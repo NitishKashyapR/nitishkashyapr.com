@@ -18,9 +18,9 @@
       particleMinRadius: 1.2,
       lineLength: 150,
       particleSpeed: 0.25,
-      dotColor: "rgba(15, 23, 42, 0.65)",   // Crisp, clearly visible slate dots
-      lineColor: "rgba(15, 23, 42, 0.22)",  // Rich 22% opacity connecting plexus lines
-      polyColor: "rgba(99, 102, 241, 0.04)" // Subtle purple/slate polygon mesh fill
+      dotColor: "rgba(15, 23, 42, 0.75)",   // Crisp, bold slate dots
+      lineColor: "rgba(99, 102, 241, 0.30)", // Rich 30% opacity indigo-slate plexus lines
+      polyColor: "rgba(99, 102, 241, 0.05)" // Delicate polygon mesh fill
     };
 
   class Particle {
@@ -146,13 +146,12 @@
 
   // Start
   resize();
-  animate();
-
-    // Respect reduced motion
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      cancelAnimationFrame(animId);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // Render static particle network frame for accessibility without clearing canvas
+    renderNetwork();
+  } else {
+    animate();
+  }
   };
 
   if (document.readyState === "loading") {
