@@ -1,0 +1,24 @@
+# AI Agent Internal Configuration & Memory Files (DO NOT COMMIT)
+.agents/
+PROJECT_MEMORY.md
+.gemini/
+.antigravity/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor & IDE Directories
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary & Log Files
+*.log
+*.tmp
+*.temp
+node_modules/
+dist/
+build/

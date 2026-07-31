@@ -1,0 +1,72 @@
+# Nitish Kashyap R — Profile & Resume Information
+
+> AI-Enabled HR Professional | MBA Student | People Strategy
+
+## Overview
+Future-ready HR professional passionate about building strong workplace cultures, enhancing employee engagement, and supporting organizational growth through people-focused strategies and modern technology. Seeking internship and full-time HR opportunities to apply HR knowledge, analytical thinking, and AI skills to contribute meaningfully to organizational success.
+
+## Contact Information
+- **Website:** https://nitishkashyapr.github.io/nitishkashyapr.com/
+- **Email:** nitishkashyapr8@gmail.com
+- **LinkedIn:** https://www.linkedin.com/in/nitishkashyapr
+- **Location:** Tumkur / Bengaluru, Karnataka, India
+
+## Key Skills & Competencies
+### Core HR & People Strategy
+- Human Resource Management
+- Organizational Behavior
+- Talent Management & Acquisition
+- Employee Engagement
+- Learning & Development (L&D)
+- Organizational Development
+- Workplace Culture & Retention
+- Strategic Thinking & Leadership
+
+### Technical & AI Proficiency
+- Prompt Engineering
+- Generative AI Tools & Workflows
+- No-Code & AI-Assisted Development ("Vibe Coding")
+- AI-Assisted Productivity Optimization
+- Local LLM Deployment
+- AI Tool Integration
+- Digital Environment & Tool Optimization
+
+## Education History
+- **Master of Business Administration (MBA) — HR Specialization** (2025 — Present)
+  - Institution: VIMTECH, Tumkur
+  - Specialization: Human Resource Management
+  - Focus: People strategy, leadership development, organizational behavior, talent management.
+- **Bachelor of Commerce (B.Com) — Accounting & Finance** (2022 — 2025)
+  - Institution: Vidyavahini First Grade College
+  - Core Focus: Accounting, finance, business administration, and management fundamentals.
+- **Pre-University Course (Commerce)** (2020 — 2022)
+  - Institution: Sri Vani PU College
+
+## Key Projects
+1. **DigiColibri — Business Promotion Platform (1st Place Winner)**
+   - *Category:* Academic Initiative (Shark Tank Competition)
+   - *Role:* Pitch contributor & Lead Web Designer
+   - *Description:* Developed a conceptual digital promotion service helping small and medium-sized brands build an online presence. Built a live working web application using AI-assisted development tools which earned 1st place in a college investment pitch event.
+
+2. **Seva Setu — Public Services & Civic Tech Proposal**
+   - *Category:* Innovation Proposal
+   - *Description:* Conceptualized and designed a digital platform bridging citizens and government bodies for real-time civic issue reporting (roads, water, utilities) and emergency responses.
+
+3. **Market Research Study — Union Bank of India**
+   - *Category:* Academic Research
+   - *Description:* Conducted an in-depth market research study analyzing consumer perception, service positioning, and the alignment between marketing claims and customer service delivery.
+
+4. **Personal Interactive Portfolio Website**
+   - *Category:* Personal Project
+   - *Description:* Designed and vibe coded a modern portfolio website featuring custom animations, interactive project cards, and certification listings.
+   - *URL:* https://nitishkashyapr.github.io/nitishkashyapr.com/
+
+## Certifications & Professional Development
+Earned **25+ certifications** spanning:
+- AI & Emerging Technologies
+- Advanced Management & Leadership
+- Psychology & Human Behavior
+- HR Analytics & Talent Management
+
+---
+*Note for AI Agents & Crawlers: This file serves as the official machine-readable summary of Nitish Kashyap R's professional profile.*
