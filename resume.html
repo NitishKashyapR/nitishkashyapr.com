@@ -9,8 +9,17 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <link rel="icon" type="image/png" href="favicon.png?v=2" />
-  <link rel="shortcut icon" type="image/png" href="favicon.png?v=2" />
+  <link rel="icon" type="image/png" href="favicon.png?v=3" />
+  <link rel="shortcut icon" type="image/png" href="favicon.png?v=3" />
+
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const theme = saved || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
   <style>
     :root {
       --primary: #2563eb;
@@ -19,6 +28,14 @@
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --border: #cbd5e1;
+    }
+    :root[data-theme="dark"] {
+      --primary: #818cf8;
+      --text-dark: #f8fafc;
+      --text-muted: #cbd5e1;
+      --bg: #090a16;
+      --card-bg: rgba(17, 24, 39, 0.85);
+      --border: rgba(99, 102, 241, 0.25);
     }
     * {
       box-sizing: border-box;
@@ -30,18 +47,19 @@
       line-height: 1.6;
       margin: 0;
       padding: 30px 15px;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
     .resume-container {
       max-width: 820px;
       margin: 0 auto;
       background: var(--card-bg);
       padding: 45px 50px;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       border: 1px solid var(--border);
     }
     header {
-      border-bottom: 2px solid var(--text-dark);
+      border-bottom: 2px solid var(--primary);
       padding-bottom: 18px;
       margin-bottom: 24px;
     }
@@ -53,7 +71,7 @@
       letter-spacing: 0.02em;
     }
     .subtitle {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--primary);
       margin-bottom: 10px;
@@ -76,7 +94,7 @@
       margin-bottom: 26px;
     }
     h2 {
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       color: var(--text-dark);
       border-bottom: 1.5px solid var(--border);
       padding-bottom: 4px;
@@ -116,7 +134,7 @@
       margin-bottom: 6px;
     }
     .cert-group {
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .cert-group-title {
       font-weight: bold;
@@ -125,8 +143,11 @@
       margin-bottom: 4px;
     }
     @media print {
-      body { background: #fff; padding: 0; }
-      .resume-container { border: none; box-shadow: none; padding: 0; }
+      body { background: #fff !important; color: #000 !important; padding: 0; }
+      .resume-container { border: none; box-shadow: none; padding: 0; background: #fff !important; color: #000 !important; }
+      h1, h2, .entry-header, .cert-group-title { color: #000 !important; }
+      .subtitle, .entry-sub, .contact-info a { color: #1d4ed8 !important; }
+      ul, p { color: #334155 !important; }
     }
   </style>
 </head>
@@ -189,8 +210,9 @@
   <section>
     <h2>Skills & Core Competencies</h2>
     <ul>
-      <li><strong>HR & People Strategy:</strong> Human Resource Management, Talent Acquisition, Organizational Behavior, Employee Engagement, Learning & Development, Workplace Culture, Change Management.</li>
-      <li><strong>AI & Technology:</strong> Prompt Engineering, Generative AI in HR, AI Tool Integration, Local LLM Deployment, AI Productivity Workflows, Vibe Coding, Web Design.</li>
+      <li><strong>Human Resources & People Strategy:</strong> Talent Acquisition, Learning & Development, Compensation & Benefits, Employee Relations, Compliance & Risk Management, Workplace Culture, Change Management, HRCI & SHRM Standards.</li>
+      <li><strong>Artificial Intelligence & Tech:</strong> Google Prompting Essentials, Google AI Essentials, GenAI in HR Workflows, Prompt Engineering, Local LLM Deployment, AI Productivity Workflows, Vibe Coding, Web Design.</li>
+      <li><strong>Management & Behavioral Science:</strong> Google Project Management, Risk Management (NASBA), Positive Psychology (UPenn), Science of Well-Being (Yale), Moralities of Everyday Life.</li>
       <li><strong>Professional Strengths:</strong> Strategic Thinking, Analytical Problem Solving, Stakeholder Communication, Team Leadership, Adaptability.</li>
     </ul>
   </section>
@@ -201,7 +223,7 @@
     <div class="job-entry">
       <div class="entry-header">
         <span>DigiColibri — Business Promotion Platform</span>
-        <span>1st Place Winner</span>
+        <span>1st Place Winner 🏆</span>
       </div>
       <div class="entry-sub">Academic Business Pitch & Working Web Prototype</div>
       <ul>
@@ -239,13 +261,23 @@
       </div>
       <div class="entry-sub">Vibe Coded & Built Independently</div>
       <ul>
-        <li>Designed and launched a fully responsive, AI-accessible portfolio website (`nitishkashyapr.github.io/nitishkashyapr.com`) featuring glassmorphism, dynamic certification listings, and smooth animations.</li>
+        <li>Designed and launched a fully responsive, AI-accessible portfolio website (`nitishkashyapr.github.io/nitishkashyapr.com`) featuring glassmorphism, dynamic certification listings, dark mode, and smooth animations.</li>
       </ul>
     </div>
   </section>
 
   <section>
-    <h2>Professional Certifications (16+ Credentials)</h2>
+    <h2>Professional Certifications (17+ Credentials)</h2>
+
+    <div class="cert-group">
+      <div class="cert-group-title">Human Resources (4 Certifications):</div>
+      <ul>
+        <li><strong>HRCI Human Resource Associate Specialization</strong> — HRCI / Coursera (Talent Acquisition, L&D, Compensation & Benefits, Employee Relations, Compliance & Risk Management)</li>
+        <li><strong>Managing Organizational Change for HR Professionals</strong> — SHRM / LinkedIn Learning</li>
+        <li><strong>Generative AI in HR</strong> — SHRM / LinkedIn Learning</li>
+        <li><strong>Generative AI: Recruiting and Talent Acquisition</strong> — NASBA / LinkedIn Learning</li>
+      </ul>
+    </div>
     
     <div class="cert-group">
       <div class="cert-group-title">AI & Technical Skills (5 Certifications):</div>
@@ -275,15 +307,6 @@
         <li><strong>The Science of Well-Being</strong> — Yale University / Coursera</li>
         <li><strong>Moralities of Everyday Life</strong> — Yale University / Coursera</li>
         <li><strong>Social Psychology</strong> — Wesleyan University / Coursera</li>
-      </ul>
-    </div>
-
-    <div class="cert-group">
-      <div class="cert-group-title">Human Resources (3 Certifications):</div>
-      <ul>
-        <li><strong>Managing Organizational Change for HR Professionals</strong> — SHRM / LinkedIn Learning</li>
-        <li><strong>Generative AI in HR</strong> — SHRM / LinkedIn Learning</li>
-        <li><strong>Generative AI: Recruiting and Talent Acquisition</strong> — NASBA / LinkedIn Learning</li>
       </ul>
     </div>
   </section>
