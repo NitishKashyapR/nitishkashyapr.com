@@ -9,149 +9,172 @@
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     let particles = [];
-    let mouse = { x: null, y: null, radius: 240 };
+    let mouse = { x: null, y: null, radius: 220 };
     let animId = null;
 
     const config = {
-      particleCount: 160,
-      particleMaxRadius: 3.5,
+      particleCount: 140,
+      particleMaxRadius: 3.2,
       particleMinRadius: 1.2,
-      lineLength: 150,
+      lineLength: 145,
       particleSpeed: 0.25,
-      dotColor: "rgba(15, 23, 42, 0.75)",   // Crisp, bold slate dots
-      lineColor: "rgba(99, 102, 241, 0.30)", // Rich 30% opacity indigo-slate plexus lines
-      polyColor: "rgba(99, 102, 241, 0.05)" // Delicate polygon mesh fill
+      dotColor: "rgba(165, 180, 252, 0.85)",
+      lineColor: "rgba(129, 140, 248, 0.28)",
+      polyColor: "rgba(167, 139, 250, 0.04)"
     };
 
-  class Particle {
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * config.particleSpeed;
-      this.vy = (Math.random() - 0.5) * config.particleSpeed;
-      this.radius = Math.random() * (config.particleMaxRadius - config.particleMinRadius) + config.particleMinRadius;
-    }
-    update() {
-      // Mouse magnetism
-      if (mouse.x !== null) {
-        let dx = mouse.x - this.x;
-        let dy = mouse.y - this.y;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < mouse.radius) {
-          let force = (mouse.radius - dist) / mouse.radius;
-          this.x += (dx / dist) * force * 0.6;
-          this.y += (dy / dist) * force * 0.6;
-        }
+    function updateThemeColors() {
+      const theme = document.documentElement.getAttribute("data-theme") || "dark";
+      if (theme === "dark") {
+        config.dotColor = "rgba(165, 180, 252, 0.85)";
+        config.lineColor = "rgba(129, 140, 248, 0.28)";
+        config.polyColor = "rgba(167, 139, 250, 0.04)";
+      } else {
+        config.dotColor = "rgba(15, 23, 42, 0.75)";
+        config.lineColor = "rgba(99, 102, 241, 0.22)";
+        config.polyColor = "rgba(99, 102, 241, 0.03)";
       }
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
     }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = config.dotColor;
-      ctx.fill();
-    }
-  }
 
-  let currentScrollY = 0;
-  window.addEventListener("scroll", () => {
-    currentScrollY = window.scrollY;
-  }, { passive: true });
-
-  function renderNetwork() {
-    ctx.save();
-    // Parallax scroll effect: shift background plexus mesh vertically as page scrolls
-    const yOffset = (currentScrollY * 0.12) % canvas.height;
-    ctx.translate(0, -yOffset);
-
-    for (let i = 0; i < particles.length; i++) {
-      particles[i].update();
-      particles[i].draw();
-    }
-    // Lines + triangulated polygon fills
-    for (let i = 0; i < particles.length; i++) {
-      let closeNodes = [];
-      for (let j = i + 1; j < particles.length; j++) {
-        let dx = particles[i].x - particles[j].x;
-        let dy = particles[i].y - particles[j].y;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < config.lineLength) {
-          closeNodes.push({ index: j, dist: dist });
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = config.lineColor;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
+    class Particle {
+      constructor(w, h) {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+        this.vx = (Math.random() - 0.5) * config.particleSpeed;
+        this.vy = (Math.random() - 0.5) * config.particleSpeed;
+        this.radius = Math.random() * (config.particleMaxRadius - config.particleMinRadius) + config.particleMinRadius;
       }
-      // Triangulated polygon fills
-      for (let k = 0; k < closeNodes.length; k++) {
-        for (let m = k + 1; m < closeNodes.length; m++) {
-          let p2 = particles[closeNodes[k].index];
-          let p3 = particles[closeNodes[m].index];
-          let dx2 = p2.x - p3.x;
-          let dy2 = p2.y - p3.y;
-          let dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-          if (dist2 < config.lineLength) {
+      update(w, h, yOffset) {
+        // Mouse magnetism with scroll offset correction
+        if (mouse.x !== null) {
+          let effectiveMouseY = mouse.y + yOffset;
+          let dx = mouse.x - this.x;
+          let dy = effectiveMouseY - this.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            let force = (mouse.radius - dist) / mouse.radius;
+            this.x += (dx / dist) * force * 0.6;
+            this.y += (dy / dist) * force * 0.6;
+          }
+        }
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > w) this.vx *= -1;
+        if (this.y < 0 || this.y > h) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = config.dotColor;
+        ctx.fill();
+      }
+    }
+
+    let currentScrollY = 0;
+    window.addEventListener("scroll", () => {
+      currentScrollY = window.scrollY;
+    }, { passive: true });
+
+    function renderNetwork() {
+      const displayWidth = window.innerWidth;
+      const displayHeight = window.innerHeight;
+      ctx.save();
+      const yOffset = (currentScrollY * 0.12) % displayHeight;
+      ctx.translate(0, -yOffset);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update(displayWidth, displayHeight, yOffset);
+        particles[i].draw();
+      }
+      // Connecting lines & subtle mesh
+      for (let i = 0; i < particles.length; i++) {
+        let closeNodes = [];
+        for (let j = i + 1; j < particles.length; j++) {
+          let dx = particles[i].x - particles[j].x;
+          let dy = particles[i].y - particles[j].y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < config.lineLength) {
+            closeNodes.push({ index: j, dist: dist });
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.lineTo(p3.x, p3.y);
-            ctx.closePath();
-            ctx.fillStyle = config.polyColor;
-            ctx.fill();
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = config.lineColor;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+        for (let k = 0; k < closeNodes.length; k++) {
+          for (let m = k + 1; m < closeNodes.length; m++) {
+            let p2 = particles[closeNodes[k].index];
+            let p3 = particles[closeNodes[m].index];
+            let dx2 = p2.x - p3.x;
+            let dy2 = p2.y - p3.y;
+            let dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+            if (dist2 < config.lineLength) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.lineTo(p3.x, p3.y);
+              ctx.closePath();
+              ctx.fillStyle = config.polyColor;
+              ctx.fill();
+            }
           }
         }
       }
+      ctx.restore();
     }
-    ctx.restore();
-  }
 
-  function init() {
-    particles = [];
-    for (let i = 0; i < config.particleCount; i++) {
-      particles.push(new Particle());
+    function init() {
+      particles = [];
+      const displayWidth = window.innerWidth;
+      const displayHeight = window.innerHeight;
+      for (let i = 0; i < config.particleCount; i++) {
+        particles.push(new Particle(displayWidth, displayHeight));
+      }
     }
-  }
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    renderNetwork();
-    animId = requestAnimationFrame(animate);
-  }
+    function animate() {
+      const displayWidth = window.innerWidth;
+      const displayHeight = window.innerHeight;
+      ctx.clearRect(0, 0, displayWidth, displayHeight);
+      renderNetwork();
+      animId = requestAnimationFrame(animate);
+    }
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const area = canvas.width * canvas.height;
-    // Dynamically scale particle count based on screen area for optimal density
-    config.particleCount = Math.min(160, Math.max(30, Math.floor(area / 9500)));
-    init();
-  }
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const displayWidth = window.innerWidth;
+      const displayHeight = window.innerHeight;
+      canvas.width = displayWidth * dpr;
+      canvas.height = displayHeight * dpr;
+      canvas.style.width = displayWidth + "px";
+      canvas.style.height = displayHeight + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  // Mouse tracking (pointer-events:none on canvas, so track on document)
-  document.addEventListener("mousemove", (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
-  document.addEventListener("mouseleave", () => {
-    mouse.x = null;
-    mouse.y = null;
-  });
-  window.addEventListener("resize", resize);
+      const area = displayWidth * displayHeight;
+      config.particleCount = Math.min(140, Math.max(30, Math.floor(area / 10000)));
+      updateThemeColors();
+      init();
+    }
 
-  // Start
-  resize();
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    // Render static particle network frame for accessibility without clearing canvas
-    renderNetwork();
-  } else {
+    document.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    document.addEventListener("mouseleave", () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+    window.addEventListener("resize", resize);
+
+    const observer = new MutationObserver(() => {
+      updateThemeColors();
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+    resize();
     animate();
-  }
   };
 
   if (document.readyState === "loading") {
@@ -160,6 +183,39 @@
     initEngine();
   }
 })();
+
+function initThemeToggle() {
+  const toggleBtn = document.getElementById("themeToggleBtn");
+  if (!toggleBtn) return;
+
+  const sunIcon = toggleBtn.querySelector(".theme-icon-sun");
+  const moonIcon = toggleBtn.querySelector(".theme-icon-moon");
+
+  function updateIcon(theme) {
+    if (theme === "dark") {
+      if (sunIcon) sunIcon.style.display = "block";
+      if (moonIcon) moonIcon.style.display = "none";
+      toggleBtn.setAttribute("aria-label", "Switch to Light Theme");
+      toggleBtn.setAttribute("title", "Switch to Light Theme");
+    } else {
+      if (sunIcon) sunIcon.style.display = "none";
+      if (moonIcon) moonIcon.style.display = "block";
+      toggleBtn.setAttribute("aria-label", "Switch to Dark Theme");
+      toggleBtn.setAttribute("title", "Switch to Dark Theme");
+    }
+  }
+
+  const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+  updateIcon(currentTheme);
+
+  toggleBtn.addEventListener("click", () => {
+    const active = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = active === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+    updateIcon(next);
+  });
+}
 
 // SVG Vector Icon Definitions for Professional UI
 const icons = {
@@ -1056,6 +1112,9 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", () => {
     renderTestimonials();
   });
+
+  // Initialize Theme Toggle
+  initThemeToggle();
 
   renderTestimonials();
   resetAutoSlide();
