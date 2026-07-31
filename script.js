@@ -14,13 +14,13 @@
 
     const config = {
       particleCount: 160,
-      particleMaxRadius: 3.2,
-      particleMinRadius: 0.9,
-      lineLength: 140,
-      particleSpeed: 0.22,
-      dotColor: "rgba(15, 23, 42, 0.38)",   // Softened dark slate for 100% effortless text readability
-      lineColor: "rgba(15, 23, 42, 0.08)",  // Gentle slate grey lines
-      polyColor: "rgba(15, 23, 42, 0.02)"   // Ultra-subtle monochrome polygon mesh fill
+      particleMaxRadius: 3.5,
+      particleMinRadius: 1.2,
+      lineLength: 150,
+      particleSpeed: 0.25,
+      dotColor: "rgba(15, 23, 42, 0.65)",   // Crisp, clearly visible slate dots
+      lineColor: "rgba(15, 23, 42, 0.22)",  // Rich 22% opacity connecting plexus lines
+      polyColor: "rgba(99, 102, 241, 0.04)" // Subtle purple/slate polygon mesh fill
     };
 
   class Particle {
