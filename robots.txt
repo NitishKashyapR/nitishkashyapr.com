@@ -39,8 +39,12 @@ Allow: /
 
 User-agent: *
 Allow: /
+Allow: /index.html
+Allow: /resume.html
 Allow: /llms.txt
 Allow: /llms-full.txt
-Allow: /resume.html
+Allow: /LLMS.txt
+Allow: /LLMS-FULL.txt
+Allow: /sitemap.xml
 
 Sitemap: https://nitishkashyapr.github.io/nitishkashyapr.com/sitemap.xml
