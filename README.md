@@ -65,7 +65,30 @@ Open To: HR Internships, Talent Acquisition Roles, People Strategy Projects & In
 
 ### 🎓 Key Professional Credentials (17+ Certifications & 23 Verified Badges)
 
-- 🛡️ **Verified Digital Badges (23 Badges)**: 23 Credly & Google Cloud Skills Boost badges in AI, Project Management, HR Strategy & Leadership
+- 🛡️ **Verified Digital Badges (23 Badges)**:
+  1. Google Prompting Essentials *(Google / Credly)*
+  2. Google Project Management Professional *(Google / Credly)*
+  3. Google People Management Essentials *(Google / Credly)*
+  4. Human Resource Associate Professional Certificate *(HRCI / Credly)*
+  5. Artificial Intelligence Fundamentals *(IBM / Credly)*
+  6. GenAI for Execs & Business Leaders: Formulate Your Use Case *(Google / Credly)*
+  7. GenAI for Execs & Business Leaders: Integration Strategy *(Google / Credly)*
+  8. GenAI for Executives & Business Leaders: An Introduction *(Google / Credly)*
+  9. Generative AI for Business Leaders & Executives Specialization *(IBM / Credly)*
+  10. Google AI for App Building *(Google / Credly)*
+  11. Google AI for Brainstorming and Planning *(Google / Credly)*
+  12. Google AI for Content Creation *(Google / Credly)*
+  13. Google AI for Data Analysis *(Google / Credly)*
+  14. Google AI for Research and Insights *(Google / Credly)*
+  15. Google AI for Writing and Communicating *(Google / Credly)*
+  16. Google AI Fundamentals *(Google / Credly)*
+  17. Google AI Professional Certificate *(Google / Credly)*
+  18. SkillsBuild - Customer Engagement: Communication and Personality Dynamics *(IBM / Credly)*
+  19. SkillsBuild - Customer Engagement: Problem Solving and Process Controls *(IBM / Credly)*
+  20. Gen AI: Unlock Foundational Concepts *(Google Cloud Skills Boost)*
+  21. Attention Mechanism *(Google Cloud Skills Boost)*
+  22. Gen AI: Beyond the Chatbot *(Google Cloud Skills Boost)*
+  23. AI Boost Bites: Your Personal Feedback Agent *(Google Cloud Skills Boost)*
 - 👥 **Human Resources (4 Certifications)**: HRCI Human Resource Associate *(HRCI)* • Managing Organizational Change *(SHRM)* • Generative AI in HR *(SHRM)* • Generative AI: Recruiting & Talent Acquisition *(NASBA)*
 - 🤖 **AI & Technical Skills (5 Certifications)**: Google AI Essentials *(Google)* • Google Prompting Essentials *(Google)* • Google AI Professional *(Google)* • Generative AI for Executives *(IBM)* • Cyber Security Overview *(Infosys)*
 - 📊 **Advanced Management (3 Certifications)**: Google Project Management Professional *(Google)* • Google People Management *(Google)* • Introduction to Risk Management *(NASBA)*
