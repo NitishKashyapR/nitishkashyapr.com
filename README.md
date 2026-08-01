@@ -63,14 +63,12 @@ Open To: HR Internships, Talent Acquisition Roles, People Strategy Projects & In
 
 ---
 
-### 🎓 Key Professional Certifications (17+)
+### 🎓 Key Professional Certifications (17+ Main Programs)
 
-- 🎓 **HRCI Human Resource Associate** *(HRCI — Coursera)* — Talent Acquisition, L&D, Compensation & Benefits, Employee Relations, Compliance & Risk Management.
-- 📈 **Google Project Management Professional** *(Google — Credly)* — 6-course specialization covering Foundations, Planning, Execution, Agile & Capstone.
-- 🤖 **Google Prompting Essentials & AI Professional** *(Google — Credly)* — Advanced prompt engineering and AI productivity tools.
-- 👔 **Managing Organizational Change & GenAI in HR** *(SHRM — LinkedIn Learning)* — Leading people-side change management and generative AI adoption in HR.
-- 🧠 **Foundations of Positive Psychology** *(University of Pennsylvania — Coursera)* — 5-course specialization in wellbeing science and resilience.
-- 🏛️ **Introduction to Psychology & Science of Well-Being** *(Yale University — Coursera)* — Mental processes, habit formation, and evidence-based wellbeing.
+- 👥 **Human Resources (4 Certifications)**: HRCI Human Resource Associate *(HRCI)* • Managing Organizational Change *(SHRM)* • Generative AI in HR *(SHRM)* • Generative AI: Recruiting & Talent Acquisition *(NASBA)*
+- 🤖 **AI & Technical Skills (5 Certifications)**: Google AI Essentials *(Google)* • Google Prompting Essentials *(Google)* • Google AI Professional *(Google)* • Generative AI for Executives *(IBM)* • Cyber Security Overview *(Infosys)*
+- 📊 **Advanced Management (3 Certifications)**: Google Project Management Professional *(Google)* • Google People Management *(Google)* • Introduction to Risk Management *(NASBA)*
+- 🧠 **Psychology & Human Behavior (5 Certifications)**: Foundations of Positive Psychology *(UPenn)* • Introduction to Psychology *(Yale)* • Science of Well-Being *(Yale)* • Moralities of Everyday Life *(Yale)* • Social Psychology *(Wesleyan)*
 
 ---
 

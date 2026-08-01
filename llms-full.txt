@@ -1,0 +1,139 @@
+# Nitish Kashyap R — Full Machine-Readable Profile & Resume Dataset
+
+> Comprehensive Data Source for AI Models, LLM Agents, ATS Systems, and Automated Resume Crawlers.
+
+## Profile Summary
+Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (Tumkur), specializing in Human Resource Management, Organizational Behavior, Talent Strategy, and AI-enabled workplace workflows. He combines foundational HR competencies with prompt engineering, generative AI tools, and vibe coding to optimize people strategy and organizational effectiveness.
+
+## Contact & Online Profiles
+- **Full Name:** Nitish Kashyap R
+- **Professional Title:** AI-Enabled HR Professional | MBA Student | People Strategy Enthusiast
+- **Email:** nitishkashyapr8@gmail.com
+- **LinkedIn:** https://www.linkedin.com/in/nitishkashyapr
+- **GitHub:** https://github.com/NitishKashyapR
+- **Portfolio Website:** https://nitishkashyapr.github.io/nitishkashyapr.com/
+- **ATS Resume Page:** https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html
+- **Location:** Tumkur / Bengaluru, Karnataka, India
+
+---
+
+## Education History
+
+### 1. Master of Business Administration (MBA) — HR Specialization
+- **Institution:** VIMTECH, Tumkur
+- **Period:** 2025 — Present (Currently Pursuing)
+- **Specialization:** Human Resource Management
+- **Key Coursework & Focus Areas:** People strategy, leadership development, organizational behavior, talent acquisition, employee engagement, compensation & benefits, organizational development.
+
+### 2. Bachelor of Commerce (B.Com) — Accounting & Finance
+- **Institution:** Vidyavahini First Grade College
+- **Period:** 2022 — 2025 (Completed)
+- **Focus Areas:** Financial accounting, business law, commercial principles, corporate management, taxation.
+
+### 3. Pre-University Course (Commerce Stream)
+- **Institution:** Sri Vani PU College
+- **Period:** 2020 — 2022 (Completed)
+- **Focus Areas:** Accountancy, business studies, economics, basic mathematics.
+
+---
+
+## Complete Certifications & Professional Development Catalog (17+ Main Credentials)
+
+### Category A: Human Resource Management (4 Main Programs / 9 Total Certifications)
+1. **HRCI Human Resource Associate** (Provider: HRCI via Coursera)
+   - *Main Certificate Share Link:* https://coursera.org/share/0677f1802c28bdf8f8ea40a0dc930750
+   - *Description:* Comprehensive HRCI professional certification covering 5 core domain sub-courses:
+     a) Talent Acquisition: https://coursera.org/share/ec4c4ccc79accbd5900ae2da4f575235
+     b) Learning and Development: https://coursera.org/share/8d80ad7e85a056d1aeeeae01e434a674
+     c) Compensation and Benefits: https://coursera.org/share/d862fc715256db3c57e65c3bf85b9baa
+     d) Employee Relations: https://coursera.org/share/7cf06002f79dc207504f2bcd1dfdaa79
+     e) Compliance and Risk Management: https://coursera.org/share/0b221ec09e359b730570a38bc038689b
+2. **Managing Organizational Change for HR Professionals** (Provider: SHRM via LinkedIn Learning)
+   - *Certificate Link:* https://www.linkedin.com/learning/certificates/6a758a5ef9ca2ed64b8a26393c9c5b032c74ab4365e990d067fa6da5062cb92b?trk=share_certificate
+   - *Description:* Focused on leading and supporting organizational change initiatives, change models, employee communication, and reducing resistance.
+3. **Generative AI in HR** (Provider: SHRM via LinkedIn Learning)
+   - *Certificate Link:* https://www.linkedin.com/learning/certificates/c25f3a120f6adf4b4bf48854e1f44485a8b6362933f8b33bb533e37f999b8c44?trk=share_certificate
+   - *Description:* Explores practical use cases of generative AI across core HR functions, policy drafting, employee communication, and HR automation.
+4. **Generative AI: Recruiting and Talent Acquisition** (Provider: NASBA via LinkedIn Learning)
+   - *Certificate Link:* https://www.linkedin.com/learning/certificates/c41db3e9cb5342ac05bcbdbc85ece86db1cfcf974db6be852549e9a28a275177?trk=share_certificate
+   - *Description:* Reshaping recruiting, candidate screening, talent acquisition workflows, and candidate experience through AI.
+
+### Category B: AI & Emerging Technologies (5 Main Certifications)
+1. **Google AI Essentials** (Provider: Google via Coursera)
+   - *Description:* Foundational AI concepts, prompt engineering techniques, productivity workflows, and practical applications of generative AI.
+2. **Google Prompting Essentials** (Provider: Google via Coursera)
+   - *Description:* Advanced prompt design, structured prompt frameworks, multi-shot prompting, and AI workflow optimization.
+3. **Google AI Professional Certification** (Provider: Google via Coursera)
+   - *Description:* Comprehensive professional program covering end-to-end AI capabilities, machine learning fundamentals, and corporate AI deployment.
+4. **Generative AI for Executives and Business Leaders** (Provider: IBM via Coursera)
+   - *Description:* Strategic positioning of generative AI, organizational AI adoption, risk management, and executive leadership in the AI era.
+5. **Cyber Security Overview** (Provider: Infosys)
+   - *Certificate Link:* pdfs/Cyber Security Overview.pdf
+   - *Description:* Infosys foundational course covering essential cybersecurity principles, common threats, and best practices for safe digital behavior.
+
+### Category C: Psychology & Human Behavior (5 Main Programs / 9 Total Certifications)
+1. **Foundations of Positive Psychology Specialization** (Provider: University of Pennsylvania via Coursera)
+   - *Main Certificate Link:* https://coursera.org/share/d8f1d19f5e93488584d6df9091492414
+   - *Sub-Courses Included:*
+     a) Positive Psychology: Martin E. P. Seligman's Visionary Science (Link: https://coursera.org/share/f44a14c01038af49365ef361c426f049)
+     b) Positive Psychology: Applications and Interventions (Link: https://coursera.org/share/ce6f3b16de23225e0c0e43c172f16b97)
+     c) Positive Psychology: Character, Grit and Research Methods (Link: https://coursera.org/share/9f6855467f85da4fb60da7f4c1e5018d)
+     d) Positive Psychology: Resilience Skills (Link: https://coursera.org/share/31ab59f391efabf994b23619df97d5b2)
+     e) Design Your Life for Well-being Capstone Project (Link: https://coursera.org/share/fd5b4181926c36f469e3f11edebf7767)
+2. **Introduction to Psychology** (Provider: Yale University via Coursera)
+   - *Certificate Link:* https://coursera.org/share/5db216560664adf14989daa0d8223e00
+   - *Description:* Foundational psychological science, perception, memory, cognition, and human mental processes.
+3. **The Science of Well-Being** (Provider: Yale University via Coursera)
+   - *Certificate Link:* https://coursera.org/share/801ab23d109b8c5cadc40efd7d098d6f
+   - *Description:* Evidence-based strategies for happiness, productive habit formation, and personal well-being.
+4. **Moralities of Everyday Life** (Provider: Yale University via Coursera)
+   - *Certificate Link:* https://coursera.org/share/eef5e61a89328c4f7d3010a4ed59cc05
+   - *Description:* Psychological foundations of moral judgment, empathy, altruism, and human moral behavior.
+5. **Social Psychology** (Provider: Wesleyan University via Coursera)
+   - *Certificate Link:* https://coursera.org/share/30d561587636338817b20598a55b1f84
+   - *Description:* Social influence, interpersonal relationships, group dynamics, and cognitive biases in social contexts.
+
+### Category D: Advanced Management & Leadership (3 Main Certifications)
+1. **Google Project Management** (Provider: Google via Coursera)
+   - *Description:* End-to-end project management methodologies, Agile frameworks, risk management, and team leadership.
+2. **Google People Management** (Provider: Google via Coursera)
+   - *Description:* Leadership techniques, performance evaluation, team motivation, feedback loops, and talent development.
+3. **Risk Management & Business Fundamentals** (Provider: NASBA / Coursera)
+   - *Description:* Organizational risk assessment, corporate governance, financial controls, and risk mitigation strategies.
+
+---
+
+## Projects & Deliverables
+
+### 1. DigiColibri — Business Promotion Platform
+- **Category:** Academic Initiative (Shark Tank Competition, 1st Semester MBA)
+- **Role:** Pitch contributor & Lead Web Designer (Team of 12)
+- **Award:** 1st Place Winner in College Shark Tank Investment Competition
+- **Description:** Developed a conceptual digital promotion service helping small and medium-sized businesses establish an online presence and optimize marketing outreach. Created a live working web application using AI-assisted development tools.
+- **Live Deployed URL:** https://digicolibri.lovable.app/
+
+### 2. Seva Setu — Public Services & Civic Tech Proposal
+- **Category:** Innovation Proposal (1st Semester MBA, Team of 4)
+- **Role:** Core Conceptualizer & Co-Author
+- **Description:** Designed a civic tech digital platform proposal connecting citizens with municipal and government authorities. Features real-time civic issue reporting (roads, water supply, public lighting), engineer assessment workflows, public job creation, and emergency SOS response mechanisms.
+- **Document PDF:** `pdfs/Seva Satu.pdf`
+
+### 3. Market Research Study — Union Bank of India
+- **Category:** Academic Research Project (1st Semester MBA)
+- **Role:** Lead Researcher & Data Analyst
+- **Description:** Conducted an in-depth empirical market research study on Union Bank of India. Analyzed consumer perception, brand positioning, customer satisfaction gaps, and the alignment between marketing claims and actual branch service delivery.
+- **Document PDF:** `pdfs/Union bank of India.pdf`
+
+### 4. Personal Interactive Portfolio Website
+- **Category:** Personal Project & Digital Representation
+- **Role:** Creator & Web Designer ("Vibe Coded")
+- **Tech Stack:** HTML5, Vanilla CSS3, JavaScript (ES6+), Plexus Canvas Particle System, JSON-LD Schema.org Data.
+- **Features:** Glassmorphism UI design, fluid responsive typography clamp system, accessible theme toggle (light/dark mode), dynamic certification counter, interactive project modals, 100/100 ATS-friendly resume page.
+- **URL:** https://nitishkashyapr.github.io/nitishkashyapr.com/
+
+---
+
+## Technical & Professional Skills Matrix
+- **Human Resources:** HR Management, Talent Acquisition, Learning & Development (L&D), Employee Engagement, Compensation & Benefits, Employee Relations, Compliance & Risk Management, Managing Organizational Change.
+- **AI & Productivity:** Prompt Engineering, Generative AI Tools (ChatGPT, Gemini, Claude), Local LLM Deployment (Ollama/LM Studio), No-Code & AI-Assisted Development ("Vibe Coding"), AI Productivity Integration.
+- **Methodologies & Soft Skills:** Strategic Thinking, Organizational Behavior, Public Speaking, Academic Research, Leadership & Team Collaboration, Analytical Problem Solving.

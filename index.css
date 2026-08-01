@@ -17,10 +17,10 @@
 
 /* Default / Dark Theme System Tokens */
 :root, :root[data-theme="dark"] {
-  --background: #090a16;
-  --nav-bg: rgba(9, 10, 22, 0.88);
-  --card: rgba(17, 24, 39, 0.75);
-  --card-hover: rgba(30, 41, 59, 0.85);
+  --background: #121426;
+  --nav-bg: rgba(18, 20, 38, 0.88);
+  --card: rgba(24, 32, 53, 0.78);
+  --card-hover: rgba(38, 48, 75, 0.85);
   --surface-1: rgba(99, 102, 241, 0.15);
   --surface-2: rgba(16, 185, 129, 0.15);
   --surface-3: rgba(245, 158, 11, 0.15);

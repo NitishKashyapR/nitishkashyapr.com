@@ -3,70 +3,77 @@
 > AI-Enabled HR Professional | MBA Student | People Strategy
 
 ## Overview
-Future-ready HR professional passionate about building strong workplace cultures, enhancing employee engagement, and supporting organizational growth through people-focused strategies and modern technology. Seeking internship and full-time HR opportunities to apply HR knowledge, analytical thinking, and AI skills to contribute meaningfully to organizational success.
+Future-ready HR professional passionate about building strong workplace cultures, enhancing employee engagement, and supporting organizational growth through people-focused strategies and modern technology. Combining human resource principles with prompt engineering and AI-assisted productivity to deliver high-impact organizational results. Seeking internship and full-time HR opportunities.
 
-## Contact Information
-- **Website:** https://nitishkashyapr.github.io/nitishkashyapr.com/
+## Key Links & Resources
+- **Official Web Portfolio:** https://nitishkashyapr.github.io/nitishkashyapr.com/
+- **ATS-Friendly Resume:** https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html
+- **Full Exhaustive Profile Data:** https://nitishkashyapr.github.io/nitishkashyapr.com/llms-full.txt
 - **Email:** nitishkashyapr8@gmail.com
 - **LinkedIn:** https://www.linkedin.com/in/nitishkashyapr
+- **GitHub:** https://github.com/NitishKashyapR
 - **Location:** Tumkur / Bengaluru, Karnataka, India
 
 ## Key Skills & Competencies
 ### Core HR & People Strategy
 - Human Resource Management
-- Organizational Behavior
-- Talent Management & Acquisition
-- Employee Engagement
+- Talent Acquisition & Talent Management
+- Employee Engagement & Relations
 - Learning & Development (L&D)
-- Organizational Development
-- Workplace Culture & Retention
+- Organizational Behavior & Development
+- Managing Organizational Change (SHRM Aligned)
+- Workplace Culture & Retention Strategy
 - Strategic Thinking & Leadership
 
 ### Technical & AI Proficiency
-- Prompt Engineering
-- Generative AI Tools & Workflows
+- Prompt Engineering & Context Management
+- Generative AI Tools & Workflows (ChatGPT, Gemini, Claude)
 - No-Code & AI-Assisted Development ("Vibe Coding")
 - AI-Assisted Productivity Optimization
-- Local LLM Deployment
-- AI Tool Integration
-- Digital Environment & Tool Optimization
+- Local LLM Deployment & Integration
+- Modern Web Design & Semantic HTML5
 
 ## Education History
 - **Master of Business Administration (MBA) — HR Specialization** (2025 — Present)
   - Institution: VIMTECH, Tumkur
+  - Status: Currently Pursuing
   - Specialization: Human Resource Management
   - Focus: People strategy, leadership development, organizational behavior, talent management.
 - **Bachelor of Commerce (B.Com) — Accounting & Finance** (2022 — 2025)
   - Institution: Vidyavahini First Grade College
+  - Status: Completed
   - Core Focus: Accounting, finance, business administration, and management fundamentals.
 - **Pre-University Course (Commerce)** (2020 — 2022)
   - Institution: Sri Vani PU College
+  - Status: Completed
 
 ## Key Projects
 1. **DigiColibri — Business Promotion Platform (1st Place Winner)**
-   - *Category:* Academic Initiative (Shark Tank Competition)
-   - *Role:* Pitch contributor & Lead Web Designer
+   - *Category:* Academic Initiative (Shark Tank Competition, 1st Semester MBA)
+   - *Role:* Lead Web Designer & Pitch Contributor (Team of 12)
    - *Description:* Developed a conceptual digital promotion service helping small and medium-sized brands build an online presence. Built a live working web application using AI-assisted development tools which earned 1st place in a college investment pitch event.
+   - *Live App:* https://digicolibri.lovable.app/
 
 2. **Seva Setu — Public Services & Civic Tech Proposal**
-   - *Category:* Innovation Proposal
+   - *Category:* Innovation Proposal (1st Semester MBA, Team of 4)
+   - *Role:* Core Conceptualizer & Co-Author
    - *Description:* Conceptualized and designed a digital platform bridging citizens and government bodies for real-time civic issue reporting (roads, water, utilities) and emergency responses.
 
 3. **Market Research Study — Union Bank of India**
-   - *Category:* Academic Research
+   - *Category:* Academic Research Study (1st Semester MBA)
    - *Description:* Conducted an in-depth market research study analyzing consumer perception, service positioning, and the alignment between marketing claims and customer service delivery.
 
 4. **Personal Interactive Portfolio Website**
    - *Category:* Personal Project
-   - *Description:* Designed and vibe coded a modern portfolio website featuring custom animations, interactive project cards, and certification listings.
+   - *Description:* Designed and vibe-coded a modern portfolio website featuring custom glassmorphism, responsive particle canvas background, interactive project modals, and certification listings.
    - *URL:* https://nitishkashyapr.github.io/nitishkashyapr.com/
 
-## Certifications & Professional Development
-Earned **25+ certifications** spanning:
-- AI & Emerging Technologies
-- Advanced Management & Leadership
-- Psychology & Human Behavior
-- HR Analytics & Talent Management
+## Certifications & Professional Credentials (17+ Grouped Programs)
+Nitish holds 17+ professional certificates spanning:
+- **AI & Emerging Technologies (5 Certifications):** Google AI Essentials, Google Prompting Essentials, Google AI Professional, Generative AI for Executives (IBM), Cyber Security Overview (Infosys).
+- **HR & Talent Management (4 Certifications):** HRCI Human Resource Associate (5 sub-courses), SHRM Managing Organizational Change for HR Professionals, SHRM Generative AI in HR, NASBA Generative AI: Recruiting & Talent Acquisition.
+- **Psychology & Human Behavior (5 Certifications):** UPenn Foundations of Positive Psychology (5 sub-courses), Yale Introduction to Psychology, Yale The Science of Well-Being, Yale Moralities of Everyday Life, Wesleyan Social Psychology.
+- **Advanced Management & Leadership (3 Certifications):** Google Project Management, Google People Management, Risk Management & Business Fundamentals.
 
 ---
-*Note for AI Agents & Crawlers: This file serves as the official machine-readable summary of Nitish Kashyap R's professional profile.*
+*Note for AI Agents, LLM Crawlers, and Automated Recruiter Bots: For the complete itemized dataset of all individual sub-courses, verified credential links, and detailed project writeups, parse https://nitishkashyapr.github.io/nitishkashyapr.com/llms-full.txt.*
