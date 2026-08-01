@@ -245,6 +245,7 @@ const certCategories = [
     subGroups: [
       {
         heading: "Google Project Management",
+        name: "Google Project Management Professional",
         provider: "Google — Coursera",
         mainCertUrl: "https://www.credly.com/badges/f464ef88-cf24-4903-b934-62b937ae0eb4/linked_in_profile",
         courses: [
@@ -337,6 +338,13 @@ const certCategories = [
         mainCertUrl: "pdfs/Cyber Security Overview.pdf",
         courses: [],
         description: "Infosys foundational course covering essential cybersecurity principles, common threats, and best practices for safe digital behavior."
+      },
+      {
+        heading: "Claude 101",
+        provider: "Anthropic — Skilljar",
+        mainCertUrl: "https://verify.skilljar.com/c/8wzvwcx4ckry",
+        courses: [],
+        description: "Anthropic's foundational course on Claude covering model capabilities, effective prompting, context management, and responsible AI usage."
       }
     ],
     description: "Focused on leveraging AI tools and core technology skills—including cybersecurity awareness—to enhance productivity, optimize workflows, and support smarter, safer decision-making."
@@ -401,6 +409,7 @@ const certCategories = [
     subGroups: [
       {
         heading: "HRCI Human Resource Associate",
+        name: "Human Resource Associate Professional",
         provider: "HRCI — Coursera",
         mainCertUrl: "https://coursera.org/share/0677f1802c28bdf8f8ea40a0dc930750",
         courses: [
@@ -432,6 +441,20 @@ const certCategories = [
         mainCertUrl: "https://www.linkedin.com/learning/certificates/c41db3e9cb5342ac05bcbdbc85ece86db1cfcf974db6be852549e9a28a275177?trk=share_certificate",
         courses: [],
         description: "Covers how generative AI is reshaping recruiting and talent acquisition, candidate screening, and candidate experience."
+      },
+      {
+        heading: "Leveraging Agentic AI in HR",
+        provider: "SHRM — LinkedIn Learning",
+        mainCertUrl: "https://www.linkedin.com/learning/certificates/d7810c38ccb3af32748d4828b827466005ab4bae11136afa7ceec51a8bb2343f?trk=share_certificate",
+        courses: [],
+        description: "Explores how agentic AI systems and autonomous AI agents can support HR workflows — automating multi-step people processes, assisting decision-making, and reshaping HR operations."
+      },
+      {
+        heading: "Data-Driven HR: AI-Powered People Analytics for Workforce Planning and Employee Experience",
+        provider: "SHRM — LinkedIn Learning",
+        mainCertUrl: "https://www.linkedin.com/learning/certificates/d309c26775d59ac3aab3da08894c1457f8b1e67861e5ffe8c033d1d187969c56?trk=share_certificate",
+        courses: [],
+        description: "Covers AI-powered people analytics for workforce planning, talent forecasting, and elevating employee experience through data-driven HR decisions."
       }
     ],
     description: "HR-focused certifications covering HRCI associate competencies, people-side change management, and generative AI in HR operations."
@@ -456,6 +479,7 @@ const projectsData = [
     subtitle: "Business Promotion Design",
     description: "A conceptual business designer to promote brands through strategic outreach and digital presence.",
     category: "Academic",
+    status: "Completed",
     headerStyle: "linear-gradient(135deg, #1e1b4b, #4338ca)",
     skills: ["Business Model", "Market Strategy", "Digital Marketing"],
     note: "Undertaken during my 1st semester of MBA as part of an academic initiative. Our team of 12 members won 1st place in a Shark Tank-style college competition. I took on the website design and created a live working prototype using AI tools.",
@@ -471,6 +495,7 @@ const projectsData = [
     subtitle: "Public Services App Proposal",
     description: "A digital platform connecting citizens with government authorities to improve issue reporting and emergency response.",
     category: "Innovation",
+    status: "Completed",
     headerStyle: "linear-gradient(135deg, #064e3b, #059669)",
     skills: ["Civic Tech", "App Design", "Public Policy"],
     pdf: "pdfs/Seva Satu.pdf",
@@ -487,6 +512,7 @@ const projectsData = [
     subtitle: "Union Bank of India",
     description: "An in-depth market research study on Union Bank of India, analyzing consumer perception, service positioning, and brand claims.",
     category: "Research",
+    status: "Completed",
     headerStyle: "linear-gradient(135deg, #78350f, #b45309)",
     skills: ["Market Research", "Data Analysis", "Reporting"],
     pdf: "pdfs/Union bank of India.pdf",
@@ -503,6 +529,7 @@ const projectsData = [
     subtitle: "Vibe Coded & Built by Me",
     description: "This very website you're viewing — designed, vibe coded, and built entirely by me using modern web technologies.",
     category: "Personal",
+    status: "Live",
     headerStyle: "linear-gradient(135deg, #4a1942, #9b59b6)",
     skills: ["Vibe Coding", "AI Tools", "Web Design"],
     details: {
@@ -522,74 +549,6 @@ const testimonialsData = [
   { initial: "R", bg: "linear-gradient(135deg, #f59e0b, #d97706)", stars: 5, text: "Nitish is a good listener in group discussions and is open to other people's ideas before settling on a direction.", name: "Research Partner", role: "Academic Collaborator" },
   { initial: "A", bg: "linear-gradient(135deg, #ec4899, #f43f5e)", stars: 5, text: "Nitish is curious and keeps learning new things, and he's usually happy to share what he picks up with the rest of us.", name: "Assignment Partner", role: "MBA Peer" }
 ];
-
-// Document Ready
-document.addEventListener("DOMContentLoaded", () => {
-  // Mobile Navigation Toggle
-  const toggleBtn = document.getElementById("mobileToggleBtn");
-  const mobileOverlay = document.getElementById("mobileMenuOverlay");
-  
-  if (toggleBtn && mobileOverlay) {
-    toggleBtn.addEventListener("click", () => {
-      const isActive = mobileOverlay.classList.toggle("active");
-      toggleBtn.setAttribute("aria-expanded", isActive);
-    });
-  }
-
-  window.scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      if (mobileOverlay) mobileOverlay.classList.remove("active");
-    }
-  };
-
-  // Dynamic Certificate Counter Auto-Updater
-  const updateDynamicCounts = () => {
-    const total = getTotalCertCount();
-    const aiCat = certCategories.find(c => c.id === "artificial-intelligence");
-    const mgmtCat = certCategories.find(c => c.id === "project-management");
-    const psychCat = certCategories.find(c => c.id === "psychology");
-    const hrCat = certCategories.find(c => c.id === "hr");
-
-    const aiCount = aiCat ? countCategory(aiCat) : 0;
-    const mgmtCount = mgmtCat ? countCategory(mgmtCat) : 0;
-    const psychCount = psychCat ? countCategory(psychCat) : 0;
-    const hrCount = hrCat ? countCategory(hrCat) : 0;
-
-    const heroEl = document.getElementById("heroCertCount");
-    if (heroEl) heroEl.innerText = `${total}+`;
-
-    const aboutEl = document.getElementById("aboutCertCount");
-    if (aboutEl) aboutEl.innerHTML = `${total}<span style="font-size: 1.8rem; color: var(--p1);">+</span>`;
-
-    const darkCardEl = document.getElementById("certDarkCardCount");
-    if (darkCardEl) darkCardEl.innerText = `${total}+`;
-
-    const certTotalEl = document.getElementById("certTotalStat");
-    if (certTotalEl) certTotalEl.innerText = `${total}`;
-
-    const certAiEl = document.getElementById("certAiStat");
-    if (certAiEl) certAiEl.innerText = `${aiCount}`;
-
-    const certMgmtEl = document.getElementById("certMgmtStat");
-    if (certMgmtEl) certMgmtEl.innerText = `${mgmtCount}`;
-
-    const certPsychEl = document.getElementById("certPsychStat");
-    if (certPsychEl) certPsychEl.innerText = `${psychCount}`;
-
-    const certHrEl = document.getElementById("certHrStat");
-    if (certHrEl) certHrEl.innerText = `${hrCount}`;
-  };
-
-  updateDynamicCounts();
-
-  // Full Screen Certifications & Badges View Logic
-  const certFullView = document.getElementById("certificationsFullView");
-  const certFullContent = document.getElementById("certFullContent");
-  let activeCertFilter = null;
-  let activeCertTab = "certificates"; // "certificates" | "badges"
-  const openBlocks = new Set();
 
   // Digital Badges Catalog (23 Official Verified Badges)
   const badgesData = [
@@ -931,13 +890,230 @@ document.addEventListener("DOMContentLoaded", () => {
       "AI Productivity"
     ],
     "verified": true
+  },
+  {
+    "id": "gen-ai-navigate-the-landscape",
+    "title": "Gen AI: Navigate the Landscape",
+    "issuer": "Google",
+    "platform": "Google Cloud Skills Boost",
+    "badgeImg": "assets/badges/gen-ai-navigate-the-landscape.png",
+    "badgeUrl": "https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26181315",
+    "description": "",
+    "skills": [
+      "Generative AI",
+      "LLM Strategy",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "gen-ai-apps-transform-your-work",
+    "title": "Gen AI Apps: Transform Your Work",
+    "issuer": "Google",
+    "platform": "Google Cloud Skills Boost",
+    "badgeImg": "assets/badges/gen-ai-apps-transform-your-work.png",
+    "badgeUrl": "https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26182097",
+    "description": "",
+    "skills": [
+      "Generative AI",
+      "AI Apps",
+      "AI Productivity"
+    ],
+    "verified": true
   }
 ];
+
+// Education Data (single source of truth)
+const educationData = [
+  {
+    degree: "Master of Business Administration (MBA)",
+    institution: "VIMTECH, Tumkur",
+    specialization: "HR Specialization",
+    period: "2025 — Present",
+    status: "Pursuing",
+    focus: "People strategy, leadership development, and organizational effectiveness."
+  },
+  {
+    degree: "Bachelor of Commerce (B.Com) – Accounting and Finance",
+    institution: "Vidyavahini First Grade College",
+    period: "2022 — 2025",
+    status: "Completed",
+    focus: "Accounting, finance, and core business principles."
+  },
+  {
+    degree: "Pre-University Course (Commerce)",
+    institution: "Sri Vani PU College",
+    period: "2020 — 2022",
+    status: "Completed",
+    focus: "Commerce stream with a focus on foundational business subjects."
+  }
+];
+
+// ============================================================
+// CENTRALIZED PORTFOLIO DATA STORE
+// Single source of truth for ALL professional content:
+// Profile, Certifications, Digital Badges, Projects, Education.
+// Every UI renderer AND the hidden LLM plaintext fallback
+// (#llm-profile-data) is generated from this one object.
+// Add or update an entry here and it automatically flows
+// into the visible UI and the machine-readable plaintext area.
+// ============================================================
+const PORTFOLIO_DATA = {
+  profile: {
+    name: "Nitish Kashyap R",
+    title: "AI-Enabled HR Professional",
+    email: "nitishkashyapr8@gmail.com",
+    location: "Tumkur / Bengaluru, Karnataka, India",
+    linkedin: "https://www.linkedin.com/in/nitishkashyapr",
+    github: "https://github.com/NitishKashyapR",
+    website: "https://nitishkashyapr.github.io/nitishkashyapr.com/"
+  },
+  certifications: certCategories,
+  badges: badgesData,
+  projects: projectsData,
+  education: educationData
+};
+
+// ============================================================
+// LLM / AI CRAWLER PLAINTEXT DATA ENGINE
+// Renders ALL profile data from PORTFOLIO_DATA into the hidden
+// #llm-profile-data container so AI crawlers, resume parsers,
+// and non-JS agents can read it straight from the DOM without
+// any external file fetches. Every entry is placed on its own
+// distinct line under clearly labeled sub-headings.
+// ============================================================
+const renderLLMProfileData = () => {
+  const container = document.getElementById("llm-profile-data");
+  if (!container) return;
+
+  const certifications = PORTFOLIO_DATA.certifications.flatMap(cat =>
+    (cat.subGroups || []).map(sg => ({
+      name: sg.name || sg.heading,
+      category: cat.label,
+      provider: sg.provider,
+      url: sg.mainCertUrl
+    }))
+  );
+
+  const certificationsHtml = certifications.map(c =>
+    `        <li><strong>${c.name}</strong> — Category: ${c.category} — Issuer: ${c.provider}${c.url ? ` — <a href="${c.url}">Verify Certification</a>` : ''}</li>`
+  ).join("\n");
+
+  const badgesHtml = PORTFOLIO_DATA.badges.map(b =>
+    `        <li><strong>${b.title}</strong> — Issuer: ${b.issuer} — Platform: ${b.platform} — <a href="${b.badgeUrl}">Verify Badge</a></li>`
+  ).join("\n");
+
+  const projectsHtml = PORTFOLIO_DATA.projects.map(p =>
+    `        <li><strong>${p.title}</strong> — Status: ${p.status || "Completed"} — ${p.description}</li>`
+  ).join("\n");
+
+  const educationHtml = PORTFOLIO_DATA.education.map(e =>
+    `        <li><strong>${e.degree}</strong> — ${e.institution} — Period: ${e.period} — Status: ${e.status}${e.focus ? ` — ${e.focus}` : ''}</li>`
+  ).join("\n");
+
+  container.innerHTML = `
+    <h3>Verified Certifications Earned by Nitish Kashyap R</h3>
+    <p>The following ${certifications.length} professional certifications were earned by Nitish Kashyap R across Coursera, LinkedIn Learning, HRCI, SHRM, NASBA, IBM, Infosys, and Google platforms:</p>
+    <ol>
+${certificationsHtml}
+    </ol>
+    <h3>Verified Digital Badges Earned by Nitish Kashyap R</h3>
+    <p>The following ${PORTFOLIO_DATA.badges.length} verified digital badges were earned by Nitish Kashyap R across Credly and Google Cloud Skills Boost platforms:</p>
+    <ol>
+${badgesHtml}
+    </ol>
+    <h3>Featured Projects and Academic Innovations</h3>
+    <p>The following projects were conceptualized, researched, and built by Nitish Kashyap R:</p>
+    <ul>
+${projectsHtml}
+    </ul>
+    <h3>Education and Academic Journey</h3>
+    <ul>
+${educationHtml}
+    </ul>
+  `;
+};
+
+// Document Ready
+document.addEventListener("DOMContentLoaded", () => {
+  // Mobile Navigation Toggle
+  const toggleBtn = document.getElementById("mobileToggleBtn");
+  const mobileOverlay = document.getElementById("mobileMenuOverlay");
+  
+  if (toggleBtn && mobileOverlay) {
+    toggleBtn.addEventListener("click", () => {
+      const isActive = mobileOverlay.classList.toggle("active");
+      toggleBtn.setAttribute("aria-expanded", isActive);
+    });
+  }
+
+  window.scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      if (mobileOverlay) mobileOverlay.classList.remove("active");
+    }
+  };
+
+  // Dynamic Certificate Counter Auto-Updater
+  const updateDynamicCounts = () => {
+    const total = getTotalCertCount();
+    const aiCat = certCategories.find(c => c.id === "artificial-intelligence");
+    const mgmtCat = certCategories.find(c => c.id === "project-management");
+    const psychCat = certCategories.find(c => c.id === "psychology");
+    const hrCat = certCategories.find(c => c.id === "hr");
+
+    const aiCount = aiCat ? countCategory(aiCat) : 0;
+    const mgmtCount = mgmtCat ? countCategory(mgmtCat) : 0;
+    const psychCount = psychCat ? countCategory(psychCat) : 0;
+    const hrCount = hrCat ? countCategory(hrCat) : 0;
+
+    const heroEl = document.getElementById("heroCertCount");
+    if (heroEl) heroEl.innerText = `${total}+`;
+
+    const aboutEl = document.getElementById("aboutCertCount");
+    if (aboutEl) aboutEl.innerHTML = `${total}<span style="font-size: 1.8rem; color: var(--p1);">+</span>`;
+
+    const darkCardEl = document.getElementById("certDarkCardCount");
+    if (darkCardEl) darkCardEl.innerText = `${total}+`;
+
+    const certTotalEl = document.getElementById("certTotalStat");
+    if (certTotalEl) certTotalEl.innerText = `${total}`;
+
+    const certAiEl = document.getElementById("certAiStat");
+    if (certAiEl) certAiEl.innerText = `${aiCount}`;
+
+    const certMgmtEl = document.getElementById("certMgmtStat");
+    if (certMgmtEl) certMgmtEl.innerText = `${mgmtCount}`;
+
+    const certPsychEl = document.getElementById("certPsychStat");
+    if (certPsychEl) certPsychEl.innerText = `${psychCount}`;
+
+    const certHrEl = document.getElementById("certHrStat");
+    if (certHrEl) certHrEl.innerText = `${hrCount}`;
+  };
+
+  updateDynamicCounts();
+
+  // Render centralized profile data into the hidden plaintext
+  // fallback container for LLM crawlers, parsers, and bots.
+  renderLLMProfileData();
+
+  // Full Screen Certifications & Badges View Logic
+  const certFullView = document.getElementById("certificationsFullView");
+  const certFullContent = document.getElementById("certFullContent");
+  let activeCertFilter = null;
+  let activeCertTab = "certificates"; // "certificates" | "badges"
+  let activeOpenBlock = null; // only one accordion block can be open at a time
+  const stickyBackRefresh = [];
+
+
 
   window.openCertificationsFullView = () => {
     if (certFullView) {
       certFullView.classList.add("active");
       document.body.style.overflow = "hidden";
+      stickyBackRefresh.forEach(fn => fn());
       renderCertFullView();
     }
   };
@@ -968,33 +1144,78 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    activeOpenBlock = null;
     renderCertFullView();
   };
 
   window.setCertFilter = (catId) => {
     activeCertFilter = activeCertFilter === catId ? null : catId;
+    activeOpenBlock = null;
     renderCertFullView();
   };
 
+  // Buttery accordion engine: only one block open at a time.
+  // Opening a new block smoothly collapses the previously open one,
+  // then expands the clicked block with a silky spring-like ease.
+  const openAccordionBlock = (card) => {
+    const content = card.querySelector(".accordion-content");
+    if (!content) return;
+    card.classList.add("open");
+    content.style.maxHeight = "0px";
+    content.style.opacity = "0";
+    content.style.padding = "0";
+    void content.offsetHeight;
+    content.style.maxHeight = content.scrollHeight + "px";
+    content.style.opacity = "1";
+    content.style.padding = "0 1.25rem 1.25rem 1.25rem";
+  };
+
+  const closeAccordionBlock = (card) => {
+    const content = card.querySelector(".accordion-content");
+    if (!content) return;
+    content.style.maxHeight = content.scrollHeight + "px";
+    content.style.opacity = "1";
+    content.style.padding = "0 1.25rem 1.25rem 1.25rem";
+    void content.offsetHeight;
+    content.style.maxHeight = "0px";
+    content.style.opacity = "0";
+    content.style.padding = "0";
+    card.classList.remove("open");
+  };
+
+  const refreshAccordionChevrons = () => {
+    document.querySelectorAll(".glass-card[data-accordion-block]").forEach(card => {
+      const chevron = card.querySelector(".accordion-chevron");
+      if (chevron) chevron.innerHTML = card.classList.contains("open") ? icons.chevronUp : icons.chevronDown;
+    });
+  };
+
   window.toggleAccordionBlock = (blockId) => {
-    if (openBlocks.has(blockId)) {
-      openBlocks.delete(blockId);
+    const card = document.querySelector(`.glass-card[data-accordion-block="${blockId}"]`);
+    if (!card) return;
+
+    if (card.classList.contains("open")) {
+      closeAccordionBlock(card);
+      activeOpenBlock = null;
     } else {
-      openBlocks.add(blockId);
+      const openCard = document.querySelector(".glass-card.open[data-accordion-block]");
+      if (openCard && openCard !== card) closeAccordionBlock(openCard);
+      openAccordionBlock(card);
+      activeOpenBlock = blockId;
     }
-    renderCertFullView();
+    refreshAccordionChevrons();
   };
 
   const getProviderLogo = (heading, provider) => {
     const text = `${heading} ${provider || ''}`.toLowerCase();
     if (text.includes("hrci")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #002d62; display: flex; align-items: center; justify-content: center; color: #ffffff; font-weight: 900; font-size: 0.65rem; letter-spacing: 0.05em; font-family: var(--font-heading); box-shadow: 0 2px 8px rgba(0,45,98,0.35); border: 1px solid rgba(255,255,255,0.18);">HRCI</div>`;
+      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/HRCI.png" alt="HRCI" style="width: 28px; height: 28px; object-fit: contain;" /></div>`;
     }
     if (text.includes("shrm")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #0f2b5c; display: flex; align-items: center; justify-content: center; color: #ffffff; font-weight: 900; font-size: 0.7rem; letter-spacing: 0.05em; font-family: var(--font-heading); box-shadow: 0 2px 8px rgba(15,43,92,0.35); border: 1px solid rgba(255,255,255,0.18);">SHRM</div>`;
+      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/SHRM logo.jpg" alt="SHRM" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
     }
     if (text.includes("nasba")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #00487c; display: flex; align-items: center; justify-content: center; color: #ffffff; font-weight: 900; font-size: 0.62rem; letter-spacing: 0.04em; font-family: var(--font-heading); box-shadow: 0 2px 8px rgba(0,72,124,0.35); border: 1px solid rgba(255,255,255,0.18);">NASBA</div>`;
+      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/NASBA.jpg" alt="NASBA" style="width: 30px; height: 24px; object-fit: contain;" /></div>`;
     }
     if (text.includes("ibm")) {
       return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/ibm.png" alt="IBM" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
@@ -1006,13 +1227,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg></div>`;
     }
     if (text.includes("yale")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #00356B; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 1rem; font-family: Georgia, serif; box-shadow: 0 2px 6px rgba(0,53,107,0.3);">Y</div>`;
+      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/Yale university.jpg" alt="Yale University" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
     }
     if (text.includes("wesleyan")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #C41E3A; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 0.95rem; font-family: var(--font-heading); box-shadow: 0 2px 6px rgba(196,30,58,0.3);">W</div>`;
+      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/Wesleyan university.png" alt="Wesleyan University" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
     }
     if (text.includes("pennsylvania") || text.includes("penn")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #011F5B, #990000); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 0.95rem; font-family: Georgia, serif; box-shadow: 0 2px 6px rgba(1,31,91,0.3);">P</div>`;
+      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/University of Pennsylvania.png" alt="University of Pennsylvania" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
+    }
+    if (text.includes("anthropic")) {
+      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/anthropic logo.png" alt="Anthropic" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
     }
     if (text.includes("linkedin")) {
       return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #0A66C2; display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 2px 6px rgba(10,102,194,0.3);"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></div>`;
@@ -1142,11 +1366,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (cat.subGroups) {
         cat.subGroups.forEach(sg => {
           const blockId = `${cat.id}-${sg.heading}`;
-          const isOpen = openBlocks.has(blockId);
+          const isOpen = activeOpenBlock === blockId;
           const hasExpandableContent = (sg.courses && sg.courses.length > 0) || Boolean(sg.description);
 
           mainHtml += `
-            <div class="glass-card" style="padding: 0; margin-bottom: 0.75rem; overflow: hidden;">
+            <div class="glass-card${isOpen ? ' open' : ''}" data-accordion-block="${blockId}" style="padding: 0; margin-bottom: 0.75rem; overflow: hidden;">
               <div style="padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; ${hasExpandableContent ? 'cursor: pointer;' : ''}" ${hasExpandableContent ? `onclick="toggleAccordionBlock('${blockId}')"` : ''}>
                 <div style="display: flex; align-items: center; gap: 0.85rem; flex: 1;">
                   ${getProviderLogo(sg.heading, sg.provider)}
@@ -1163,7 +1387,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </a>
                   ` : ''}
                   ${hasExpandableContent ? `
-                    <button onclick="toggleAccordionBlock('${blockId}')" style="background: transparent; border: none; color: var(--ink-3); cursor: pointer; display: flex; align-items: center;">
+                    <button class="accordion-chevron" onclick="toggleAccordionBlock('${blockId}')" aria-label="Toggle details" style="background: transparent; border: none; color: var(--ink-3); cursor: pointer; display: flex; align-items: center; transition: color 0.2s ease;">
                       ${isOpen ? icons.chevronUp : icons.chevronDown}
                     </button>
                   ` : ''}
@@ -1171,7 +1395,7 @@ document.addEventListener("DOMContentLoaded", () => {
               </div>
 
               ${hasExpandableContent ? `
-                <div class="accordion-content ${isOpen ? 'open' : ''}" style="max-height: ${isOpen ? '1000px' : '0'}; opacity: ${isOpen ? '1' : '0'}; padding: ${isOpen ? '0 1.25rem 1.25rem 1.25rem' : '0'}; transition: all 0.3s ease;">
+                <div class="accordion-content ${isOpen ? 'open' : ''}">
                   ${sg.description ? `<div style="background: var(--surface-1); padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.82rem; color: var(--ink-2); margin-bottom: ${sg.courses && sg.courses.length > 0 ? '0.75rem' : '0'};">${sg.description}</div>` : ''}
                   ${(sg.courses || []).map(c => `
                     <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 0.85rem; background: var(--surface-1); border-radius: 8px; margin-bottom: 0.4rem;">
@@ -1210,6 +1434,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (projectsFullView) {
       projectsFullView.classList.add("active");
       document.body.style.overflow = "hidden";
+      stickyBackRefresh.forEach(fn => fn());
       renderProjectsFullView();
     }
   };
@@ -1279,6 +1504,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
     projectsFullContent.innerHTML = tabsHtml + gridHtml;
   };
+
+  // ============================================================
+  // STICKY BACK BUTTONS (Certifications & Projects full views)
+  // The back button stays pinned at the top of the viewport while
+  // the user scrolls, and slowly glides left into the empty screen
+  // margin so it settles beside the sticky filter column instead
+  // of scrolling away with the page.
+  // ============================================================
+  const STICKY_SCROLL_RANGE = 600;
+  const STICKY_EDGE_MARGIN = 16;
+
+  const setupStickyBackButton = (btn) => {
+    if (!btn) return;
+    const view = btn.closest(".fullscreen-view");
+    const container = btn.closest(".container");
+    if (!view || !container) return;
+
+    btn.style.position = "sticky";
+    btn.style.top = "1rem";
+    btn.style.zIndex = "50";
+    btn.style.display = "flex";
+    btn.style.willChange = "transform";
+
+    let maxShift = 0;
+
+    const update = () => {
+      const progress = Math.min(1, view.scrollTop / STICKY_SCROLL_RANGE);
+      const eased = 1 - Math.pow(1 - progress, 2);
+      btn.style.transform = `translateX(${-maxShift * eased}px)`;
+    };
+
+    const measure = () => {
+      const baseLeft = container.getBoundingClientRect().left + btn.offsetLeft;
+      maxShift = Math.max(0, baseLeft - STICKY_EDGE_MARGIN);
+      update();
+    };
+
+    view.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", measure);
+    stickyBackRefresh.push(measure);
+    measure();
+  };
+
+  setupStickyBackButton(document.getElementById("certBackBtn"));
+  setupStickyBackButton(document.getElementById("projectsBackBtn"));
+
+  // Back to Top floating button
+  const backToTopBtn = document.getElementById("backToTopBtn");
+  if (backToTopBtn) {
+    const toggleBackToTop = () => {
+      backToTopBtn.classList.toggle("visible", window.scrollY > 400);
+    };
+    window.addEventListener("scroll", toggleBackToTop, { passive: true });
+    toggleBackToTop();
+    backToTopBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 
   // Modals
   const modalBackdrop = document.getElementById("modalBackdrop");

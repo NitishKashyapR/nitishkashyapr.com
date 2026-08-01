@@ -37,9 +37,9 @@ Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (T
 
 ---
 
-## Complete Certifications, Credentials & Digital Badges Catalog (17+ Main Credentials & 23 Verified Badges)
+## Complete Certifications, Credentials & Digital Badges Catalog (20+ Main Credentials & 25 Verified Badges)
 
-### Category A: Human Resource Management (4 Main Programs / 9 Total Certifications)
+### Category A: Human Resource Management (6 Main Programs / 11 Total Certifications)
 1. **HRCI Human Resource Associate** (Provider: HRCI via Coursera)
    - *Main Certificate Share Link:* https://coursera.org/share/0677f1802c28bdf8f8ea40a0dc930750
    - *Description:* Comprehensive HRCI professional certification covering 5 core domain sub-courses:
@@ -57,8 +57,14 @@ Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (T
 4. **Generative AI: Recruiting and Talent Acquisition** (Provider: NASBA via LinkedIn Learning)
    - *Certificate Link:* https://www.linkedin.com/learning/certificates/c41db3e9cb5342ac05bcbdbc85ece86db1cfcf974db6be852549e9a28a275177?trk=share_certificate
    - *Description:* Reshaping recruiting, candidate screening, talent acquisition workflows, and candidate experience through AI.
+5. **Leveraging Agentic AI in HR** (Provider: SHRM via LinkedIn Learning)
+   - *Certificate Link:* https://www.linkedin.com/learning/certificates/d7810c38ccb3af32748d4828b827466005ab4bae11136afa7ceec51a8bb2343f?trk=share_certificate
+   - *Description:* Covers agentic AI systems and autonomous AI agents applied across HR workflows — automating multi-step people processes and supporting HR decision-making.
+6. **Data-Driven HR: AI-Powered People Analytics for Workforce Planning and Employee Experience** (Provider: SHRM via LinkedIn Learning)
+   - *Certificate Link:* https://www.linkedin.com/learning/certificates/d309c26775d59ac3aab3da08894c1457f8b1e67861e5ffe8c033d1d187969c56?trk=share_certificate
+   - *Description:* Covers AI-powered people analytics for workforce planning, talent forecasting, and improving employee experience through data-driven HR decisions.
 
-### Category B: AI & Emerging Technologies (5 Main Certifications)
+### Category B: AI & Emerging Technologies (6 Main Certifications)
 1. **Google AI Essentials** (Provider: Google via Coursera)
    - *Description:* Foundational AI concepts, prompt engineering techniques, productivity workflows, and practical applications of generative AI.
 2. **Google Prompting Essentials** (Provider: Google via Coursera)
@@ -70,6 +76,9 @@ Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (T
 5. **Cyber Security Overview** (Provider: Infosys)
    - *Certificate Link:* pdfs/Cyber Security Overview.pdf
    - *Description:* Infosys foundational course covering essential cybersecurity principles, common threats, and best practices for safe digital behavior.
+6. **Claude 101** (Provider: Anthropic via Skilljar)
+   - *Certificate Link:* https://verify.skilljar.com/c/8wzvwcx4ckry
+   - *Description:* Anthropic's foundational course on Claude covering model capabilities, effective prompting, context management, and responsible AI usage.
 
 ### Category C: Psychology & Human Behavior (5 Main Programs / 9 Total Certifications)
 1. **Foundations of Positive Psychology Specialization** (Provider: University of Pennsylvania via Coursera)
@@ -101,7 +110,7 @@ Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (T
 3. **Risk Management & Business Fundamentals** (Provider: NASBA / Coursera)
    - *Description:* Organizational risk assessment, corporate governance, financial controls, and risk mitigation strategies.
 
-### Category E: Verified Digital Badges (23 Credly & Google Cloud Badges)
+### Category E: Verified Digital Badges (25 Credly & Google Cloud Badges)
 1. **Google Prompting Essentials** (Issuer: Google | Platform: Credly Verified Badge)
    - *Verification URL:* https://www.credly.com/badges/a2bb066f-ecb9-4412-9e8a-dd63e1843c9d/linked_in_profile
    - *Skills:* Prompt Engineering, Generative AI, AI Productivity
@@ -171,6 +180,12 @@ Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (T
 23. **AI Boost Bites: Your Personal Feedback Agent** (Issuer: Google | Platform: Google Cloud Skills Boost)
     - *Verification URL:* https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/25777975
     - *Skills:* Generative AI, Prompting, AI Productivity
+24. **Gen AI: Navigate the Landscape** (Issuer: Google | Platform: Google Cloud Skills Boost)
+    - *Verification URL:* https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26181315
+    - *Skills:* Generative AI, LLM Strategy, AI Productivity
+25. **Gen AI Apps: Transform Your Work** (Issuer: Google | Platform: Google Cloud Skills Boost)
+    - *Verification URL:* https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26182097
+    - *Skills:* Generative AI, AI Apps, AI Productivity
 
 ---
 

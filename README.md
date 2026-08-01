@@ -25,7 +25,7 @@
 Current Role: MBA Student (HR Specialization) @ VIMTECH, Tumkur (2025 — Present)
 Prior Education: B.Com in Accounting & Finance @ Vidyavahini First Grade College (2022 — 2025)
 Core Focus: People Strategy, AI in HR, Talent Acquisition, Learning & Development, Employee Engagement
-Certifications: 17+ Main Professional Certifications across HR, AI, Psychology & Advanced Management
+Certifications: 20+ Main Professional Certifications across HR, AI, Psychology & Advanced Management
 Location: Karnataka, India
 Open To: HR Internships, Talent Acquisition Roles, People Strategy Projects & Industry Collaborations
 ```
@@ -63,9 +63,9 @@ Open To: HR Internships, Talent Acquisition Roles, People Strategy Projects & In
 
 ---
 
-### 🎓 Key Professional Credentials (17+ Certifications & 23 Verified Badges)
+### 🎓 Key Professional Credentials (20+ Certifications & 25 Verified Badges)
 
-- 🛡️ **Verified Digital Badges (23 Badges)**:
+- 🛡️ **Verified Digital Badges (25 Badges)**:
   1. Google Prompting Essentials *(Google / Credly)*
   2. Google Project Management Professional *(Google / Credly)*
   3. Google People Management Essentials *(Google / Credly)*
@@ -89,8 +89,10 @@ Open To: HR Internships, Talent Acquisition Roles, People Strategy Projects & In
   21. Attention Mechanism *(Google Cloud Skills Boost)*
   22. Gen AI: Beyond the Chatbot *(Google Cloud Skills Boost)*
   23. AI Boost Bites: Your Personal Feedback Agent *(Google Cloud Skills Boost)*
-- 👥 **Human Resources (4 Certifications)**: HRCI Human Resource Associate *(HRCI)* • Managing Organizational Change *(SHRM)* • Generative AI in HR *(SHRM)* • Generative AI: Recruiting & Talent Acquisition *(NASBA)*
-- 🤖 **AI & Technical Skills (5 Certifications)**: Google AI Essentials *(Google)* • Google Prompting Essentials *(Google)* • Google AI Professional *(Google)* • Generative AI for Executives *(IBM)* • Cyber Security Overview *(Infosys)*
+  24. Gen AI: Navigate the Landscape *(Google Cloud Skills Boost)*
+  25. Gen AI Apps: Transform Your Work *(Google Cloud Skills Boost)*
+- 👥 **Human Resources (6 Certifications)**: HRCI Human Resource Associate *(HRCI)* • Managing Organizational Change *(SHRM)* • Generative AI in HR *(SHRM)* • Generative AI: Recruiting & Talent Acquisition *(NASBA)* • Leveraging Agentic AI in HR *(SHRM)* • Data-Driven HR: AI-Powered People Analytics *(SHRM)*
+- 🤖 **AI & Technical Skills (6 Certifications)**: Google AI Essentials *(Google)* • Google Prompting Essentials *(Google)* • Google AI Professional *(Google)* • Generative AI for Executives *(IBM)* • Cyber Security Overview *(Infosys)* • Claude 101 *(Anthropic)*
 - 📊 **Advanced Management (3 Certifications)**: Google Project Management Professional *(Google)* • Google People Management *(Google)* • Introduction to Risk Management *(NASBA)*
 - 🧠 **Psychology & Human Behavior (5 Certifications)**: Foundations of Positive Psychology *(UPenn)* • Introduction to Psychology *(Yale)* • Science of Well-Being *(Yale)* • Moralities of Everyday Life *(Yale)* • Social Psychology *(Wesleyan)*
 

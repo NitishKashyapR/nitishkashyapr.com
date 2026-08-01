@@ -337,5 +337,35 @@
       "AI Productivity"
     ],
     "verified": true
+  },
+  {
+    "id": "gen-ai-navigate-the-landscape",
+    "title": "Gen AI: Navigate the Landscape",
+    "issuer": "Google",
+    "platform": "Google Cloud Skills Boost",
+    "badgeImg": "assets/badges/gen-ai-navigate-the-landscape.png",
+    "badgeUrl": "https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26181315",
+    "description": "",
+    "skills": [
+      "Generative AI",
+      "LLM Strategy",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "gen-ai-apps-transform-your-work",
+    "title": "Gen AI Apps: Transform Your Work",
+    "issuer": "Google",
+    "platform": "Google Cloud Skills Boost",
+    "badgeImg": "assets/badges/gen-ai-apps-transform-your-work.png",
+    "badgeUrl": "https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26182097",
+    "description": "",
+    "skills": [
+      "Generative AI",
+      "AI Apps",
+      "AI Productivity"
+    ],
+    "verified": true
   }
 ]

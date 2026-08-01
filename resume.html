@@ -36,338 +36,1025 @@
     "knowsAbout": [
       "Human Resource Management", "Talent Acquisition", "Learning & Development",
       "Employee Relations", "Compensation & Benefits", "Compliance & Risk Management",
-      "Prompt Engineering", "Generative AI in HR", "Vibe Coding"
+      "Prompt Engineering", "Generative AI in HR", "Vibe Coding",
+      "People Analytics", "Workforce Planning", "Employee Engagement",
+      "Change Management", "Project Management", "Positive Psychology"
     ]
   }
   </script>
 
   <script>
-    (function() {
-      const saved = localStorage.getItem('theme');
-      const theme = saved || 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
+  /* Resume is intentionally always light mode for clean ATS-safe printing. */
   </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --primary: #2563eb;
+      --accent: #7c3aed;
       --text-dark: #0f172a;
       --text-muted: #334155;
-      --bg: #f8fafc;
+      --text-light: #64748b;
+      --bg: #eef2f7;
       --card-bg: #ffffff;
-      --border: #cbd5e1;
-    }
-    :root[data-theme="dark"] {
-      --primary: #818cf8;
-      --text-dark: #f8fafc;
-      --text-muted: #cbd5e1;
-      --bg: #121426;
-      --card-bg: rgba(24, 32, 53, 0.9);
-      --border: rgba(99, 102, 241, 0.25);
+      --border: #e2e8f0;
+      --rule: #cbd5e1;
+      --soft: #f1f5f9;
+      --glow-a: rgba(37, 99, 235, 0.14);
+      --glow-b: rgba(124, 58, 237, 0.14);
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.16);
+      --ring: rgba(37, 99, 235, 0.25);
     }
     * {
       box-sizing: border-box;
     }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background-color: var(--bg);
+      background:
+        radial-gradient(620px 420px at 10% -6%, var(--glow-a), transparent 62%),
+        radial-gradient(720px 520px at 110% 8%, var(--glow-b), transparent 62%),
+        radial-gradient(520px 400px at 50% 115%, var(--glow-b), transparent 60%),
+        repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.028) 0 1px, transparent 1px 52px),
+        repeating-linear-gradient(90deg, rgba(15, 23, 42, 0.028) 0 1px, transparent 1px 52px),
+        var(--bg);
+      background-attachment: fixed;
       color: var(--text-dark);
-      line-height: 1.6;
+      line-height: 1.55;
       margin: 0;
-      padding: 30px 15px;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      padding: 34px 16px 60px;
     }
-    .resume-container {
-      max-width: 820px;
+    .page {
+      max-width: 830px;
       margin: 0 auto;
-      background: var(--card-bg);
-      padding: 45px 50px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      border: 1px solid var(--border);
+      position: relative;
     }
-    header {
-      border-bottom: 2px solid var(--primary);
-      padding-bottom: 18px;
-      margin-bottom: 24px;
-    }
-    h1 {
-      font-size: 2.2rem;
-      margin: 0 0 6px 0;
-      color: var(--text-dark);
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-    }
-    .subtitle {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-    .contact-info {
-      font-size: 0.92rem;
-      color: var(--text-muted);
+    .toolbar {
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
       gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
     }
-    .contact-info a {
-      color: var(--primary);
+    .back-link {
+      font-size: 0.85rem;
+    }
+    .back-link a {
+      color: var(--text-light);
       text-decoration: none;
+      font-weight: 600;
     }
-    .contact-info a:hover {
+    .back-link a:hover {
+      color: var(--primary);
       text-decoration: underline;
     }
+    .print-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border: none;
+      border-radius: 10px;
+      padding: 0.55rem 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.32);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .print-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(37, 99, 235, 0.45);
+    }
+    .resume {
+      position: relative;
+      background: var(--card-bg);
+      padding: 50px 56px 44px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    /* Animated gradient hairline on top edge */
+    .resume::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent), #06b6d4, var(--primary));
+      background-size: 300% 100%;
+      animation: shimmer 9s linear infinite;
+      z-index: 2;
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 0; }
+      100% { background-position: 300% 0; }
+    }
+    /* Decorative corner ornament */
+    .resume::after {
+      content: "";
+      position: absolute;
+      top: -70px;
+      right: -70px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--glow-b), transparent 70%);
+      pointer-events: none;
+    }
+    /* Ghost initials watermark */
+    .watermark {
+      position: absolute;
+      bottom: 10px;
+      right: 24px;
+      font-family: 'Sora', Arial, sans-serif;
+      font-weight: 800;
+      font-size: 4.5rem;
+      letter-spacing: 0.06em;
+      color: var(--soft);
+      opacity: 0.55;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+    header {
+      padding-bottom: 22px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+    .identity {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .monogram {
+      width: 66px;
+      height: 66px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      font-family: 'Sora', Arial, sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 26px rgba(37, 99, 235, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      flex-shrink: 0;
+    }
+    h1 {
+      font-family: 'Sora', Arial, sans-serif;
+      font-size: 2.05rem;
+      font-weight: 800;
+      letter-spacing: 0.008em;
+      margin: 0 0 6px 0;
+      color: var(--text-dark);
+    }
+    .accent-name {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: var(--primary);
+    }
+    .role {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--primary);
+      margin: 0 0 14px 0;
+    }
+    .contact {
+      font-size: 0.86rem;
+      color: var(--text-light);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .chip svg {
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    a.chip:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+    }
+    /* Quick stat tiles */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .stat {
+      background: linear-gradient(135deg, var(--soft), #ffffff);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+    .stat:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.12);
+    }
+    .stat b {
+      display: block;
+      font-family: 'Sora', Arial, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+    .stat small {
+      display: block;
+      font-size: 0.66rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
     section {
-      margin-bottom: 26px;
+      margin-bottom: 30px;
+    }
+    section:last-of-type {
+      margin-bottom: 0;
     }
     h2 {
-      font-size: 1.18rem;
-      color: var(--text-dark);
-      border-bottom: 1.5px solid var(--border);
-      padding-bottom: 4px;
-      margin: 0 0 14px 0;
+      font-family: 'Sora', Arial, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.16em;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 18px 0;
+    }
+    .sec-num {
+      font-size: 0.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: var(--primary);
+      letter-spacing: 0.08em;
+      position: relative;
+    }
+    .sec-num::after {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      transform: rotate(45deg);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      margin-left: 12px;
+      border-radius: 1px;
+    }
+    h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--rule), transparent);
     }
     p {
       margin: 0 0 10px 0;
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.94rem;
+    }
+    .summary {
+      margin: 0;
+      line-height: 1.68;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, var(--soft), #ffffff);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 14px 14px 0;
     }
     ul {
-      margin: 0 0 12px 0;
-      padding-left: 20px;
-      color: var(--text-muted);
-      font-size: 0.93rem;
+      margin: 0;
+      padding-left: 18px;
     }
     li {
-      margin-bottom: 6px;
+      margin-bottom: 5px;
+      color: var(--text-muted);
+      font-size: 0.91rem;
+      line-height: 1.55;
     }
-    .job-entry {
-      margin-bottom: 18px;
+    li:last-child {
+      margin-bottom: 0;
     }
-    .entry-header {
+    /* Vertical timeline for education & experience */
+    .timeline {
+      position: relative;
+      padding-left: 14px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 14px;
+      bottom: 14px;
+      width: 2px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, var(--primary), var(--accent), rgba(124, 58, 237, 0.1));
+    }
+    .timeline .entry {
+      position: relative;
+      margin-bottom: 20px;
+      padding: 10px 16px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      transition: all 0.25s ease;
+    }
+    .timeline .entry::before {
+      content: "";
+      position: absolute;
+      left: -15px;
+      top: 20px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 0 0 3px var(--soft), 0 0 12px rgba(37, 99, 235, 0.35);
+    }
+    .timeline .entry:hover {
+      border-color: var(--border);
+      background: var(--soft);
+      transform: translateX(4px);
+    }
+    .entry-head {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      font-weight: bold;
-      color: var(--text-dark);
-      font-size: 1rem;
+      gap: 14px;
+      flex-wrap: wrap;
     }
-    .entry-sub {
-      font-style: italic;
+    .entry-title {
+      font-family: 'Sora', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 0.97rem;
+      color: var(--text-dark);
+    }
+    .entry-date {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-light);
+      white-space: nowrap;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+    .entry-org {
+      font-size: 0.9rem;
+      font-weight: 600;
       color: var(--primary);
-      font-size: 0.92rem;
-      margin-bottom: 6px;
+      margin: 3px 0 7px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .skill-card {
+      background: linear-gradient(135deg, var(--soft), #ffffff);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .skill-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(37, 99, 235, 0.14);
+    }
+    .skill-card:hover::before {
+      opacity: 1;
+    }
+    .skill-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .skill-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(124, 58, 237, 0.12));
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .skill-head strong {
+      font-family: 'Sora', Arial, sans-serif;
+      font-size: 0.87rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px 10px;
+      transition: all 0.2s ease;
+    }
+    .skill-card:hover .tag {
+      border-color: rgba(37, 99, 235, 0.35);
+      color: var(--text-dark);
     }
     .cert-group {
       margin-bottom: 14px;
+      background: linear-gradient(135deg, var(--soft), #ffffff);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px 12px;
+      transition: border-color 0.25s ease;
+    }
+    .cert-group:hover {
+      border-color: rgba(37, 99, 235, 0.4);
+    }
+    .cert-group:last-child {
+      margin-bottom: 0;
     }
     .cert-group-title {
-      font-weight: bold;
+      font-family: 'Sora', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
       color: var(--text-dark);
-      font-size: 0.95rem;
-      margin-bottom: 4px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .count-pill {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 999px;
+      padding: 2px 9px;
+      flex-shrink: 0;
+      box-shadow: 0 3px 8px rgba(37, 99, 235, 0.25);
+    }
+    .cert-group ul {
+      padding-left: 18px;
+    }
+    .cert-group li {
+      font-size: 0.86rem;
+      margin-bottom: 3px;
+    }
+    .badges-note {
+      background: linear-gradient(135deg, var(--soft), #ffffff);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      border-radius: 14px;
+      padding: 16px 18px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin: 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .badges-note > svg {
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .badges-note a {
+      color: var(--primary);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .badges-note a:hover {
+      text-decoration: underline;
+    }
+    /* Decorative badge distribution bar */
+    .badge-bar {
+      margin-top: 12px;
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      display: flex;
+      gap: 2px;
+    }
+    .badge-bar span {
+      height: 100%;
+      border-radius: 999px;
+    }
+    .badge-bar span:nth-child(1) { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+    .badge-bar span:nth-child(2) { background: linear-gradient(90deg, #7c3aed, #8b5cf6); }
+    .badge-bar span:nth-child(3) { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
+    .badge-bar span:nth-child(4) { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .badge-legend {
+      margin-top: 8px;
+      font-size: 0.74rem;
+      color: var(--text-light);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+    }
+    .badge-legend i {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+    .references {
+      margin-top: 26px;
+      padding-top: 16px;
+      border-top: 1px solid var(--rule);
+      font-size: 0.85rem;
+      color: var(--text-light);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .references svg {
+      color: var(--primary);
+    }
+    @media (max-width: 640px) {
+      body {
+        padding: 16px 10px 40px;
+      }
+      .resume {
+        padding: 34px 22px 32px;
+        border-radius: 14px;
+      }
+      .identity {
+        gap: 12px;
+      }
+      .monogram {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        font-size: 1.1rem;
+      }
+      h1 {
+        font-size: 1.55rem;
+      }
+      .role {
+        font-size: 0.76rem;
+        letter-spacing: 0.09em;
+      }
+      .stat-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .entry-head {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .entry-date {
+        align-self: flex-start;
+      }
+      .watermark {
+        font-size: 3rem;
+      }
     }
     @media print {
-      body { background: #fff !important; color: #000 !important; padding: 0; }
-      .resume-container { border: none; box-shadow: none; padding: 0; background: #fff !important; color: #000 !important; }
-      h1, h2, .entry-header, .cert-group-title { color: #000 !important; }
-      .subtitle, .entry-sub, .contact-info a { color: #1d4ed8 !important; }
-      ul, p { color: #334155 !important; }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        padding: 0;
+      }
+      .toolbar {
+        display: none;
+      }
+      .resume {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        background: #fff !important;
+        overflow: visible;
+      }
+      .resume::before,
+      .resume::after,
+      .watermark {
+        display: none;
+      }
+      h1, h2, .entry-title, .cert-group-title, .skill-head strong, .stat b {
+        color: #000 !important;
+        -webkit-text-fill-color: initial;
+      }
+      .role, .entry-org, a {
+        color: #1d4ed8 !important;
+      }
+      .sec-num, .accent-name {
+        color: #1d4ed8 !important;
+        -webkit-text-fill-color: initial;
+        background: none;
+      }
+      .contact, .entry-date, p, li, .badges-note, .references, .badge-legend, .stat small, .tag {
+        color: #1f2937 !important;
+      }
+      .summary, .skill-card, .cert-group, .badges-note, .stat {
+        background: #fff !important;
+        border-color: #cbd5e1 !important;
+        box-shadow: none !important;
+      }
+      .tag, .entry-date, .chip {
+        background: #fff !important;
+        border: 1px solid #cbd5e1 !important;
+        padding: 2px 8px !important;
+      }
+      .chip svg {
+        display: none;
+      }
+      .timeline::before {
+        background: #1d4ed8 !important;
+      }
+      .timeline .entry::before {
+        background: #1d4ed8 !important;
+        box-shadow: none !important;
+      }
+      .timeline .entry {
+        transform: none !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 6px 0 6px 10px !important;
+        margin-bottom: 12px !important;
+        break-inside: avoid;
+      }
+      .skill-card, .cert-group, .badges-note, .stat-row {
+        break-inside: avoid;
+        padding: 12px 14px !important;
+      }
+      .cert-group {
+        margin-bottom: 10px !important;
+      }
+      .skill-card {
+        margin-bottom: 10px !important;
+      }
+      section {
+        break-inside: auto;
+        margin-bottom: 16px;
+      }
+      h2 {
+        break-after: avoid;
+        margin-bottom: 10px !important;
+      }
+      li {
+        margin-bottom: 2px !important;
+      }
+      p, li {
+        orphans: 3;
+        widows: 3;
+      }
+      h1 {
+        font-size: 1.7rem !important;
+      }
+      .role {
+        margin-bottom: 8px !important;
+      }
+      header {
+        border-bottom: 2px solid #1d4ed8;
+        padding-bottom: 14px !important;
+        margin-bottom: 18px !important;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="resume-container" itemscope itemtype="https://schema.org/Person">
-  <header>
-    <h1 itemprop="name">Nitish Kashyap R</h1>
-    <div class="subtitle" itemprop="jobTitle">AI-Enabled HR Professional · MBA Student · People Strategy</div>
-    <div class="contact-info">
-      <span>Email: <a href="mailto:nitishkashyapr8@gmail.com" itemprop="email">nitishkashyapr8@gmail.com</a></span> |
-      <span>LinkedIn: <a href="https://www.linkedin.com/in/nitishkashyapr" target="_blank" itemprop="sameAs">linkedin.com/in/nitishkashyapr</a></span> |
-      <span>Portfolio: <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" itemprop="url">nitishkashyapr.github.io/nitishkashyapr.com</a></span>
-    </div>
-  </header>
+<div class="page">
+  <div class="toolbar">
+    <div class="back-link"><a href="index.html">← Back to Portfolio</a></div>
+    <button class="print-btn" onclick="window.print()" aria-label="Print or save this resume as PDF">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print / Save as PDF
+    </button>
+  </div>
 
-  <section>
-    <h2>Professional Summary</h2>
-    <p>Future-ready HR professional passionate about building strong workplace cultures, enhancing employee engagement, and driving organizational effectiveness through strategic people management and AI-assisted workflows. Combining core human resource principles with prompt engineering and modern digital productivity to deliver high-impact organizational results.</p>
-  </section>
+  <div class="resume" itemscope itemtype="https://schema.org/Person">
+    <div class="watermark" aria-hidden="true">NKR</div>
 
-  <section>
-    <h2>Education</h2>
-    
-    <div class="job-entry">
-      <div class="entry-header">
-        <span>Master of Business Administration (MBA) — HR Specialization</span>
-        <span>2025 — Present</span>
+    <header>
+      <div class="identity">
+        <div class="monogram" aria-hidden="true">NK</div>
+        <div>
+          <h1 itemprop="name">Nitish <span class="accent-name">Kashyap R</span></h1>
+          <p class="role" itemprop="jobTitle">AI-Enabled HR Professional · MBA Student · People Strategy</p>
+        </div>
       </div>
-      <div class="entry-sub">VIMTECH, Tumkur</div>
-      <ul>
-        <li>Specializing in Human Resource Management, Organizational Behavior, Strategic Talent Management, and Employee Relations.</li>
-        <li>Active contributor in group case studies, leadership initiatives, and academic project work.</li>
-      </ul>
-    </div>
-
-    <div class="job-entry">
-      <div class="entry-header">
-        <span>Bachelor of Commerce (B.Com) — Accounting & Finance</span>
-        <span>2022 — 2025</span>
+      <div class="contact">
+        <a class="chip" href="mailto:nitishkashyapr8@gmail.com" itemprop="email">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          nitishkashyapr8@gmail.com
+        </a>
+        <a class="chip" href="https://www.linkedin.com/in/nitishkashyapr" target="_blank" itemprop="sameAs">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          linkedin.com/in/nitishkashyapr
+        </a>
+        <a class="chip" href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" itemprop="url">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          nitishkashyapr.github.io
+        </a>
+        <span class="chip" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Tumkur / Bengaluru, Karnataka, India
+        </span>
       </div>
-      <div class="entry-sub">Vidyavahini First Grade College</div>
-      <ul>
-        <li>Built strong foundational expertise in financial accounting, business law, principles of management, and organizational dynamics.</li>
-      </ul>
-    </div>
-
-    <div class="job-entry">
-      <div class="entry-header">
-        <span>Pre-University Course (Commerce)</span>
-        <span>2020 — 2022</span>
+      <div class="stat-row">
+        <div class="stat"><b>MBA (HR)</b><small>Candidate</small></div>
+        <div class="stat"><b>20+</b><small>Certifications</small></div>
+        <div class="stat"><b>25</b><small>Verified Badges</small></div>
       </div>
-      <div class="entry-sub">Sri Vani PU College</div>
-      <ul>
-        <li>Commerce stream focusing on Business Studies, Accountancy, and Economics.</li>
-      </ul>
-    </div>
-  </section>
+    </header>
 
-  <section>
-    <h2>Skills & Core Competencies</h2>
-    <ul>
-      <li><strong>Human Resources & People Strategy:</strong> Talent Acquisition, Learning & Development, Compensation & Benefits, Employee Relations, Compliance & Risk Management, Workplace Culture, Change Management, HRCI & SHRM Standards.</li>
-      <li><strong>Artificial Intelligence & Tech:</strong> Google Prompting Essentials, Google AI Essentials, GenAI in HR Workflows, Prompt Engineering, Local LLM Deployment, AI Productivity Workflows, Vibe Coding, Web Design.</li>
-      <li><strong>Management & Behavioral Science:</strong> Google Project Management, Risk Management (NASBA), Positive Psychology (UPenn), Science of Well-Being (Yale), Moralities of Everyday Life.</li>
-      <li><strong>Professional Strengths:</strong> Strategic Thinking, Analytical Problem Solving, Stakeholder Communication, Team Leadership, Adaptability.</li>
-    </ul>
-  </section>
+    <section>
+      <h2><span class="sec-num">01</span>Professional Summary</h2>
+      <p class="summary">
+        MBA (HR) candidate and AI-enabled HR professional specializing in talent acquisition, employee engagement, and people analytics. Combines core human resource principles with generative AI workflows and prompt engineering to design efficient, data-informed people processes. Proven leadership through award-winning academic projects and 20+ verified certifications across HR, AI, management, and behavioral science. Open to internships and entry-level HR roles.
+      </p>
+    </section>
 
-  <section>
-    <h2>Key Projects & Achievements</h2>
-    
-    <div class="job-entry">
-      <div class="entry-header">
-        <span>DigiColibri — Business Promotion Platform</span>
-        <span>1st Place Winner 🏆</span>
+    <section>
+      <h2><span class="sec-num">02</span>Education</h2>
+      <div class="timeline">
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">Master of Business Administration (MBA) — HR Specialization</span>
+            <span class="entry-date">2025 — Present</span>
+          </div>
+          <div class="entry-org">VIMTECH, Tumkur</div>
+          <ul>
+            <li>Specializing in Human Resource Management, Organizational Behavior, Strategic Talent Management, Employee Relations, and Workforce Planning.</li>
+            <li>Active contributor in group case studies, leadership initiatives, and academic project work.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">Bachelor of Commerce (B.Com) — Accounting &amp; Finance</span>
+            <span class="entry-date">2022 — 2025</span>
+          </div>
+          <div class="entry-org">Vidyavahini First Grade College</div>
+          <ul>
+            <li>Built strong foundational expertise in financial accounting, business law, principles of management, and organizational dynamics.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">Pre-University Course (Commerce)</span>
+            <span class="entry-date">2020 — 2022</span>
+          </div>
+          <div class="entry-org">Sri Vani PU College</div>
+          <ul>
+            <li>Commerce stream focusing on Business Studies, Accountancy, and Economics.</li>
+          </ul>
+        </div>
+
       </div>
-      <div class="entry-sub">Academic Business Pitch & Working Web Prototype</div>
-      <ul>
-        <li>Led website design and developed a live working prototype for a 12-member team project in a college Shark Tank-style competition. Won 1st Place.</li>
-        <li>Conceptualized end-to-end digital promotion models designed to assist small and medium businesses build digital presence.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="job-entry">
-      <div class="entry-header">
-        <span>Seva Setu — Public Services App Proposal</span>
-        <span>Civic Innovation Project</span>
+    <section>
+      <h2><span class="sec-num">03</span>Projects &amp; Experience</h2>
+      <div class="timeline">
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">DigiColibri — Business Promotion Platform</span>
+            <span class="entry-date">Academic · First Place Winner</span>
+          </div>
+          <div class="entry-org">College Shark Tank-Style Competition — Team of 12</div>
+          <ul>
+            <li>Led website design and built a live working prototype for a 12-member team; won 1st place in a college Shark Tank-style competition.</li>
+            <li>Conceptualized end-to-end digital promotion models enabling small and medium businesses to build their digital presence.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">Seva Setu — Public Services App Proposal</span>
+            <span class="entry-date">Academic · Civic Innovation</span>
+          </div>
+          <div class="entry-org">Digital Civic Tech Platform Concept</div>
+          <ul>
+            <li>Conceptualized a digital platform connecting citizens with government bodies for civic issue reporting, engineer assessment, and emergency response.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">Market Research Study — Union Bank of India</span>
+            <span class="entry-date">Academic · Consumer Research</span>
+          </div>
+          <div class="entry-org">Customer Perception &amp; Service Delivery Analysis</div>
+          <ul>
+            <li>Conducted an in-depth market research study analyzing consumer perception, service positioning, and alignment between the bank's brand claims and actual service delivery.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">Personal Interactive Portfolio Website</span>
+            <span class="entry-date">Personal · Live</span>
+          </div>
+          <div class="entry-org">Designed &amp; Vibe-Coded Independently</div>
+          <ul>
+            <li>Designed and launched a fully responsive, AI-accessible portfolio website featuring glassmorphism, dynamic certification listings, dark mode, and smooth animations.</li>
+          </ul>
+        </div>
+
       </div>
-      <div class="entry-sub">Digital Civic Tech Platform Concept</div>
-      <ul>
-        <li>Conceptualized a digital platform connecting citizens with government bodies for civic problem reporting, engineer assessment, and emergency response.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="job-entry">
-      <div class="entry-header">
-        <span>Market Research Study — Union Bank of India</span>
-        <span>Consumer Research Project</span>
+    <section>
+      <h2><span class="sec-num">04</span>Core Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-head">
+            <span class="skill-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            <strong>Human Resources &amp; People Strategy</strong>
+          </div>
+          <div class="tags">
+            <span class="tag">Talent Acquisition</span><span class="tag">Recruiting</span><span class="tag">Onboarding</span><span class="tag">Learning &amp; Development</span><span class="tag">Compensation &amp; Benefits</span><span class="tag">Employee Relations</span><span class="tag">Employee Engagement</span><span class="tag">Performance Management</span><span class="tag">Workplace Culture</span><span class="tag">Change Management</span><span class="tag">HRCI</span><span class="tag">SHRM Standards</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-head">
+            <span class="skill-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </span>
+            <strong>People Analytics &amp; AI</strong>
+          </div>
+          <div class="tags">
+            <span class="tag">Workforce Planning</span><span class="tag">People Analytics</span><span class="tag">Generative AI in HR</span><span class="tag">Agentic AI</span><span class="tag">Prompt Engineering</span><span class="tag">Google AI Tools</span><span class="tag">Local LLM Deployment</span><span class="tag">Ollama</span><span class="tag">LM Studio</span><span class="tag">AI Productivity</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-head">
+            <span class="skill-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </span>
+            <strong>Management &amp; Behavioral Science</strong>
+          </div>
+          <div class="tags">
+            <span class="tag">Project Management</span><span class="tag">Risk Management</span><span class="tag">Agile Methodologies</span><span class="tag">Positive Psychology</span><span class="tag">Organizational Behavior</span><span class="tag">Well-Being</span><span class="tag">Resilience</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-head">
+            <span class="skill-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </span>
+            <strong>Professional Strengths</strong>
+          </div>
+          <div class="tags">
+            <span class="tag">Strategic Thinking</span><span class="tag">Analytical Problem Solving</span><span class="tag">Stakeholder Communication</span><span class="tag">Team Leadership</span><span class="tag">Adaptability</span><span class="tag">Attention to Detail</span>
+          </div>
+        </div>
       </div>
-      <div class="entry-sub">Customer Perception & Service Delivery Analysis</div>
-      <ul>
-        <li>Conducted an in-depth market research study analyzing consumer perceptions, service positioning, and alignment between bank marketing claims and actual customer delivery.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="job-entry">
-      <div class="entry-header">
-        <span>Personal Interactive Portfolio Website</span>
-        <span>Live Web Application</span>
+    <section>
+      <h2><span class="sec-num">05</span>Certifications</h2>
+
+      <div class="cert-group">
+        <div class="cert-group-title"><span class="count-pill">6</span>Human Resources (6 Certifications)</div>
+        <ul>
+          <li><strong>HRCI Human Resource Associate Specialization</strong> — HRCI / Coursera (Talent Acquisition, L&amp;D, Compensation &amp; Benefits, Employee Relations, Compliance &amp; Risk Management)</li>
+          <li><strong>Managing Organizational Change for HR Professionals</strong> — SHRM / LinkedIn Learning</li>
+          <li><strong>Generative AI in HR</strong> — SHRM / LinkedIn Learning</li>
+          <li><strong>Generative AI: Recruiting and Talent Acquisition</strong> — NASBA / LinkedIn Learning</li>
+          <li><strong>Leveraging Agentic AI in HR</strong> — SHRM / LinkedIn Learning</li>
+          <li><strong>Data-Driven HR: AI-Powered People Analytics for Workforce Planning and Employee Experience</strong> — SHRM / LinkedIn Learning</li>
+        </ul>
       </div>
-      <div class="entry-sub">Vibe Coded & Built Independently</div>
-      <ul>
-        <li>Designed and launched a fully responsive, AI-accessible portfolio website (`nitishkashyapr.github.io/nitishkashyapr.com`) featuring glassmorphism, dynamic certification listings, dark mode, and smooth animations.</li>
-      </ul>
-    </div>
-  </section>
 
-  <section>
-    <h2>Professional Certifications & Digital Badges (17+ Certifications & 23 Verified Badges)</h2>
+      <div class="cert-group">
+        <div class="cert-group-title"><span class="count-pill">6</span>AI &amp; Technical Skills (6 Certifications)</div>
+        <ul>
+          <li><strong>Google AI Essentials</strong> — Google / Coursera</li>
+          <li><strong>Google Prompting Essentials</strong> — Google / Coursera (Credly Verified Badge)</li>
+          <li><strong>Google AI Professional Certificate</strong> — Google / Coursera</li>
+          <li><strong>Generative AI for Executives and Business Leaders</strong> — IBM / Coursera</li>
+          <li><strong>Cyber Security Overview</strong> — Infosys</li>
+          <li><strong>Claude 101</strong> — Anthropic / Skilljar</li>
+        </ul>
+      </div>
 
-    <div class="cert-group">
-      <div class="cert-group-title">Human Resources (4 Certifications):</div>
-      <ul>
-        <li><strong>HRCI Human Resource Associate Specialization</strong> — HRCI / Coursera (Talent Acquisition, L&D, Compensation & Benefits, Employee Relations, Compliance & Risk Management)</li>
-        <li><strong>Managing Organizational Change for HR Professionals</strong> — SHRM / LinkedIn Learning</li>
-        <li><strong>Generative AI in HR</strong> — SHRM / LinkedIn Learning</li>
-        <li><strong>Generative AI: Recruiting and Talent Acquisition</strong> — NASBA / LinkedIn Learning</li>
-      </ul>
-    </div>
-    
-    <div class="cert-group">
-      <div class="cert-group-title">AI & Technical Skills (5 Certifications):</div>
-      <ul>
-        <li><strong>Google AI Essentials</strong> — Google / Coursera</li>
-        <li><strong>Google Prompting Essentials</strong> — Google / Coursera (Credly Verified Badge)</li>
-        <li><strong>Google AI Professional Certificate</strong> — Google / Coursera</li>
-        <li><strong>Generative AI for Executives and Business Leaders</strong> — IBM / Coursera</li>
-        <li><strong>Cyber Security Overview</strong> — Infosys</li>
-      </ul>
-    </div>
+      <div class="cert-group">
+        <div class="cert-group-title"><span class="count-pill">3</span>Advanced Management (3 Certifications)</div>
+        <ul>
+          <li><strong>Google Project Management Professional Certificate</strong> — Google / Coursera (Credly Verified Badge)</li>
+          <li><strong>Google People Management Specialization</strong> — Google / Coursera</li>
+          <li><strong>Introduction to Risk Management</strong> — NASBA / LinkedIn Learning</li>
+        </ul>
+      </div>
 
-    <div class="cert-group">
-      <div class="cert-group-title">Advanced Management (3 Certifications):</div>
-      <ul>
-        <li><strong>Google Project Management Professional Certificate</strong> — Google / Coursera (Credly Verified Badge)</li>
-        <li><strong>Google People Management Specialization</strong> — Google / Coursera</li>
-        <li><strong>Introduction to Risk Management</strong> — NASBA / LinkedIn Learning</li>
-      </ul>
-    </div>
+      <div class="cert-group">
+        <div class="cert-group-title"><span class="count-pill">5</span>Psychology &amp; Human Behavior (5 Certifications)</div>
+        <ul>
+          <li><strong>Foundations of Positive Psychology Specialization</strong> — University of Pennsylvania / Coursera</li>
+          <li><strong>Introduction to Psychology</strong> — Yale University / Coursera</li>
+          <li><strong>The Science of Well-Being</strong> — Yale University / Coursera</li>
+          <li><strong>Moralities of Everyday Life</strong> — Yale University / Coursera</li>
+          <li><strong>Social Psychology</strong> — Wesleyan University / Coursera</li>
+        </ul>
+      </div>
+    </section>
 
-    <div class="cert-group">
-      <div class="cert-group-title">Psychology & Human Behavior (5 Certifications):</div>
-      <ul>
-        <li><strong>Foundations of Positive Psychology Specialization</strong> — University of Pennsylvania / Coursera</li>
-        <li><strong>Introduction to Psychology</strong> — Yale University / Coursera</li>
-        <li><strong>The Science of Well-Being</strong> — Yale University / Coursera</li>
-        <li><strong>Moralities of Everyday Life</strong> — Yale University / Coursera</li>
-        <li><strong>Social Psychology</strong> — Wesleyan University / Coursera</li>
-      </ul>
-    </div>
+    <section>
+      <h2><span class="sec-num">06</span>Digital Badges</h2>
+      <div class="badges-note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        <span>
+          <strong>25 verified digital badges</strong> issued by Google, IBM, HRCI, and Google Cloud Skills Boost — including 15 Google AI tool badges (App Building, Content Creation, Data Analysis, Research, Writing, Brainstorming and more), the Google AI Professional and Project Management badges, IBM AI Fundamentals and SkillsBuild badges, the HRCI Associate badge, and 5 Google Cloud Skills Boost GenAI badges. Full itemized list with verification links: <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/#certifications" target="_blank">view all 25 badges</a>.
+          <div class="badge-bar" aria-hidden="true">
+            <span style="width: 60%;"></span><span style="width: 20%;"></span><span style="width: 12%;"></span><span style="width: 8%;"></span>
+          </div>
+          <div class="badge-legend">
+            <span><i style="background: #3b82f6;"></i>15 Google AI badges</span>
+            <span><i style="background: #8b5cf6;"></i>5 Cloud Skills Boost</span>
+            <span><i style="background: #22d3ee;"></i>3 IBM badges</span>
+            <span><i style="background: #fbbf24;"></i>2 HRCI &amp; Google</span>
+          </div>
+        </span>
+      </div>
+    </section>
 
-    <div class="cert-group">
-      <div class="cert-group-title">Verified Digital Badges (23 Credly & Google Cloud Badges):</div>
-      <ul>
-        <li><strong>Google Prompting Essentials</strong> — Google / Credly</li>
-        <li><strong>Google Project Management Professional</strong> — Google / Credly</li>
-        <li><strong>Google People Management Essentials</strong> — Google / Credly</li>
-        <li><strong>Human Resource Associate Professional Certificate</strong> — HRCI / Credly</li>
-        <li><strong>Artificial Intelligence Fundamentals</strong> — IBM / Credly</li>
-        <li><strong>GenAI for Execs &amp; Business Leaders: Formulate Your Use Case</strong> — Google / Credly</li>
-        <li><strong>GenAI for Execs &amp; Business Leaders: Integration Strategy</strong> — Google / Credly</li>
-        <li><strong>GenAI for Executives &amp; Business Leaders: An Introduction</strong> — Google / Credly</li>
-        <li><strong>Generative AI for Business Leaders &amp; Executives Specialization</strong> — IBM / Credly</li>
-        <li><strong>Google AI for App Building</strong> — Google / Credly</li>
-        <li><strong>Google AI for Brainstorming and Planning</strong> — Google / Credly</li>
-        <li><strong>Google AI for Content Creation</strong> — Google / Credly</li>
-        <li><strong>Google AI for Data Analysis</strong> — Google / Credly</li>
-        <li><strong>Google AI for Research and Insights</strong> — Google / Credly</li>
-        <li><strong>Google AI for Writing and Communicating</strong> — Google / Credly</li>
-        <li><strong>Google AI Fundamentals</strong> — Google / Credly</li>
-        <li><strong>Google AI Professional Certificate</strong> — Google / Credly</li>
-        <li><strong>SkillsBuild - Customer Engagement: Communication and Personality Dynamics</strong> — IBM / Credly</li>
-        <li><strong>SkillsBuild - Customer Engagement: Problem Solving and Process Controls</strong> — IBM / Credly</li>
-        <li><strong>Gen AI: Unlock Foundational Concepts</strong> — Google Cloud Skills Boost</li>
-        <li><strong>Attention Mechanism</strong> — Google Cloud Skills Boost</li>
-        <li><strong>Gen AI: Beyond the Chatbot</strong> — Google Cloud Skills Boost</li>
-        <li><strong>AI Boost Bites: Your Personal Feedback Agent</strong> — Google Cloud Skills Boost</li>
-      </ul>
+    <div class="references">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      References available upon request
     </div>
-  </section>
+  </div>
 </div>
 
 </body>
