@@ -576,6 +576,71 @@ main, section, .container, .hero-section {
   box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
 }
 
+/* Segmented Control Switch (Certificates vs Badges) */
+.segmented-control {
+  display: inline-flex;
+  align-items: center;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 6px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--card-shadow);
+  gap: 6px;
+}
+
+.segmented-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.65rem 1.6rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink-3);
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-butter);
+  user-select: none;
+}
+
+.segmented-btn:hover {
+  color: var(--foreground);
+  background: var(--surface-1);
+}
+
+.segmented-btn.active {
+  background: linear-gradient(135deg, var(--p1) 0%, var(--p2) 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.4);
+}
+
+.segmented-btn svg {
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.segmented-btn.active svg {
+  transform: scale(1.1);
+}
+
+/* Badges View Grid & Card Architecture */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.badge-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 /* Search Bar */
 .search-box {
   position: relative;

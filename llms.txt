@@ -68,8 +68,9 @@ Future-ready HR professional passionate about building strong workplace cultures
    - *Description:* Designed and vibe-coded a modern portfolio website featuring custom glassmorphism, responsive particle canvas background, interactive project modals, and certification listings.
    - *URL:* https://nitishkashyapr.github.io/nitishkashyapr.com/
 
-## Certifications & Professional Credentials (17+ Grouped Programs)
-Nitish holds 17+ professional certificates spanning:
+## Certifications, Credentials & Digital Badges (17+ Certifications & 23 Verified Badges)
+Nitish holds 17+ professional certificates and 23 verified Credly & Google Cloud digital badges spanning:
+- **Verified Digital Badges (23 Badges):** 23 verified Credly & Google Cloud Skills Boost badges covering Generative AI, Prompt Engineering, Project Management, HR Strategy, and Leadership.
 - **AI & Emerging Technologies (5 Certifications):** Google AI Essentials, Google Prompting Essentials, Google AI Professional, Generative AI for Executives (IBM), Cyber Security Overview (Infosys).
 - **HR & Talent Management (4 Certifications):** HRCI Human Resource Associate (5 sub-courses), SHRM Managing Organizational Change for HR Professionals, SHRM Generative AI in HR, NASBA Generative AI: Recruiting & Talent Acquisition.
 - **Psychology & Human Behavior (5 Certifications):** UPenn Foundations of Positive Psychology (5 sub-courses), Yale Introduction to Psychology, Yale The Science of Well-Being, Yale Moralities of Everyday Life, Wesleyan Social Psychology.

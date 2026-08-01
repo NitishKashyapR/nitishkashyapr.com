@@ -584,11 +584,355 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateDynamicCounts();
 
-  // Full Screen Certifications View Logic (Matching Certifications.tsx)
+  // Full Screen Certifications & Badges View Logic
   const certFullView = document.getElementById("certificationsFullView");
   const certFullContent = document.getElementById("certFullContent");
   let activeCertFilter = null;
+  let activeCertTab = "certificates"; // "certificates" | "badges"
   const openBlocks = new Set();
+
+  // Digital Badges Catalog (23 Official Verified Badges)
+  const badgesData = [
+  {
+    "id": "google-prompting-essentials",
+    "title": "Google Prompting Essentials",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-prompting-essentials-badge.png",
+    "badgeUrl": "https://www.credly.com/badges/a2bb066f-ecb9-4412-9e8a-dd63e1843c9d/linked_in_profile",
+    "description": "Demonstrates core expertise in designing effective prompts, context management, multi-turn AI workflows, and optimizing Generative AI tools for professional productivity.",
+    "skills": [
+      "Prompt Engineering",
+      "Generative AI",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "google-project-management",
+    "title": "Google Project Management Professional",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-project-management-badge.png",
+    "badgeUrl": "https://www.credly.com/badges/f464ef88-cf24-4903-b934-62b937ae0eb4/linked_in_profile",
+    "description": "Verified professional qualification in traditional and Agile project management, project documentation, risk management, strategic planning, and team leadership.",
+    "skills": [
+      "Project Management",
+      "Agile & Scrum",
+      "Risk Management"
+    ],
+    "verified": true
+  },
+  {
+    "id": "google-people-management-essentials-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Google People Management Essentials",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-people-management-essentials-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/b5d6d8b1-789d-4b75-81d7-5b19abb02844/public_url",
+    "description": "Those who earn the Google People Management Essentials Certificate have demonstrated their competence in foundational people management skills. Through hands-on activities and a...",
+    "skills": [
+      "HR Management",
+      "People Strategy",
+      "Organizational Change"
+    ],
+    "verified": true
+  },
+  {
+    "id": "human-resource-associate-professional-certificate-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Human Resource Associate Professional Certificate",
+    "issuer": "HRCI",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/human-resource-associate-professional-certificate-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/8b78593b-64fc-403d-9b90-7f0d4e00d6ad/public_url",
+    "description": "Human Resource professionals have a significant impact on an organization\u2019s success. They play a vital role in hiring the right people, developing employee policies, and creatin...",
+    "skills": [
+      "HR Management",
+      "People Strategy",
+      "Organizational Change"
+    ],
+    "verified": true
+  },
+  {
+    "id": "artificial-intelligence-fundamentals-was-issued-by-ibm-skillsbuild-to-nitish-kashyap-r",
+    "title": "Artificial Intelligence Fundamentals",
+    "issuer": "IBM",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/artificial-intelligence-fundamentals-was-issued-by-ibm-skillsbuild-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/37fee686-d4a0-4ad6-9c4a-d3aecf7a4683/public_url",
+    "description": "This credential earner demonstrates knowledge of artificial intelligence (AI) concepts, such as natural language processing, computer vision, machine learning, deep learning, ch...",
+    "skills": [
+      "Professional Skills",
+      "Certified Credential"
+    ],
+    "verified": true
+  },
+  {
+    "id": "genai-for-execs-business-leaders-formulate-your-use-case-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "GenAI for Execs & Business Leaders: Formulate Your Use Case",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/genai-for-execs-business-leaders-formulate-your-use-case-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/afe55edb-02dd-4069-b252-16f25b8e6ed6/public_url",
+    "description": "The badge earner can use Generative AI (GenAI) to support business goals by crafting effective prompts, identifying pain points, and selecting appropriate GenAI applications to ...",
+    "skills": [
+      "Generative AI",
+      "Prompting",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "genai-for-execs-business-leaders-integration-strategy-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "GenAI for Execs & Business Leaders: Integration Strategy",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/genai-for-execs-business-leaders-integration-strategy-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/36a0781a-3935-4536-94ba-d82bea2233c3/public_url",
+    "description": "The badge earner understands factors to consider when choosing a business case for scaling AI to drive ROI. They can explain complexities in relation to AI regulations. They can...",
+    "skills": [
+      "Generative AI",
+      "Prompting",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "genai-for-executives-business-leaders-an-introduction-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "GenAI for Executives & Business Leaders: An Introduction",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/genai-for-executives-business-leaders-an-introduction-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/8dac2b42-f543-46e8-9abd-de5818831543/public_url",
+    "description": "This credential earner can demonstrate a foundation level understanding of Generative AI (GenAI) as it relates to a business leader or executive's expected level of knowledge. T...",
+    "skills": [
+      "Generative AI",
+      "Prompting",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "generative-ai-for-business-leaders-executives-specialization-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Generative AI for Business Leaders & Executives Specialization",
+    "issuer": "IBM",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/generative-ai-for-business-leaders-executives-specialization-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/d1ab23b2-2d9a-41fe-bae9-646069a9a84e/public_url",
+    "description": "The badge earner has foundational knowledge of generative AI governance and applications, and can effectively align AI strategies with organizational goals. Using IBM watsonx or...",
+    "skills": [
+      "Generative AI",
+      "LLM Strategy",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "google-ai-for-app-building-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Google AI for App Building",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-ai-for-app-building-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/b7fc1d97-b0ea-41c1-844d-6286624fd88e/public_url",
+    "description": "Those who earn the AI for App Building badge from Google can apply \"vibe coding\"\u2014a technique where natural language is used to generate fully functioning code. They have mapped ...",
+    "skills": [
+      "Vibe Coding",
+      "AI App Building",
+      "Prompt Engineering"
+    ],
+    "verified": true
+  },
+  {
+    "id": "google-ai-for-brainstorming-and-planning-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Google AI for Brainstorming and Planning",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-ai-for-brainstorming-and-planning-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/dd0518b2-21bb-4fec-bd22-4153c1b018cf/public_url",
+    "description": "Those who earn the AI for Brainstorming and Planning badge from Google can transform abstract ideas into actionable project plans using AI. They have demonstrated the ability to...",
+    "skills": [
+      "AI Planning",
+      "Brainstorming",
+      "Project Strategy"
+    ],
+    "verified": true
+  },
+  {
+    "id": "google-ai-for-content-creation-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Google AI for Content Creation",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-ai-for-content-creation-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/381716eb-4d8b-4bae-bef0-f16b69d677e3/public_url",
+    "description": "Those who earn the AI for Content Creation badge from Google can use AI to generate and transform multimedia content. They have demonstrated the ability to create marketing asse...",
+    "skills": [
+      "AI Content Creation",
+      "Generative Media"
+    ],
+    "verified": true
+  },
+  {
+    "id": "google-ai-for-data-analysis-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Google AI for Data Analysis",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-ai-for-data-analysis-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/afde94f8-6ed5-4733-9ac6-12177b87cd93/public_url",
+    "description": "Those who earn the AI for Data Analysis badge from Google can use AI to clean, analyze, and visualize complex data. They have acquired the skills to convert messy, unstructured ...",
+    "skills": [
+      "AI Data Analysis",
+      "Insights & Analytics"
+    ],
+    "verified": true
+  },
+  {
+    "id": "google-ai-for-research-and-insights-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Google AI for Research and Insights",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-ai-for-research-and-insights-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/540fbe0c-a890-42af-8163-6a509b9c3ad1/public_url",
+    "description": "Those who earn the AI for Research and Insights badge from Google can leverage AI to increase the speed and depth of their research. They have the skills to synthesize complex, ...",
+    "skills": [
+      "AI Research",
+      "Web Insights",
+      "Prompting"
+    ],
+    "verified": true
+  },
+  {
+    "id": "google-ai-for-writing-and-communicating-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Google AI for Writing and Communicating",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-ai-for-writing-and-communicating-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/1d8bb157-fe8c-41ef-8d26-26cc21eb903d/public_url",
+    "description": "Those who earn the AI for Writing and Communicating badge from Google can use AI to refine communication strategies and produce high-quality writing. They are proficient in tran...",
+    "skills": [
+      "AI Writing",
+      "Executive Communication"
+    ],
+    "verified": true
+  },
+  {
+    "id": "google-ai-fundamentals-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Google AI Fundamentals",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-ai-fundamentals-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/4abf1d14-5e75-401d-9735-af736b94677b/public_url",
+    "description": "Those who earn the AI Fundamentals badge from Google have adopted the \"AI as a Collaborator\" mindset and developed an understanding of the AI ecosystem, including models, featur...",
+    "skills": [
+      "Generative AI",
+      "Prompting",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "google-ai-professional-certificate-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Google AI Professional Certificate",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-ai-professional-certificate-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/cc579c24-d587-42c5-a1f6-a26c57c48d20/public_url",
+    "description": "Those who earn the Google AI Professional Certificate are fluent in AI, and have completed 7 courses demonstrating their ability to apply AI to the skills where AI is transformi...",
+    "skills": [
+      "Generative AI",
+      "Prompting",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "skillsbuild-customer-engagement-communication-and-personality-dynamics-was-issued-by-ibm-skillsbuild-to-nitish-kashyap-r",
+    "title": "SkillsBuild - Customer Engagement: Communication and Personality Dynamics",
+    "issuer": "IBM",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/skillsbuild-customer-engagement-communication-and-personality-dynamics-was-issued-by-ibm-skillsbuild-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/bb3973c5-83f6-4cbc-9a70-eeccf1d2e9bc/public_url",
+    "description": "This credential earner understands methodologies and best practices for building rapport and engaging in productive communication. The individual knows communication skills that...",
+    "skills": [
+      "Customer Success",
+      "Personality Dynamics"
+    ],
+    "verified": true
+  },
+  {
+    "id": "skillsbuild-customer-engagement-problem-solving-and-process-controls-was-issued-by-ibm-skillsbuild-to-nitish-kashyap-r",
+    "title": "SkillsBuild - Customer Engagement: Problem Solving and Process Controls",
+    "issuer": "IBM",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/skillsbuild-customer-engagement-problem-solving-and-process-controls-was-issued-by-ibm-skillsbuild-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/ef61a031-eb22-41f8-b8f0-7b5beed4975a/public_url",
+    "description": "This credential earner knows best practices essential to resolving client problems through organization, retrieval, and usage of resources and information essential to customer ...",
+    "skills": [
+      "Customer Success",
+      "Personality Dynamics"
+    ],
+    "verified": true
+  },
+  {
+    "id": "gen-ai-unlock-foundational-concepts",
+    "title": "Gen AI: Unlock Foundational Concepts",
+    "issuer": "Google",
+    "platform": "Google Cloud Skills Boost",
+    "badgeImg": "assets/badges/gen-ai-unlock-foundational-concepts.png",
+    "badgeUrl": "https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26176113",
+    "description": "",
+    "skills": [
+      "Generative AI",
+      "LLM Strategy",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "attention-mechanism",
+    "title": "Attention Mechanism",
+    "issuer": "Google",
+    "platform": "Google Cloud Skills Boost",
+    "badgeImg": "assets/badges/attention-mechanism.png",
+    "badgeUrl": "https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26131538",
+    "description": "",
+    "skills": [
+      "Transformer Models",
+      "Deep Learning",
+      "GenAI Architecture"
+    ],
+    "verified": true
+  },
+  {
+    "id": "gen-ai-beyond-the-chatbot",
+    "title": "Gen AI: Beyond the Chatbot",
+    "issuer": "Google",
+    "platform": "Google Cloud Skills Boost",
+    "badgeImg": "assets/badges/gen-ai-beyond-the-chatbot.png",
+    "badgeUrl": "https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/25790700",
+    "description": "",
+    "skills": [
+      "Generative AI",
+      "LLM Strategy",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "ai-boost-bites-your-personal-feedback-agent",
+    "title": "AI Boost Bites: Your Personal Feedback Agent",
+    "issuer": "Google",
+    "platform": "Google Cloud Skills Boost",
+    "badgeImg": "assets/badges/ai-boost-bites-your-personal-feedback-agent.png",
+    "badgeUrl": "https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/25777975",
+    "description": "",
+    "skills": [
+      "Generative AI",
+      "Prompting",
+      "AI Productivity"
+    ],
+    "verified": true
+  }
+];
 
   window.openCertificationsFullView = () => {
     if (certFullView) {
@@ -603,6 +947,28 @@ document.addEventListener("DOMContentLoaded", () => {
       certFullView.classList.remove("active");
       document.body.style.overflow = "";
     }
+  };
+
+  window.switchCertTab = (tabName) => {
+    activeCertTab = tabName;
+
+    const certBtn = document.getElementById("certTabBtn");
+    const badgeBtn = document.getElementById("badgeTabBtn");
+    const titleEl = document.getElementById("certFullViewTitle");
+
+    if (certBtn && badgeBtn) {
+      if (tabName === "certificates") {
+        certBtn.classList.add("active");
+        badgeBtn.classList.remove("active");
+        if (titleEl) titleEl.innerText = "All Certifications";
+      } else {
+        badgeBtn.classList.add("active");
+        certBtn.classList.remove("active");
+        if (titleEl) titleEl.innerText = "Earned Badges";
+      }
+    }
+
+    renderCertFullView();
   };
 
   window.setCertFilter = (catId) => {
@@ -654,8 +1020,77 @@ document.addEventListener("DOMContentLoaded", () => {
     return `<div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, var(--p1), var(--p2)); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff;">${(provider || heading).charAt(0).toUpperCase()}</div>`;
   };
 
+  const renderBadgesFullView = () => {
+    if (!certFullContent) return;
+
+    let badgesHtml = `
+      <div style="margin-bottom: 2.5rem; text-align: center;">
+        <p style="font-size: 0.95rem; color: var(--ink-3); max-width: 650px; margin: 0 auto; line-height: 1.7;">
+          Official verified digital credentials earned across Artificial Intelligence, HR Management, Project Leadership, and Emerging Technologies (${badgesData.length} Badges).
+        </p>
+      </div>
+      <div class="badges-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 1.75rem;">
+    `;
+
+    badgesData.forEach(badge => {
+      // Smart zoom scaling depending on badge image characteristics
+      let imgScale = "scale(1.48)";
+      if (badge.title.toLowerCase().includes("people management") || badge.title.toLowerCase().includes("project management") || badge.title.toLowerCase().includes("prompting")) {
+        imgScale = "scale(1.58)";
+      }
+
+      badgesHtml += `
+        <div class="glass-card badge-card" style="padding: 2.25rem 1.6rem 2rem 1.6rem; border-radius: 140px; display: flex; flex-direction: column; justify-content: space-between; text-align: center; border: 1.5px solid var(--border-strong); background: var(--card); overflow: hidden; transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-spring);">
+          <div>
+            <!-- Large Zoomed-In Badge Graphic Preview Frame without Dark Shadow Halo -->
+            <div style="width: 175px; height: 175px; border-radius: 50%; background: var(--surface-1); border: 2px solid var(--border-strong); padding: 12px; margin: 0 auto 1.35rem auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); position: relative; overflow: hidden; transition: transform 0.35s var(--ease-spring);">
+              <img src="${badge.badgeImg}" alt="${badge.title}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transform: ${imgScale}; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));" />
+            </div>
+
+            <!-- Title & Issuer -->
+            <h3 style="font-family: var(--font-heading); font-size: 1.08rem; font-weight: 800; color: var(--foreground); line-height: 1.3; margin-bottom: 0.35rem;">
+              ${badge.title}
+            </h3>
+            <div style="font-size: 0.8rem; font-weight: 600; color: var(--p1); margin-bottom: 0.75rem;">
+              ${badge.issuer} • ${badge.platform}
+            </div>
+
+            <!-- Status Pill -->
+            <div style="margin-bottom: 0.85rem;">
+              <span style="font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.32rem 0.75rem; border-radius: 9999px; background: rgba(16, 185, 129, 0.15); color: var(--g1); border: 1px solid rgba(16, 185, 129, 0.3); display: inline-flex; align-items: center; gap: 0.35rem;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--g1); box-shadow: 0 0 8px var(--g1);"></span> Verified Badge
+              </span>
+            </div>
+
+            <!-- Description -->
+            <p style="font-size: 0.82rem; color: var(--ink-2); line-height: 1.6; margin-bottom: 1.15rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+              ${badge.description}
+            </p>
+
+            <!-- Skill Tags -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; margin-bottom: 1.35rem;">
+              ${(badge.skills || []).map(s => `<span style="font-size: 0.68rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 9999px; background: var(--surface-1); color: var(--ink-1); border: 1px solid rgba(99, 102, 241, 0.15);">${s}</span>`).join('')}
+            </div>
+          </div>
+
+          <a href="${badge.badgeUrl}" target="_blank" rel="noopener" class="btn-primary" style="width: fit-content; min-width: 150px; max-width: 82%; margin: 0 auto 0.4rem auto; justify-content: center; font-size: 0.78rem; padding: 0.55rem 1.15rem; font-weight: 700; border-radius: 9999px;">
+            Verify Badge ${icons.external}
+          </a>
+        </div>
+      `;
+    });
+
+    badgesHtml += `</div>`;
+    certFullContent.innerHTML = badgesHtml;
+  };
+
   const renderCertFullView = () => {
     if (!certFullContent) return;
+
+    if (activeCertTab === "badges") {
+      renderBadgesFullView();
+      return;
+    }
 
     const displayedCats = activeCertFilter 
       ? certCategories.filter(c => c.id === activeCertFilter)
@@ -829,7 +1264,7 @@ document.addEventListener("DOMContentLoaded", () => {
               ${p.skills.map(s => `<span style="font-size: 0.65rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 9999px; background: var(--surface-1); border: 1px solid var(--border); color: var(--ink-3);">${s}</span>`).join('')}
             </div>
 
-            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; pt-1rem; border-top: 1px solid var(--border);">
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding-top: 1.25rem; margin-top: 0.75rem; border-top: 1px solid var(--border);">
               ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View Live ${icons.external}</a>` : ''}
               ${p.pdf ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View the Project ${icons.file}</a>` : ''}
               <button onclick="openProjectModal('${p.id}')" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">

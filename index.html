@@ -373,6 +373,16 @@
             </div>
           </div>
 
+          <div class="glass-card" style="padding: 0.85rem 1.25rem; display: flex; align-items: center; gap: 0.75rem; cursor: pointer;" onclick="openCertificationsFullView(); switchCertTab('badges');">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(168, 85, 247, 0.15); color: var(--p2); display: flex; align-items: center; justify-content: center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <div>
+              <div id="heroBadgeCount" style="font-size: 1.1rem; font-weight: 800; color: var(--foreground);">23</div>
+              <div style="font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: var(--ink-3);">Earned Badges</div>
+            </div>
+          </div>
+
           <div class="glass-card" style="padding: 0.85rem 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
             <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(5, 150, 105, 0.12); color: var(--g1); display: flex; align-items: center; justify-content: center;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
@@ -647,21 +657,33 @@
         </div>
 
         <div class="grid-2">
-          <!-- Left dark card matching CertificationsSection.tsx -->
+          <!-- Left dark card with Certifications & Badges overview -->
           <div class="reveal-on-scroll delay-1" style="border-radius: 28px; padding: 2.5rem; background: linear-gradient(135deg, #111019 0%, #1e1b4b 50%, #2d1b69 100%); color: #fff; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; min-height: 340px; box-shadow: 0 20px 40px rgba(30, 27, 75, 0.3);">
             <div>
-              <div id="certDarkCardCount" style="font-family: var(--font-heading); font-size: 6rem; font-weight: 800; line-height: 0.85; margin-bottom: 0.5rem;">
-                17+
+              <div style="display: flex; align-items: flex-end; gap: 1.5rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+                <div>
+                  <div id="certDarkCardCount" style="font-family: var(--font-heading); font-size: 4.8rem; font-weight: 800; line-height: 0.85;">17+</div>
+                  <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; opacity: 0.8; margin-top: 0.4rem;">Certifications</div>
+                </div>
+                <div style="font-size: 2rem; font-weight: 300; opacity: 0.3; padding-bottom: 0.8rem;">+</div>
+                <div>
+                  <div id="badgeDarkCardCount" style="font-family: var(--font-heading); font-size: 4.8rem; font-weight: 800; line-height: 0.85; color: var(--p3);">23</div>
+                  <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; opacity: 0.8; margin-top: 0.4rem; color: var(--p3);">Earned Badges</div>
+                </div>
               </div>
-              <div style="font-size: 0.9rem; font-weight: 600; opacity: 0.8; margin-bottom: 1.5rem;">Professional Certifications</div>
-              <p style="font-size: 0.85rem; opacity: 0.7; line-height: 1.8; max-width: 320px; margin-bottom: 2rem;">
-                Continuously upskilling across AI, management, psychology, and HR to stay ahead in a fast-changing world.
+              <p style="font-size: 0.85rem; opacity: 0.75; line-height: 1.8; max-width: 360px; margin-top: 1rem; margin-bottom: 2rem;">
+                Continuously upskilling across AI, HR management, psychology, and strategic leadership to drive organizational excellence.
               </p>
             </div>
             
-            <button onclick="openCertificationsFullView()" class="btn-primary" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; width: fit-content;">
-              View All Certifications →
-            </button>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <button onclick="openCertificationsFullView(); switchCertTab('certificates');" class="btn-primary" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 0.82rem; padding: 0.6rem 1.1rem;">
+                View Certifications →
+              </button>
+              <button onclick="openCertificationsFullView(); switchCertTab('badges');" class="btn-primary" style="background: linear-gradient(135deg, var(--p1), var(--p2)); border: none; color: #fff; font-size: 0.82rem; padding: 0.6rem 1.1rem;">
+                View 23 Badges →
+              </button>
+            </div>
           </div>
 
           <!-- Right stat cards matching Image 2 -->
@@ -913,7 +935,21 @@
           ← Back to Home
         </button>
 
-        <h1 style="font-family: var(--font-heading); font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 800; color: var(--foreground); text-align: center; margin-bottom: 2.5rem;">
+        <!-- Segmented Toggle Control: Certificates vs Badges -->
+        <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+          <div class="segmented-control">
+            <button id="certTabBtn" onclick="switchCertTab('certificates')" class="segmented-btn active" aria-label="Show Certificates">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span>Certificates</span>
+            </button>
+            <button id="badgeTabBtn" onclick="switchCertTab('badges')" class="segmented-btn" aria-label="Show Badges">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              <span>Badges</span>
+            </button>
+          </div>
+        </div>
+
+        <h1 id="certFullViewTitle" style="font-family: var(--font-heading); font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 800; color: var(--foreground); text-align: center; margin-bottom: 2.5rem;">
           All Certifications
         </h1>
 

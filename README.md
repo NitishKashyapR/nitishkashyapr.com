@@ -63,8 +63,9 @@ Open To: HR Internships, Talent Acquisition Roles, People Strategy Projects & In
 
 ---
 
-### 🎓 Key Professional Certifications (17+ Main Programs)
+### 🎓 Key Professional Credentials (17+ Certifications & 23 Verified Badges)
 
+- 🛡️ **Verified Digital Badges (23 Badges)**: 23 Credly & Google Cloud Skills Boost badges in AI, Project Management, HR Strategy & Leadership
 - 👥 **Human Resources (4 Certifications)**: HRCI Human Resource Associate *(HRCI)* • Managing Organizational Change *(SHRM)* • Generative AI in HR *(SHRM)* • Generative AI: Recruiting & Talent Acquisition *(NASBA)*
 - 🤖 **AI & Technical Skills (5 Certifications)**: Google AI Essentials *(Google)* • Google Prompting Essentials *(Google)* • Google AI Professional *(Google)* • Generative AI for Executives *(IBM)* • Cyber Security Overview *(Infosys)*
 - 📊 **Advanced Management (3 Certifications)**: Google Project Management Professional *(Google)* • Google People Management *(Google)* • Introduction to Risk Management *(NASBA)*
