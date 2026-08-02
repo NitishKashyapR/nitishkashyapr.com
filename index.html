@@ -695,7 +695,8 @@
           <p class="section-desc">HR-aligned competencies built through academics and project work.</p>
         </div>
 
-        <div class="grid-3 stagger-children">
+        <!-- Desktop Grid View (min-width: 769px) -->
+        <div class="grid-3 stagger-children desktop-only-view">
           <div class="glass-card reveal-on-scroll delay-1" style="border-top: 4px solid var(--p1);">
             <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800; color: var(--foreground); margin-bottom: 1rem;">Core Competencies</h3>
             <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
@@ -730,6 +731,80 @@
               <span class="tab-btn" style="cursor: default;">Workplace Culture</span>
               <span class="tab-btn" style="cursor: default;">Leadership Development</span>
             </div>
+          </div>
+        </div>
+
+        <!-- Mobile Tinder-Style Tilt Swipe View (max-width: 768px) -->
+        <div class="mobile-only-view mobile-skills-wrapper">
+          <div class="swipe-guide-bar">
+            <span class="swipe-badge">FLICK & TILT DECK</span>
+            <div class="swipe-direction-hints">
+              <span id="skillsGlowLeft" class="glow-hint left">← PREV</span>
+              <span id="skillsGlowRight" class="glow-hint right">NEXT →</span>
+            </div>
+          </div>
+
+          <div id="skillsTiltDeck" class="mobile-tilt-deck">
+            <!-- Card 1: Core Competencies -->
+            <div class="mobile-tilt-card active" data-index="0" style="border-top: 4px solid var(--p1);">
+              <div class="card-header-bar">
+                <span class="card-chip-tag" style="background: rgba(99, 102, 241, 0.12); color: var(--p1);">Category 01</span>
+                <span class="card-swipe-hint">Swipe horizontally ↔</span>
+              </div>
+              <h3 class="card-main-title">Core Competencies</h3>
+              <p class="card-subtext">Foundational human resource management capabilities and leadership skills.</p>
+              <div class="card-tags-container">
+                <span class="skill-tag-pill">Human Resource Management</span>
+                <span class="skill-tag-pill">Organizational Behavior</span>
+                <span class="skill-tag-pill">Strategic Thinking</span>
+                <span class="skill-tag-pill">Communication</span>
+                <span class="skill-tag-pill">Problem Solving</span>
+                <span class="skill-tag-pill">Team Collaboration</span>
+              </div>
+            </div>
+
+            <!-- Card 2: Technical & Digital -->
+            <div class="mobile-tilt-card" data-index="1" style="border-top: 4px solid var(--g1);">
+              <div class="card-header-bar">
+                <span class="card-chip-tag" style="background: rgba(5, 150, 105, 0.12); color: var(--g1);">Category 02</span>
+                <span class="card-swipe-hint">Swipe horizontally ↔</span>
+              </div>
+              <h3 class="card-main-title">Technical & Digital</h3>
+              <p class="card-subtext">Hands-on experience with modern AI, prompt design, and digital workflows.</p>
+              <div class="card-tags-container">
+                <span class="skill-tag-pill">Prompt Engineering</span>
+                <span class="skill-tag-pill">Generative AI Tools</span>
+                <span class="skill-tag-pill">Vibe Coding</span>
+                <span class="skill-tag-pill">AI Productivity</span>
+                <span class="skill-tag-pill">Local LLM Deployment</span>
+                <span class="skill-tag-pill">Web Design</span>
+              </div>
+            </div>
+
+            <!-- Card 3: Professional Interests -->
+            <div class="mobile-tilt-card" data-index="2" style="border-top: 4px solid var(--o1);">
+              <div class="card-header-bar">
+                <span class="card-chip-tag" style="background: rgba(245, 158, 11, 0.12); color: var(--o1);">Category 03</span>
+                <span class="card-swipe-hint">Swipe horizontally ↔</span>
+              </div>
+              <h3 class="card-main-title">Professional Interests</h3>
+              <p class="card-subtext">Key focus areas driving workforce engagement and organizational growth.</p>
+              <div class="card-tags-container">
+                <span class="skill-tag-pill">Talent Management</span>
+                <span class="skill-tag-pill">Employee Engagement</span>
+                <span class="skill-tag-pill">Learning & Development</span>
+                <span class="skill-tag-pill">Organizational Development</span>
+                <span class="skill-tag-pill">Workplace Culture</span>
+                <span class="skill-tag-pill">Leadership Development</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Skill Category Selector Pills -->
+          <div class="mobile-skill-tabs">
+            <button class="skill-tab-pill active" onclick="switchSkillsCard(0)">Core</button>
+            <button class="skill-tab-pill" onclick="switchSkillsCard(1)">Technical</button>
+            <button class="skill-tab-pill" onclick="switchSkillsCard(2)">Interests</button>
           </div>
         </div>
       </div>
@@ -798,7 +873,8 @@
         <p class="section-desc">Core capabilities that define how I work.</p>
       </div>
 
-      <div class="grid-3 strengths-grid stagger-children">
+      <!-- Desktop Grid View (min-width: 769px) -->
+      <div class="grid-3 strengths-grid stagger-children desktop-only-view">
         <div class="glass-card reveal-on-scroll delay-1">
           <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(99, 102, 241, 0.12); color: var(--p1); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg>
@@ -845,6 +921,104 @@
           </div>
           <h3 style="font-family: var(--font-heading); font-size: 1rem; font-weight: 800; color: var(--foreground); margin-bottom: 0.4rem;">Structured Problem Solving</h3>
           <p style="font-size: 0.8rem; color: var(--ink-3);">Identifies root causes and designs clear methodical solutions.</p>
+        </div>
+      </div>
+
+      <!-- Mobile Vertical Rolodex Reel View (max-width: 768px) -->
+      <div class="mobile-only-view mobile-strengths-wrapper">
+        <div class="reel-guide-bar">
+          <span class="reel-badge">VERTICAL REEL STACK</span>
+          <div id="strengthsReelCounter" class="reel-counter-badge">1 / 6 STRENGTHS</div>
+        </div>
+
+        <div class="reel-viewport-container">
+          <div id="strengthsRolodexDeck" class="mobile-rolodex-deck">
+            <!-- Strength Card 1 -->
+            <div class="mobile-reel-card active" data-index="0">
+              <div class="reel-card-icon" style="background: rgba(99, 102, 241, 0.12); color: var(--p1);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg>
+              </div>
+              <div class="reel-card-content">
+                <span class="reel-card-num">STRENGTH 01</span>
+                <h3 class="reel-card-title">AI Proficiency & Vibe Coding</h3>
+                <p class="reel-card-desc">Hands-on with AI tools, prompt design, and vibe coding to build and ship faster.</p>
+              </div>
+              <div class="reel-swipe-hint">Swipe vertically ↕</div>
+            </div>
+
+            <!-- Strength Card 2 -->
+            <div class="mobile-reel-card" data-index="1">
+              <div class="reel-card-icon" style="background: rgba(139, 92, 246, 0.12); color: var(--p2);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="reel-card-content">
+                <span class="reel-card-num">STRENGTH 02</span>
+                <h3 class="reel-card-title">Strong Communication</h3>
+                <p class="reel-card-desc">Clear and confident at presenting ideas and aligning stakeholders.</p>
+              </div>
+              <div class="reel-swipe-hint">Swipe vertically ↕</div>
+            </div>
+
+            <!-- Strength Card 3 -->
+            <div class="mobile-reel-card" data-index="2">
+              <div class="reel-card-icon" style="background: rgba(245, 158, 11, 0.12); color: var(--o1);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              </div>
+              <div class="reel-card-content">
+                <span class="reel-card-num">STRENGTH 03</span>
+                <h3 class="reel-card-title">Analytical Thinking</h3>
+                <p class="reel-card-desc">Breaks down complex problems using evidence-based reasoning.</p>
+              </div>
+              <div class="reel-swipe-hint">Swipe vertically ↕</div>
+            </div>
+
+            <!-- Strength Card 4 -->
+            <div class="mobile-reel-card" data-index="3">
+              <div class="reel-card-icon" style="background: rgba(236, 72, 153, 0.12); color: var(--r1);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="reel-card-content">
+                <span class="reel-card-num">STRENGTH 04</span>
+                <h3 class="reel-card-title">Leadership & Collaboration</h3>
+                <p class="reel-card-desc">Motivates teams and drives results in project environments.</p>
+              </div>
+              <div class="reel-swipe-hint">Swipe vertically ↕</div>
+            </div>
+
+            <!-- Strength Card 5 -->
+            <div class="mobile-reel-card" data-index="4">
+              <div class="reel-card-icon" style="background: rgba(5, 150, 105, 0.12); color: var(--g1);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div class="reel-card-content">
+                <span class="reel-card-num">STRENGTH 05</span>
+                <h3 class="reel-card-title">Adaptability</h3>
+                <p class="reel-card-desc">Quickly picks up new tools and responsibilities with ease.</p>
+              </div>
+              <div class="reel-swipe-hint">Swipe vertically ↕</div>
+            </div>
+
+            <!-- Strength Card 6 -->
+            <div class="mobile-reel-card" data-index="5">
+              <div class="reel-card-icon" style="background: rgba(6, 182, 212, 0.12); color: var(--g2);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              </div>
+              <div class="reel-card-content">
+                <span class="reel-card-num">STRENGTH 06</span>
+                <h3 class="reel-card-title">Structured Problem Solving</h3>
+                <p class="reel-card-desc">Identifies root causes and designs clear methodical solutions.</p>
+              </div>
+              <div class="reel-swipe-hint">Swipe vertically ↕</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reel-controls-bar">
+          <button class="reel-arrow-btn" onclick="prevStrengthsReel()">↑ Prev</button>
+          <div class="reel-progress-track">
+            <div id="reelProgressFill" class="reel-progress-fill" style="width: 16.66%;"></div>
+          </div>
+          <button class="reel-arrow-btn" onclick="nextStrengthsReel()">Next ↓</button>
         </div>
       </div>
     </section>
@@ -1019,85 +1193,165 @@
         </button>
       </div>
 
-      <div class="grid-2 stagger-children">
-        <!-- DigiColibri Card -->
-        <div class="glass-card reveal-on-scroll delay-1" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--p1);">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-              <span style="font-size: 0.68rem; font-weight: 700; color: var(--p1); text-transform: uppercase;">Academic Project Winner</span>
-              <span style="font-size: 0.65rem; font-weight: 700; color: var(--g1); background: rgba(5,150,105,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Completed</span>
+        <!-- Desktop Grid View (min-width: 769px) -->
+        <div class="grid-2 stagger-children desktop-only-view">
+          <!-- DigiColibri Card -->
+          <div class="glass-card reveal-on-scroll delay-1" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--p1);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <span style="font-size: 0.68rem; font-weight: 700; color: var(--p1); text-transform: uppercase;">Academic Project Winner</span>
+                <span style="font-size: 0.65rem; font-weight: 700; color: var(--g1); background: rgba(5,150,105,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Completed</span>
+              </div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--foreground); margin-bottom: 0.2rem;">DigiColibri</h3>
+              <div style="font-size: 0.85rem; font-weight: 600; color: var(--p2); margin-bottom: 0.75rem;">Business Promotion Platform</div>
+              <p style="font-size: 0.85rem; color: var(--ink-3); margin-bottom: 1.25rem;">A conceptual business designer to promote brands through strategic outreach and digital presence. Won 1st place in a college Shark Tank-style competition.</p>
             </div>
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--foreground); margin-bottom: 0.2rem;">DigiColibri</h3>
-            <div style="font-size: 0.85rem; font-weight: 600; color: var(--p2); margin-bottom: 0.75rem;">Business Promotion Platform</div>
-            <p style="font-size: 0.85rem; color: var(--ink-3); margin-bottom: 1.25rem;">A conceptual business designer to promote brands through strategic outreach and digital presence. Won 1st place in a college Shark Tank-style competition.</p>
+
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <button onclick="openProjectModal('digicolibri')" class="btn-primary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem;">
+                View Details →
+              </button>
+              <a href="https://digicolibri.lovable.app/" target="_blank" rel="noopener" class="btn-secondary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem; text-decoration: none;">
+                Visit Website ↗
+              </a>
+            </div>
           </div>
 
-          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-            <button onclick="openProjectModal('digicolibri')" class="btn-primary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem;">
+          <!-- Seva Setu Card -->
+          <div class="glass-card reveal-on-scroll delay-2" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--g1);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <span style="font-size: 0.68rem; font-weight: 700; color: var(--g1); text-transform: uppercase;">Innovation Proposal</span>
+                <span style="font-size: 0.65rem; font-weight: 700; color: var(--g1); background: rgba(5,150,105,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Completed</span>
+              </div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--foreground); margin-bottom: 0.2rem;">Seva Setu</h3>
+              <div style="font-size: 0.85rem; font-weight: 600; color: var(--g2); margin-bottom: 0.75rem;">Public Services App Proposal</div>
+              <p style="font-size: 0.85rem; color: var(--ink-3); margin-bottom: 1.25rem;">A digital platform connecting citizens with government authorities to improve issue reporting and emergency response.</p>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <button onclick="openProjectModal('seva-setu')" class="btn-primary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem;">
+                View Details →
+              </button>
+              <a href="pdfs/Seva Satu.pdf" target="_blank" rel="noopener" class="btn-secondary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem; text-decoration: none;">
+                View Project ↗
+              </a>
+            </div>
+          </div>
+
+          <!-- Market Research Card -->
+          <div class="glass-card reveal-on-scroll delay-1" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--o1);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <span style="font-size: 0.68rem; font-weight: 700; color: var(--o1); text-transform: uppercase;">Research</span>
+                <span style="font-size: 0.65rem; font-weight: 700; color: var(--g1); background: rgba(5,150,105,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Completed</span>
+              </div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--foreground); margin-bottom: 0.2rem;">Market Research Study</h3>
+              <div style="font-size: 0.85rem; font-weight: 600; color: var(--o2); margin-bottom: 0.75rem;">Union Bank of India</div>
+              <p style="font-size: 0.85rem; color: var(--ink-3); margin-bottom: 1.25rem;">An in-depth market research study analyzing consumer perception, service positioning, and bank marketing claims.</p>
+            </div>
+
+            <button onclick="openProjectModal('union-bank')" class="btn-primary" style="width: 100%; justify-content: center; padding: 0.7rem 0.9rem; font-size: 0.82rem;">
               View Details →
             </button>
-            <a href="https://digicolibri.lovable.app/" target="_blank" rel="noopener" class="btn-secondary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem; text-decoration: none;">
-              Visit Website ↗
-            </a>
           </div>
-        </div>
 
-        <!-- Seva Setu Card -->
-        <div class="glass-card reveal-on-scroll delay-2" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--g1);">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-              <span style="font-size: 0.68rem; font-weight: 700; color: var(--g1); text-transform: uppercase;">Innovation Proposal</span>
-              <span style="font-size: 0.65rem; font-weight: 700; color: var(--g1); background: rgba(5,150,105,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Completed</span>
+          <!-- Portfolio Website Card -->
+          <div class="glass-card reveal-on-scroll delay-2" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--r1);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <span style="font-size: 0.68rem; font-weight: 700; color: var(--r1); text-transform: uppercase;">Personal Project</span>
+                <span style="font-size: 0.65rem; font-weight: 700; color: var(--g1); background: rgba(5,150,105,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Live</span>
+              </div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--foreground); margin-bottom: 0.2rem;">This Portfolio Website</h3>
+              <div style="font-size: 0.85rem; font-weight: 600; color: var(--p2); margin-bottom: 0.75rem;">Vibe Coded & Built by Me</div>
+              <p style="font-size: 0.85rem; color: var(--ink-3); margin-bottom: 1.25rem;">Designed and built from scratch using modern web technologies, custom CSS animations, and AI tool integration.</p>
             </div>
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--foreground); margin-bottom: 0.2rem;">Seva Setu</h3>
-            <div style="font-size: 0.85rem; font-weight: 600; color: var(--g2); margin-bottom: 0.75rem;">Public Services App Proposal</div>
-            <p style="font-size: 0.85rem; color: var(--ink-3); margin-bottom: 1.25rem;">A digital platform connecting citizens with government authorities to improve issue reporting and emergency response.</p>
-          </div>
 
-          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-            <button onclick="openProjectModal('seva-setu')" class="btn-primary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem;">
+            <button onclick="openProjectModal('portfolio')" class="btn-primary" style="width: 100%; justify-content: center; padding: 0.7rem 0.9rem; font-size: 0.82rem;">
               View Details →
             </button>
-            <a href="pdfs/Seva Satu.pdf" target="_blank" rel="noopener" class="btn-secondary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem; text-decoration: none;">
-              View Project ↗
-            </a>
           </div>
         </div>
 
-        <!-- Market Research Card -->
-        <div class="glass-card reveal-on-scroll delay-1" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--o1);">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-              <span style="font-size: 0.68rem; font-weight: 700; color: var(--o1); text-transform: uppercase;">Research</span>
-              <span style="font-size: 0.65rem; font-weight: 700; color: var(--g1); background: rgba(5,150,105,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Completed</span>
+        <!-- Mobile 3D Orbital Arc Deck View (max-width: 768px) -->
+        <div class="mobile-only-view mobile-projects-wrapper">
+          <div class="arc-deck-header-bar">
+            <span class="arc-deck-badge">3D ARC STACK DECK</span>
+            <div id="projectsArcCounter" class="arc-counter-pill">01 / 04 <span class="arr">→</span> 02 / 04</div>
+          </div>
+
+          <div class="arc-deck-stage">
+            <div id="projectsArcDeck" class="mobile-arc-deck">
+              <!-- Arc Card 1: DigiColibri -->
+              <div class="mobile-arc-card active" data-index="0" style="border-top: 4px solid var(--p1);">
+                <div class="arc-card-header">
+                  <span class="arc-card-tag" style="color: var(--p1);">01 DRAG • 02 RELEASE • 03 LOOP</span>
+                  <span class="arc-card-status">Completed</span>
+                </div>
+                <h3 class="arc-card-title">DigiColibri</h3>
+                <div class="arc-card-sub">Business Promotion Platform</div>
+                <p class="arc-card-desc">Conceptual business designer to promote brands through strategic outreach and digital presence. Won 1st place in Shark Tank competition.</p>
+                <div class="arc-card-actions">
+                  <button onclick="openProjectModal('digicolibri')" class="btn-primary" style="padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
+                  <a href="https://digicolibri.lovable.app/" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.8rem; text-decoration: none;">Visit ↗</a>
+                </div>
+                <div class="arc-drag-hint">Swipe up along arc to cycle deck ↗</div>
+              </div>
+
+              <!-- Arc Card 2: Seva Setu -->
+              <div class="mobile-arc-card" data-index="1" style="border-top: 4px solid var(--g1);">
+                <div class="arc-card-header">
+                  <span class="arc-card-tag" style="color: var(--g1);">01 DRAG • 02 RELEASE • 03 LOOP</span>
+                  <span class="arc-card-status">Completed</span>
+                </div>
+                <h3 class="arc-card-title">Seva Setu</h3>
+                <div class="arc-card-sub">Public Services App Proposal</div>
+                <p class="arc-card-desc">Digital platform connecting citizens with government authorities to improve civic issue reporting and emergency response.</p>
+                <div class="arc-card-actions">
+                  <button onclick="openProjectModal('seva-setu')" class="btn-primary" style="padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
+                  <a href="pdfs/Seva Satu.pdf" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.8rem; text-decoration: none;">PDF ↗</a>
+                </div>
+                <div class="arc-drag-hint">Swipe up along arc to cycle deck ↗</div>
+              </div>
+
+              <!-- Arc Card 3: Market Research Study -->
+              <div class="mobile-arc-card" data-index="2" style="border-top: 4px solid var(--o1);">
+                <div class="arc-card-header">
+                  <span class="arc-card-tag" style="color: var(--o1);">01 DRAG • 02 RELEASE • 03 LOOP</span>
+                  <span class="arc-card-status">Completed</span>
+                </div>
+                <h3 class="arc-card-title">Market Research Study</h3>
+                <div class="arc-card-sub">Union Bank of India</div>
+                <p class="arc-card-desc">In-depth market research study analyzing consumer perception, service positioning, and bank marketing claims.</p>
+                <div class="arc-card-actions">
+                  <button onclick="openProjectModal('union-bank')" class="btn-primary" style="width: 100%; justify-content: center; padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
+                </div>
+                <div class="arc-drag-hint">Swipe up along arc to cycle deck ↗</div>
+              </div>
+
+              <!-- Arc Card 4: Portfolio Website -->
+              <div class="mobile-arc-card" data-index="3" style="border-top: 4px solid var(--r1);">
+                <div class="arc-card-header">
+                  <span class="arc-card-tag" style="color: var(--r1);">01 DRAG • 02 RELEASE • 03 LOOP</span>
+                  <span class="arc-card-status">Live</span>
+                </div>
+                <h3 class="arc-card-title">This Portfolio Website</h3>
+                <div class="arc-card-sub">Vibe Coded & Built by Me</div>
+                <p class="arc-card-desc">Designed and built from scratch using modern web technologies, custom CSS animations, and AI tool integration.</p>
+                <div class="arc-card-actions">
+                  <button onclick="openProjectModal('portfolio')" class="btn-primary" style="width: 100%; justify-content: center; padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
+                </div>
+                <div class="arc-drag-hint">Swipe up along arc to cycle deck ↗</div>
+              </div>
             </div>
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--foreground); margin-bottom: 0.2rem;">Market Research Study</h3>
-            <div style="font-size: 0.85rem; font-weight: 600; color: var(--o2); margin-bottom: 0.75rem;">Union Bank of India</div>
-            <p style="font-size: 0.85rem; color: var(--ink-3); margin-bottom: 1.25rem;">An in-depth market research study analyzing consumer perception, service positioning, and bank marketing claims.</p>
           </div>
 
-          <button onclick="openProjectModal('union-bank')" class="btn-primary" style="width: 100%; justify-content: center; padding: 0.7rem 0.9rem; font-size: 0.82rem;">
-            View Details →
-          </button>
-        </div>
-
-        <!-- Portfolio Website Card -->
-        <div class="glass-card reveal-on-scroll delay-2" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--r1);">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-              <span style="font-size: 0.68rem; font-weight: 700; color: var(--r1); text-transform: uppercase;">Personal Project</span>
-              <span style="font-size: 0.65rem; font-weight: 700; color: var(--g1); background: rgba(5,150,105,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Live</span>
-            </div>
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--foreground); margin-bottom: 0.2rem;">This Portfolio Website</h3>
-            <div style="font-size: 0.85rem; font-weight: 600; color: var(--p2); margin-bottom: 0.75rem;">Vibe Coded & Built by Me</div>
-            <p style="font-size: 0.85rem; color: var(--ink-3); margin-bottom: 1.25rem;">Designed and built from scratch using modern web technologies, custom CSS animations, and AI tool integration.</p>
+          <div class="arc-controls-bar">
+            <button class="arc-btn" onclick="prevProjectsArcCard()">← Prev Project</button>
+            <button class="arc-btn" onclick="nextProjectsArcCard()">Next Project →</button>
           </div>
-
-          <button onclick="openProjectModal('portfolio')" class="btn-primary" style="width: 100%; justify-content: center; padding: 0.7rem 0.9rem; font-size: 0.82rem;">
-            View Details →
-          </button>
         </div>
-      </div>
     </section>
 
     <!-- Testimonials Carousel Section (Matching Screenshot 2) -->
@@ -1194,7 +1448,7 @@
     </section>
 
     <!-- Footer -->
-    <footer style="background: var(--background); border-top: 1px solid var(--border); text-align: center; color: var(--ink-4); overflow: hidden; position: relative;">
+    <footer style="background: transparent; border-top: 1px solid var(--border); text-align: center; color: var(--ink-4); overflow: hidden; position: relative;">
 
       <!-- Animated Marquee Strip (matches hero ticker style) -->
       <div style="border-bottom: 1px solid var(--border); padding: 0.9rem 0; overflow: hidden; background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(168,85,247,0.05));">
@@ -1261,12 +1515,12 @@
         </div>
       </div>
     </footer>
+    </main>
 
-    <!-- Back to Top Floating Button -->
+    <!-- Back to Top Floating Button (Main Home Page) -->
     <a href="#" id="backToTopBtn" class="back-to-top-btn" aria-label="Back to top">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
     </a>
-    </main>
 
     <!-- Full Screen View: Certifications Page (Matching Certifications.tsx) -->
     <div id="certificationsFullView" class="fullscreen-view">

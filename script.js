@@ -44,29 +44,18 @@
         this.vy = (Math.random() - 0.5) * config.particleSpeed;
         this.radius = Math.random() * (config.particleMaxRadius - config.particleMinRadius) + config.particleMinRadius;
       }
-      update(w, h, yOffset) {
-        // Mouse magnetism with scroll offset correction
-        if (mouse.x !== null) {
-          let effectiveMouseY = mouse.y + yOffset;
-          let dx = mouse.x - this.x;
-          let dy = effectiveMouseY - this.y;
-          let dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < mouse.radius) {
-            let force = (mouse.radius - dist) / mouse.radius;
-            this.x += (dx / dist) * force * 0.6;
-            this.y += (dy / dist) * force * 0.6;
-          }
-        }
+      update(w, h) {
         this.x += this.vx;
         this.y += this.vy;
-        if (this.x < 0 || this.x > w) this.vx *= -1;
-        if (this.y < 0 || this.y > h) this.vy *= -1;
+        if (this.x < 0) this.x = w;
+        if (this.x > w) this.x = 0;
+        if (this.y < 0) this.y = h;
+        if (this.y > h) this.y = 0;
       }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = config.dotColor;
-        ctx.fill();
+      getScreenPos(yOffset, h) {
+        let sy = (this.y - yOffset) % h;
+        if (sy < 0) sy += h;
+        return { x: this.x, y: sy };
       }
     }
 
@@ -78,26 +67,61 @@
     function renderNetwork() {
       const displayWidth = window.innerWidth;
       const displayHeight = window.innerHeight;
-      ctx.save();
       const yOffset = (currentScrollY * 0.12) % displayHeight;
-      ctx.translate(0, -yOffset);
 
+      // Calculate screen positions for all particles
+      const screenNodes = [];
       for (let i = 0; i < particles.length; i++) {
-        particles[i].update(displayWidth, displayHeight, yOffset);
-        particles[i].draw();
+        particles[i].update(displayWidth, displayHeight);
+        let pos = particles[i].getScreenPos(yOffset, displayHeight);
+        screenNodes.push({ x: pos.x, y: pos.y, radius: particles[i].radius });
       }
-      // Connecting lines & subtle mesh
-      for (let i = 0; i < particles.length; i++) {
+
+      // Mouse interactive repulsion and direct cursor connection lines
+      if (mouse.x !== null && mouse.y !== null) {
+        for (let i = 0; i < screenNodes.length; i++) {
+          let dx = mouse.x - screenNodes[i].x;
+          let dy = mouse.y - screenNodes[i].y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius && dist > 0) {
+            let force = (mouse.radius - dist) / mouse.radius;
+            
+            // Draw interactive glowing connection line from cursor to particle
+            let alpha = force * 0.65;
+            ctx.beginPath();
+            ctx.moveTo(mouse.x, mouse.y);
+            ctx.lineTo(screenNodes[i].x, screenNodes[i].y);
+            ctx.strokeStyle = config.lineColor.replace(/[\d\.]+\)$/, `${alpha})`);
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+
+            // Repel dots away from cursor
+            screenNodes[i].x -= (dx / dist) * force * 24;
+            screenNodes[i].y -= (dy / dist) * force * 24;
+          }
+        }
+      }
+
+      // Draw particle dots
+      for (let i = 0; i < screenNodes.length; i++) {
+        ctx.beginPath();
+        ctx.arc(screenNodes[i].x, screenNodes[i].y, screenNodes[i].radius, 0, Math.PI * 2);
+        ctx.fillStyle = config.dotColor;
+        ctx.fill();
+      }
+
+      // Draw connecting lines & mesh between particles
+      for (let i = 0; i < screenNodes.length; i++) {
         let closeNodes = [];
-        for (let j = i + 1; j < particles.length; j++) {
-          let dx = particles[i].x - particles[j].x;
-          let dy = particles[i].y - particles[j].y;
+        for (let j = i + 1; j < screenNodes.length; j++) {
+          let dx = screenNodes[i].x - screenNodes[j].x;
+          let dy = screenNodes[i].y - screenNodes[j].y;
           let dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < config.lineLength) {
             closeNodes.push({ index: j, dist: dist });
             ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.moveTo(screenNodes[i].x, screenNodes[i].y);
+            ctx.lineTo(screenNodes[j].x, screenNodes[j].y);
             ctx.strokeStyle = config.lineColor;
             ctx.lineWidth = 0.5;
             ctx.stroke();
@@ -105,14 +129,14 @@
         }
         for (let k = 0; k < closeNodes.length; k++) {
           for (let m = k + 1; m < closeNodes.length; m++) {
-            let p2 = particles[closeNodes[k].index];
-            let p3 = particles[closeNodes[m].index];
+            let p2 = screenNodes[closeNodes[k].index];
+            let p3 = screenNodes[closeNodes[m].index];
             let dx2 = p2.x - p3.x;
             let dy2 = p2.y - p3.y;
             let dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
             if (dist2 < config.lineLength) {
               ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.moveTo(screenNodes[i].x, screenNodes[i].y);
               ctx.lineTo(p2.x, p2.y);
               ctx.lineTo(p3.x, p3.y);
               ctx.closePath();
@@ -122,7 +146,6 @@
           }
         }
       }
-      ctx.restore();
     }
 
     function init() {
@@ -480,6 +503,7 @@ const projectsData = [
     description: "A conceptual business designer to promote brands through strategic outreach and digital presence.",
     category: "Academic",
     status: "Completed",
+    live: "https://digicolibri.lovable.app/",
     headerStyle: "linear-gradient(135deg, #1e1b4b, #4338ca)",
     skills: ["Business Model", "Market Strategy", "Digital Marketing"],
     note: "Undertaken during my 1st semester of MBA as part of an academic initiative. Our team of 12 members won 1st place in a Shark Tank-style college competition. I took on the website design and created a live working prototype using AI tools.",
@@ -1105,7 +1129,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeCertFilter = null;
   let activeCertTab = "certificates"; // "certificates" | "badges"
   let activeOpenBlock = null; // only one accordion block can be open at a time
-  const stickyBackRefresh = [];
 
 
 
@@ -1113,7 +1136,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (certFullView) {
       certFullView.classList.add("active");
       document.body.style.overflow = "hidden";
-      stickyBackRefresh.forEach(fn => fn());
       renderCertFullView();
     }
   };
@@ -1208,45 +1230,178 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const getProviderLogo = (heading, provider) => {
     const text = `${heading} ${provider || ''}`.toLowerCase();
+    const style = `width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06); flex-shrink: 0;`;
     if (text.includes("hrci")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/HRCI.png" alt="HRCI" style="width: 28px; height: 28px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/HRCI.png" alt="HRCI" style="width: 28px; height: 28px; object-fit: contain;" /></div>`;
     }
     if (text.includes("shrm")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/SHRM logo.jpg" alt="SHRM" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/SHRM logo.jpg" alt="SHRM" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
     }
     if (text.includes("nasba")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/NASBA.jpg" alt="NASBA" style="width: 30px; height: 24px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/NASBA.jpg" alt="NASBA" style="width: 30px; height: 24px; object-fit: contain;" /></div>`;
     }
     if (text.includes("ibm")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/ibm.png" alt="IBM" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/ibm.png" alt="IBM" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
     }
     if (text.includes("infosys")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/infosys.png" alt="Infosys" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/infosys.png" alt="Infosys" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
     }
     if (text.includes("google")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg></div>`;
+      return `<div style="${style}"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg></div>`;
     }
     if (text.includes("yale")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/Yale university.jpg" alt="Yale University" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/Yale university.jpg" alt="Yale University" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
     }
     if (text.includes("wesleyan")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/Wesleyan university.png" alt="Wesleyan University" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/Wesleyan university.png" alt="Wesleyan University" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
     }
     if (text.includes("pennsylvania") || text.includes("penn")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/University of Pennsylvania.png" alt="University of Pennsylvania" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/University of Pennsylvania.png" alt="University of Pennsylvania" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
     }
     if (text.includes("anthropic")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06);"><img src="assets/logos/anthropic logo.png" alt="Anthropic" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/anthropic logo.png" alt="Anthropic" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
     }
     if (text.includes("linkedin")) {
-      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #0A66C2; display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 2px 6px rgba(10,102,194,0.3);"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></div>`;
+      return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #0A66C2; display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 2px 6px rgba(10,102,194,0.3); flex-shrink: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></div>`;
     }
-    return `<div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, var(--p1), var(--p2)); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff;">${(provider || heading).charAt(0).toUpperCase()}</div>`;
+    return `<div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, var(--p1), var(--p2)); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; flex-shrink: 0;">${(provider || heading).charAt(0).toUpperCase()}</div>`;
+  };
+
+  // Helper for generating mobile reference vector thumbnails for projects
+  const getProjectMobileThumbSVG = (id) => {
+    if (id === 'digicolibri') {
+      return `<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="#090D16"/>
+        <circle cx="50" cy="50" r="35" fill="url(#blueGlow)" opacity="0.25"/>
+        <path d="M50 25C36.19 25 25 36.19 25 50C25 63.81 36.19 75 50 75C63.81 75 75 63.81 75 50C75 36.19 63.81 25 50 25Z" stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <circle cx="50" cy="50" r="18" fill="#1E3A8A" stroke="#60A5FA" stroke-width="2"/>
+        <circle cx="35" cy="40" r="4" fill="#60A5FA"/>
+        <circle cx="65" cy="40" r="4" fill="#60A5FA"/>
+        <circle cx="50" cy="65" r="4" fill="#60A5FA"/>
+        <line x1="35" y1="40" x2="50" y2="50" stroke="#93C5FD" stroke-width="1.5"/>
+        <line x1="65" y1="40" x2="50" y2="50" stroke="#93C5FD" stroke-width="1.5"/>
+        <line x1="50" y1="65" x2="50" y2="50" stroke="#93C5FD" stroke-width="1.5"/>
+        <defs>
+          <radialGradient id="blueGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(35)">
+            <stop stop-color="#3B82F6"/>
+            <stop offset="1" stop-color="#3B82F6" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>`;
+    } else if (id === 'seva-setu') {
+      return `<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="#061A14"/>
+        <circle cx="50" cy="50" r="35" fill="url(#greenGlow)" opacity="0.3"/>
+        <circle cx="50" cy="50" r="28" stroke="#10B981" stroke-width="1.5" stroke-dasharray="4 2"/>
+        <path d="M50 25C50 25 32 40 32 55C32 64.94 40.06 73 50 73C59.94 73 68 64.94 68 55C68 40 50 25 50 25Z" fill="url(#leafGrad)" stroke="#34D399" stroke-width="2"/>
+        <path d="M50 35V65M50 48L40 42M50 54L60 48" stroke="#A7F3D0" stroke-width="1.5" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="leafGrad" x1="50" y1="25" x2="50" y2="73" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#059669"/>
+            <stop offset="1" stop-color="#047857"/>
+          </linearGradient>
+          <radialGradient id="greenGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(35)">
+            <stop stop-color="#10B981"/>
+            <stop offset="1" stop-color="#10B981" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>`;
+    } else if (id === 'union-bank') {
+      return `<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="#140D24"/>
+        <circle cx="50" cy="50" r="35" fill="url(#purpleGlow)" opacity="0.3"/>
+        <line x1="30" y1="40" x2="50" y2="30" stroke="#C084FC" stroke-width="2"/>
+        <line x1="50" y1="30" x2="70" y2="40" stroke="#C084FC" stroke-width="2"/>
+        <line x1="70" y1="40" x2="70" y2="65" stroke="#C084FC" stroke-width="2"/>
+        <line x1="70" y1="65" x2="50" y2="75" stroke="#C084FC" stroke-width="2"/>
+        <line x1="50" y1="75" x2="30" y2="65" stroke="#C084FC" stroke-width="2"/>
+        <line x1="30" y1="65" x2="30" y2="40" stroke="#C084FC" stroke-width="2"/>
+        <circle cx="30" cy="40" r="5" fill="#A855F7"/>
+        <circle cx="50" cy="30" r="5" fill="#A855F7"/>
+        <circle cx="70" cy="40" r="5" fill="#A855F7"/>
+        <circle cx="70" cy="65" r="5" fill="#A855F7"/>
+        <circle cx="50" cy="75" r="5" fill="#A855F7"/>
+        <circle cx="30" cy="65" r="5" fill="#A855F7"/>
+        <circle cx="50" cy="52" r="7" fill="#C084FC" stroke="#FFFFFF" stroke-width="1.5"/>
+        <defs>
+          <radialGradient id="purpleGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(35)">
+            <stop stop-color="#A855F7"/>
+            <stop offset="1" stop-color="#A855F7" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>`;
+    } else {
+      return `<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="#1A120B"/>
+        <path d="M0 100L25 60L50 85L80 40L100 100H0Z" fill="url(#mountGrad)"/>
+        <circle cx="75" cy="22" r="10" fill="#FBBF24" opacity="0.9"/>
+        <circle cx="20" cy="25" r="1.5" fill="#FFFFFF"/>
+        <circle cx="45" cy="18" r="1" fill="#FFFFFF"/>
+        <circle cx="85" cy="15" r="1" fill="#FFFFFF"/>
+        <defs>
+          <linearGradient id="mountGrad" x1="50" y1="40" x2="50" y2="100" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#78350F"/>
+            <stop offset="1" stop-color="#291003"/>
+          </linearGradient>
+        </defs>
+      </svg>`;
+    }
   };
 
   const renderBadgesFullView = () => {
     if (!certFullContent) return;
 
+    // Mobile-first Reference Redesign for Badges Section (< 769px)
+    if (window.innerWidth <= 768) {
+      let mobileHtml = `
+        <div class="mobile-ref-view-header">
+          <div class="mobile-ref-title-group">
+            <div class="mobile-ref-folder-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <h1 class="mobile-ref-title">Verified Badges</h1>
+          </div>
+        </div>
+        <div class="mobile-ref-cards-container">
+      `;
+
+      badgesData.forEach(badge => {
+        mobileHtml += `
+          <div class="mobile-ref-card">
+            <div class="mobile-ref-card-body">
+              <div class="mobile-ref-card-thumb mobile-ref-card-thumb-badge">
+                <img src="${badge.badgeImg}" alt="${badge.title}" />
+              </div>
+              <div class="mobile-ref-card-content">
+                <div class="mobile-ref-cat-badge mobile-ref-cat-verified">
+                  VERIFIED BADGE
+                </div>
+                <h3 class="mobile-ref-card-title">${badge.title}</h3>
+                <div style="font-size: 0.76rem; font-weight: 600; color: var(--p1); margin-bottom: 0.35rem;">
+                  ${badge.issuer} • ${badge.platform}
+                </div>
+                <p class="mobile-ref-card-desc">${badge.description}</p>
+                <div class="mobile-ref-skills-row">
+                  ${(badge.skills || []).map(s => `<span class="mobile-ref-skill-tag">${s}</span>`).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
+              <a href="${badge.badgeUrl}" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; justify-content: center; font-size: 0.8rem; padding: 0.6rem 1rem; border-radius: 9999px; font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem;">
+                Verify Badge ${icons.external}
+              </a>
+            </div>
+          </div>
+        `;
+      });
+
+      mobileHtml += `</div>`;
+      certFullContent.innerHTML = mobileHtml;
+      return;
+    }
+
+    // Desktop view preserved 100% unchanged
     let badgesHtml = `
       <div style="margin-bottom: 2.5rem; text-align: center;">
         <p style="font-size: 0.95rem; color: var(--ink-3); max-width: 650px; margin: 0 auto; line-height: 1.7;">
@@ -1257,7 +1412,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     badgesData.forEach(badge => {
-      // Smart zoom scaling depending on badge image characteristics
       let imgScale = "scale(1.48)";
       if (badge.title.toLowerCase().includes("people management") || badge.title.toLowerCase().includes("project management") || badge.title.toLowerCase().includes("prompting")) {
         imgScale = "scale(1.58)";
@@ -1266,37 +1420,27 @@ document.addEventListener("DOMContentLoaded", () => {
       badgesHtml += `
         <div class="glass-card badge-card" style="padding: 2.25rem 1.6rem 2rem 1.6rem; border-radius: 140px; display: flex; flex-direction: column; justify-content: space-between; text-align: center; border: 1.5px solid var(--border-strong); background: var(--card); overflow: hidden; transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-spring);">
           <div>
-            <!-- Large Zoomed-In Badge Graphic Preview Frame without Dark Shadow Halo -->
             <div style="width: 175px; height: 175px; border-radius: 50%; background: var(--surface-1); border: 2px solid var(--border-strong); padding: 12px; margin: 0 auto 1.35rem auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); position: relative; overflow: hidden; transition: transform 0.35s var(--ease-spring);">
               <img src="${badge.badgeImg}" alt="${badge.title}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transform: ${imgScale}; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));" />
             </div>
-
-            <!-- Title & Issuer -->
             <h3 style="font-family: var(--font-heading); font-size: 1.08rem; font-weight: 800; color: var(--foreground); line-height: 1.3; margin-bottom: 0.35rem;">
               ${badge.title}
             </h3>
             <div style="font-size: 0.8rem; font-weight: 600; color: var(--p1); margin-bottom: 0.75rem;">
               ${badge.issuer} • ${badge.platform}
             </div>
-
-            <!-- Status Pill -->
             <div style="margin-bottom: 0.85rem;">
               <span style="font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.32rem 0.75rem; border-radius: 9999px; background: rgba(16, 185, 129, 0.15); color: var(--g1); border: 1px solid rgba(16, 185, 129, 0.3); display: inline-flex; align-items: center; gap: 0.35rem;">
                 <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--g1); box-shadow: 0 0 8px var(--g1);"></span> Verified Badge
               </span>
             </div>
-
-            <!-- Description -->
             <p style="font-size: 0.82rem; color: var(--ink-2); line-height: 1.6; margin-bottom: 1.15rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
               ${badge.description}
             </p>
-
-            <!-- Skill Tags -->
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; margin-bottom: 1.35rem;">
               ${(badge.skills || []).map(s => `<span style="font-size: 0.68rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 9999px; background: var(--surface-1); color: var(--ink-1); border: 1px solid rgba(99, 102, 241, 0.15);">${s}</span>`).join('')}
             </div>
           </div>
-
           <a href="${badge.badgeUrl}" target="_blank" rel="noopener" class="btn-primary" style="width: fit-content; min-width: 150px; max-width: 82%; margin: 0 auto 0.4rem auto; justify-content: center; font-size: 0.78rem; padding: 0.55rem 1.15rem; font-weight: 700; border-radius: 9999px;">
             Verify Badge ${icons.external}
           </a>
@@ -1320,8 +1464,8 @@ document.addEventListener("DOMContentLoaded", () => {
       ? certCategories.filter(c => c.id === activeCertFilter)
       : certCategories;
 
-    // Sidebar HTML (Fix: height fit-content & align-self start to prevent box stretching down the page)
-    let sidebarHtml = `<div class="glass-card" style="padding: 0.5rem; position: sticky; top: 1.5rem; height: fit-content; align-self: start;">`;
+    // Sidebar HTML
+    let sidebarHtml = `<div class="glass-card cert-sidebar" style="padding: 0.5rem; position: sticky; top: 1.5rem; height: fit-content; align-self: start;">`;
     const sidebarItems = [
       { id: "project-management", label: "Advanced Management", iconKey: "chart" },
       { id: "artificial-intelligence", label: "AI & Technical Skills", iconKey: "lightbulb" },
@@ -1370,24 +1514,24 @@ document.addEventListener("DOMContentLoaded", () => {
           const hasExpandableContent = (sg.courses && sg.courses.length > 0) || Boolean(sg.description);
 
           mainHtml += `
-            <div class="glass-card${isOpen ? ' open' : ''}" data-accordion-block="${blockId}" style="padding: 0; margin-bottom: 0.75rem; overflow: hidden;">
-              <div style="padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; ${hasExpandableContent ? 'cursor: pointer;' : ''}" ${hasExpandableContent ? `onclick="toggleAccordionBlock('${blockId}')"` : ''}>
-                <div style="display: flex; align-items: center; gap: 0.85rem; flex: 1;">
+            <div class="glass-card${isOpen ? ' open' : ''}" data-accordion-block="${blockId}" style="padding: 0; margin-bottom: 0.65rem; overflow: hidden; border-radius: 16px;">
+              <div style="padding: 0.65rem 1.15rem; display: flex; align-items: center; justify-content: space-between; gap: 0.85rem; ${hasExpandableContent ? 'cursor: pointer;' : ''}" ${hasExpandableContent ? `onclick="toggleAccordionBlock('${blockId}')"` : ''}>
+                <div style="display: flex; align-items: center; gap: 0.85rem; flex: 1; min-width: 0;">
                   ${getProviderLogo(sg.heading, sg.provider)}
-                  <div>
-                    <h3 style="font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: var(--foreground); line-height: 1.2;">${sg.heading}</h3>
-                    <div style="font-size: 0.78rem; color: var(--ink-3); margin-top: 0.2rem;">${sg.provider}</div>
+                  <div style="min-width: 0; flex: 1;">
+                    <h3 style="font-family: var(--font-heading); font-size: 0.94rem; font-weight: 700; color: var(--foreground); line-height: 1.3; margin-bottom: 0.1rem; word-break: break-word; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${sg.heading}</h3>
+                    <div style="font-size: 0.75rem; color: var(--ink-3); font-weight: 500;">${sg.provider}</div>
                   </div>
                 </div>
 
-                <div style="display: flex; align-items: center; gap: 0.75rem;" onclick="event.stopPropagation()">
+                <div style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;" onclick="event.stopPropagation()">
                   ${sg.mainCertUrl ? `
-                    <a href="${sg.mainCertUrl}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">
+                    <a href="${sg.mainCertUrl}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.38rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; font-weight: 600; display: inline-flex; align-items: center; gap: 0.3rem;">
                       View ${icons.external}
                     </a>
                   ` : ''}
                   ${hasExpandableContent ? `
-                    <button class="accordion-chevron" onclick="toggleAccordionBlock('${blockId}')" aria-label="Toggle details" style="background: transparent; border: none; color: var(--ink-3); cursor: pointer; display: flex; align-items: center; transition: color 0.2s ease;">
+                    <button class="accordion-chevron" onclick="toggleAccordionBlock('${blockId}')" aria-label="Toggle details" style="width: 32px; height: 32px; border-radius: 50%; background: var(--surface-1); border: 1px solid var(--border); color: var(--ink-2); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.25s var(--ease-spring); flex-shrink: 0;">
                       ${isOpen ? icons.chevronUp : icons.chevronDown}
                     </button>
                   ` : ''}
@@ -1396,16 +1540,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
               ${hasExpandableContent ? `
                 <div class="accordion-content ${isOpen ? 'open' : ''}">
-                  ${sg.description ? `<div style="background: var(--surface-1); padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.82rem; color: var(--ink-2); margin-bottom: ${sg.courses && sg.courses.length > 0 ? '0.75rem' : '0'};">${sg.description}</div>` : ''}
-                  ${(sg.courses || []).map(c => `
-                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 0.85rem; background: var(--surface-1); border-radius: 8px; margin-bottom: 0.4rem;">
-                      <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; color: var(--ink-1);">
-                        <span style="color: var(--g1); display: flex; align-items: center;">${icons.check}</span>
-                        <span>${c.name}</span>
+                  <div style="padding: 0.5rem 1.15rem 0.85rem 1.15rem;">
+                    ${sg.description ? `<div style="background: var(--surface-1); padding: 0.65rem 0.85rem; border-radius: 10px; font-size: 0.8rem; color: var(--ink-2); margin-bottom: ${sg.courses && sg.courses.length > 0 ? '0.65rem' : '0'};">${sg.description}</div>` : ''}
+                    ${(sg.courses || []).map(c => `
+                      <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.55rem 0.75rem; background: var(--surface-1); border-radius: 8px; margin-bottom: 0.35rem;">
+                        <div style="display: flex; align-items: center; gap: 0.55rem; font-size: 0.8rem; color: var(--ink-1);">
+                          <span style="color: var(--g1); display: flex; align-items: center;">${icons.check}</span>
+                          <span>${c.name}</span>
+                        </div>
+                        ${c.certUrl ? `<a href="${c.certUrl}" target="_blank" rel="noopener" style="font-size: 0.73rem; font-weight: 700; color: var(--p1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.2rem;">Open ${icons.external}</a>` : ''}
                       </div>
-                      ${c.certUrl ? `<a href="${c.certUrl}" target="_blank" rel="noopener" style="font-size: 0.75rem; font-weight: 700; color: var(--p1); text-decoration: none; display: inline-flex; align-items: center; gap: 0.2rem;">Open ${icons.external}</a>` : ''}
-                    </div>
-                  `).join('')}
+                    `).join('')}
+                  </div>
                 </div>
               ` : ''}
             </div>
@@ -1418,7 +1564,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mainHtml += `</div>`;
 
     certFullContent.innerHTML = `
-      <div class="cert-layout-grid" style="display: grid; grid-template-columns: 260px 1fr; gap: 2rem; items-start;">
+      <div class="cert-layout-grid">
         ${sidebarHtml}
         ${mainHtml}
       </div>
@@ -1434,7 +1580,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (projectsFullView) {
       projectsFullView.classList.add("active");
       document.body.style.overflow = "hidden";
-      stickyBackRefresh.forEach(fn => fn());
       renderProjectsFullView();
     }
   };
@@ -1453,6 +1598,117 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const renderProjectsFullView = () => {
     if (!projectsFullContent) return;
+
+    // Mobile-first Reference Redesign for All Projects (< 769px)
+    if (window.innerWidth <= 768) {
+      const categories = ["All", ...Array.from(new Set(projectsData.map(p => p.category)))];
+      const filteredProjects = activeProjectCategory === "All"
+        ? projectsData
+        : projectsData.filter(p => p.category === activeProjectCategory);
+
+      // Hide default static back button & title inside container on mobile to prevent header duplication
+      const oldBackBtn = document.getElementById("projectsBackBtn");
+      if (oldBackBtn) oldBackBtn.style.display = "none";
+      const oldTitle = projectsFullView.querySelector("h1");
+      if (oldTitle) oldTitle.style.display = "none";
+
+      let mobileHtml = `
+        <div class="mobile-ref-view-header">
+          <div class="mobile-ref-title-group">
+            <div class="mobile-ref-folder-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h1 class="mobile-ref-title">All Projects</h1>
+          </div>
+          <button onclick="closeProjectsFullView()" class="mobile-ref-back-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            <span>Back to Home</span>
+          </button>
+        </div>
+
+        <div class="mobile-ref-filter-row">
+          <button onclick="setProjectCategory('All')" class="mobile-ref-filter-btn ${activeProjectCategory === 'All' ? 'active' : ''}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>All</span>
+          </button>
+          <button onclick="setProjectCategory('Academic')" class="mobile-ref-filter-btn ${activeProjectCategory === 'Academic' ? 'active' : ''}">
+            ${icons.graduation}
+            <span>Academic</span>
+          </button>
+          <button onclick="setProjectCategory('Innovation')" class="mobile-ref-filter-btn ${activeProjectCategory === 'Innovation' ? 'active' : ''}">
+            ${icons.lightbulb}
+            <span>Innovation</span>
+          </button>
+          <button onclick="setProjectCategory('Research')" class="mobile-ref-filter-btn ${activeProjectCategory === 'Research' ? 'active' : ''}">
+            ${icons.chart}
+            <span>Research</span>
+          </button>
+          <button onclick="setProjectCategory('Personal')" class="mobile-ref-filter-btn ${activeProjectCategory === 'Personal' ? 'active' : ''}">
+            ${icons.users}
+            <span>Personal</span>
+          </button>
+        </div>
+
+        <div class="mobile-ref-cards-container">
+      `;
+
+      const metaMap = {
+        'digicolibri': { date: 'May 15, 2024', team: 'Team of 12', rating: '4.9' },
+        'seva-setu': { date: 'Apr 28, 2024', team: 'Team of 4', rating: '4.8' },
+        'union-bank': { date: 'Mar 10, 2024', team: 'Team of 2', rating: '4.7' },
+        'portfolio': { date: 'Feb 18, 2024', team: 'Solo Project', rating: '4.9' }
+      };
+
+      const catBadgeClassMap = {
+        'Academic': 'mobile-ref-cat-academic',
+        'Innovation': 'mobile-ref-cat-innovation',
+        'Research': 'mobile-ref-cat-research',
+        'Personal': 'mobile-ref-cat-personal'
+      };
+
+      filteredProjects.forEach(p => {
+        const meta = metaMap[p.id] || { date: 'May 2024', team: 'Academic Team', rating: '4.8' };
+        const catClass = catBadgeClassMap[p.category] || 'mobile-ref-cat-academic';
+
+        mobileHtml += `
+          <div class="mobile-ref-card" onclick="openProjectModal('${p.id}')">
+            <div class="mobile-ref-card-body">
+              <div class="mobile-ref-card-thumb">
+                ${getProjectMobileThumbSVG(p.id)}
+              </div>
+              <div class="mobile-ref-card-content">
+                <div class="mobile-ref-cat-badge ${catClass}">
+                  ${p.category.toUpperCase()}
+                </div>
+                <h3 class="mobile-ref-card-title">${p.title}</h3>
+                <p class="mobile-ref-card-desc">${p.description}</p>
+                <div class="mobile-ref-skills-row">
+                  ${p.skills.map(s => `<span class="mobile-ref-skill-tag">${s}</span>`).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
+              ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-primary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View Website ${icons.external}</a>` : ''}
+              ${p.pdf ? `<a href="${p.pdf}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View Project ${icons.file}</a>` : ''}
+              <button onclick="event.stopPropagation(); openProjectModal('${p.id}')" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">
+                Details ${icons.info}
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      mobileHtml += `</div>`;
+      projectsFullContent.innerHTML = mobileHtml;
+      return;
+    }
+
+    // On Desktop, ensure desktop elements are restored
+    const oldBackBtn = document.getElementById("projectsBackBtn");
+    if (oldBackBtn) oldBackBtn.style.display = "flex";
+    const oldTitle = projectsFullView.querySelector("h1");
+    if (oldTitle) oldTitle.style.display = "block";
 
     const categories = ["All", ...Array.from(new Set(projectsData.map(p => p.category)))];
     const filteredProjects = activeProjectCategory === "All"
@@ -1505,16 +1761,7 @@ document.addEventListener("DOMContentLoaded", () => {
     projectsFullContent.innerHTML = tabsHtml + gridHtml;
   };
 
-  // ============================================================
-  // STICKY BACK BUTTONS (Certifications & Projects full views)
-  // The back button stays pinned at the top of the viewport while
-  // the user scrolls, and slowly glides left into the empty screen
-  // margin so it settles beside the sticky filter column instead
-  // of scrolling away with the page.
-  // ============================================================
-  const STICKY_SCROLL_RANGE = 600;
-  const STICKY_EDGE_MARGIN = 16;
-
+  // Smooth Sticky & Left-Gliding Back to Home Buttons
   const setupStickyBackButton = (btn) => {
     if (!btn) return;
     const view = btn.closest(".fullscreen-view");
@@ -1522,45 +1769,72 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!view || !container) return;
 
     btn.style.position = "sticky";
-    btn.style.top = "1rem";
-    btn.style.zIndex = "50";
-    btn.style.display = "flex";
+    btn.style.top = "1.25rem";
+    btn.style.zIndex = "500";
+    btn.style.display = "inline-flex";
     btn.style.willChange = "transform";
 
     let maxShift = 0;
 
     const update = () => {
-      const progress = Math.min(1, view.scrollTop / STICKY_SCROLL_RANGE);
+      const progress = Math.min(1, view.scrollTop / 250);
       const eased = 1 - Math.pow(1 - progress, 2);
       btn.style.transform = `translateX(${-maxShift * eased}px)`;
     };
 
     const measure = () => {
-      const baseLeft = container.getBoundingClientRect().left + btn.offsetLeft;
-      maxShift = Math.max(0, baseLeft - STICKY_EDGE_MARGIN);
+      const containerLeft = container.getBoundingClientRect().left;
+      const btnLeft = btn.getBoundingClientRect().left;
+      maxShift = Math.max(0, btnLeft - 16);
       update();
     };
 
     view.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", measure);
-    stickyBackRefresh.push(measure);
+    setTimeout(measure, 100);
     measure();
   };
 
   setupStickyBackButton(document.getElementById("certBackBtn"));
   setupStickyBackButton(document.getElementById("projectsBackBtn"));
 
-  // Back to Top floating button
+  // Single Unified Back to Top floating button supporting Home, Certifications, Badges & Projects views
   const backToTopBtn = document.getElementById("backToTopBtn");
+  const certView = document.getElementById("certificationsFullView");
+  const projView = document.getElementById("projectsFullView");
+
   if (backToTopBtn) {
     const toggleBackToTop = () => {
-      backToTopBtn.classList.toggle("visible", window.scrollY > 400);
+      let isCertActive = certView && certView.classList.contains("active");
+      let isProjActive = projView && projView.classList.contains("active");
+
+      let currentScroll = 0;
+      if (isCertActive) {
+        currentScroll = certView.scrollTop;
+      } else if (isProjActive) {
+        currentScroll = projView.scrollTop;
+      } else {
+        currentScroll = window.scrollY;
+      }
+
+      backToTopBtn.classList.toggle("visible", currentScroll > 250);
     };
+
     window.addEventListener("scroll", toggleBackToTop, { passive: true });
+    if (certView) certView.addEventListener("scroll", toggleBackToTop, { passive: true });
+    if (projView) projView.addEventListener("scroll", toggleBackToTop, { passive: true });
+
     toggleBackToTop();
+
     backToTopBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (certView && certView.classList.contains("active")) {
+        certView.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (projView && projView.classList.contains("active")) {
+        projView.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     });
   }
 
@@ -1830,6 +2104,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("resize", () => {
     renderTestimonials();
+    if (typeof renderProjectsFullView === "function") renderProjectsFullView();
+    if (typeof renderBadgesFullView === "function" && activeCertTab === "badges") renderBadgesFullView();
   });
 
   // Initialize Theme Toggle
@@ -1837,6 +2113,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderTestimonials();
   resetAutoSlide();
+
+  // Initialize Mobile-Only Unique Card Swipe Engines
+  initMobileCardSwipeEngines();
 
   // Keyboard Accessibility: Escape key close handler
   document.addEventListener("keydown", (e) => {
@@ -1848,3 +2127,293 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+/* ==========================================================================
+   MOBILE CARD SWIPE ENGINES (Max-Width: 768px Only)
+   1. Featured Projects: 3D Orbital Arc Stack Deck
+   2. Skills & Expertise: Tinder Velocity Tilt-Swipe Deck
+   3. Key Strengths: Vertical Rolodex Reel
+   ========================================================================== */
+
+// --- ENGINE 1: FEATURED PROJECTS (3D Orbital Arc Deck) ---
+let currentArcIndex = 0;
+const totalArcCards = 4;
+
+function updateArcDeckStack() {
+  const cards = document.querySelectorAll(".mobile-arc-card");
+  const counter = document.getElementById("projectsArcCounter");
+  if (!cards.length) return;
+
+  cards.forEach((card, idx) => {
+    let depth = (idx - currentArcIndex + totalArcCards) % totalArcCards;
+    card.setAttribute("data-depth", depth);
+    card.style.transform = "";
+    card.style.opacity = "";
+  });
+
+  if (counter) {
+    const activeNum = String(currentArcIndex + 1).padStart(2, "0");
+    const nextNum = String(((currentArcIndex + 1) % totalArcCards) + 1).padStart(2, "0");
+    const totalNum = String(totalArcCards).padStart(2, "0");
+    counter.innerHTML = `${activeNum} / ${totalNum} <span class="arr">→</span> ${nextNum} / ${totalNum}`;
+  }
+}
+
+window.nextProjectsArcCard = function() {
+  currentArcIndex = (currentArcIndex + 1) % totalArcCards;
+  updateArcDeckStack();
+};
+
+window.prevProjectsArcCard = function() {
+  currentArcIndex = (currentArcIndex - 1 + totalArcCards) % totalArcCards;
+  updateArcDeckStack();
+};
+
+function initProjectsArcDeckGesture() {
+  const deck = document.getElementById("projectsArcDeck");
+  if (!deck) return;
+
+  let startX = 0, startY = 0, currentX = 0, currentY = 0;
+  let isDragging = false;
+
+  const getTopCard = () => deck.querySelector('.mobile-arc-card[data-depth="0"]');
+
+  const onStart = (e) => {
+    const topCard = getTopCard();
+    if (!topCard) return;
+    isDragging = true;
+    const pt = e.touches ? e.touches[0] : e;
+    startX = pt.clientX;
+    startY = pt.clientY;
+    topCard.style.transition = "none";
+  };
+
+  const onMove = (e) => {
+    if (!isDragging) return;
+    const topCard = getTopCard();
+    if (!topCard) return;
+
+    const pt = e.touches ? e.touches[0] : e;
+    currentX = pt.clientX - startX;
+    currentY = pt.clientY - startY;
+
+    const rot = currentX * 0.08;
+    topCard.style.transform = `translate3d(${currentX}px, ${currentY}px, 0px) rotate(${rot}deg)`;
+  };
+
+  const onEnd = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    const topCard = getTopCard();
+    if (!topCard) return;
+
+    topCard.style.transition = "transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.45s ease";
+
+    const dist = Math.hypot(currentX, currentY);
+    if (dist > 70 || currentY < -50) {
+      topCard.style.transform = `translate3d(${currentX * 1.4}px, ${currentY - 90}px, -80px) rotate(${currentX * 0.12}deg)`;
+      topCard.style.opacity = "0";
+
+      setTimeout(() => {
+        currentArcIndex = (currentArcIndex + 1) % totalArcCards;
+        updateArcDeckStack();
+      }, 220);
+    } else {
+      topCard.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
+    }
+
+    startX = startY = currentX = currentY = 0;
+  };
+
+  deck.addEventListener("touchstart", onStart, { passive: true });
+  deck.addEventListener("touchmove", onMove, { passive: true });
+  deck.addEventListener("touchend", onEnd);
+
+  deck.addEventListener("mousedown", onStart);
+  window.addEventListener("mousemove", onMove);
+  window.addEventListener("mouseup", onEnd);
+}
+
+// --- ENGINE 2: SKILLS & EXPERTISE (Tinder Velocity Tilt-Swipe) ---
+let currentSkillIndex = 0;
+const totalSkillCards = 3;
+
+window.switchSkillsCard = function(idx) {
+  currentSkillIndex = idx;
+  const cards = document.querySelectorAll(".mobile-tilt-card");
+  const tabs = document.querySelectorAll(".skill-tab-pill");
+
+  cards.forEach((card, i) => {
+    card.classList.toggle("active", i === idx);
+    card.style.transform = "";
+    card.style.opacity = "";
+  });
+
+  tabs.forEach((tab, i) => {
+    tab.classList.toggle("active", i === idx);
+  });
+};
+
+function initSkillsTiltSwipeGesture() {
+  const deck = document.getElementById("skillsTiltDeck");
+  if (!deck) return;
+
+  let startX = 0, currentX = 0, isDragging = false;
+  const glowLeft = document.getElementById("skillsGlowLeft");
+  const glowRight = document.getElementById("skillsGlowRight");
+
+  const getActiveCard = () => deck.querySelector(".mobile-tilt-card.active");
+
+  const onStart = (e) => {
+    const card = getActiveCard();
+    if (!card) return;
+    isDragging = true;
+    startX = (e.touches ? e.touches[0] : e).clientX;
+    card.style.transition = "none";
+  };
+
+  const onMove = (e) => {
+    if (!isDragging) return;
+    const card = getActiveCard();
+    if (!card) return;
+
+    currentX = (e.touches ? e.touches[0] : e).clientX - startX;
+    const rot = currentX * 0.08;
+
+    card.style.transform = `translate3d(${currentX}px, 0, 0) rotate(${rot}deg)`;
+
+    if (glowLeft && glowRight) {
+      glowLeft.classList.toggle("active", currentX < -30);
+      glowRight.classList.toggle("active", currentX > 30);
+    }
+  };
+
+  const onEnd = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    const card = getActiveCard();
+    if (!card) return;
+
+    if (glowLeft && glowRight) {
+      glowLeft.classList.remove("active");
+      glowRight.classList.remove("active");
+    }
+
+    card.style.transition = "transform 0.35s ease, opacity 0.3s ease";
+
+    if (Math.abs(currentX) > 75) {
+      const dir = currentX > 0 ? 1 : -1;
+      card.style.transform = `translate3d(${dir * 350}px, 0, 0) rotate(${dir * 25}deg)`;
+      card.style.opacity = "0";
+
+      setTimeout(() => {
+        const nextIdx = (currentSkillIndex + (dir < 0 ? 1 : -1) + totalSkillCards) % totalSkillCards;
+        switchSkillsCard(nextIdx);
+      }, 200);
+    } else {
+      card.style.transform = "translate3d(0,0,0) rotate(0deg)";
+    }
+
+    startX = currentX = 0;
+  };
+
+  deck.addEventListener("touchstart", onStart, { passive: true });
+  deck.addEventListener("touchmove", onMove, { passive: true });
+  deck.addEventListener("touchend", onEnd);
+
+  deck.addEventListener("mousedown", onStart);
+  window.addEventListener("mousemove", onMove);
+  window.addEventListener("mouseup", onEnd);
+}
+
+// --- ENGINE 3: KEY STRENGTHS (Vertical Rolodex Reel) ---
+let currentReelIndex = 0;
+const totalReelCards = 6;
+
+function updateStrengthsReelStack() {
+  const cards = document.querySelectorAll(".mobile-reel-card");
+  const counter = document.getElementById("strengthsReelCounter");
+  const fill = document.getElementById("reelProgressFill");
+  if (!cards.length) return;
+
+  cards.forEach((card, idx) => {
+    card.classList.remove("active", "prev-card", "next-card", "hidden-card");
+
+    if (idx === currentReelIndex) {
+      card.classList.add("active");
+    } else if (idx === (currentReelIndex - 1 + totalReelCards) % totalReelCards && currentReelIndex > 0) {
+      card.classList.add("prev-card");
+    } else if (idx === (currentReelIndex + 1) % totalReelCards) {
+      card.classList.add("next-card");
+    } else {
+      card.classList.add("hidden-card");
+    }
+  });
+
+  if (counter) {
+    counter.innerText = `${currentReelIndex + 1} / ${totalReelCards} STRENGTHS`;
+  }
+  if (fill) {
+    fill.style.width = `${((currentReelIndex + 1) / totalReelCards) * 100}%`;
+  }
+}
+
+window.nextStrengthsReel = function() {
+  currentReelIndex = (currentReelIndex + 1) % totalReelCards;
+  updateStrengthsReelStack();
+};
+
+window.prevStrengthsReel = function() {
+  currentReelIndex = (currentReelIndex - 1 + totalReelCards) % totalReelCards;
+  updateStrengthsReelStack();
+};
+
+function initStrengthsRolodexGesture() {
+  const deck = document.getElementById("strengthsRolodexDeck");
+  if (!deck) return;
+
+  let startY = 0, currentY = 0, isDragging = false;
+
+  const onStart = (e) => {
+    isDragging = true;
+    startY = (e.touches ? e.touches[0] : e).clientY;
+  };
+
+  const onMove = (e) => {
+    if (!isDragging) return;
+    currentY = (e.touches ? e.touches[0] : e).clientY - startY;
+  };
+
+  const onEnd = () => {
+    if (!isDragging) return;
+    isDragging = false;
+
+    if (currentY < -40) {
+      nextStrengthsReel();
+    } else if (currentY > 40) {
+      prevStrengthsReel();
+    }
+
+    startY = currentY = 0;
+  };
+
+  deck.addEventListener("touchstart", onStart, { passive: true });
+  deck.addEventListener("touchmove", onMove, { passive: true });
+  deck.addEventListener("touchend", onEnd);
+
+  deck.addEventListener("mousedown", onStart);
+  window.addEventListener("mousemove", onMove);
+  window.addEventListener("mouseup", onEnd);
+}
+
+function initMobileCardSwipeEngines() {
+  updateArcDeckStack();
+  initProjectsArcDeckGesture();
+
+  switchSkillsCard(0);
+  initSkillsTiltSwipeGesture();
+
+  updateStrengthsReelStack();
+  initStrengthsRolodexGesture();
+}
+
