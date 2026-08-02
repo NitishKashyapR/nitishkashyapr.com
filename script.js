@@ -85,7 +85,7 @@
           let dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < mouse.radius && dist > 0) {
             let force = (mouse.radius - dist) / mouse.radius;
-            
+
             // Draw interactive glowing connection line from cursor to particle
             let alpha = force * 0.65;
             ctx.beginPath();
@@ -574,8 +574,8 @@ const testimonialsData = [
   { initial: "A", bg: "linear-gradient(135deg, #ec4899, #f43f5e)", stars: 5, text: "Nitish is curious and keeps learning new things, and he's usually happy to share what he picks up with the rest of us.", name: "Assignment Partner", role: "MBA Peer" }
 ];
 
-  // Digital Badges Catalog (23 Official Verified Badges)
-  const badgesData = [
+// Digital Badges Catalog (23 Official Verified Badges)
+const badgesData = [
   {
     "id": "google-prompting-essentials",
     "title": "Google Prompting Essentials",
@@ -1063,7 +1063,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mobile Navigation Toggle
   const toggleBtn = document.getElementById("mobileToggleBtn");
   const mobileOverlay = document.getElementById("mobileMenuOverlay");
-  
+
   if (toggleBtn && mobileOverlay) {
     toggleBtn.addEventListener("click", () => {
       const isActive = mobileOverlay.classList.toggle("active");
@@ -1460,7 +1460,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const displayedCats = activeCertFilter 
+    const displayedCats = activeCertFilter
       ? certCategories.filter(c => c.id === activeCertFilter)
       : certCategories;
 
@@ -2162,9 +2162,11 @@ function updateArcDeckStack() {
 }
 
 function animateArcThrow(direction, callback) {
-  if (isArcAnimating) return;
   const deck = document.getElementById("projectsArcDeck");
-  if (!deck) return;
+  if (!deck) {
+    if (callback) callback();
+    return;
+  }
   const topCard = deck.querySelector('.mobile-arc-card[data-depth="0"]');
 
   if (!topCard) {
@@ -2173,28 +2175,26 @@ function animateArcThrow(direction, callback) {
   }
 
   isArcAnimating = true;
-  topCard.style.transition = "transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease";
-  const throwX = direction === "next" ? 220 : -220;
-  const throwRot = direction === "next" ? 18 : -18;
-  topCard.style.transform = `translate3d(${throwX}px, -70px, -60px) rotate(${throwRot}deg)`;
+  topCard.style.transition = "transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
+  const throwX = direction === "next" ? 260 : -260;
+  const throwRot = direction === "next" ? 14 : -14;
+  topCard.style.transform = `translate(${throwX}px, -40px) rotate(${throwRot}deg)`;
   topCard.style.opacity = "0";
 
   setTimeout(() => {
     if (callback) callback();
     isArcAnimating = false;
-  }, 210);
+  }, 160);
 }
 
-window.nextProjectsArcCard = function() {
-  if (isArcAnimating) return;
+window.nextProjectsArcCard = function () {
   animateArcThrow("next", () => {
     currentArcIndex = (currentArcIndex + 1) % totalArcCards;
     updateArcDeckStack();
   });
 };
 
-window.prevProjectsArcCard = function() {
-  if (isArcAnimating) return;
+window.prevProjectsArcCard = function () {
   animateArcThrow("prev", () => {
     currentArcIndex = (currentArcIndex - 1 + totalArcCards) % totalArcCards;
     updateArcDeckStack();
@@ -2300,9 +2300,9 @@ let currentSkillIndex = 0;
 const totalSkillCards = 3;
 let isSkillAnimating = false;
 
-window.switchSkillsCard = function(idx) {
+window.switchSkillsCard = function (idx) {
   if (currentSkillIndex === idx || isSkillAnimating) return;
-  
+
   const cards = document.querySelectorAll(".mobile-tilt-card");
   const activeCard = document.querySelector(".mobile-tilt-card.active");
   const tabs = document.querySelectorAll(".skill-tab-pill");
@@ -2475,27 +2475,27 @@ function updateStrengthsReelStack() {
   }
 }
 
-window.nextStrengthsReel = function() {
+window.nextStrengthsReel = function () {
   if (isReelAnimating) return;
   const activeCard = document.querySelector(".mobile-reel-card.active");
   if (activeCard) {
     isReelAnimating = true;
-    activeCard.style.transition = "transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease";
-    activeCard.style.transform = "translateY(-120%) rotateX(-30deg) scale(0.9)";
+    activeCard.style.transition = "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
+    activeCard.style.transform = "translateY(-100%) scale(0.9)";
     activeCard.style.opacity = "0";
 
     setTimeout(() => {
       currentReelIndex = (currentReelIndex + 1) % totalReelCards;
       updateStrengthsReelStack();
       isReelAnimating = false;
-    }, 200);
+    }, 160);
   } else {
     currentReelIndex = (currentReelIndex + 1) % totalReelCards;
     updateStrengthsReelStack();
   }
 };
 
-window.prevStrengthsReel = function() {
+window.prevStrengthsReel = function () {
   if (isReelAnimating) return;
   const prevIdx = (currentReelIndex - 1 + totalReelCards) % totalReelCards;
   const cards = document.querySelectorAll(".mobile-reel-card");
@@ -2504,22 +2504,22 @@ window.prevStrengthsReel = function() {
   if (prevCard) {
     isReelAnimating = true;
     prevCard.style.transition = "none";
-    prevCard.style.transform = "translateY(-120%) rotateX(-30deg) scale(0.9)";
+    prevCard.style.transform = "translateY(-100%) scale(0.9)";
     prevCard.style.opacity = "0";
     prevCard.classList.remove("hidden-card", "next-card");
     prevCard.style.zIndex = "15";
 
-    void prevCard.offsetHeight; // force reflow
-
-    prevCard.style.transition = "transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease";
-    prevCard.style.transform = "translateY(0px) rotateX(0deg) scale(1)";
-    prevCard.style.opacity = "1";
+    requestAnimationFrame(() => {
+      prevCard.style.transition = "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
+      prevCard.style.transform = "translateY(0px) scale(1)";
+      prevCard.style.opacity = "1";
+    });
 
     setTimeout(() => {
       currentReelIndex = prevIdx;
       updateStrengthsReelStack();
       isReelAnimating = false;
-    }, 200);
+    }, 160);
   } else {
     currentReelIndex = prevIdx;
     updateStrengthsReelStack();
