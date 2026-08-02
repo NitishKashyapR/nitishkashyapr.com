@@ -59,12 +59,14 @@
       }
     }
 
-    let currentScrollY = 0;
+    let targetScrollY = window.scrollY || 0;
+    let currentScrollY = targetScrollY;
     window.addEventListener("scroll", () => {
-      currentScrollY = window.scrollY;
+      targetScrollY = window.scrollY || 0;
     }, { passive: true });
 
     function renderNetwork() {
+      currentScrollY += (targetScrollY - currentScrollY) * 0.1;
       const displayWidth = window.innerWidth;
       const displayHeight = window.innerHeight;
       const yOffset = (currentScrollY * 0.12) % displayHeight;
@@ -165,6 +167,9 @@
       animId = requestAnimationFrame(animate);
     }
 
+    let lastWidth = 0;
+    let lastHeight = 0;
+
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const displayWidth = window.innerWidth;
@@ -175,10 +180,14 @@
       canvas.style.height = displayHeight + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const area = displayWidth * displayHeight;
-      config.particleCount = Math.min(140, Math.max(30, Math.floor(area / 10000)));
-      updateThemeColors();
-      init();
+      if (Math.abs(displayWidth - lastWidth) > 10 || Math.abs(displayHeight - lastHeight) > 150 || particles.length === 0) {
+        lastWidth = displayWidth;
+        lastHeight = displayHeight;
+        const area = displayWidth * displayHeight;
+        config.particleCount = Math.min(140, Math.max(30, Math.floor(area / 10000)));
+        updateThemeColors();
+        init();
+      }
     }
 
     document.addEventListener("mousemove", (e) => {
@@ -1690,7 +1699,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div style="display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
               ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-primary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View Website ${icons.external}</a>` : ''}
-              ${p.pdf ? `<a href="${p.pdf}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View Project ${icons.file}</a>` : ''}
+              ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View Project ${icons.file}</a>` : ''}
               <button onclick="event.stopPropagation(); openProjectModal('${p.id}')" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">
                 Details ${icons.info}
               </button>
@@ -1747,7 +1756,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding-top: 1.25rem; margin-top: 0.75rem; border-top: 1px solid var(--border);">
               ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View Live ${icons.external}</a>` : ''}
-              ${p.pdf ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View the Project ${icons.file}</a>` : ''}
+              ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View the Project ${icons.file}</a>` : ''}
               <button onclick="openProjectModal('${p.id}')" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">
                 Details ${icons.info}
               </button>
@@ -2175,19 +2184,20 @@ function animateArcThrow(direction, callback) {
   }
 
   isArcAnimating = true;
-  topCard.style.transition = "transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
-  const throwX = direction === "next" ? 260 : -260;
+  topCard.style.transition = "transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease";
+  const throwX = direction === "next" ? 280 : -280;
   const throwRot = direction === "next" ? 14 : -14;
-  topCard.style.transform = `translate(${throwX}px, -40px) rotate(${throwRot}deg)`;
+  topCard.style.transform = `translate3d(${throwX}px, -30px, 0px) rotate(${throwRot}deg)`;
   topCard.style.opacity = "0";
 
   setTimeout(() => {
     if (callback) callback();
     isArcAnimating = false;
-  }, 160);
+  }, 220);
 }
 
 window.nextProjectsArcCard = function () {
+  if (isArcAnimating) return;
   animateArcThrow("next", () => {
     currentArcIndex = (currentArcIndex + 1) % totalArcCards;
     updateArcDeckStack();
@@ -2195,6 +2205,7 @@ window.nextProjectsArcCard = function () {
 };
 
 window.prevProjectsArcCard = function () {
+  if (isArcAnimating) return;
   animateArcThrow("prev", () => {
     currentArcIndex = (currentArcIndex - 1 + totalArcCards) % totalArcCards;
     updateArcDeckStack();
@@ -2234,7 +2245,7 @@ function initProjectsArcDeckGesture() {
     const deltaX = pt.clientX - startX;
     const deltaY = pt.clientY - startY;
 
-    if (e.cancelable && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+    if (e.cancelable && Math.abs(deltaX) > 5) {
       e.preventDefault();
     }
 
@@ -2257,16 +2268,16 @@ function initProjectsArcDeckGesture() {
     const topCard = getTopCard();
     if (!topCard) return;
 
-    topCard.style.transition = "transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease";
     const dist = Math.hypot(currentX, currentY);
 
-    if (dist > 65 || currentY < -45 || Math.abs(currentX) > 80) {
+    if (dist > 50 || Math.abs(currentX) > 60) {
       const dir = currentX >= 0 ? "next" : "prev";
-      const throwX = currentX !== 0 ? currentX * 1.4 : 200;
-      const throwY = currentY < 0 ? currentY - 60 : -50;
-      const throwRot = currentX * 0.12 || 15;
+      const throwX = currentX !== 0 ? (currentX > 0 ? 280 : -280) : 280;
+      const throwY = currentY < 0 ? currentY - 30 : 20;
+      const throwRot = currentX * 0.1 || (dir === "next" ? 12 : -12);
 
-      topCard.style.transform = `translate3d(${throwX}px, ${throwY}px, -60px) rotate(${throwRot}deg)`;
+      topCard.style.transition = "transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease";
+      topCard.style.transform = `translate3d(${throwX}px, ${throwY}px, 0px) rotate(${throwRot}deg)`;
       topCard.style.opacity = "0";
 
       isArcAnimating = true;
@@ -2278,8 +2289,9 @@ function initProjectsArcDeckGesture() {
         }
         updateArcDeckStack();
         isArcAnimating = false;
-      }, 190);
+      }, 220);
     } else {
+      topCard.style.transition = "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)";
       topCard.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
     }
 
@@ -2401,7 +2413,7 @@ function initSkillsTiltSwipeGesture() {
       glowRight.classList.remove("active");
     }
 
-    card.style.transition = "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease";
+    card.style.transition = "transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease";
 
     if (Math.abs(currentX) > 70) {
       const dir = currentX > 0 ? 1 : -1;
@@ -2423,7 +2435,7 @@ function initSkillsTiltSwipeGesture() {
         });
         tabs.forEach((tab, i) => tab.classList.toggle("active", i === nextIdx));
         isSkillAnimating = false;
-      }, 190);
+      }, 220);
     } else {
       card.style.transform = "translate3d(0,0,0) rotate(0deg)";
     }
