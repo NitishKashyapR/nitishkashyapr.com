@@ -2138,6 +2138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // --- ENGINE 1: FEATURED PROJECTS (3D Orbital Arc Deck) ---
 let currentArcIndex = 0;
 const totalArcCards = 4;
+let isArcAnimating = false;
 
 function updateArcDeckStack() {
   const cards = document.querySelectorAll(".mobile-arc-card");
@@ -2149,6 +2150,7 @@ function updateArcDeckStack() {
     card.setAttribute("data-depth", depth);
     card.style.transform = "";
     card.style.opacity = "";
+    card.style.transition = "";
   });
 
   if (counter) {
@@ -2159,14 +2161,44 @@ function updateArcDeckStack() {
   }
 }
 
+function animateArcThrow(direction, callback) {
+  if (isArcAnimating) return;
+  const deck = document.getElementById("projectsArcDeck");
+  if (!deck) return;
+  const topCard = deck.querySelector('.mobile-arc-card[data-depth="0"]');
+
+  if (!topCard) {
+    if (callback) callback();
+    return;
+  }
+
+  isArcAnimating = true;
+  topCard.style.transition = "transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease";
+  const throwX = direction === "next" ? 220 : -220;
+  const throwRot = direction === "next" ? 18 : -18;
+  topCard.style.transform = `translate3d(${throwX}px, -70px, -60px) rotate(${throwRot}deg)`;
+  topCard.style.opacity = "0";
+
+  setTimeout(() => {
+    if (callback) callback();
+    isArcAnimating = false;
+  }, 210);
+}
+
 window.nextProjectsArcCard = function() {
-  currentArcIndex = (currentArcIndex + 1) % totalArcCards;
-  updateArcDeckStack();
+  if (isArcAnimating) return;
+  animateArcThrow("next", () => {
+    currentArcIndex = (currentArcIndex + 1) % totalArcCards;
+    updateArcDeckStack();
+  });
 };
 
 window.prevProjectsArcCard = function() {
-  currentArcIndex = (currentArcIndex - 1 + totalArcCards) % totalArcCards;
-  updateArcDeckStack();
+  if (isArcAnimating) return;
+  animateArcThrow("prev", () => {
+    currentArcIndex = (currentArcIndex - 1 + totalArcCards) % totalArcCards;
+    updateArcDeckStack();
+  });
 };
 
 function initProjectsArcDeckGesture() {
@@ -2175,16 +2207,21 @@ function initProjectsArcDeckGesture() {
 
   let startX = 0, startY = 0, currentX = 0, currentY = 0;
   let isDragging = false;
+  let animFrameId = null;
 
   const getTopCard = () => deck.querySelector('.mobile-arc-card[data-depth="0"]');
 
   const onStart = (e) => {
+    if (isArcAnimating) return;
     const topCard = getTopCard();
     if (!topCard) return;
+
     isDragging = true;
     const pt = e.touches ? e.touches[0] : e;
     startX = pt.clientX;
     startY = pt.clientY;
+    currentX = 0;
+    currentY = 0;
     topCard.style.transition = "none";
   };
 
@@ -2194,30 +2231,54 @@ function initProjectsArcDeckGesture() {
     if (!topCard) return;
 
     const pt = e.touches ? e.touches[0] : e;
-    currentX = pt.clientX - startX;
-    currentY = pt.clientY - startY;
+    const deltaX = pt.clientX - startX;
+    const deltaY = pt.clientY - startY;
 
-    const rot = currentX * 0.08;
-    topCard.style.transform = `translate3d(${currentX}px, ${currentY}px, 0px) rotate(${rot}deg)`;
+    if (e.cancelable && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+      e.preventDefault();
+    }
+
+    currentX = deltaX;
+    currentY = deltaY;
+
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    animFrameId = requestAnimationFrame(() => {
+      if (!isDragging) return;
+      const rot = currentX * 0.07;
+      topCard.style.transform = `translate3d(${currentX}px, ${currentY}px, 0px) rotate(${rot}deg)`;
+    });
   };
 
   const onEnd = () => {
     if (!isDragging) return;
     isDragging = false;
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+
     const topCard = getTopCard();
     if (!topCard) return;
 
-    topCard.style.transition = "transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.45s ease";
-
+    topCard.style.transition = "transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease";
     const dist = Math.hypot(currentX, currentY);
-    if (dist > 70 || currentY < -50) {
-      topCard.style.transform = `translate3d(${currentX * 1.4}px, ${currentY - 90}px, -80px) rotate(${currentX * 0.12}deg)`;
+
+    if (dist > 65 || currentY < -45 || Math.abs(currentX) > 80) {
+      const dir = currentX >= 0 ? "next" : "prev";
+      const throwX = currentX !== 0 ? currentX * 1.4 : 200;
+      const throwY = currentY < 0 ? currentY - 60 : -50;
+      const throwRot = currentX * 0.12 || 15;
+
+      topCard.style.transform = `translate3d(${throwX}px, ${throwY}px, -60px) rotate(${throwRot}deg)`;
       topCard.style.opacity = "0";
 
+      isArcAnimating = true;
       setTimeout(() => {
-        currentArcIndex = (currentArcIndex + 1) % totalArcCards;
+        if (dir === "next") {
+          currentArcIndex = (currentArcIndex + 1) % totalArcCards;
+        } else {
+          currentArcIndex = (currentArcIndex - 1 + totalArcCards) % totalArcCards;
+        }
         updateArcDeckStack();
-      }, 220);
+        isArcAnimating = false;
+      }, 190);
     } else {
       topCard.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
     }
@@ -2226,7 +2287,7 @@ function initProjectsArcDeckGesture() {
   };
 
   deck.addEventListener("touchstart", onStart, { passive: true });
-  deck.addEventListener("touchmove", onMove, { passive: true });
+  deck.addEventListener("touchmove", onMove, { passive: false });
   deck.addEventListener("touchend", onEnd);
 
   deck.addEventListener("mousedown", onStart);
@@ -2237,38 +2298,65 @@ function initProjectsArcDeckGesture() {
 // --- ENGINE 2: SKILLS & EXPERTISE (Tinder Velocity Tilt-Swipe) ---
 let currentSkillIndex = 0;
 const totalSkillCards = 3;
+let isSkillAnimating = false;
 
 window.switchSkillsCard = function(idx) {
-  currentSkillIndex = idx;
+  if (currentSkillIndex === idx || isSkillAnimating) return;
+  
   const cards = document.querySelectorAll(".mobile-tilt-card");
+  const activeCard = document.querySelector(".mobile-tilt-card.active");
   const tabs = document.querySelectorAll(".skill-tab-pill");
 
-  cards.forEach((card, i) => {
-    card.classList.toggle("active", i === idx);
-    card.style.transform = "";
-    card.style.opacity = "";
-  });
+  if (activeCard) {
+    isSkillAnimating = true;
+    const dir = idx > currentSkillIndex ? 1 : -1;
+    activeCard.style.transition = "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease";
+    activeCard.style.transform = `translate3d(${dir * -300}px, 0, 0) rotate(${dir * -20}deg)`;
+    activeCard.style.opacity = "0";
 
-  tabs.forEach((tab, i) => {
-    tab.classList.toggle("active", i === idx);
-  });
+    setTimeout(() => {
+      currentSkillIndex = idx;
+      cards.forEach((card, i) => {
+        card.classList.toggle("active", i === idx);
+        card.style.transform = "";
+        card.style.opacity = "";
+        card.style.transition = "";
+      });
+      tabs.forEach((tab, i) => tab.classList.toggle("active", i === idx));
+      isSkillAnimating = false;
+    }, 200);
+  } else {
+    currentSkillIndex = idx;
+    cards.forEach((card, i) => {
+      card.classList.toggle("active", i === idx);
+      card.style.transform = "";
+      card.style.opacity = "";
+    });
+    tabs.forEach((tab, i) => tab.classList.toggle("active", i === idx));
+  }
 };
 
 function initSkillsTiltSwipeGesture() {
   const deck = document.getElementById("skillsTiltDeck");
   if (!deck) return;
 
-  let startX = 0, currentX = 0, isDragging = false;
+  let startX = 0, startY = 0, currentX = 0, isDragging = false;
+  let animFrameId = null;
   const glowLeft = document.getElementById("skillsGlowLeft");
   const glowRight = document.getElementById("skillsGlowRight");
 
   const getActiveCard = () => deck.querySelector(".mobile-tilt-card.active");
 
   const onStart = (e) => {
+    if (isSkillAnimating) return;
     const card = getActiveCard();
     if (!card) return;
+
     isDragging = true;
-    startX = (e.touches ? e.touches[0] : e).clientX;
+    const pt = e.touches ? e.touches[0] : e;
+    startX = pt.clientX;
+    startY = pt.clientY;
+    currentX = 0;
     card.style.transition = "none";
   };
 
@@ -2277,20 +2365,34 @@ function initSkillsTiltSwipeGesture() {
     const card = getActiveCard();
     if (!card) return;
 
-    currentX = (e.touches ? e.touches[0] : e).clientX - startX;
-    const rot = currentX * 0.08;
+    const pt = e.touches ? e.touches[0] : e;
+    const deltaX = pt.clientX - startX;
+    const deltaY = pt.clientY - startY;
 
-    card.style.transform = `translate3d(${currentX}px, 0, 0) rotate(${rot}deg)`;
-
-    if (glowLeft && glowRight) {
-      glowLeft.classList.toggle("active", currentX < -30);
-      glowRight.classList.toggle("active", currentX > 30);
+    if (e.cancelable && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+      e.preventDefault();
     }
+
+    currentX = deltaX;
+
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    animFrameId = requestAnimationFrame(() => {
+      if (!isDragging) return;
+      const rot = currentX * 0.08;
+      card.style.transform = `translate3d(${currentX}px, 0, 0) rotate(${rot}deg)`;
+
+      if (glowLeft && glowRight) {
+        glowLeft.classList.toggle("active", currentX < -25);
+        glowRight.classList.toggle("active", currentX > 25);
+      }
+    });
   };
 
   const onEnd = () => {
     if (!isDragging) return;
     isDragging = false;
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+
     const card = getActiveCard();
     if (!card) return;
 
@@ -2299,26 +2401,38 @@ function initSkillsTiltSwipeGesture() {
       glowRight.classList.remove("active");
     }
 
-    card.style.transition = "transform 0.35s ease, opacity 0.3s ease";
+    card.style.transition = "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease";
 
-    if (Math.abs(currentX) > 75) {
+    if (Math.abs(currentX) > 70) {
       const dir = currentX > 0 ? 1 : -1;
-      card.style.transform = `translate3d(${dir * 350}px, 0, 0) rotate(${dir * 25}deg)`;
+      card.style.transform = `translate3d(${dir * 360}px, 0, 0) rotate(${dir * 25}deg)`;
       card.style.opacity = "0";
 
+      isSkillAnimating = true;
       setTimeout(() => {
         const nextIdx = (currentSkillIndex + (dir < 0 ? 1 : -1) + totalSkillCards) % totalSkillCards;
-        switchSkillsCard(nextIdx);
-      }, 200);
+        currentSkillIndex = nextIdx;
+
+        const cards = document.querySelectorAll(".mobile-tilt-card");
+        const tabs = document.querySelectorAll(".skill-tab-pill");
+        cards.forEach((c, i) => {
+          c.classList.toggle("active", i === nextIdx);
+          c.style.transform = "";
+          c.style.opacity = "";
+          c.style.transition = "";
+        });
+        tabs.forEach((tab, i) => tab.classList.toggle("active", i === nextIdx));
+        isSkillAnimating = false;
+      }, 190);
     } else {
       card.style.transform = "translate3d(0,0,0) rotate(0deg)";
     }
 
-    startX = currentX = 0;
+    startX = startY = currentX = 0;
   };
 
   deck.addEventListener("touchstart", onStart, { passive: true });
-  deck.addEventListener("touchmove", onMove, { passive: true });
+  deck.addEventListener("touchmove", onMove, { passive: false });
   deck.addEventListener("touchend", onEnd);
 
   deck.addEventListener("mousedown", onStart);
@@ -2329,6 +2443,7 @@ function initSkillsTiltSwipeGesture() {
 // --- ENGINE 3: KEY STRENGTHS (Vertical Rolodex Reel) ---
 let currentReelIndex = 0;
 const totalReelCards = 6;
+let isReelAnimating = false;
 
 function updateStrengthsReelStack() {
   const cards = document.querySelectorAll(".mobile-reel-card");
@@ -2338,6 +2453,8 @@ function updateStrengthsReelStack() {
 
   cards.forEach((card, idx) => {
     card.classList.remove("active", "prev-card", "next-card", "hidden-card");
+    card.style.transform = "";
+    card.style.opacity = "";
 
     if (idx === currentReelIndex) {
       card.classList.add("active");
@@ -2359,46 +2476,136 @@ function updateStrengthsReelStack() {
 }
 
 window.nextStrengthsReel = function() {
-  currentReelIndex = (currentReelIndex + 1) % totalReelCards;
-  updateStrengthsReelStack();
+  if (isReelAnimating) return;
+  const activeCard = document.querySelector(".mobile-reel-card.active");
+  if (activeCard) {
+    isReelAnimating = true;
+    activeCard.style.transition = "transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease";
+    activeCard.style.transform = "translateY(-120%) rotateX(-30deg) scale(0.9)";
+    activeCard.style.opacity = "0";
+
+    setTimeout(() => {
+      currentReelIndex = (currentReelIndex + 1) % totalReelCards;
+      updateStrengthsReelStack();
+      isReelAnimating = false;
+    }, 200);
+  } else {
+    currentReelIndex = (currentReelIndex + 1) % totalReelCards;
+    updateStrengthsReelStack();
+  }
 };
 
 window.prevStrengthsReel = function() {
-  currentReelIndex = (currentReelIndex - 1 + totalReelCards) % totalReelCards;
-  updateStrengthsReelStack();
+  if (isReelAnimating) return;
+  const prevIdx = (currentReelIndex - 1 + totalReelCards) % totalReelCards;
+  const cards = document.querySelectorAll(".mobile-reel-card");
+  const prevCard = cards[prevIdx];
+
+  if (prevCard) {
+    isReelAnimating = true;
+    prevCard.style.transition = "none";
+    prevCard.style.transform = "translateY(-120%) rotateX(-30deg) scale(0.9)";
+    prevCard.style.opacity = "0";
+    prevCard.classList.remove("hidden-card", "next-card");
+    prevCard.style.zIndex = "15";
+
+    void prevCard.offsetHeight; // force reflow
+
+    prevCard.style.transition = "transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease";
+    prevCard.style.transform = "translateY(0px) rotateX(0deg) scale(1)";
+    prevCard.style.opacity = "1";
+
+    setTimeout(() => {
+      currentReelIndex = prevIdx;
+      updateStrengthsReelStack();
+      isReelAnimating = false;
+    }, 200);
+  } else {
+    currentReelIndex = prevIdx;
+    updateStrengthsReelStack();
+  }
 };
 
 function initStrengthsRolodexGesture() {
   const deck = document.getElementById("strengthsRolodexDeck");
   if (!deck) return;
 
-  let startY = 0, currentY = 0, isDragging = false;
+  let startX = 0, startY = 0, currentY = 0, isDragging = false;
+  let animFrameId = null;
 
   const onStart = (e) => {
+    if (isReelAnimating) return;
     isDragging = true;
-    startY = (e.touches ? e.touches[0] : e).clientY;
+    const pt = e.touches ? e.touches[0] : e;
+    startX = pt.clientX;
+    startY = pt.clientY;
+    currentY = 0;
   };
 
   const onMove = (e) => {
     if (!isDragging) return;
-    currentY = (e.touches ? e.touches[0] : e).clientY - startY;
+    const pt = e.touches ? e.touches[0] : e;
+    const deltaX = pt.clientX - startX;
+    const deltaY = pt.clientY - startY;
+
+    if (e.cancelable && Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 10) {
+      e.preventDefault();
+    }
+
+    currentY = deltaY;
+
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    animFrameId = requestAnimationFrame(() => {
+      if (!isDragging) return;
+      const activeCard = deck.querySelector(".mobile-reel-card.active");
+      if (activeCard) {
+        activeCard.style.transition = "none";
+        const rot = (currentY / 200) * -20;
+        activeCard.style.transform = `translate3d(0, ${currentY}px, 0) rotateX(${rot}deg)`;
+      }
+    });
   };
 
   const onEnd = () => {
     if (!isDragging) return;
     isDragging = false;
+    if (animFrameId) cancelAnimationFrame(animFrameId);
 
-    if (currentY < -40) {
-      nextStrengthsReel();
-    } else if (currentY > 40) {
+    const activeCard = deck.querySelector(".mobile-reel-card.active");
+
+    if (currentY < -45) {
+      if (activeCard) {
+        activeCard.style.transition = "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease";
+        activeCard.style.transform = "translateY(-120%) rotateX(-30deg) scale(0.9)";
+        activeCard.style.opacity = "0";
+
+        isReelAnimating = true;
+        setTimeout(() => {
+          currentReelIndex = (currentReelIndex + 1) % totalReelCards;
+          updateStrengthsReelStack();
+          isReelAnimating = false;
+        }, 190);
+      } else {
+        nextStrengthsReel();
+      }
+    } else if (currentY > 45) {
+      if (activeCard) {
+        activeCard.style.transition = "transform 0.35s ease";
+        activeCard.style.transform = "translateY(0px) rotateX(0deg)";
+      }
       prevStrengthsReel();
+    } else {
+      if (activeCard) {
+        activeCard.style.transition = "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)";
+        activeCard.style.transform = "translateY(0px) rotateX(0deg) scale(1)";
+      }
     }
 
-    startY = currentY = 0;
+    startX = startY = currentY = 0;
   };
 
   deck.addEventListener("touchstart", onStart, { passive: true });
-  deck.addEventListener("touchmove", onMove, { passive: true });
+  deck.addEventListener("touchmove", onMove, { passive: false });
   deck.addEventListener("touchend", onEnd);
 
   deck.addEventListener("mousedown", onStart);
