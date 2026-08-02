@@ -1635,6 +1635,8 @@ section,
     backdrop-filter: none;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    contain: layout style;
     opacity: 1 !important;
   }
 

@@ -2151,15 +2151,28 @@ let isArcAnimating = false;
 
 function updateArcDeckStack() {
   const cards = document.querySelectorAll(".mobile-arc-card");
+  const deck = document.getElementById("projectsArcDeck");
   const counter = document.getElementById("projectsArcCounter");
   if (!cards.length) return;
+
+  // Suppress CSS transitions temporarily so depth re-ordering doesn't fly back across screen
+  cards.forEach((card) => {
+    card.style.transition = "none";
+  });
 
   cards.forEach((card, idx) => {
     let depth = (idx - currentArcIndex + totalArcCards) % totalArcCards;
     card.setAttribute("data-depth", depth);
     card.style.transform = "";
     card.style.opacity = "";
-    card.style.transition = "";
+  });
+
+  if (deck) void deck.offsetHeight; // Force layout reflow before restoring transitions
+
+  requestAnimationFrame(() => {
+    cards.forEach((card) => {
+      card.style.transition = "";
+    });
   });
 
   if (counter) {
@@ -2191,8 +2204,11 @@ function animateArcThrow(direction, callback) {
   topCard.style.opacity = "0";
 
   setTimeout(() => {
+    topCard.style.transition = "none";
     if (callback) callback();
-    isArcAnimating = false;
+    requestAnimationFrame(() => {
+      isArcAnimating = false;
+    });
   }, 220);
 }
 
@@ -2282,13 +2298,16 @@ function initProjectsArcDeckGesture() {
 
       isArcAnimating = true;
       setTimeout(() => {
+        topCard.style.transition = "none";
         if (dir === "next") {
           currentArcIndex = (currentArcIndex + 1) % totalArcCards;
         } else {
           currentArcIndex = (currentArcIndex - 1 + totalArcCards) % totalArcCards;
         }
         updateArcDeckStack();
-        isArcAnimating = false;
+        requestAnimationFrame(() => {
+          isArcAnimating = false;
+        });
       }, 220);
     } else {
       topCard.style.transition = "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)";
