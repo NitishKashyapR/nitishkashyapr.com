@@ -2317,9 +2317,22 @@ function initProjectsArcDeckGesture() {
     startX = startY = currentX = currentY = 0;
   };
 
+  const onCancel = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    const topCard = getTopCard();
+    if (!topCard) return;
+    topCard.style.transition = "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)";
+    topCard.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
+    startX = startY = currentX = currentY = 0;
+  };
+
   deck.addEventListener("touchstart", onStart, { passive: true });
   deck.addEventListener("touchmove", onMove, { passive: false });
   deck.addEventListener("touchend", onEnd);
+  deck.addEventListener("touchcancel", onCancel);
+  deck.addEventListener("pointercancel", onCancel);
 
   deck.addEventListener("mousedown", onStart);
   window.addEventListener("mousemove", onMove);
@@ -2346,11 +2359,15 @@ window.switchSkillsCard = function (idx) {
     activeCard.style.opacity = "0";
 
     setTimeout(() => {
+      const outgoing = cards[currentSkillIndex];
       currentSkillIndex = idx;
       cards.forEach((card, i) => {
         card.classList.toggle("active", i === idx);
+        if (card === outgoing) card.style.transition = "none";
         card.style.transform = "";
         card.style.opacity = "";
+      });
+      cards.forEach((card) => {
         card.style.transition = "";
       });
       tabs.forEach((tab, i) => tab.classList.toggle("active", i === idx));
@@ -2448,8 +2465,11 @@ function initSkillsTiltSwipeGesture() {
         const tabs = document.querySelectorAll(".skill-tab-pill");
         cards.forEach((c, i) => {
           c.classList.toggle("active", i === nextIdx);
+          if (c === card) c.style.transition = "none";
           c.style.transform = "";
           c.style.opacity = "";
+        });
+        cards.forEach((c) => {
           c.style.transition = "";
         });
         tabs.forEach((tab, i) => tab.classList.toggle("active", i === nextIdx));
@@ -2462,9 +2482,26 @@ function initSkillsTiltSwipeGesture() {
     startX = startY = currentX = 0;
   };
 
+  const onCancel = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    const card = getActiveCard();
+    if (!card) return;
+    if (glowLeft && glowRight) {
+      glowLeft.classList.remove("active");
+      glowRight.classList.remove("active");
+    }
+    card.style.transition = "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)";
+    card.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
+    startX = startY = currentX = 0;
+  };
+
   deck.addEventListener("touchstart", onStart, { passive: true });
   deck.addEventListener("touchmove", onMove, { passive: false });
   deck.addEventListener("touchend", onEnd);
+  deck.addEventListener("touchcancel", onCancel);
+  deck.addEventListener("pointercancel", onCancel);
 
   deck.addEventListener("mousedown", onStart);
   window.addEventListener("mousemove", onMove);
@@ -2516,8 +2553,12 @@ window.nextStrengthsReel = function () {
     activeCard.style.opacity = "0";
 
     setTimeout(() => {
+      activeCard.style.transition = "none";
       currentReelIndex = (currentReelIndex + 1) % totalReelCards;
       updateStrengthsReelStack();
+      requestAnimationFrame(() => {
+        activeCard.style.transition = "";
+      });
       isReelAnimating = false;
     }, 160);
   } else {
@@ -2547,10 +2588,15 @@ window.prevStrengthsReel = function () {
     });
 
     setTimeout(() => {
+      prevCard.style.transition = "none";
+      prevCard.style.zIndex = "";
       currentReelIndex = prevIdx;
       updateStrengthsReelStack();
+      requestAnimationFrame(() => {
+        prevCard.style.transition = "";
+      });
       isReelAnimating = false;
-    }, 160);
+    }, 200);
   } else {
     currentReelIndex = prevIdx;
     updateStrengthsReelStack();
@@ -2612,8 +2658,12 @@ function initStrengthsRolodexGesture() {
 
         isReelAnimating = true;
         setTimeout(() => {
+          activeCard.style.transition = "none";
           currentReelIndex = (currentReelIndex + 1) % totalReelCards;
           updateStrengthsReelStack();
+          requestAnimationFrame(() => {
+            activeCard.style.transition = "";
+          });
           isReelAnimating = false;
         }, 190);
       } else {
@@ -2635,9 +2685,23 @@ function initStrengthsRolodexGesture() {
     startX = startY = currentY = 0;
   };
 
+  const onCancel = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    const activeCard = deck.querySelector(".mobile-reel-card.active");
+    if (activeCard) {
+      activeCard.style.transition = "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)";
+      activeCard.style.transform = "translateY(0px) rotateX(0deg) scale(1)";
+    }
+    startX = startY = currentY = 0;
+  };
+
   deck.addEventListener("touchstart", onStart, { passive: true });
   deck.addEventListener("touchmove", onMove, { passive: false });
   deck.addEventListener("touchend", onEnd);
+  deck.addEventListener("touchcancel", onCancel);
+  deck.addEventListener("pointercancel", onCancel);
 
   deck.addEventListener("mousedown", onStart);
   window.addEventListener("mousemove", onMove);

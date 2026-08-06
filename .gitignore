@@ -1,8 +1,24 @@
+# Local-Only Documents (per-job personalization; never deploy)
+cover-letter.html
+cover-letter.pdf
+
 # AI Agent Internal Configuration & Memory Files (DO NOT COMMIT)
 .agents/
+.opencode/
 PROJECT_MEMORY.md
 .gemini/
 .antigravity/
+.claude/
+.cursor/
+.codex/
+.windsurf/
+.cline/
+.roo/
+.continue/
+.cursorrules
+.windsurfrules
+AGENTS.override.md
+.github/copilot-instructions.md
 
 # Operating System Files
 .DS_Store
