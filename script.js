@@ -11,6 +11,19 @@
     let particles = [];
     let mouse = { x: null, y: null, radius: 220 };
     let animId = null;
+    let lastFrameAt = 0;
+    let frameInterval = 16;
+
+    const reduceParticles = () => {
+      const w = window.innerWidth;
+      const maxP = w < 480 ? 32 : w < 768 ? 48 : 140;
+      const fps = w < 768 ? 30 : 60;
+      frameInterval = 1000 / fps;
+      const area = w * Math.min(window.innerHeight, 900);
+      config.particleCount = Math.min(maxP, Math.max(20, Math.floor(area / (w < 768 ? 15000 : 10000))));
+      // Shorter connection distance on mobile = far fewer distance/lines computed per frame
+      config.lineLength = w < 768 ? 95 : 145;
+    };
 
     const config = {
       particleCount: 140,
@@ -23,17 +36,25 @@
       polyColor: "rgba(167, 139, 250, 0.04)"
     };
 
+    const THEME_PARTICLE_PALETTES = {
+      dark:    { dot: "rgba(165, 180, 252, 0.9)",  line: "rgba(129, 140, 248, 0.32)",  poly: "rgba(167, 139, 250, 0.05)" },
+      ocean:   { dot: "rgba(125, 211, 252, 0.9)",  line: "rgba(56, 189, 248, 0.32)",   poly: "rgba(129, 140, 248, 0.05)" },
+      emerald: { dot: "rgba(167, 243, 208, 0.9)",  line: "rgba(52, 211, 153, 0.32)",   poly: "rgba(16, 185, 129, 0.05)" },
+      forge:   { dot: "rgba(221, 214, 254, 0.9)",  line: "rgba(167, 139, 250, 0.32)",  poly: "rgba(244, 114, 182, 0.05)" },
+      slate:   { dot: "rgba(226, 232, 240, 0.85)", line: "rgba(148, 163, 184, 0.28)",  poly: "rgba(148, 163, 184, 0.04)" },
+      light:   { dot: "rgba(15, 23, 42, 0.75)",    line: "rgba(99, 102, 241, 0.22)",   poly: "rgba(99, 102, 241, 0.03)" },
+      sunrise: { dot: "rgba(120, 72, 20, 0.7)",    line: "rgba(249, 115, 22, 0.22)",   poly: "rgba(234, 179, 8, 0.04)" },
+      bloom:   { dot: "rgba(150, 40, 90, 0.7)",    line: "rgba(236, 72, 153, 0.22)",   poly: "rgba(168, 85, 247, 0.04)" },
+      breeze:  { dot: "rgba(15, 60, 100, 0.7)",    line: "rgba(14, 165, 233, 0.22)",   poly: "rgba(99, 102, 241, 0.03)" },
+      meadow:  { dot: "rgba(30, 100, 50, 0.7)",    line: "rgba(22, 163, 74, 0.22)",    poly: "rgba(13, 148, 136, 0.04)" }
+    };
+
     function updateThemeColors() {
       const theme = document.documentElement.getAttribute("data-theme") || "dark";
-      if (theme === "dark") {
-        config.dotColor = "rgba(165, 180, 252, 0.85)";
-        config.lineColor = "rgba(129, 140, 248, 0.28)";
-        config.polyColor = "rgba(167, 139, 250, 0.04)";
-      } else {
-        config.dotColor = "rgba(15, 23, 42, 0.75)";
-        config.lineColor = "rgba(99, 102, 241, 0.22)";
-        config.polyColor = "rgba(99, 102, 241, 0.03)";
-      }
+      const palette = THEME_PARTICLE_PALETTES[theme] || THEME_PARTICLE_PALETTES.dark;
+      config.dotColor = palette.dot;
+      config.lineColor = palette.line;
+      config.polyColor = palette.poly;
     }
 
     class Particle {
@@ -159,7 +180,18 @@
       }
     }
 
-    function animate() {
+    function animate(now) {
+      if (document.hidden) {
+        // Skip rendering entirely while the tab is not visible
+        animId = requestAnimationFrame(animate);
+        return;
+      }
+      if (now - lastFrameAt < frameInterval) {
+        // Throttle to ~30fps on mobile so the main thread stays free for card animations
+        animId = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameAt = now;
       const displayWidth = window.innerWidth;
       const displayHeight = window.innerHeight;
       ctx.clearRect(0, 0, displayWidth, displayHeight);
@@ -171,7 +203,8 @@
     let lastHeight = 0;
 
     function resize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const isMobile = window.innerWidth < 768;
+      const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
       const displayWidth = window.innerWidth;
       const displayHeight = window.innerHeight;
       canvas.width = displayWidth * dpr;
@@ -183,8 +216,7 @@
       if (Math.abs(displayWidth - lastWidth) > 10 || Math.abs(displayHeight - lastHeight) > 150 || particles.length === 0) {
         lastWidth = displayWidth;
         lastHeight = displayHeight;
-        const area = displayWidth * displayHeight;
-        config.particleCount = Math.min(140, Math.max(30, Math.floor(area / 10000)));
+        reduceParticles();
         updateThemeColors();
         init();
       }
@@ -206,7 +238,8 @@
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
     resize();
-    animate();
+    lastFrameAt = performance.now();
+    animate(lastFrameAt);
   };
 
   if (document.readyState === "loading") {
@@ -216,37 +249,69 @@
   }
 })();
 
+// Alternating dark/light order so every click flips brightness and the
+// change is unmistakable: dark → light → ocean → sunrise → emerald → bloom
+// → forge → breeze → slate → meadow → (back to dark)
+const THEME_ORDER = ["dark", "light", "ocean", "sunrise", "emerald", "bloom", "forge", "breeze", "slate", "meadow"];
+const THEME_LABELS = {
+  dark: "Dark (Indigo)",
+  ocean: "Ocean (Navy)",
+  emerald: "Emerald (Forest)",
+  forge: "Forge (Violet)",
+  slate: "Slate (Graphite)",
+  light: "Light (Paper)",
+  sunrise: "Sunrise (Amber)",
+  bloom: "Bloom (Pink)",
+  breeze: "Breeze (Ice Blue)",
+  meadow: "Meadow (Green)"
+};
+
 function initThemeToggle() {
   const toggleBtn = document.getElementById("themeToggleBtn");
   if (!toggleBtn) return;
 
-  const sunIcon = toggleBtn.querySelector(".theme-icon-sun");
-  const moonIcon = toggleBtn.querySelector(".theme-icon-moon");
-
-  function updateIcon(theme) {
-    if (theme === "dark") {
-      if (sunIcon) sunIcon.style.display = "block";
-      if (moonIcon) moonIcon.style.display = "none";
-      toggleBtn.setAttribute("aria-label", "Switch to Light Theme");
-      toggleBtn.setAttribute("title", "Switch to Light Theme");
-    } else {
-      if (sunIcon) sunIcon.style.display = "none";
-      if (moonIcon) moonIcon.style.display = "block";
-      toggleBtn.setAttribute("aria-label", "Switch to Dark Theme");
-      toggleBtn.setAttribute("title", "Switch to Dark Theme");
-    }
-  }
-
-  const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
-  updateIcon(currentTheme);
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  const currentIndex = THEME_ORDER.indexOf(current);
+  const activeIndex = currentIndex === -1 ? 0 : currentIndex;
+  const nextName = THEME_LABELS[THEME_ORDER[(activeIndex + 1) % THEME_ORDER.length]];
+  toggleBtn.setAttribute("aria-label", `Switch theme — next: ${nextName}`);
+  toggleBtn.setAttribute("title", `Theme: ${THEME_LABELS[current] || current} — click to switch`);
 
   toggleBtn.addEventListener("click", () => {
     const active = document.documentElement.getAttribute("data-theme") || "dark";
-    const next = active === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
+    const idx = THEME_ORDER.indexOf(active);
+    const next = THEME_ORDER[(idx === -1 ? 0 : idx + 1) % THEME_ORDER.length];
+    const html = document.documentElement;
+    html.classList.add("theme-transition");
+    html.setAttribute("data-theme", next);
     localStorage.setItem("theme", next);
-    updateIcon(next);
+    setTimeout(() => html.classList.remove("theme-transition"), 450);
+    const nextNext = THEME_ORDER[(THEME_ORDER.indexOf(next) + 1) % THEME_ORDER.length];
+    toggleBtn.setAttribute("aria-label", `Switch theme — next: ${THEME_LABELS[nextNext]}`);
+    toggleBtn.setAttribute("title", `Theme: ${THEME_LABELS[next]} — click to switch`);
+    showThemeCelebration(next);
   });
+}
+
+function showThemeCelebration(theme) {
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const wave = document.getElementById("themeWave");
+  const badge = document.getElementById("themeBadge");
+  if (!wave || !badge) return;
+  const toggleBtn = document.getElementById("themeToggleBtn");
+  if (toggleBtn) {
+    const rect = toggleBtn.getBoundingClientRect();
+    wave.style.setProperty("--wave-x", `${rect.left + rect.width / 2}px`);
+    wave.style.setProperty("--wave-y", `${rect.top + rect.height / 2}px`);
+  }
+  wave.classList.remove("anim");
+  badge.classList.remove("anim");
+  const badgeName = document.getElementById("themeBadgeName");
+  if (badgeName) badgeName.textContent = THEME_LABELS[theme] || theme;
+  void wave.offsetWidth;
+  wave.classList.add("anim");
+  void badge.offsetWidth;
+  badge.classList.add("anim");
 }
 
 // SVG Vector Icon Definitions for Professional UI
@@ -1076,15 +1141,22 @@ document.addEventListener("DOMContentLoaded", () => {
   if (toggleBtn && mobileOverlay) {
     toggleBtn.addEventListener("click", () => {
       const isActive = mobileOverlay.classList.toggle("active");
-      toggleBtn.setAttribute("aria-expanded", isActive);
+      toggleBtn.classList.toggle("open", isActive);
+      toggleBtn.setAttribute("aria-expanded", String(isActive));
     });
   }
+
+  const closeMobileMenu = () => {
+    mobileOverlay.classList.remove("active");
+    toggleBtn.classList.remove("open");
+    toggleBtn.setAttribute("aria-expanded", "false");
+  };
 
   window.scrollToSection = (id) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
-      if (mobileOverlay) mobileOverlay.classList.remove("active");
+      closeMobileMenu();
     }
   };
 
@@ -2132,7 +2204,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (typeof closeModal === "function") closeModal();
       if (typeof closeCertificationsFullView === "function") closeCertificationsFullView();
       if (typeof closeProjectsFullView === "function") closeProjectsFullView();
-      if (mobileOverlay) mobileOverlay.classList.remove("active");
+      if (mobileOverlay) {
+        mobileOverlay.classList.remove("active");
+        if (toggleBtn) toggleBtn.classList.remove("open");
+      }
     }
   });
 });
@@ -2155,6 +2230,12 @@ function updateArcDeckStack() {
   const counter = document.getElementById("projectsArcCounter");
   if (!cards.length) return;
 
+  // Flush any in-flight depth-zero animation before re-ordering so rapid clicks
+  // never leave the incoming card stuck mid-transform
+  cards.forEach((card) => {
+    card.getAnimations && card.getAnimations().forEach((a) => a.cancel());
+  });
+
   // Suppress CSS transitions temporarily so depth re-ordering doesn't fly back across screen
   cards.forEach((card) => {
     card.style.transition = "none";
@@ -2163,8 +2244,8 @@ function updateArcDeckStack() {
   cards.forEach((card, idx) => {
     let depth = (idx - currentArcIndex + totalArcCards) % totalArcCards;
     card.setAttribute("data-depth", depth);
-    card.style.transform = "";
-    card.style.opacity = "";
+    card.style.removeProperty("transform");
+    card.style.removeProperty("opacity");
   });
 
   if (deck) void deck.offsetHeight; // Force layout reflow before restoring transitions
@@ -2197,35 +2278,70 @@ function animateArcThrow(direction, callback) {
   }
 
   isArcAnimating = true;
-  topCard.style.transition = "transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease";
+  topCard.style.transition = "transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.16s ease";
   const throwX = direction === "next" ? 280 : -280;
   const throwRot = direction === "next" ? 14 : -14;
   topCard.style.transform = `translate3d(${throwX}px, -30px, 0px) rotate(${throwRot}deg)`;
   topCard.style.opacity = "0";
 
-  setTimeout(() => {
+  let settled = false;
+  const settle = () => {
+    if (settled) return;
+    settled = true;
+    topCard.removeEventListener("transitionend", onTe);
     topCard.style.transition = "none";
     if (callback) callback();
-    requestAnimationFrame(() => {
-      isArcAnimating = false;
-    });
-  }, 220);
+    isArcAnimating = false;
+  };
+  // transitionend is authoritative (fires when the throw actually finishes);
+  // the timer is only a safety net so a missed event can never wedge the deck.
+  const onTe = () => settle();
+  topCard.addEventListener("transitionend", onTe, { once: true });
+  setTimeout(settle, 220);
+}
+
+// Queue-based move so rapid taps are never dropped and never overlap:
+// clicks during a throw are recorded and replayed immediately after it ends.
+let arcQueue = [];
+let arcQueueRunning = false;
+
+function pumpArcQueue() {
+  if (isArcAnimating) {
+    // A gesture throw is in flight; wait for it to finish before replaying
+    setTimeout(pumpArcQueue, 60);
+    return;
+  }
+  const dir = arcQueue.shift();
+  if (!dir) {
+    arcQueueRunning = false;
+    return;
+  }
+  animateArcThrow(dir, () => {
+    if (dir === "next") {
+      currentArcIndex = (currentArcIndex + 1) % totalArcCards;
+    } else {
+      currentArcIndex = (currentArcIndex - 1 + totalArcCards) % totalArcCards;
+    }
+    updateArcDeckStack();
+    // Yield one frame so the CSS transitions restored by updateArcDeckStack
+    // are in place before the next queued throw starts
+    requestAnimationFrame(pumpArcQueue);
+  });
+}
+
+function queueArcMove(direction) {
+  if (arcQueue.length < 3) arcQueue.push(direction);
+  if (arcQueueRunning) return;
+  arcQueueRunning = true;
+  pumpArcQueue();
 }
 
 window.nextProjectsArcCard = function () {
-  if (isArcAnimating) return;
-  animateArcThrow("next", () => {
-    currentArcIndex = (currentArcIndex + 1) % totalArcCards;
-    updateArcDeckStack();
-  });
+  queueArcMove("next");
 };
 
 window.prevProjectsArcCard = function () {
-  if (isArcAnimating) return;
-  animateArcThrow("prev", () => {
-    currentArcIndex = (currentArcIndex - 1 + totalArcCards) % totalArcCards;
-    updateArcDeckStack();
-  });
+  queueArcMove("prev");
 };
 
 function initProjectsArcDeckGesture() {
@@ -2239,7 +2355,7 @@ function initProjectsArcDeckGesture() {
   const getTopCard = () => deck.querySelector('.mobile-arc-card[data-depth="0"]');
 
   const onStart = (e) => {
-    if (isArcAnimating) return;
+    if (isArcAnimating || arcQueueRunning) return;
     const topCard = getTopCard();
     if (!topCard) return;
 
@@ -2292,12 +2408,12 @@ function initProjectsArcDeckGesture() {
       const throwY = currentY < 0 ? currentY - 30 : 20;
       const throwRot = currentX * 0.1 || (dir === "next" ? 12 : -12);
 
-      topCard.style.transition = "transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease";
+      topCard.style.transition = "transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.16s ease";
       topCard.style.transform = `translate3d(${throwX}px, ${throwY}px, 0px) rotate(${throwRot}deg)`;
       topCard.style.opacity = "0";
 
       isArcAnimating = true;
-      setTimeout(() => {
+      const commit = () => {
         topCard.style.transition = "none";
         if (dir === "next") {
           currentArcIndex = (currentArcIndex + 1) % totalArcCards;
@@ -2305,10 +2421,17 @@ function initProjectsArcDeckGesture() {
           currentArcIndex = (currentArcIndex - 1 + totalArcCards) % totalArcCards;
         }
         updateArcDeckStack();
-        requestAnimationFrame(() => {
-          isArcAnimating = false;
-        });
-      }, 220);
+        topCard.removeEventListener("transitionend", onFe);
+        clearTimeout(safetyTimer);
+        isArcAnimating = false;
+      };
+      function onFe(ev) {
+        if (ev.target !== topCard) return;
+        commit();
+      }
+      topCard.addEventListener("transitionend", onFe, { once: true });
+      // Safety net: never leave the deck locked if the event is missed
+      const safetyTimer = setTimeout(commit, 240);
     } else {
       topCard.style.transition = "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)";
       topCard.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
@@ -2354,7 +2477,7 @@ window.switchSkillsCard = function (idx) {
   if (activeCard) {
     isSkillAnimating = true;
     const dir = idx > currentSkillIndex ? 1 : -1;
-    activeCard.style.transition = "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease";
+    activeCard.style.transition = "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
     activeCard.style.transform = `translate3d(${dir * -300}px, 0, 0) rotate(${dir * -20}deg)`;
     activeCard.style.opacity = "0";
 
@@ -2449,7 +2572,7 @@ function initSkillsTiltSwipeGesture() {
       glowRight.classList.remove("active");
     }
 
-    card.style.transition = "transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease";
+    card.style.transition = "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
 
     if (Math.abs(currentX) > 70) {
       const dir = currentX > 0 ? 1 : -1;
@@ -2474,7 +2597,7 @@ function initSkillsTiltSwipeGesture() {
         });
         tabs.forEach((tab, i) => tab.classList.toggle("active", i === nextIdx));
         isSkillAnimating = false;
-      }, 220);
+      }, 200);
     } else {
       card.style.transform = "translate3d(0,0,0) rotate(0deg)";
     }
@@ -2544,64 +2667,81 @@ function updateStrengthsReelStack() {
 }
 
 window.nextStrengthsReel = function () {
-  if (isReelAnimating) return;
-  const activeCard = document.querySelector(".mobile-reel-card.active");
-  if (activeCard) {
-    isReelAnimating = true;
-    activeCard.style.transition = "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
-    activeCard.style.transform = "translateY(-100%) scale(0.9)";
-    activeCard.style.opacity = "0";
-
-    setTimeout(() => {
-      activeCard.style.transition = "none";
-      currentReelIndex = (currentReelIndex + 1) % totalReelCards;
-      updateStrengthsReelStack();
-      requestAnimationFrame(() => {
-        activeCard.style.transition = "";
-      });
-      isReelAnimating = false;
-    }, 160);
-  } else {
-    currentReelIndex = (currentReelIndex + 1) % totalReelCards;
-    updateStrengthsReelStack();
-  }
+  reelPending = 1;
+  pumpReelQueue();
 };
 
 window.prevStrengthsReel = function () {
+  reelPending = -1;
+  pumpReelQueue();
+};
+
+let reelPending = 0;
+
+function pumpReelQueue() {
   if (isReelAnimating) return;
-  const prevIdx = (currentReelIndex - 1 + totalReelCards) % totalReelCards;
-  const cards = document.querySelectorAll(".mobile-reel-card");
-  const prevCard = cards[prevIdx];
+  const dir = reelPending;
+  if (!dir) return;
+  reelPending = 0;
 
-  if (prevCard) {
-    isReelAnimating = true;
-    prevCard.style.transition = "none";
-    prevCard.style.transform = "translateY(-100%) scale(0.9)";
-    prevCard.style.opacity = "0";
-    prevCard.classList.remove("hidden-card", "next-card");
-    prevCard.style.zIndex = "15";
+  if (dir > 0) {
+    const activeCard = document.querySelector(".mobile-reel-card.active");
+    if (activeCard) {
+      isReelAnimating = true;
+      activeCard.style.transition = "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
+      activeCard.style.transform = "translateY(-100%) scale(0.9)";
+      activeCard.style.opacity = "0";
 
-    requestAnimationFrame(() => {
-      prevCard.style.transition = "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
-      prevCard.style.transform = "translateY(0px) scale(1)";
-      prevCard.style.opacity = "1";
-    });
+      setTimeout(() => {
+        activeCard.style.transition = "none";
+        currentReelIndex = (currentReelIndex + 1) % totalReelCards;
+        updateStrengthsReelStack();
+        requestAnimationFrame(() => {
+          activeCard.style.transition = "";
+          isReelAnimating = false;
+          pumpReelQueue();
+        });
+      }, 200);
+    } else {
+      currentReelIndex = (currentReelIndex + 1) % totalReelCards;
+      updateStrengthsReelStack();
+    }
+  } else {
+    const prevIdx = (currentReelIndex - 1 + totalReelCards) % totalReelCards;
+    const cards = document.querySelectorAll(".mobile-reel-card");
+    const prevCard = cards[prevIdx];
 
-    setTimeout(() => {
+    if (prevCard) {
+      isReelAnimating = true;
       prevCard.style.transition = "none";
-      prevCard.style.zIndex = "";
+      prevCard.style.transform = "translateY(-100%) scale(0.9)";
+      prevCard.style.opacity = "0";
+      prevCard.classList.remove("hidden-card", "next-card");
+      prevCard.style.zIndex = "15";
+
+      requestAnimationFrame(() => {
+        prevCard.style.transition = "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
+        prevCard.style.transform = "translateY(0px) scale(1)";
+        prevCard.style.opacity = "1";
+      });
+
+      setTimeout(() => {
+        prevCard.style.transition = "none";
+        prevCard.style.zIndex = "";
+        currentReelIndex = prevIdx;
+        updateStrengthsReelStack();
+        requestAnimationFrame(() => {
+          prevCard.style.transition = "";
+          isReelAnimating = false;
+          pumpReelQueue();
+        });
+      }, 200);
+    } else {
       currentReelIndex = prevIdx;
       updateStrengthsReelStack();
-      requestAnimationFrame(() => {
-        prevCard.style.transition = "";
-      });
-      isReelAnimating = false;
-    }, 200);
-  } else {
-    currentReelIndex = prevIdx;
-    updateStrengthsReelStack();
+    }
   }
-};
+}
 
 function initStrengthsRolodexGesture() {
   const deck = document.getElementById("strengthsRolodexDeck");
@@ -2652,7 +2792,7 @@ function initStrengthsRolodexGesture() {
 
     if (currentY < -45) {
       if (activeCard) {
-        activeCard.style.transition = "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease";
+        activeCard.style.transition = "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
         activeCard.style.transform = "translateY(-120%) rotateX(-30deg) scale(0.9)";
         activeCard.style.opacity = "0";
 
@@ -2665,7 +2805,7 @@ function initStrengthsRolodexGesture() {
             activeCard.style.transition = "";
           });
           isReelAnimating = false;
-        }, 190);
+        }, 200);
       } else {
         nextStrengthsReel();
       }
