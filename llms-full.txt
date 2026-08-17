@@ -200,6 +200,7 @@ Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (T
     - *Skills:* Generative AI, AI Apps, AI Productivity
 27. **Gen AI Agents: Transform Your Organization** (Issuer: Google | Platform: Google Cloud Skills Boost)
     - *Verification URL:* https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26898888
+    - *Description:* Gen AI Agents: Transform Your Organization explores how organizations can use custom gen AI agents to help tackle specific business challenges. Includes hands-on practice building a gen AI agent, exploring models, reasoning loops, and tools.
     - *Skills:* Generative AI, AI Agents, AI Productivity
 
 ---
