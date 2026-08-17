@@ -149,6 +149,21 @@
     "verified": true
   },
   {
+    "id": "google-ai-for-app-deployment-was-issued-by-coursera-to-nitish-kashyap-r",
+    "title": "Google AI for App Deployment",
+    "issuer": "Google",
+    "platform": "Credly Verified Badge",
+    "badgeImg": "assets/badges/google-ai-for-app-deployment-was-issued-by-coursera-to-nitish-kashyap-r.png",
+    "badgeUrl": "https://www.credly.com/badges/3e49905b-a55e-4eb3-acac-c2b4cc79ca00/public_url",
+    "description": "Those who earn the AI for App Deployment badge from Google can vibe code a user-friendly tool that they can share with others. They have built a plan for their app before generating any code, tested and debugged their app prototype, and deployed their app so others can use it with confidence.",
+    "skills": [
+      "Vibe Coding",
+      "AI App Deployment",
+      "Prompt Engineering"
+    ],
+    "verified": true
+  },
+  {
     "id": "google-ai-for-brainstorming-and-planning-was-issued-by-coursera-to-nitish-kashyap-r",
     "title": "Google AI for Brainstorming and Planning",
     "issuer": "Google",
@@ -364,6 +379,21 @@
     "skills": [
       "Generative AI",
       "AI Apps",
+      "AI Productivity"
+    ],
+    "verified": true
+  },
+  {
+    "id": "gen-ai-agents-transform-your-organization",
+    "title": "Gen AI Agents: Transform Your Organization",
+    "issuer": "Google",
+    "platform": "Google Cloud Skills Boost",
+    "badgeImg": "assets/badges/gen-ai-agents-transform-your-organization.png",
+    "badgeUrl": "https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26898888",
+    "description": "Gen AI Agents: Transform Your Organization explores how organizations can use custom gen AI agents to help tackle specific business challenges. Includes hands-on practice building a gen AI agent, exploring models, reasoning loops, and tools.",
+    "skills": [
+      "Generative AI",
+      "AI Agents",
       "AI Productivity"
     ],
     "verified": true

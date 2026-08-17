@@ -83,7 +83,7 @@
 ![AI & Technical](https://img.shields.io/badge/AI_%26_Technical-6_Certifications-7C3AED?style=for-the-badge)
 ![Advanced Management](https://img.shields.io/badge/Advanced_Management-3_Certifications-F59E0B?style=for-the-badge)
 ![Psychology & Behavior](https://img.shields.io/badge/Psychology_%26_Behavior-5_Certifications-059669?style=for-the-badge)
-![Verified Badges](https://img.shields.io/badge/Verified_Badges-25_Credly-0EA5E9?style=for-the-badge)
+![Verified Badges](https://img.shields.io/badge/Verified_Badges-27_Credly_%26_Google_Cloud-0EA5E9?style=for-the-badge)
 
 <br />
 

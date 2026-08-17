@@ -37,7 +37,7 @@ Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (T
 
 ---
 
-## Complete Certifications, Credentials & Digital Badges Catalog (20+ Main Credentials & 25 Verified Badges)
+## Complete Certifications, Credentials & Digital Badges Catalog (20+ Main Credentials & 27 Verified Badges)
 
 ### Category A: Human Resource Management (6 Main Programs / 11 Total Certifications)
 1. **HRCI Human Resource Associate** (Provider: HRCI via Coursera)
@@ -70,7 +70,16 @@ Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (T
 2. **Google Prompting Essentials** (Provider: Google via Coursera)
    - *Description:* Advanced prompt design, structured prompt frameworks, multi-shot prompting, and AI workflow optimization.
 3. **Google AI Professional Certification** (Provider: Google via Coursera)
-   - *Description:* Comprehensive professional program covering end-to-end AI capabilities, machine learning fundamentals, and corporate AI deployment.
+   - *Main Certificate Link:* https://www.coursera.org/account/accomplishments/professional-cert/PF2G8XYT596M
+   - *Description:* Comprehensive professional program covering end-to-end AI capabilities, machine learning fundamentals, and corporate AI deployment across 8 sub-courses:
+     a) AI Fundamentals (Link: https://coursera.org/share/6e448ace7434ff8b204263a399677d4b)
+     b) AI for Brainstorming and Planning (Link: https://coursera.org/share/d9d48c1a9f65b63a843f51c1accd401d)
+     c) AI for Research and Insights (Link: https://coursera.org/share/445b33b978a074c7ce444639dbe35f27)
+     d) AI for Writing and Communicating (Link: https://coursera.org/share/19307886df66fc8c08e49f5a5667e41d)
+     e) AI for Content Creation (Link: https://coursera.org/share/060c2c87dc7d55d7bdba7e01e32ef8a3)
+     f) AI for Data Analytics (Link: https://coursera.org/share/b5eba89bdaaa6d3b9d124f50b2fbce68)
+     g) AI for App Building (Link: https://coursera.org/share/7e6286ec4b266f036f0c1683aefa483d)
+     h) AI for App Deployment (Link: https://coursera.org/share/fe82bb2692bb5051de0965f91ecba3b9)
 4. **Generative AI for Executives and Business Leaders** (Provider: IBM via Coursera)
    - *Description:* Strategic positioning of generative AI, organizational AI adoption, risk management, and executive leadership in the AI era.
 5. **Cyber Security Overview** (Provider: Infosys)
@@ -110,7 +119,7 @@ Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (T
 3. **Risk Management & Business Fundamentals** (Provider: NASBA / Coursera)
    - *Description:* Organizational risk assessment, corporate governance, financial controls, and risk mitigation strategies.
 
-### Category E: Verified Digital Badges (25 Credly & Google Cloud Badges)
+### Category E: Verified Digital Badges (27 Credly & Google Cloud Badges)
 1. **Google Prompting Essentials** (Issuer: Google | Platform: Credly Verified Badge)
    - *Verification URL:* https://www.credly.com/badges/a2bb066f-ecb9-4412-9e8a-dd63e1843c9d/linked_in_profile
    - *Skills:* Prompt Engineering, Generative AI, AI Productivity
@@ -141,51 +150,57 @@ Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (T
 10. **Google AI for App Building** (Issuer: Google | Platform: Credly Verified Badge)
     - *Verification URL:* https://www.credly.com/badges/b7fc1d97-b0ea-41c1-844d-6286624fd88e/public_url
     - *Skills:* Vibe Coding, AI App Building, Prompt Engineering
-11. **Google AI for Brainstorming and Planning** (Issuer: Google | Platform: Credly Verified Badge)
+11. **Google AI for App Deployment** (Issuer: Google | Platform: Credly Verified Badge)
+    - *Verification URL:* https://www.credly.com/badges/3e49905b-a55e-4eb3-acac-c2b4cc79ca00/public_url
+    - *Skills:* Vibe Coding, AI App Deployment, Prompt Engineering
+12. **Google AI for Brainstorming and Planning** (Issuer: Google | Platform: Credly Verified Badge)
     - *Verification URL:* https://www.credly.com/badges/dd0518b2-21bb-4fec-bd22-4153c1b018cf/public_url
     - *Skills:* AI Planning, Brainstorming, Project Strategy
-12. **Google AI for Content Creation** (Issuer: Google | Platform: Credly Verified Badge)
+13. **Google AI for Content Creation** (Issuer: Google | Platform: Credly Verified Badge)
     - *Verification URL:* https://www.credly.com/badges/381716eb-4d8b-4bae-bef0-f16b69d677e3/public_url
     - *Skills:* AI Content Creation, Generative Media
-13. **Google AI for Data Analysis** (Issuer: Google | Platform: Credly Verified Badge)
+14. **Google AI for Data Analysis** (Issuer: Google | Platform: Credly Verified Badge)
     - *Verification URL:* https://www.credly.com/badges/afde94f8-6ed5-4733-9ac6-12177b87cd93/public_url
     - *Skills:* AI Data Analysis, Insights & Analytics
-14. **Google AI for Research and Insights** (Issuer: Google | Platform: Credly Verified Badge)
+15. **Google AI for Research and Insights** (Issuer: Google | Platform: Credly Verified Badge)
     - *Verification URL:* https://www.credly.com/badges/540fbe0c-a890-42af-8163-6a509b9c3ad1/public_url
     - *Skills:* AI Research, Web Insights, Prompting
-15. **Google AI for Writing and Communicating** (Issuer: Google | Platform: Credly Verified Badge)
+16. **Google AI for Writing and Communicating** (Issuer: Google | Platform: Credly Verified Badge)
     - *Verification URL:* https://www.credly.com/badges/1d8bb157-fe8c-41ef-8d26-26cc21eb903d/public_url
     - *Skills:* AI Writing, Executive Communication
-16. **Google AI Fundamentals** (Issuer: Google | Platform: Credly Verified Badge)
+17. **Google AI Fundamentals** (Issuer: Google | Platform: Credly Verified Badge)
     - *Verification URL:* https://www.credly.com/badges/4abf1d14-5e75-401d-9735-af736b94677b/public_url
     - *Skills:* Generative AI, Prompting, AI Productivity
-17. **Google AI Professional Certificate** (Issuer: Google | Platform: Credly Verified Badge)
+18. **Google AI Professional Certificate** (Issuer: Google | Platform: Credly Verified Badge)
     - *Verification URL:* https://www.credly.com/badges/cc579c24-d587-42c5-a1f6-a26c57c48d20/public_url
     - *Skills:* Generative AI, Prompting, AI Productivity
-18. **SkillsBuild - Customer Engagement: Communication and Personality Dynamics** (Issuer: IBM | Platform: Credly Verified Badge)
+19. **SkillsBuild - Customer Engagement: Communication and Personality Dynamics** (Issuer: IBM | Platform: Credly Verified Badge)
     - *Verification URL:* https://www.credly.com/badges/bb3973c5-83f6-4cbc-9a70-eeccf1d2e9bc/public_url
     - *Skills:* Customer Success, Personality Dynamics
-19. **SkillsBuild - Customer Engagement: Problem Solving and Process Controls** (Issuer: IBM | Platform: Credly Verified Badge)
+20. **SkillsBuild - Customer Engagement: Problem Solving and Process Controls** (Issuer: IBM | Platform: Credly Verified Badge)
     - *Verification URL:* https://www.credly.com/badges/ef61a031-eb22-41f8-b8f0-7b5beed4975a/public_url
     - *Skills:* Customer Success, Problem Solving
-20. **Gen AI: Unlock Foundational Concepts** (Issuer: Google | Platform: Google Cloud Skills Boost)
+21. **Gen AI: Unlock Foundational Concepts** (Issuer: Google | Platform: Google Cloud Skills Boost)
     - *Verification URL:* https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26176113
     - *Skills:* Generative AI, LLM Strategy, AI Productivity
-21. **Attention Mechanism** (Issuer: Google | Platform: Google Cloud Skills Boost)
+22. **Attention Mechanism** (Issuer: Google | Platform: Google Cloud Skills Boost)
     - *Verification URL:* https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26131538
     - *Skills:* Transformer Models, Deep Learning, GenAI Architecture
-22. **Gen AI: Beyond the Chatbot** (Issuer: Google | Platform: Google Cloud Skills Boost)
+23. **Gen AI: Beyond the Chatbot** (Issuer: Google | Platform: Google Cloud Skills Boost)
     - *Verification URL:* https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/25790700
     - *Skills:* Generative AI, LLM Strategy, AI Productivity
-23. **AI Boost Bites: Your Personal Feedback Agent** (Issuer: Google | Platform: Google Cloud Skills Boost)
+24. **AI Boost Bites: Your Personal Feedback Agent** (Issuer: Google | Platform: Google Cloud Skills Boost)
     - *Verification URL:* https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/25777975
     - *Skills:* Generative AI, Prompting, AI Productivity
-24. **Gen AI: Navigate the Landscape** (Issuer: Google | Platform: Google Cloud Skills Boost)
+25. **Gen AI: Navigate the Landscape** (Issuer: Google | Platform: Google Cloud Skills Boost)
     - *Verification URL:* https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26181315
     - *Skills:* Generative AI, LLM Strategy, AI Productivity
-25. **Gen AI Apps: Transform Your Work** (Issuer: Google | Platform: Google Cloud Skills Boost)
+26. **Gen AI Apps: Transform Your Work** (Issuer: Google | Platform: Google Cloud Skills Boost)
     - *Verification URL:* https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26182097
     - *Skills:* Generative AI, AI Apps, AI Productivity
+27. **Gen AI Agents: Transform Your Organization** (Issuer: Google | Platform: Google Cloud Skills Boost)
+    - *Verification URL:* https://www.skills.google/public_profiles/03ba0724-ae09-42e2-96fb-c86b3101827c/badges/26898888
+    - *Skills:* Generative AI, AI Agents, AI Productivity
 
 ---
 
