@@ -187,44 +187,44 @@
   color-scheme: light;
 }
 
-/* Theme 5/10 — emerald · dark forest green-grey */
-:root[data-theme="emerald"] {
-  --background: #11241a;
-  --nav-bg: rgba(17, 36, 26, 0.88);
-  --menu-bg: rgba(17, 36, 26, 0.92);
-  --card: rgba(20, 42, 32, 0.82);
-  --card-solid: #163021;
-  --card-hover: rgba(28, 52, 38, 0.85);
-  --surface-1: rgba(52, 211, 153, 0.15);
-  --surface-2: rgba(16, 185, 129, 0.15);
-  --surface-3: rgba(251, 191, 36, 0.15);
-  --surface-4: rgba(45, 212, 191, 0.15);
-  --border: rgba(52, 211, 153, 0.22);
-  --border-strong: rgba(16, 185, 129, 0.45);
-  --bd2: #28503a;
+/* Theme 5/10 — lavender · luminous lilac / lavender cloud */
+:root[data-theme="lavender"] {
+  --background: #f7f5ff;
+  --nav-bg: rgba(247, 245, 255, 0.88);
+  --menu-bg: rgba(247, 245, 255, 0.92);
+  --card: #ffffff;
+  --card-solid: #ffffff;
+  --card-hover: #faf8ff;
+  --surface-1: #f1edff;
+  --surface-2: #faf5ff;
+  --surface-3: #fdf4ff;
+  --surface-4: #eef2ff;
+  --border: rgba(124, 58, 237, 0.14);
+  --border-strong: rgba(124, 58, 237, 0.32);
+  --bd2: #ded7f5;
 
-  --aura-1: rgba(52, 211, 153, 0.3);
-  --aura-2: rgba(16, 185, 129, 0.22);
-  --aura-3: rgba(45, 212, 191, 0.14);
+  --aura-1: rgba(124, 58, 237, 0.14);
+  --aura-2: rgba(168, 85, 247, 0.1);
+  --aura-3: rgba(236, 72, 153, 0.06);
   --aura-opacity: 0.5;
 
-  --foreground: #ecfdf5;
-  --ink-1: #ffffff;
-  --ink-2: #c7ead9;
-  --ink-3: #8cb8a4;
-  --ink-4: #5e8573;
+  --foreground: #140b2a;
+  --ink-1: #1a0f35;
+  --ink-2: #48386b;
+  --ink-3: #756396;
+  --ink-4: #a497be;
 
-  --p1: #34d399;
-  --p2: #10b981;
-  --p3: #2dd4bf;
-  --g1: #10b981;
-  --g2: #22d3ee;
-  --o1: #fbbf24;
-  --o2: #fb923c;
-  --r1: #f472b6;
-  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-  --card-hover-shadow: 0 16px 45px rgba(52, 211, 153, 0.25);
-  color-scheme: dark;
+  --p1: #7c3aed;
+  --p2: #a855f7;
+  --p3: #ec4899;
+  --g1: #059669;
+  --g2: #06b6d4;
+  --o1: #f59e0b;
+  --o2: #ea580c;
+  --r1: #db2777;
+  --card-shadow: 0 8px 30px rgba(60, 20, 110, 0.06);
+  --card-hover-shadow: 0 16px 45px rgba(124, 58, 237, 0.18);
+  color-scheme: light;
 }
 
 /* Theme 6/10 — bloom · soft pink / violet */

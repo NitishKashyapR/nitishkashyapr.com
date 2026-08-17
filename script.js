@@ -252,11 +252,11 @@
 // Alternating dark/light order so every click flips brightness and the
 // change is unmistakable: dark → light → ocean → sunrise → emerald → bloom
 // → forge → breeze → slate → meadow → (back to dark)
-const THEME_ORDER = ["dark", "light", "ocean", "sunrise", "emerald", "bloom", "forge", "breeze", "slate", "meadow"];
+const THEME_ORDER = ["dark", "light", "ocean", "sunrise", "lavender", "bloom", "forge", "breeze", "slate", "meadow"];
 const THEME_LABELS = {
   dark: "Dark (Indigo)",
   ocean: "Ocean (Navy)",
-  emerald: "Emerald (Forest)",
+  lavender: "Lavender (Lilac)",
   forge: "Forge (Violet)",
   slate: "Slate (Graphite)",
   light: "Light (Paper)",
@@ -266,16 +266,81 @@ const THEME_LABELS = {
   meadow: "Meadow (Green)"
 };
 
-function initThemeToggle() {
+// 24-Hour Automatic Theme Changer Engine (Indian Standard Time - IST 12:00 Midnight)
+function getISTDateString(d = new Date()) {
+  try {
+    return d.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+  } catch (e) {
+    const now = d;
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const ist = new Date(utc + (3600000 * 5.5));
+    return `${ist.getFullYear()}-${String(ist.getMonth() + 1).padStart(2, "0")}-${String(ist.getDate()).padStart(2, "0")}`;
+  }
+}
+
+function getDailyISTTheme() {
+  const istDate = getISTDateString();
+  const [y, m, d] = istDate.split("-").map(Number);
+  const days = Math.floor(Date.UTC(y, m - 1, d) / 86400000);
+  return THEME_ORDER[Math.abs(days) % THEME_ORDER.length];
+}
+
+function updateThemeButtonLabels(currentTheme) {
   const toggleBtn = document.getElementById("themeToggleBtn");
   if (!toggleBtn) return;
-
-  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  const current = currentTheme || document.documentElement.getAttribute("data-theme") || "dark";
   const currentIndex = THEME_ORDER.indexOf(current);
   const activeIndex = currentIndex === -1 ? 0 : currentIndex;
   const nextName = THEME_LABELS[THEME_ORDER[(activeIndex + 1) % THEME_ORDER.length]];
   toggleBtn.setAttribute("aria-label", `Switch theme — next: ${nextName}`);
   toggleBtn.setAttribute("title", `Theme: ${THEME_LABELS[current] || current} — click to switch`);
+}
+
+function scheduleMidnightThemeCheck() {
+  try {
+    const now = new Date();
+    const istStr = now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+    const istNow = new Date(istStr);
+    const istNextMidnight = new Date(istNow);
+    istNextMidnight.setHours(24, 0, 1, 0);
+    const msUntilMidnight = Math.max(1000, istNextMidnight.getTime() - istNow.getTime());
+
+    setTimeout(() => {
+      const manualDate = localStorage.getItem("theme_manual_date");
+      const todayIST = getISTDateString();
+      if (manualDate !== todayIST) {
+        const nextDailyTheme = getDailyISTTheme();
+        const html = document.documentElement;
+        html.classList.add("theme-transition");
+        html.setAttribute("data-theme", nextDailyTheme);
+        setTimeout(() => html.classList.remove("theme-transition"), 450);
+        updateThemeButtonLabels(nextDailyTheme);
+      }
+      scheduleMidnightThemeCheck();
+    }, msUntilMidnight);
+  } catch (e) {
+    setInterval(() => {
+      const manualDate = localStorage.getItem("theme_manual_date");
+      const todayIST = getISTDateString();
+      if (manualDate !== todayIST) {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const nextDailyTheme = getDailyISTTheme();
+        if (currentTheme !== nextDailyTheme) {
+          document.documentElement.setAttribute("data-theme", nextDailyTheme);
+          updateThemeButtonLabels(nextDailyTheme);
+        }
+      }
+    }, 300000);
+  }
+}
+
+function initThemeToggle() {
+  const toggleBtn = document.getElementById("themeToggleBtn");
+  if (!toggleBtn) return;
+
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  updateThemeButtonLabels(current);
+  scheduleMidnightThemeCheck();
 
   toggleBtn.addEventListener("click", () => {
     const active = document.documentElement.getAttribute("data-theme") || "dark";
@@ -284,11 +349,14 @@ function initThemeToggle() {
     const html = document.documentElement;
     html.classList.add("theme-transition");
     html.setAttribute("data-theme", next);
+
+    const todayIST = getISTDateString();
+    localStorage.setItem("theme_manual", next);
+    localStorage.setItem("theme_manual_date", todayIST);
     localStorage.setItem("theme", next);
+
     setTimeout(() => html.classList.remove("theme-transition"), 450);
-    const nextNext = THEME_ORDER[(THEME_ORDER.indexOf(next) + 1) % THEME_ORDER.length];
-    toggleBtn.setAttribute("aria-label", `Switch theme — next: ${THEME_LABELS[nextNext]}`);
-    toggleBtn.setAttribute("title", `Theme: ${THEME_LABELS[next]} — click to switch`);
+    updateThemeButtonLabels(next);
     showThemeCelebration(next);
   });
 }

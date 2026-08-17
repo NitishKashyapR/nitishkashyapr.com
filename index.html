@@ -32,13 +32,28 @@
     <link rel="alternate" type="text/plain" href="https://nitishkashyapr.github.io/nitishkashyapr.com/llms-full.txt" title="Exhaustive LLM Profile Dataset" />
     <link rel="alternate" type="text/plain" href="https://raw.githubusercontent.com/NitishKashyapR/nitishkashyapr.com/main/llms-full.txt" title="Exhaustive LLM Dataset (Raw GitHub)" />
 
-    <link rel="stylesheet" href="index.css?v=2026.4" />
+    <link rel="stylesheet" href="index.css?v=2026.5" />
 
     <script>
       (function() {
-        var themes = ['dark', 'light', 'ocean', 'sunrise', 'emerald', 'bloom', 'forge', 'breeze', 'slate', 'meadow'];
-        var saved = localStorage.getItem('theme');
-        var theme = themes.indexOf(saved) !== -1 ? saved : 'dark';
+        var themes = ['dark', 'light', 'ocean', 'sunrise', 'lavender', 'bloom', 'forge', 'breeze', 'slate', 'meadow'];
+        var istDate;
+        try {
+          istDate = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+        } catch (e) {
+          var now = new Date();
+          var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+          var ist = new Date(utc + (3600000 * 5.5));
+          istDate = ist.getFullYear() + '-' + String(ist.getMonth() + 1).padStart(2, '0') + '-' + String(ist.getDate()).padStart(2, '0');
+        }
+        var parts = istDate.split('-');
+        var days = Math.floor(Date.UTC(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2])) / 86400000);
+        var autoTheme = themes[Math.abs(days) % themes.length];
+
+        var manualDate = localStorage.getItem('theme_manual_date');
+        var manualTheme = localStorage.getItem('theme_manual');
+        var theme = (manualDate === istDate && manualTheme && themes.indexOf(manualTheme) !== -1) ? manualTheme : autoTheme;
+
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
