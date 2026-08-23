@@ -1,7 +1,7 @@
 // ============================================================
 // INTERACTIVE PLEXUS PARTICLE BACKGROUND ENGINE
 // Dots + Lines + Triangulated Polygon fills
-// Mouse-interactive magnetic attraction
+// Mouse + Touch interactive magnetic attraction
 // ============================================================
 (function plexusEngine() {
   const initEngine = () => {
@@ -9,44 +9,43 @@
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     let particles = [];
-    let mouse = { x: null, y: null, radius: 220 };
+    let mouse = { x: null, y: null, radius: 240 };
     let animId = null;
     let lastFrameAt = 0;
     let frameInterval = 16;
 
     const reduceParticles = () => {
       const w = window.innerWidth;
-      const maxP = w < 480 ? 32 : w < 768 ? 48 : 140;
+      const maxP = w < 480 ? 40 : w < 768 ? 60 : 150;
       const fps = w < 768 ? 30 : 60;
       frameInterval = 1000 / fps;
       const area = w * Math.min(window.innerHeight, 900);
-      config.particleCount = Math.min(maxP, Math.max(20, Math.floor(area / (w < 768 ? 15000 : 10000))));
-      // Shorter connection distance on mobile = far fewer distance/lines computed per frame
-      config.lineLength = w < 768 ? 95 : 145;
+      config.particleCount = Math.min(maxP, Math.max(25, Math.floor(area / (w < 768 ? 14000 : 9000))));
+      config.lineLength = w < 768 ? 115 : 160;
     };
 
     const config = {
-      particleCount: 140,
-      particleMaxRadius: 3.2,
-      particleMinRadius: 1.2,
-      lineLength: 145,
-      particleSpeed: 0.25,
-      dotColor: "rgba(165, 180, 252, 0.85)",
-      lineColor: "rgba(129, 140, 248, 0.28)",
-      polyColor: "rgba(167, 139, 250, 0.04)"
+      particleCount: 150,
+      particleMaxRadius: 3.6,
+      particleMinRadius: 1.4,
+      lineLength: 160,
+      particleSpeed: 0.35,
+      dotColor: "rgba(165, 180, 252, 0.95)",
+      lineColor: "rgba(129, 140, 248, 0.38)",
+      polyColor: "rgba(167, 139, 250, 0.06)"
     };
 
     const THEME_PARTICLE_PALETTES = {
-      dark:    { dot: "rgba(165, 180, 252, 0.9)",  line: "rgba(129, 140, 248, 0.32)",  poly: "rgba(167, 139, 250, 0.05)" },
-      ocean:   { dot: "rgba(125, 211, 252, 0.9)",  line: "rgba(56, 189, 248, 0.32)",   poly: "rgba(129, 140, 248, 0.05)" },
-      emerald: { dot: "rgba(167, 243, 208, 0.9)",  line: "rgba(52, 211, 153, 0.32)",   poly: "rgba(16, 185, 129, 0.05)" },
-      forge:   { dot: "rgba(221, 214, 254, 0.9)",  line: "rgba(167, 139, 250, 0.32)",  poly: "rgba(244, 114, 182, 0.05)" },
-      slate:   { dot: "rgba(226, 232, 240, 0.85)", line: "rgba(148, 163, 184, 0.28)",  poly: "rgba(148, 163, 184, 0.04)" },
-      light:   { dot: "rgba(15, 23, 42, 0.75)",    line: "rgba(99, 102, 241, 0.22)",   poly: "rgba(99, 102, 241, 0.03)" },
-      sunrise: { dot: "rgba(120, 72, 20, 0.7)",    line: "rgba(249, 115, 22, 0.22)",   poly: "rgba(234, 179, 8, 0.04)" },
-      bloom:   { dot: "rgba(150, 40, 90, 0.7)",    line: "rgba(236, 72, 153, 0.22)",   poly: "rgba(168, 85, 247, 0.04)" },
-      breeze:  { dot: "rgba(15, 60, 100, 0.7)",    line: "rgba(14, 165, 233, 0.22)",   poly: "rgba(99, 102, 241, 0.03)" },
-      meadow:  { dot: "rgba(30, 100, 50, 0.7)",    line: "rgba(22, 163, 74, 0.22)",    poly: "rgba(13, 148, 136, 0.04)" }
+      dark:     { dot: "rgba(165, 180, 252, 0.95)", line: "rgba(129, 140, 248, 0.38)", poly: "rgba(167, 139, 250, 0.06)" },
+      light:    { dot: "rgba(79, 70, 229, 0.88)",   line: "rgba(99, 102, 241, 0.35)",  poly: "rgba(99, 102, 241, 0.05)" },
+      ocean:    { dot: "rgba(125, 211, 252, 0.95)", line: "rgba(56, 189, 248, 0.38)",  poly: "rgba(129, 140, 248, 0.06)" },
+      sunrise:  { dot: "rgba(234, 88, 12, 0.88)",   line: "rgba(249, 115, 22, 0.35)",  poly: "rgba(234, 179, 8, 0.05)" },
+      lavender: { dot: "rgba(124, 58, 237, 0.88)",  line: "rgba(147, 51, 234, 0.35)",  poly: "rgba(168, 85, 247, 0.05)" },
+      bloom:    { dot: "rgba(219, 39, 119, 0.88)",  line: "rgba(236, 72, 153, 0.35)",  poly: "rgba(244, 114, 182, 0.05)" },
+      forge:    { dot: "rgba(221, 214, 254, 0.95)", line: "rgba(167, 139, 250, 0.38)", poly: "rgba(244, 114, 182, 0.06)" },
+      breeze:   { dot: "rgba(2, 132, 199, 0.88)",   line: "rgba(14, 165, 233, 0.35)",  poly: "rgba(56, 189, 248, 0.05)" },
+      slate:    { dot: "rgba(226, 232, 240, 0.92)", line: "rgba(148, 163, 184, 0.38)", poly: "rgba(148, 163, 184, 0.06)" },
+      meadow:   { dot: "rgba(22, 163, 74, 0.88)",   line: "rgba(34, 197, 94, 0.35)",   poly: "rgba(13, 148, 136, 0.05)" }
     };
 
     function updateThemeColors() {
@@ -100,7 +99,7 @@
         screenNodes.push({ x: pos.x, y: pos.y, radius: particles[i].radius });
       }
 
-      // Mouse interactive repulsion and direct cursor connection lines
+      // Mouse & touch interactive repulsion and direct cursor connection lines
       if (mouse.x !== null && mouse.y !== null) {
         for (let i = 0; i < screenNodes.length; i++) {
           let dx = mouse.x - screenNodes[i].x;
@@ -109,18 +108,18 @@
           if (dist < mouse.radius && dist > 0) {
             let force = (mouse.radius - dist) / mouse.radius;
 
-            // Draw interactive glowing connection line from cursor to particle
-            let alpha = force * 0.65;
+            // Draw interactive glowing connection line from cursor/finger to particle
+            let alpha = force * 0.75;
             ctx.beginPath();
             ctx.moveTo(mouse.x, mouse.y);
             ctx.lineTo(screenNodes[i].x, screenNodes[i].y);
             ctx.strokeStyle = config.lineColor.replace(/[\d\.]+\)$/, `${alpha})`);
-            ctx.lineWidth = 1.2;
+            ctx.lineWidth = 1.4;
             ctx.stroke();
 
             // Repel dots away from cursor
-            screenNodes[i].x -= (dx / dist) * force * 24;
-            screenNodes[i].y -= (dy / dist) * force * 24;
+            screenNodes[i].x -= (dx / dist) * force * 26;
+            screenNodes[i].y -= (dy / dist) * force * 26;
           }
         }
       }
@@ -146,7 +145,7 @@
             ctx.moveTo(screenNodes[i].x, screenNodes[i].y);
             ctx.lineTo(screenNodes[j].x, screenNodes[j].y);
             ctx.strokeStyle = config.lineColor;
-            ctx.lineWidth = 0.5;
+            ctx.lineWidth = 0.85;
             ctx.stroke();
           }
         }
@@ -180,14 +179,28 @@
       }
     }
 
+    function isModalOrFullscreenActive() {
+      const certFull = document.getElementById("certificationsFullView");
+      const projFull = document.getElementById("projectsFullView");
+      const modal = document.getElementById("modalBackdrop");
+      return (
+        (certFull && certFull.classList.contains("active")) ||
+        (projFull && projFull.classList.contains("active")) ||
+        (modal && modal.classList.contains("active")) ||
+        document.body.classList.contains("modal-open")
+      );
+    }
+
     function animate(now) {
-      if (document.hidden) {
-        // Skip rendering entirely while the tab is not visible
+      if (document.hidden || isModalOrFullscreenActive()) {
+        animId = requestAnimationFrame(animate);
+        return;
+      }
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         animId = requestAnimationFrame(animate);
         return;
       }
       if (now - lastFrameAt < frameInterval) {
-        // Throttle to ~30fps on mobile so the main thread stays free for card animations
         animId = requestAnimationFrame(animate);
         return;
       }
@@ -230,6 +243,22 @@
       mouse.x = null;
       mouse.y = null;
     });
+    document.addEventListener("touchstart", (e) => {
+      if (e.touches && e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    }, { passive: true });
+    document.addEventListener("touchmove", (e) => {
+      if (e.touches && e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    }, { passive: true });
+    document.addEventListener("touchend", () => {
+      mouse.x = null;
+      mouse.y = null;
+    }, { passive: true });
     window.addEventListener("resize", resize);
 
     const observer = new MutationObserver(() => {
@@ -1319,10 +1348,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+  let savedScrollY = 0;
+  const lockBodyScroll = () => {
+    savedScrollY = window.scrollY || window.pageYOffset || 0;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+    document.body.classList.add("modal-open");
+  };
+
+  const unlockBodyScroll = () => {
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    document.body.style.overflow = "";
+    document.body.classList.remove("modal-open");
+    window.scrollTo(0, savedScrollY);
+  };
+
   window.openCertificationsFullView = () => {
     if (certFullView) {
       certFullView.classList.add("active");
-      document.body.style.overflow = "hidden";
+      lockBodyScroll();
       renderCertFullView();
     }
   };
@@ -1330,7 +1378,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.closeCertificationsFullView = () => {
     if (certFullView) {
       certFullView.classList.remove("active");
-      document.body.style.overflow = "";
+      unlockBodyScroll();
     }
   };
 
@@ -1418,35 +1466,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const getProviderLogo = (heading, provider) => {
     const text = `${heading} ${provider || ''}`.toLowerCase();
     const style = `width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06); flex-shrink: 0;`;
+    const fb = `onerror="this.onerror=null; this.src='https://nitishkashyapr.github.io/nitishkashyapr.com/' + this.getAttribute('src');"`;
     if (text.includes("hrci")) {
-      return `<div style="${style}"><img src="assets/logos/HRCI.png" alt="HRCI" style="width: 28px; height: 28px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/HRCI.png" alt="HRCI" style="width: 28px; height: 28px; object-fit: contain;" ${fb} /></div>`;
     }
     if (text.includes("shrm")) {
-      return `<div style="${style}"><img src="assets/logos/SHRM logo.jpg" alt="SHRM" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/SHRM logo.jpg" alt="SHRM" style="width: 30px; height: 30px; object-fit: contain;" ${fb} /></div>`;
     }
     if (text.includes("nasba")) {
-      return `<div style="${style}"><img src="assets/logos/NASBA.jpg" alt="NASBA" style="width: 30px; height: 24px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/NASBA.jpg" alt="NASBA" style="width: 30px; height: 24px; object-fit: contain;" ${fb} /></div>`;
     }
     if (text.includes("ibm")) {
-      return `<div style="${style}"><img src="assets/logos/ibm.png" alt="IBM" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/ibm.png" alt="IBM" style="width: 26px; height: 26px; object-fit: contain;" ${fb} /></div>`;
     }
     if (text.includes("infosys")) {
-      return `<div style="${style}"><img src="assets/logos/infosys.png" alt="Infosys" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/infosys.png" alt="Infosys" style="width: 26px; height: 26px; object-fit: contain;" ${fb} /></div>`;
     }
     if (text.includes("google")) {
       return `<div style="${style}"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg></div>`;
     }
     if (text.includes("yale")) {
-      return `<div style="${style}"><img src="assets/logos/Yale university.jpg" alt="Yale University" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/Yale university.jpg" alt="Yale University" style="width: 30px; height: 30px; object-fit: contain;" ${fb} /></div>`;
     }
     if (text.includes("wesleyan")) {
-      return `<div style="${style}"><img src="assets/logos/Wesleyan university.png" alt="Wesleyan University" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/Wesleyan university.png" alt="Wesleyan University" style="width: 26px; height: 26px; object-fit: contain;" ${fb} /></div>`;
     }
     if (text.includes("pennsylvania") || text.includes("penn")) {
-      return `<div style="${style}"><img src="assets/logos/University of Pennsylvania.png" alt="University of Pennsylvania" style="width: 26px; height: 26px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/University of Pennsylvania.png" alt="University of Pennsylvania" style="width: 26px; height: 26px; object-fit: contain;" ${fb} /></div>`;
     }
     if (text.includes("anthropic")) {
-      return `<div style="${style}"><img src="assets/logos/anthropic logo.png" alt="Anthropic" style="width: 30px; height: 30px; object-fit: contain;" /></div>`;
+      return `<div style="${style}"><img src="assets/logos/anthropic logo.png" alt="Anthropic" style="width: 30px; height: 30px; object-fit: contain;" ${fb} /></div>`;
     }
     if (text.includes("linkedin")) {
       return `<div style="width: 38px; height: 38px; border-radius: 10px; background: #0A66C2; display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 2px 6px rgba(10,102,194,0.3); flex-shrink: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></div>`;
@@ -1557,7 +1606,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="mobile-ref-card">
             <div class="mobile-ref-card-body">
               <div class="mobile-ref-card-thumb mobile-ref-card-thumb-badge">
-                <img src="${badge.badgeImg}" alt="${badge.title}" />
+                <img src="${badge.badgeImg}" alt="${badge.title}" onerror="this.onerror=null; this.src='https://nitishkashyapr.github.io/nitishkashyapr.com/' + this.getAttribute('src');" />
               </div>
               <div class="mobile-ref-card-content">
                 <div class="mobile-ref-cat-badge mobile-ref-cat-verified">
@@ -1608,7 +1657,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="glass-card badge-card" style="padding: 2.25rem 1.6rem 2rem 1.6rem; border-radius: 140px; display: flex; flex-direction: column; justify-content: space-between; text-align: center; border: 1.5px solid var(--border-strong); background: var(--card); overflow: hidden; transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-spring);">
           <div>
             <div style="width: 175px; height: 175px; border-radius: 50%; background: var(--surface-1); border: 2px solid var(--border-strong); padding: 12px; margin: 0 auto 1.35rem auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); position: relative; overflow: hidden; transition: transform 0.35s var(--ease-spring);">
-              <img src="${badge.badgeImg}" alt="${badge.title}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transform: ${imgScale}; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));" />
+              <img src="${badge.badgeImg}" alt="${badge.title}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transform: ${imgScale}; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));" onerror="this.onerror=null; this.src='https://nitishkashyapr.github.io/nitishkashyapr.com/' + this.getAttribute('src');" />
             </div>
             <h3 style="font-family: var(--font-heading); font-size: 1.08rem; font-weight: 800; color: var(--foreground); line-height: 1.3; margin-bottom: 0.35rem;">
               ${badge.title}
@@ -1766,7 +1815,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.openProjectsFullView = () => {
     if (projectsFullView) {
       projectsFullView.classList.add("active");
-      document.body.style.overflow = "hidden";
+      lockBodyScroll();
       renderProjectsFullView();
     }
   };
@@ -1774,7 +1823,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.closeProjectsFullView = () => {
     if (projectsFullView) {
       projectsFullView.classList.remove("active");
-      document.body.style.overflow = "";
+      unlockBodyScroll();
     }
   };
 
@@ -2030,7 +2079,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalBox = document.getElementById("modalBox");
 
   window.closeModal = () => {
-    if (modalBackdrop) modalBackdrop.classList.remove("active");
+    if (modalBackdrop) {
+      modalBackdrop.classList.remove("active");
+      if (!certFullView?.classList.contains("active") && !projectsFullView?.classList.contains("active")) {
+        unlockBodyScroll();
+      }
+    }
   };
 
   if (modalBackdrop) {
@@ -2190,110 +2244,141 @@ document.addEventListener("DOMContentLoaded", () => {
   // Observe elements with data-counter attribute
   document.querySelectorAll("[data-counter]").forEach(el => counterObserver.observe(el));
 
-  // Testimonials Carousel Engine (Matching Screenshot 2)
-  const testimonialsGrid = document.getElementById("testimonialsGrid");
+  // Testimonials Carousel Engine (Continuous Hardware-Accelerated Sliding Track)
+  const testimonialsTrack = document.getElementById("testimonialsTrack");
   const testimonialDots = document.getElementById("testimonialDots");
   const prevBtn = document.getElementById("prevTestimonial");
   const nextBtn = document.getElementById("nextTestimonial");
 
-  let currentPage = 0;
+  let currentTestimonialPage = 0;
   let autoSlideTimer = null;
 
   const getItemsPerPage = () => {
-    if (window.innerWidth >= 1024) return 3;
-    if (window.innerWidth >= 640) return 2;
+    if (window.innerWidth >= 1025) return 3;
+    if (window.innerWidth >= 641) return 2;
     return 1;
   };
 
-  const renderTestimonials = () => {
-    if (!testimonialsGrid) return;
+  const initTestimonialsTrack = () => {
+    if (!testimonialsTrack) return;
+    let cardsHtml = "";
+    testimonialsData.forEach(item => {
+      cardsHtml += `
+        <div class="testimonial-card-slide glass-card" style="padding: 1.75rem; border-radius: 20px; background: var(--card); border: 1px solid var(--border); box-shadow: var(--card-shadow);">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+              <div style="width: 38px; height: 38px; border-radius: 50%; background: ${item.bg}; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #ffffff; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                ${item.initial}
+              </div>
+              <div style="color: #f59e0b; font-size: 0.85rem; letter-spacing: 2px;">
+                ★★★★★
+              </div>
+            </div>
+            <p style="font-size: 0.88rem; font-style: italic; color: var(--foreground); line-height: 1.6; margin-bottom: 1.5rem;">
+              "${item.text}"
+            </p>
+          </div>
+          <div style="border-top: 1px solid var(--border); padding-top: 1rem;">
+            <div style="font-weight: 800; color: var(--foreground); font-size: 0.9rem; font-family: var(--font-heading);">${item.name}</div>
+            <div style="font-size: 0.75rem; color: var(--ink-3); font-weight: 500;">${item.role}</div>
+          </div>
+        </div>
+      `;
+    });
+    testimonialsTrack.innerHTML = cardsHtml;
+    updateTestimonialsSlide();
+  };
+
+  const updateTestimonialsSlide = () => {
+    if (!testimonialsTrack) return;
     const perPage = getItemsPerPage();
     const totalPages = Math.ceil(testimonialsData.length / perPage);
-    if (currentPage >= totalPages) currentPage = 0;
-    if (currentPage < 0) currentPage = totalPages - 1;
+    if (currentTestimonialPage >= totalPages) currentTestimonialPage = 0;
+    if (currentTestimonialPage < 0) currentTestimonialPage = totalPages - 1;
 
-    const startIdx = currentPage * perPage;
-    const currentItems = testimonialsData.slice(startIdx, startIdx + perPage);
+    const offset = currentTestimonialPage * 100;
+    testimonialsTrack.style.transform = `translateX(calc(-${offset}% - ${currentTestimonialPage * 1.5}rem))`;
 
-    testimonialsGrid.style.opacity = "0";
-    testimonialsGrid.style.transform = "translateY(8px)";
-
-    setTimeout(() => {
-      let cardsHtml = "";
-      currentItems.forEach(item => {
-        cardsHtml += `
-          <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 1.75rem; border-radius: 20px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
-            <div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-                <div style="width: 38px; height: 38px; border-radius: 50%; background: ${item.bg}; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #ffffff; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-                  ${item.initial}
-                </div>
-                <div style="color: #f59e0b; font-size: 0.85rem; letter-spacing: 2px;">
-                  ★★★★★
-                </div>
-              </div>
-              <p style="font-size: 0.88rem; font-style: italic; color: var(--foreground); line-height: 1.6; margin-bottom: 1.5rem;">
-                "${item.text}"
-              </p>
-            </div>
-            <div style="border-top: 1px solid var(--border); padding-top: 1rem;">
-              <div style="font-weight: 800; color: var(--foreground); font-size: 0.9rem; font-family: var(--font-heading);">${item.name}</div>
-              <div style="font-size: 0.75rem; color: var(--ink-3); font-weight: 500;">${item.role}</div>
-            </div>
-          </div>
+    if (testimonialDots) {
+      let dotsHtml = "";
+      for (let i = 0; i < totalPages; i++) {
+        const isActive = i === currentTestimonialPage;
+        dotsHtml += `
+          <button onclick="goToTestimonialPage(${i})" style="width: ${isActive ? '22px' : '8px'}; height: 8px; border-radius: 9999px; background: ${isActive ? 'var(--p1)' : 'var(--border)'}; border: none; padding: 0; cursor: pointer; transition: all 0.3s var(--ease-butter);" aria-label="Go to slide ${i + 1}"></button>
         `;
-      });
-      testimonialsGrid.innerHTML = cardsHtml;
-
-      if (testimonialDots) {
-        let dotsHtml = "";
-        for (let i = 0; i < totalPages; i++) {
-          const isActive = i === currentPage;
-          dotsHtml += `
-            <span onclick="goToTestimonialPage(${i})" style="width: ${isActive ? '22px' : '8px'}; height: 8px; border-radius: 9999px; background: ${isActive ? 'var(--p1)' : 'var(--border)'}; cursor: pointer; transition: all 0.3s var(--ease-butter);" aria-label="Go to slide ${i + 1}"></span>
-          `;
-        }
-        testimonialDots.innerHTML = dotsHtml;
       }
-
-      testimonialsGrid.style.opacity = "1";
-      testimonialsGrid.style.transform = "translateY(0)";
-    }, 180);
+      testimonialDots.innerHTML = dotsHtml;
+    }
   };
 
   window.goToTestimonialPage = (p) => {
-    currentPage = p;
-    renderTestimonials();
+    currentTestimonialPage = p;
+    updateTestimonialsSlide();
     resetAutoSlide();
   };
 
   const nextSlide = () => {
     const perPage = getItemsPerPage();
     const totalPages = Math.ceil(testimonialsData.length / perPage);
-    currentPage = (currentPage + 1) % totalPages;
-    renderTestimonials();
+    currentTestimonialPage = (currentTestimonialPage + 1) % totalPages;
+    updateTestimonialsSlide();
   };
 
   const prevSlide = () => {
     const perPage = getItemsPerPage();
     const totalPages = Math.ceil(testimonialsData.length / perPage);
-    currentPage = (currentPage - 1 + totalPages) % totalPages;
-    renderTestimonials();
+    currentTestimonialPage = (currentTestimonialPage - 1 + totalPages) % totalPages;
+    updateTestimonialsSlide();
   };
 
   const resetAutoSlide = () => {
     if (autoSlideTimer) clearInterval(autoSlideTimer);
-    autoSlideTimer = setInterval(nextSlide, 3000);
+    autoSlideTimer = setInterval(nextSlide, 4500);
   };
 
   if (prevBtn) prevBtn.addEventListener("click", () => { prevSlide(); resetAutoSlide(); });
   if (nextBtn) nextBtn.addEventListener("click", () => { nextSlide(); resetAutoSlide(); });
 
+  // Touch gesture support for testimonials slider track
+  let tStartX = 0, tStartY = 0, tDistX = 0;
+  if (testimonialsTrack) {
+    testimonialsTrack.addEventListener("touchstart", (e) => {
+      const pt = e.touches[0];
+      tStartX = pt.clientX;
+      tStartY = pt.clientY;
+      tDistX = 0;
+    }, { passive: true });
+
+    testimonialsTrack.addEventListener("touchmove", (e) => {
+      const pt = e.touches[0];
+      const deltaX = pt.clientX - tStartX;
+      const deltaY = pt.clientY - tStartY;
+      if (Math.abs(deltaX) > Math.abs(deltaY) + 5 && e.cancelable) {
+        e.preventDefault();
+      }
+      tDistX = deltaX;
+    }, { passive: false });
+
+    testimonialsTrack.addEventListener("touchend", () => {
+      if (tDistX < -40) {
+        nextSlide();
+        resetAutoSlide();
+      } else if (tDistX > 40) {
+        prevSlide();
+        resetAutoSlide();
+      }
+      tStartX = tStartY = tDistX = 0;
+    });
+  }
+
   window.addEventListener("resize", () => {
-    renderTestimonials();
+    updateTestimonialsSlide();
     if (typeof renderProjectsFullView === "function") renderProjectsFullView();
     if (typeof renderBadgesFullView === "function" && activeCertTab === "badges") renderBadgesFullView();
   });
+
+  initTestimonialsTrack();
+  resetAutoSlide();
 
   // Initialize Theme Toggle
   initThemeToggle();
@@ -2466,6 +2551,8 @@ function initProjectsArcDeckGesture() {
     if (!topCard) return;
 
     isDragging = true;
+    isLockedHorizontal = false;
+    isLockedVertical = false;
     const pt = e.touches ? e.touches[0] : e;
     startX = pt.clientX;
     startY = pt.clientY;
@@ -2473,6 +2560,9 @@ function initProjectsArcDeckGesture() {
     currentY = 0;
     topCard.style.transition = "none";
   };
+
+  let isLockedHorizontal = false;
+  let isLockedVertical = false;
 
   const onMove = (e) => {
     if (!isDragging) return;
@@ -2483,12 +2573,30 @@ function initProjectsArcDeckGesture() {
     const deltaX = pt.clientX - startX;
     const deltaY = pt.clientY - startY;
 
-    if (e.cancelable && Math.abs(deltaX) > 5) {
+    if (!isLockedHorizontal && !isLockedVertical) {
+      if (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6) {
+        if (Math.abs(deltaX) > Math.abs(deltaY) + 3) {
+          isLockedHorizontal = true;
+        } else {
+          isLockedVertical = true;
+          isDragging = false;
+          topCard.style.transition = "transform 0.2s ease";
+          topCard.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
+          return;
+        }
+      } else {
+        return;
+      }
+    }
+
+    if (isLockedVertical) return;
+
+    if (e.cancelable) {
       e.preventDefault();
     }
 
     currentX = deltaX;
-    currentY = deltaY;
+    currentY = deltaY * 0.4;
 
     if (animFrameId) cancelAnimationFrame(animFrameId);
     animFrameId = requestAnimationFrame(() => {
@@ -2622,7 +2730,8 @@ function initSkillsTiltSwipeGesture() {
   const glowLeft = document.getElementById("skillsGlowLeft");
   const glowRight = document.getElementById("skillsGlowRight");
 
-  const getActiveCard = () => deck.querySelector(".mobile-tilt-card.active");
+  let isLockedHorizontal = false;
+  let isLockedVertical = false;
 
   const onStart = (e) => {
     if (isSkillAnimating) return;
@@ -2630,6 +2739,8 @@ function initSkillsTiltSwipeGesture() {
     if (!card) return;
 
     isDragging = true;
+    isLockedHorizontal = false;
+    isLockedVertical = false;
     const pt = e.touches ? e.touches[0] : e;
     startX = pt.clientX;
     startY = pt.clientY;
@@ -2646,7 +2757,25 @@ function initSkillsTiltSwipeGesture() {
     const deltaX = pt.clientX - startX;
     const deltaY = pt.clientY - startY;
 
-    if (e.cancelable && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+    if (!isLockedHorizontal && !isLockedVertical) {
+      if (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6) {
+        if (Math.abs(deltaX) > Math.abs(deltaY) + 3) {
+          isLockedHorizontal = true;
+        } else {
+          isLockedVertical = true;
+          isDragging = false;
+          card.style.transition = "transform 0.2s ease";
+          card.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
+          return;
+        }
+      } else {
+        return;
+      }
+    }
+
+    if (isLockedVertical) return;
+
+    if (e.cancelable) {
       e.preventDefault();
     }
 
