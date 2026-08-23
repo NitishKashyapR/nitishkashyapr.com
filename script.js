@@ -2421,12 +2421,6 @@ function updateArcDeckStack() {
   const counter = document.getElementById("projectsArcCounter");
   if (!cards.length) return;
 
-  // Flush any in-flight depth-zero animation before re-ordering so rapid clicks
-  // never leave the incoming card stuck mid-transform
-  cards.forEach((card) => {
-    card.getAnimations && card.getAnimations().forEach((a) => a.cancel());
-  });
-
   // Suppress CSS transitions temporarily so depth re-ordering doesn't fly back across screen
   cards.forEach((card) => {
     card.style.transition = "none";
@@ -2469,6 +2463,8 @@ function animateArcThrow(direction, callback) {
   }
 
   isArcAnimating = true;
+  // Force reflow to ensure any prior inline styles are flushed
+  void topCard.offsetHeight;
   topCard.style.transition = "transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.16s ease";
   const throwX = direction === "next" ? 280 : -280;
   const throwRot = direction === "next" ? 14 : -14;
@@ -2480,6 +2476,7 @@ function animateArcThrow(direction, callback) {
     if (settled) return;
     settled = true;
     topCard.removeEventListener("transitionend", onTe);
+    clearTimeout(safetyTimer);
     topCard.style.transition = "none";
     if (callback) callback();
     isArcAnimating = false;
@@ -2488,7 +2485,7 @@ function animateArcThrow(direction, callback) {
   // the timer is only a safety net so a missed event can never wedge the deck.
   const onTe = () => settle();
   topCard.addEventListener("transitionend", onTe, { once: true });
-  setTimeout(settle, 220);
+  const safetyTimer = setTimeout(settle, 250);
 }
 
 // Queue-based move so rapid taps are never dropped and never overlap:
@@ -2521,7 +2518,8 @@ function pumpArcQueue() {
 }
 
 function queueArcMove(direction) {
-  if (arcQueue.length < 3) arcQueue.push(direction);
+  // Only allow 1 queued move to prevent excessive stacking from rapid taps
+  if (arcQueue.length < 2) arcQueue.push(direction);
   if (arcQueueRunning) return;
   arcQueueRunning = true;
   pumpArcQueue();
@@ -2540,6 +2538,7 @@ function initProjectsArcDeckGesture() {
   if (!deck) return;
 
   let startX = 0, startY = 0, currentX = 0, currentY = 0;
+  let startTime = 0;
   let isDragging = false;
   let animFrameId = null;
 
@@ -2556,6 +2555,7 @@ function initProjectsArcDeckGesture() {
     const pt = e.touches ? e.touches[0] : e;
     startX = pt.clientX;
     startY = pt.clientY;
+    startTime = Date.now();
     currentX = 0;
     currentY = 0;
     topCard.style.transition = "none";
@@ -2574,8 +2574,8 @@ function initProjectsArcDeckGesture() {
     const deltaY = pt.clientY - startY;
 
     if (!isLockedHorizontal && !isLockedVertical) {
-      if (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6) {
-        if (Math.abs(deltaX) > Math.abs(deltaY) + 3) {
+      if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+        if (Math.abs(deltaX) >= Math.abs(deltaY)) {
           isLockedHorizontal = true;
         } else {
           isLockedVertical = true;
@@ -2614,9 +2614,12 @@ function initProjectsArcDeckGesture() {
     const topCard = getTopCard();
     if (!topCard) return;
 
+    const elapsed = Date.now() - startTime;
+    const velocity = Math.abs(currentX) / Math.max(elapsed, 1) * 1000; // px/s
     const dist = Math.hypot(currentX, currentY);
 
-    if (dist > 50 || Math.abs(currentX) > 60) {
+    // Accept swipe if: sufficient distance, OR fast enough flick
+    if (dist > 40 || Math.abs(currentX) > 45 || velocity > 400) {
       const dir = currentX >= 0 ? "next" : "prev";
       const throwX = currentX !== 0 ? (currentX > 0 ? 280 : -280) : 280;
       const throwY = currentY < 0 ? currentY - 30 : 20;
@@ -2627,7 +2630,10 @@ function initProjectsArcDeckGesture() {
       topCard.style.opacity = "0";
 
       isArcAnimating = true;
+      let committed = false;
       const commit = () => {
+        if (committed) return;
+        committed = true;
         topCard.style.transition = "none";
         if (dir === "next") {
           currentArcIndex = (currentArcIndex + 1) % totalArcCards;
