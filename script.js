@@ -705,19 +705,14 @@ const projectsData = [
   {
     id: "union-bank",
     title: "Market Research Study",
-    subtitle: "Union Bank of India",
-    description: "An in-depth market research study on Union Bank of India, analyzing consumer perception, service positioning, and brand claims.",
+    subtitle: "Union Bank & Semiconductor Industry",
+    description: "In-depth academic research studies covering banking consumer perception and Indian semiconductor industry dynamics.",
     category: "Research",
     status: "Completed",
     headerStyle: "linear-gradient(135deg, #78350f, #b45309)",
-    skills: ["Market Research", "Data Analysis", "Reporting"],
+    skills: ["Market Research", "Industry Analysis", "PESTLE", "Data Analysis"],
     pdf: "pdfs/Union bank of India.pdf",
-    note: "Undertaken during my 1st semester of MBA as part of an academic initiative. A focused study examining customer perception and actual service delivery.",
-    details: {
-      overview: "A comprehensive market research study focused on analyzing consumer perceptions of product claims.",
-      objective: "To understand the gap between product marketing claims and actual consumer experiences.",
-      summary: "The study involved collecting and analyzing consumer feedback, comparing advertised claims with real-world product performance."
-    }
+    note: "Academic research initiatives undertaken during my 1st and 2nd semesters of MBA."
   },
   {
     id: "portfolio",
@@ -2087,6 +2082,297 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // Semiconductor Audio Data Suite (6 Chapters)
+  const semiconductorAudioData = [
+    {
+      chapter: "Chapter 0",
+      title: "India's Bid for Microchip Manufacturing Independence",
+      file: "audio/Semiconductor%20Industry%20Audio/Chapter%200.%20India,%20sbid%20for%20microchip%20manufacturing%20independence.m4a",
+      downloadName: "Chapter-0-Indias-Bid-for-Microchip-Independence.m4a"
+    },
+    {
+      chapter: "Chapter 1",
+      title: "Why Every Microchip Travels 25,000 Miles",
+      file: "audio/Semiconductor%20Industry%20Audio/Chapter%201.%20Why%20Every%20Microchip%20Travels%2025,000%20Miles.m4a",
+      downloadName: "Chapter-1-Why-Every-Microchip-Travels-25000-Miles.m4a"
+    },
+    {
+      chapter: "Chapter 2",
+      title: "Microscopic Chips and the Global Power Struggle",
+      file: "audio/Semiconductor%20Industry%20Audio/Chapter%202.%20Microscopic%20Chips%20and%20the%20Global%20Power%20Struggle.m4a",
+      downloadName: "Chapter-2-Microscopic-Chips-Global-Power-Struggle.m4a"
+    },
+    {
+      chapter: "Chapter 3",
+      title: "India's Roadmap for Global Semiconductor Sovereignty",
+      file: "audio/Semiconductor%20Industry%20Audio/Chapter%203.%20India's%20Roadmap%20for%20Global%20Semiconductor%20Sovereignty.m4a",
+      downloadName: "Chapter-3-Indias-Roadmap-Semiconductor-Sovereignty.m4a"
+    },
+    {
+      chapter: "Chapter 4",
+      title: "India's Ten Billion Dollar Microchip Mission",
+      file: "audio/Semiconductor%20Industry%20Audio/Chapter%204.%20India's%20Ten%20Billion%20Dollar%20Microchip%20Mission.m4a",
+      downloadName: "Chapter-4-Indias-Ten-Billion-Dollar-Mission.m4a"
+    },
+    {
+      chapter: "Chapter 5",
+      title: "India's Billion Dollar Semiconductor Mission",
+      file: "audio/Semiconductor%20Industry%20Audio/Chapter%205.%20India's%20billion%20dollar%20semiconductor%20mission.m4a",
+      downloadName: "Chapter-5-Indias-Billion-Dollar-Mission.m4a"
+    }
+  ];
+
+  const voiceWaveHeights = [28, 45, 65, 38, 80, 95, 70, 85, 100, 75, 55, 90, 95, 65, 45, 75, 90, 60, 85, 70, 50, 92, 80, 65, 88, 100, 75, 60, 82, 65, 48, 35, 55, 72, 58, 38];
+
+  function formatAudioTime(sec) {
+    if (isNaN(sec) || sec < 0) return "00:00";
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  }
+
+  window.showAudioToast = (msg) => {
+    let t = document.getElementById("audioToast");
+    if (!t) {
+      t = document.createElement("div");
+      t.id = "audioToast";
+      t.className = "audio-toast";
+      document.body.appendChild(t);
+    }
+    t.innerHTML = `<span style="color: #06b6d4;">✓</span> <span>${msg}</span>`;
+    t.classList.add("show");
+    clearTimeout(window._audioToastTimer);
+    window._audioToastTimer = setTimeout(() => {
+      t.classList.remove("show");
+    }, 2500);
+  };
+
+  window.toggleAudioMenu = (idx, e) => {
+    if (e) e.stopPropagation();
+    const allMenus = document.querySelectorAll(".audio-dropdown-menu");
+    const targetMenu = document.getElementById(`audioMenu-${idx}`);
+    allMenus.forEach(m => {
+      if (m !== targetMenu) m.classList.remove("active");
+    });
+    if (targetMenu) targetMenu.classList.toggle("active");
+  };
+
+  window.shareAudioClip = (idx, e) => {
+    if (e) e.stopPropagation();
+    const clip = semiconductorAudioData[idx];
+    if (!clip) return;
+    const fullAudioUrl = new URL(clip.file, window.location.href).href;
+    if (navigator.share) {
+      navigator.share({
+        title: `${clip.chapter}: ${clip.title}`,
+        text: `Listen to ${clip.chapter} - ${clip.title} from Nitish Kashyap's Semiconductor Industry Analysis`,
+        url: fullAudioUrl
+      }).catch(() => {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(fullAudioUrl).then(() => {
+        showAudioToast("Audio clip link copied to clipboard!");
+      }).catch(() => {
+        showAudioToast("Audio clip link ready!");
+      });
+    }
+    const m = document.getElementById(`audioMenu-${idx}`);
+    if (m) m.classList.remove("active");
+  };
+
+  window.togglePlayAudio = (idx) => {
+    const audio = document.getElementById(`audioElem-${idx}`);
+    if (!audio) return;
+
+    if (!audio.paused) {
+      audio.pause();
+      return;
+    }
+
+    // Pause any other playing audio
+    document.querySelectorAll(".audio-chapter-card audio").forEach(a => {
+      if (a !== audio) a.pause();
+    });
+
+    audio.play().catch(err => {
+      console.warn("Audio play error:", err);
+    });
+  };
+
+  window.skipAudio = (idx, sec) => {
+    const audio = document.getElementById(`audioElem-${idx}`);
+    if (!audio) return;
+    const maxDur = audio.duration || 0;
+    audio.currentTime = Math.max(0, Math.min(maxDur, audio.currentTime + sec));
+  };
+
+  window.seekAudio = (idx, e) => {
+    const audio = document.getElementById(`audioElem-${idx}`);
+    const track = document.getElementById(`waveTrack-${idx}`);
+    if (!audio || !track) return;
+    const rect = track.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const pct = Math.max(0, Math.min(1, clickX / rect.width));
+    if (audio.duration && !isNaN(audio.duration)) {
+      audio.currentTime = pct * audio.duration;
+    }
+  };
+
+  window.attachAudioEvents = (idx) => {
+    const audio = document.getElementById(`audioElem-${idx}`);
+    const card = document.getElementById(`audioCard-${idx}`);
+    const btn = document.getElementById(`playBtn-${idx}`);
+    const curTimeEl = document.getElementById(`curTime-${idx}`);
+    const durTimeEl = document.getElementById(`durTime-${idx}`);
+    const track = document.getElementById(`waveTrack-${idx}`);
+    if (!audio) return;
+
+    audio.addEventListener("play", () => {
+      if (card) card.classList.add("is-playing");
+      if (btn) {
+        btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>`;
+        btn.setAttribute("title", "Pause");
+        btn.setAttribute("aria-label", "Pause chapter audio");
+      }
+    });
+
+    audio.addEventListener("pause", () => {
+      if (card) card.classList.remove("is-playing");
+      if (btn) {
+        btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
+        btn.setAttribute("title", "Play");
+        btn.setAttribute("aria-label", "Play chapter audio");
+      }
+    });
+
+    audio.addEventListener("ended", () => {
+      if (card) card.classList.remove("is-playing");
+      if (btn) {
+        btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
+      }
+    });
+
+    audio.addEventListener("loadedmetadata", () => {
+      if (durTimeEl && audio.duration) {
+        durTimeEl.textContent = formatAudioTime(audio.duration);
+      }
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      if (curTimeEl) {
+        curTimeEl.textContent = formatAudioTime(audio.currentTime);
+      }
+      if (durTimeEl && (!durTimeEl.textContent || durTimeEl.textContent === "--:--") && audio.duration) {
+        durTimeEl.textContent = formatAudioTime(audio.duration);
+      }
+      if (track && audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        const bars = track.querySelectorAll(".audio-wave-bar");
+        const totalBars = bars.length;
+        const playedCount = Math.floor((pct / 100) * totalBars);
+        bars.forEach((bar, i) => {
+          if (i <= playedCount) {
+            bar.classList.add("played");
+          } else {
+            bar.classList.remove("played");
+          }
+        });
+      }
+    });
+  };
+
+  function renderAudioChapterCards() {
+    return semiconductorAudioData.map((clip, idx) => {
+      const barsHtml = voiceWaveHeights.map(h => `<div class="audio-wave-bar" style="height: ${h}%;"></div>`).join('');
+      return `
+        <div class="audio-chapter-card" id="audioCard-${idx}">
+          <audio id="audioElem-${idx}" preload="metadata" src="${clip.file}"></audio>
+          
+          <div class="audio-header-row">
+            <div class="audio-title-wrap">
+              <span class="audio-chapter-pill">${clip.chapter}</span>
+              <div class="audio-chapter-title" title="${clip.title}">${clip.title}</div>
+            </div>
+            
+            <div class="audio-menu-wrapper">
+              <button class="audio-menu-btn" onclick="toggleAudioMenu(${idx}, event)" title="More options" aria-label="Audio options">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="12" r="2"/></svg>
+              </button>
+              <div class="audio-dropdown-menu" id="audioMenu-${idx}">
+                <button class="audio-menu-item" onclick="shareAudioClip(${idx}, event)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                  <span>Share Clip</span>
+                </button>
+                <a class="audio-menu-item" href="${clip.file}" download="${clip.downloadName}">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span>Download Audio</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="audio-player-body">
+            <button class="audio-play-btn" id="playBtn-${idx}" onclick="togglePlayAudio(${idx})" title="Play" aria-label="Play chapter audio">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </button>
+
+            <button class="audio-skip-btn" onclick="skipAudio(${idx}, -10)" title="Rewind 10s" aria-label="Rewind 10 seconds">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 4v6h6"/>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                <text x="12" y="15.5" font-size="7" font-weight="800" text-anchor="middle" fill="currentColor" stroke="none" font-family="sans-serif">10</text>
+              </svg>
+            </button>
+
+            <div class="audio-waveform-track" id="waveTrack-${idx}" onclick="seekAudio(${idx}, event)" title="Click or tap to seek">
+              ${barsHtml}
+            </div>
+
+            <button class="audio-skip-btn" onclick="skipAudio(${idx}, 10)" title="Forward 10s" aria-label="Forward 10 seconds">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 4v6h-6"/>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                <text x="12" y="15.5" font-size="7" font-weight="800" text-anchor="middle" fill="currentColor" stroke="none" font-family="sans-serif">10</text>
+              </svg>
+            </button>
+          </div>
+
+          <div class="audio-time-wrap">
+            <span id="curTime-${idx}">00:00</span>
+            <span id="durTime-${idx}">--:--</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Close audio dropdown menus when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".audio-menu-wrapper")) {
+      document.querySelectorAll(".audio-dropdown-menu.active").forEach(m => m.classList.remove("active"));
+    }
+  });
+
+  window.toggleAudioChaptersAccordion = () => {
+    const container = document.getElementById("audioChaptersContainer");
+    const chevron = document.getElementById("audioToggleChevron");
+    const toggleBtn = document.getElementById("audioChaptersToggleBtn");
+    const sub = document.getElementById("audioToggleSubtitle");
+    if (!container) return;
+
+    const isHidden = container.style.display === "none";
+    if (isHidden) {
+      container.style.display = "flex";
+      if (chevron) chevron.style.transform = "rotate(180deg)";
+      if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
+      if (sub) sub.textContent = "Click to collapse audio briefings";
+    } else {
+      container.style.display = "none";
+      if (chevron) chevron.style.transform = "rotate(0deg)";
+      if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "false");
+      if (sub) sub.textContent = "Click to expand 6 recorded briefings";
+    }
+  };
+
   if (modalBackdrop) {
     modalBackdrop.addEventListener("click", (e) => {
       if (e.target === modalBackdrop) closeModal();
@@ -2102,23 +2388,78 @@ document.addEventListener("DOMContentLoaded", () => {
       extraResearchHtml = `
         <div style="margin-top: 1.5rem;">
           <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.75rem; letter-spacing: 0.04em;">Research Reports</div>
-          <div style="background: var(--surface-1); border: 1px solid var(--border); border-radius: 18px; padding: 1.35rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.9rem; border-bottom: 1px solid var(--border); margin-bottom: 0.9rem;">
-              <div style="display: flex; align-items: center; gap: 0.85rem;">
-                <div style="width: 40px; height: 40px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #d97706; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <!-- Report 1: Union Bank of India -->
+            <div style="background: var(--surface-1); border: 1px solid var(--border); border-radius: 18px; padding: 1.35rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.9rem; border-bottom: 1px solid var(--border); margin-bottom: 0.9rem;">
+                <div style="display: flex; align-items: center; gap: 0.85rem;">
+                  <div style="width: 40px; height: 40px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #d97706; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  </div>
+                  <div style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 800; color: var(--foreground);">
+                    Union Bank of India
+                  </div>
                 </div>
-                <div style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 800; color: var(--foreground);">
-                  Union Bank of India
+                <a href="${p.pdf}" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.45rem 1.1rem; font-size: 0.82rem; background: rgba(99, 102, 241, 0.15); color: var(--p1); border: 1px solid rgba(99, 102, 241, 0.25); text-decoration: none; border-radius: 10px;">
+                  View ↗
+                </a>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--ink-2); line-height: 1.7; margin: 0;">
+                Undertaken during my 1st semester of MBA as part of an academic initiative. A focused study examining customer perception, the gap between the bank's brand claims and actual service delivery, and its positioning across customer segments.
+              </p>
+            </div>
+
+            <!-- Report 2: Semiconductor Industry Analysis -->
+            <div style="background: var(--surface-1); border: 1px solid var(--border); border-radius: 18px; padding: 1.35rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.9rem; border-bottom: 1px solid var(--border); margin-bottom: 0.9rem;">
+                <div style="display: flex; align-items: center; gap: 0.85rem;">
+                  <div style="width: 40px; height: 40px; border-radius: 12px; background: rgba(14, 165, 233, 0.15); color: #0284c7; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  </div>
+                  <div style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 800; color: var(--foreground);">
+                    Semiconductor Industry Analysis
+                  </div>
+                </div>
+                <a href="pdfs/Semicondustor%20Industory%20Analysis.pdf" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.45rem 1.1rem; font-size: 0.82rem; background: rgba(99, 102, 241, 0.15); color: var(--p1); border: 1px solid rgba(99, 102, 241, 0.25); text-decoration: none; border-radius: 10px;">
+                  View ↗
+                </a>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--ink-2); line-height: 1.7; margin: 0;">
+                Undertaken during my 2nd semester of MBA as part of an academic initiative. A comprehensive industry analysis evaluating India's semiconductor ecosystem, cleanroom fab and OSAT operations, macroeconomic frameworks (PESTLE), and strategic alignment with the India Semiconductor Mission (ISM).
+              </p>
+
+              <!-- Audio Chapters & Deep Dive Section -->
+              <div style="margin-top: 1.35rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                <div class="audio-toggle-banner" onclick="toggleAudioChaptersAccordion()" style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; border-radius: 12px; background: var(--surface-1, rgba(255, 255, 255, 0.03)); border: 1px solid var(--border); cursor: pointer; transition: all 0.2s ease;">
+                  <div style="display: flex; align-items: center; gap: 0.65rem;">
+                    <div style="width: 28px; height: 28px; border-radius: 8px; background: rgba(6, 182, 212, 0.15); color: #06b6d4; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    </div>
+                    <div>
+                      <div style="font-family: var(--font-heading); font-size: 0.86rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: var(--foreground);">
+                        Audio Chapters &amp; Analysis
+                      </div>
+                      <div style="font-size: 0.72rem; color: var(--ink-3);" id="audioToggleSubtitle">
+                        Click to expand 6 recorded briefings
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 0.68rem; font-weight: 700; color: #0284c7; background: rgba(2, 132, 199, 0.12); padding: 0.25rem 0.65rem; border-radius: 9999px; border: 1px solid rgba(2, 132, 199, 0.25);">
+                      6 Audio Chapters
+                    </span>
+                    <button class="audio-toggle-btn" id="audioChaptersToggleBtn" aria-expanded="false" aria-label="Toggle audio chapters" style="background: var(--surface-2, rgba(255,255,255,0.06)); border: 1px solid var(--border); color: var(--foreground); width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease;">
+                      <svg id="audioToggleChevron" style="transition: transform 0.25s var(--ease-spring);" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="audio-chapters-container" id="audioChaptersContainer" style="display: none;">
+                  ${renderAudioChapterCards()}
                 </div>
               </div>
-              <a href="${p.pdf}" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.45rem 1.1rem; font-size: 0.82rem; background: rgba(99, 102, 241, 0.15); color: var(--p1); border: 1px solid rgba(99, 102, 241, 0.25); text-decoration: none; border-radius: 10px;">
-                View ↗
-              </a>
             </div>
-            <p style="font-size: 0.85rem; color: var(--ink-2); line-height: 1.7; margin: 0;">
-              Undertaken during my 1st semester of MBA as part of an academic initiative. A focused study examining customer perception, the gap between the bank's brand claims and actual service delivery, and its positioning across customer segments.
-            </p>
           </div>
         </div>
       `;
@@ -2128,24 +2469,31 @@ document.addEventListener("DOMContentLoaded", () => {
       <button class="modal-close-btn" onclick="closeModal()">${icons.close}</button>
       <div style="font-size: 0.72rem; font-weight: 700; color: var(--p1); text-transform: uppercase; margin-bottom: 0.4rem;">${p.category} Project</div>
       <h2 style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800; color: var(--foreground); margin-bottom: 0.25rem;">${p.title}</h2>
-      <div style="font-size: 0.9rem; font-weight: 600; color: var(--p2); margin-bottom: 1.25rem;">${p.subtitle}</div>
+      ${p.id !== 'union-bank' && p.subtitle ? `<div style="font-size: 0.9rem; font-weight: 600; color: var(--p2); margin-bottom: 1.25rem;">${p.subtitle}</div>` : ''}
       
+      ${p.details ? `
       <div style="font-size: 0.85rem; color: var(--ink-2); line-height: 1.7; margin-bottom: 1.25rem;">
         <p style="margin-bottom: 0.75rem;"><strong>Overview:</strong> ${p.details.overview}</p>
         <p style="margin-bottom: 0.75rem;"><strong>Objective:</strong> ${p.details.objective}</p>
         <p style="margin-bottom: 0.75rem;"><strong>Summary:</strong> ${p.details.summary}</p>
-      </div>
+      </div>` : ''}
 
       ${p.note && p.id !== 'union-bank' ? `<div style="background: var(--surface-1); border-left: 3px solid var(--p1); padding: 0.85rem 1rem; font-size: 0.8rem; color: var(--ink-3); margin-bottom: 1.25rem; font-style: italic;">${p.note}</div>` : ''}
 
       ${extraResearchHtml}
 
+      ${(p.live || (p.pdf && p.id !== 'union-bank')) ? `
       <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem;">
         ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" class="btn-primary" style="text-decoration: none;">Visit Website ↗</a>` : ''}
         ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration: none;">View Project ↗</a>` : ''}
-      </div>
+      </div>` : ''}
     `;
     modalBackdrop.classList.add("active");
+
+    // Initialize all audio chapter player events if opening the research project
+    if (p.id === "union-bank") {
+      semiconductorAudioData.forEach((_, idx) => attachAudioEvents(idx));
+    }
   };
 
   // ============================================================
@@ -2168,6 +2516,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Observe all reveal targets
   document.querySelectorAll(".reveal-on-scroll, .stagger-children").forEach((el) => observer.observe(el));
+
+  // Immediate reveal for above-the-fold hero elements so they are never hidden
+  document.querySelectorAll(".hero-grid .reveal-on-scroll, .hero-grid .stagger-children, .hero-grid").forEach((el) => {
+    el.classList.add("revealed");
+  });
 
   // ============================================================
   // SCROLL-DRIVEN PARALLAX FLOAT ENGINE
@@ -2382,9 +2735,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize Theme Toggle
   initThemeToggle();
-
-  renderTestimonials();
-  resetAutoSlide();
 
   // Initialize Mobile-Only Unique Card Swipe Engines
   initMobileCardSwipeEngines();

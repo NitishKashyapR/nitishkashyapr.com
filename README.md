@@ -71,7 +71,8 @@
 | 🚀 **DigiColibri** | Digital promotion platform for SMEs · **1st Place**, College Shark Tank Competition | [Live App](https://digicolibri.lovable.app/) |
 | 🌐 **Portfolio Website** | Vibe-coded, AI-accessible portfolio with canvas animations & glassmorphism | [View Site](https://nitishkashyapr.github.io/nitishkashyapr.com/) |
 | 🏛️ **Seva Setu** | Civic-tech proposal connecting citizens with government for issue reporting | [View PDF](pdfs/Seva%20Satu.pdf) |
-| 📊 **Union Bank Study** | Market research on consumer perception vs. actual service delivery | [View PDF](pdfs/Union%20bank%20of%20India.pdf) |
+| 📊 **Union Bank Study** | Market research on consumer perception vs. actual service delivery (MBA Sem 1) | [View PDF](pdfs/Union%20bank%20of%20India.pdf) |
+| 🔬 **Semiconductor Analysis** | Comprehensive 58-page MBA industry & ecosystem analysis under ISM (MBA Sem 2) | [View PDF](pdfs/Semicondustor%20Industory%20Analysis.pdf) |
 
 ---
 

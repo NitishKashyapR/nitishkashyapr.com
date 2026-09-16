@@ -220,11 +220,12 @@ Nitish Kashyap R is a future-ready HR professional and MBA student at VIMTECH (T
 - **Description:** Designed a civic tech digital platform proposal connecting citizens with municipal and government authorities. Features real-time civic issue reporting (roads, water supply, public lighting), engineer assessment workflows, public job creation, and emergency SOS response mechanisms.
 - **Document PDF:** `pdfs/Seva Satu.pdf`
 
-### 3. Market Research Study — Union Bank of India
-- **Category:** Academic Research Project (1st Semester MBA)
-- **Role:** Lead Researcher & Data Analyst
-- **Description:** Conducted an in-depth empirical market research study on Union Bank of India. Analyzed consumer perception, brand positioning, customer satisfaction gaps, and the alignment between marketing claims and actual branch service delivery.
-- **Document PDF:** `pdfs/Union bank of India.pdf`
+### 3. Market Research Studies — Union Bank of India & Semiconductor Industry
+- **Category:** Academic Research Projects (MBA 1st & 2nd Semesters)
+- **Role:** Lead Researcher & Strategic Analyst
+- **Reports:**
+  1. **Union Bank of India (MBA 1st Semester):** Conducted an empirical market research study analyzing consumer perception, brand positioning, customer satisfaction gaps, and the alignment between marketing claims and actual branch service delivery. Document: `pdfs/Union bank of India.pdf`.
+  2. **Semiconductor Industry Analysis (MBA 2nd Semester):** Conducted a comprehensive 58-page industry analysis evaluating India's semiconductor ecosystem, cleanroom fab and OSAT operations, macroeconomic drivers (PESTLE), B2B marketing channels, and strategic policy alignment under the India Semiconductor Mission (ISM) with ₹76,000 Crore fiscal outlay and PLI frameworks. Document: `pdfs/Semicondustor Industory Analysis.pdf`.
 
 ### 4. Personal Interactive Portfolio Website
 - **Category:** Personal Project & Digital Representation

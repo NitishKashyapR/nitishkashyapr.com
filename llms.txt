@@ -59,9 +59,11 @@ Future-ready HR professional passionate about building strong workplace cultures
    - *Role:* Core Conceptualizer & Co-Author
    - *Description:* Conceptualized and designed a digital platform bridging citizens and government bodies for real-time civic issue reporting (roads, water, utilities) and emergency responses.
 
-3. **Market Research Study — Union Bank of India**
-   - *Category:* Academic Research Study (1st Semester MBA)
-   - *Description:* Conducted an in-depth market research study analyzing consumer perception, service positioning, and the alignment between marketing claims and customer service delivery.
+3. **Market Research Studies — Union Bank of India & Semiconductor Industry**
+   - *Category:* Academic Research Studies (MBA 1st & 2nd Semesters)
+   - *Reports:*
+     - **Union Bank of India (MBA Sem 1):** Conducted an empirical study analyzing consumer perception, brand positioning, and the alignment between marketing claims and branch service delivery.
+     - **Semiconductor Industry Analysis (MBA Sem 2):** Conducted a comprehensive 58-page industry analysis evaluating India's semiconductor ecosystem, cleanroom fab/OSAT operations, PESTLE macroeconomic environment, and policy alignment under the India Semiconductor Mission (ISM).
 
 4. **Personal Interactive Portfolio Website**
    - *Category:* Personal Project
