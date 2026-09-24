@@ -36,49 +36,56 @@ if ("serviceWorker" in navigator) {
 // Dots + Lines + Triangulated Polygon fills
 // Mouse + Touch interactive magnetic attraction
 // ============================================================
+// HIGH-PERFORMANCE INTERACTIVE PLEXUS PARTICLE BACKGROUND ENGINE
+// Dots + Connecting Lines + Triangulated Mesh + Cursor/Touch Reactivity
+// Smooth scroll-driven parallax with wraparound & toned brightness
+// ============================================================
 (function plexusEngine() {
   const initEngine = () => {
     const canvas = document.getElementById("plexusCanvas");
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    let particles = [];
-    let mouse = { x: null, y: null, radius: 240 };
-    let animId = null;
-    let lastFrameAt = 0;
-    let frameInterval = 16;
+    if (!ctx) return;
 
-    const reduceParticles = () => {
-      const w = window.innerWidth;
-      const maxP = w < 480 ? 40 : w < 768 ? 60 : 150;
-      const fps = w < 768 ? 30 : 60;
-      frameInterval = 1000 / fps;
-      const area = w * Math.min(window.innerHeight, 900);
-      config.particleCount = Math.min(maxP, Math.max(25, Math.floor(area / (w < 768 ? 14000 : 9000))));
-      config.lineLength = w < 768 ? 115 : 160;
+    let particles = [];
+    let animId = null;
+    let isRunning = false;
+
+    const mouse = {
+      x: -9999,
+      y: -9999,
+      targetX: -9999,
+      targetY: -9999,
+      active: false,
+      opacity: 0,
+      radius: 200
     };
 
     const config = {
-      particleCount: 150,
-      particleMaxRadius: 3.6,
-      particleMinRadius: 1.4,
-      lineLength: 160,
-      particleSpeed: 0.35,
-      dotColor: "rgba(165, 180, 252, 0.95)",
-      lineColor: "rgba(129, 140, 248, 0.38)",
-      polyColor: "rgba(167, 139, 250, 0.06)"
+      particleCount: 155,
+      particleMaxRadius: 2.8,
+      particleMinRadius: 1.0,
+      lineLength: 165,
+      lineWidth: 0.55,
+      rayLineWidth: 1.0,
+      particleSpeed: 0.28,
+      dotColor: "rgba(165, 180, 252, 0.78)",
+      lineColor: "rgba(129, 140, 248, 0.22)",
+      polyColor: "rgba(167, 139, 250, 0.035)",
+      rayRgb: "165, 180, 252"
     };
 
     const THEME_PARTICLE_PALETTES = {
-      dark:     { dot: "rgba(165, 180, 252, 0.95)", line: "rgba(129, 140, 248, 0.38)", poly: "rgba(167, 139, 250, 0.06)" },
-      light:    { dot: "rgba(79, 70, 229, 0.88)",   line: "rgba(99, 102, 241, 0.35)",  poly: "rgba(99, 102, 241, 0.05)" },
-      ocean:    { dot: "rgba(125, 211, 252, 0.95)", line: "rgba(56, 189, 248, 0.38)",  poly: "rgba(129, 140, 248, 0.06)" },
-      sunrise:  { dot: "rgba(234, 88, 12, 0.88)",   line: "rgba(249, 115, 22, 0.35)",  poly: "rgba(234, 179, 8, 0.05)" },
-      lavender: { dot: "rgba(124, 58, 237, 0.88)",  line: "rgba(147, 51, 234, 0.35)",  poly: "rgba(168, 85, 247, 0.05)" },
-      bloom:    { dot: "rgba(219, 39, 119, 0.88)",  line: "rgba(236, 72, 153, 0.35)",  poly: "rgba(244, 114, 182, 0.05)" },
-      forge:    { dot: "rgba(221, 214, 254, 0.95)", line: "rgba(167, 139, 250, 0.38)", poly: "rgba(244, 114, 182, 0.06)" },
-      breeze:   { dot: "rgba(2, 132, 199, 0.88)",   line: "rgba(14, 165, 233, 0.35)",  poly: "rgba(56, 189, 248, 0.05)" },
-      slate:    { dot: "rgba(226, 232, 240, 0.92)", line: "rgba(148, 163, 184, 0.38)", poly: "rgba(148, 163, 184, 0.06)" },
-      meadow:   { dot: "rgba(22, 163, 74, 0.88)",   line: "rgba(34, 197, 94, 0.35)",   poly: "rgba(13, 148, 136, 0.05)" }
+      dark:     { dot: "rgba(165, 180, 252, 0.78)", line: "rgba(129, 140, 248, 0.22)", poly: "rgba(167, 139, 250, 0.035)", ray: "165, 180, 252" },
+      light:    { dot: "rgba(99, 102, 241, 0.50)",   line: "rgba(99, 102, 241, 0.15)",  poly: "rgba(99, 102, 241, 0.020)", ray: "99, 102, 241" },
+      ocean:    { dot: "rgba(125, 211, 252, 0.78)", line: "rgba(56, 189, 248, 0.22)",  poly: "rgba(129, 140, 248, 0.035)", ray: "125, 211, 252" },
+      sunrise:  { dot: "rgba(234, 88, 12, 0.55)",   line: "rgba(249, 115, 22, 0.16)",  poly: "rgba(234, 179, 8, 0.020)",   ray: "234, 88, 12" },
+      lavender: { dot: "rgba(124, 58, 237, 0.55)",  line: "rgba(147, 51, 234, 0.16)",  poly: "rgba(168, 85, 247, 0.020)", ray: "124, 58, 237" },
+      bloom:    { dot: "rgba(219, 39, 119, 0.55)",  line: "rgba(236, 72, 153, 0.16)",  poly: "rgba(244, 114, 182, 0.020)", ray: "219, 39, 119" },
+      forge:    { dot: "rgba(221, 214, 254, 0.78)", line: "rgba(167, 139, 250, 0.22)", poly: "rgba(244, 114, 182, 0.035)", ray: "221, 214, 254" },
+      breeze:   { dot: "rgba(2, 132, 199, 0.55)",   line: "rgba(14, 165, 233, 0.16)",  poly: "rgba(56, 189, 248, 0.020)", ray: "2, 132, 199" },
+      slate:    { dot: "rgba(226, 232, 240, 0.75)", line: "rgba(148, 163, 184, 0.20)", poly: "rgba(148, 163, 184, 0.030)", ray: "226, 232, 240" },
+      meadow:   { dot: "rgba(22, 163, 74, 0.55)",   line: "rgba(34, 197, 94, 0.16)",   poly: "rgba(13, 148, 136, 0.020)", ray: "22, 163, 74" }
     };
 
     function updateThemeColors() {
@@ -87,7 +94,27 @@ if ("serviceWorker" in navigator) {
       config.dotColor = palette.dot;
       config.lineColor = palette.line;
       config.polyColor = palette.poly;
+      config.rayRgb = palette.ray;
     }
+
+    const scaleConfigForViewport = () => {
+      const w = window.innerWidth;
+      const isMobile = w < 768;
+      const isTablet = w >= 768 && w < 1024;
+      if (isMobile) {
+        config.particleCount = 52;
+        config.lineLength = 122;
+        mouse.radius = 140;
+      } else if (isTablet) {
+        config.particleCount = 94;
+        config.lineLength = 150;
+        mouse.radius = 180;
+      } else {
+        config.particleCount = 155;
+        config.lineLength = 165;
+        mouse.radius = 215;
+      }
+    };
 
     class Particle {
       constructor(w, h) {
@@ -100,15 +127,15 @@ if ("serviceWorker" in navigator) {
       update(w, h) {
         this.x += this.vx;
         this.y += this.vy;
-        if (this.x < 0) this.x = w;
-        if (this.x > w) this.x = 0;
-        if (this.y < 0) this.y = h;
-        if (this.y > h) this.y = 0;
+        if (this.x < 0) this.x += w;
+        if (this.x > w) this.x -= w;
+        if (this.y < 0) this.y += h;
+        if (this.y > h) this.y -= h;
       }
-      getScreenPos(yOffset, h) {
-        let sy = (this.y - yOffset) % h;
+      getScreenPos(yOffset, h, speedDrift = 0) {
+        let sy = (this.y - yOffset - speedDrift) % h;
         if (sy < 0) sy += h;
-        return { x: this.x, y: sy };
+        return { x: this.x, y: sy, radius: this.radius };
       }
     }
 
@@ -119,89 +146,133 @@ if ("serviceWorker" in navigator) {
     }, { passive: true });
 
     function renderNetwork() {
-      currentScrollY += (targetScrollY - currentScrollY) * 0.1;
       const displayWidth = window.innerWidth;
       const displayHeight = window.innerHeight;
-      const yOffset = (currentScrollY * 0.12) % displayHeight;
+      if (displayWidth <= 0 || displayHeight <= 0) return;
+
+      // Adaptive scroll speed tracking: accelerates with fast scrolls and eases with silky momentum
+      const scrollDiff = targetScrollY - currentScrollY;
+      const absDiff = Math.abs(scrollDiff);
+      const adaptiveLerp = Math.min(0.26, Math.max(0.09, absDiff * 0.0006 + 0.12));
+      currentScrollY += scrollDiff * adaptiveLerp;
+
+      // Dynamic velocity drift for speed adaptation (particles react to scroll speed)
+      const speedDrift = Math.max(-14, Math.min(14, scrollDiff * 0.015));
+
+      // Page-bound scroll movement so the background moves along with the website both up and down
+      const yOffset = ((currentScrollY * 0.85) % displayHeight + displayHeight) % displayHeight;
 
       // Calculate screen positions for all particles
-      const screenNodes = [];
+      const screenNodes = new Array(particles.length);
       for (let i = 0; i < particles.length; i++) {
         particles[i].update(displayWidth, displayHeight);
-        let pos = particles[i].getScreenPos(yOffset, displayHeight);
-        screenNodes.push({ x: pos.x, y: pos.y, radius: particles[i].radius });
+        screenNodes[i] = particles[i].getScreenPos(yOffset, displayHeight, speedDrift);
       }
 
-      // Mouse & touch interactive repulsion and direct cursor connection lines
-      if (mouse.x !== null && mouse.y !== null) {
+      // Smooth pointer / touch tracking and interaction
+      if (mouse.active) {
+        mouse.opacity = Math.min(1, mouse.opacity + 0.12);
+      } else {
+        mouse.opacity = Math.max(0, mouse.opacity - 0.04);
+      }
+
+      if (mouse.opacity > 0.01) {
+        mouse.x += (mouse.targetX - mouse.x) * 0.35;
+        mouse.y += (mouse.targetY - mouse.y) * 0.35;
+
+        const rays = [];
+        const mRadius = mouse.radius;
         for (let i = 0; i < screenNodes.length; i++) {
-          let dx = mouse.x - screenNodes[i].x;
-          let dy = mouse.y - screenNodes[i].y;
-          let dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < mouse.radius && dist > 0) {
-            let force = (mouse.radius - dist) / mouse.radius;
-
-            // Draw interactive glowing connection line from cursor/finger to particle
-            let alpha = force * 0.75;
-            ctx.beginPath();
-            ctx.moveTo(mouse.x, mouse.y);
-            ctx.lineTo(screenNodes[i].x, screenNodes[i].y);
-            ctx.strokeStyle = config.lineColor.replace(/[\d\.]+\)$/, `${alpha})`);
-            ctx.lineWidth = 1.4;
-            ctx.stroke();
-
-            // Repel dots away from cursor
-            screenNodes[i].x -= (dx / dist) * force * 26;
-            screenNodes[i].y -= (dy / dist) * force * 26;
+          const node = screenNodes[i];
+          const dx = mouse.x - node.x;
+          const dy = mouse.y - node.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mRadius && dist > 0) {
+            const force = ((mRadius - dist) / mRadius) * mouse.opacity;
+            // Draw interactive luminous rays from cursor/finger to particle
+            rays.push({ x: node.x, y: node.y, alpha: force * 0.65 });
+            // Gentle physical repulsion
+            node.x -= (dx / dist) * force * 24;
+            node.y -= (dy / dist) * force * 24;
           }
+        }
+
+        // Draw interactive cursor/finger rays
+        for (let r = 0; r < rays.length; r++) {
+          const ray = rays[r];
+          ctx.beginPath();
+          ctx.moveTo(mouse.x, mouse.y);
+          ctx.lineTo(ray.x, ray.y);
+          ctx.strokeStyle = `rgba(${config.rayRgb}, ${ray.alpha})`;
+          ctx.lineWidth = config.rayLineWidth;
+          ctx.stroke();
         }
       }
 
-      // Draw particle dots
+      // 1. Batch draw particle dots (Single draw call)
+      ctx.beginPath();
       for (let i = 0; i < screenNodes.length; i++) {
-        ctx.beginPath();
-        ctx.arc(screenNodes[i].x, screenNodes[i].y, screenNodes[i].radius, 0, Math.PI * 2);
-        ctx.fillStyle = config.dotColor;
-        ctx.fill();
+        const node = screenNodes[i];
+        ctx.moveTo(node.x + node.radius, node.y);
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
       }
+      ctx.fillStyle = config.dotColor;
+      ctx.fill();
 
-      // Draw connecting lines & mesh between particles (optimized with squared distances)
+      // 2. Batch draw connecting mesh lines (Single draw call)
       const maxDist2 = config.lineLength * config.lineLength;
+      ctx.beginPath();
       for (let i = 0; i < screenNodes.length; i++) {
-        let closeNodes = [];
+        const p1 = screenNodes[i];
         for (let j = i + 1; j < screenNodes.length; j++) {
-          let dx = screenNodes[i].x - screenNodes[j].x;
-          let dy = screenNodes[i].y - screenNodes[j].y;
-          let d2 = dx * dx + dy * dy;
-          if (d2 < maxDist2) {
-            closeNodes.push({ index: j });
-            ctx.beginPath();
-            ctx.moveTo(screenNodes[i].x, screenNodes[i].y);
-            ctx.lineTo(screenNodes[j].x, screenNodes[j].y);
-            ctx.strokeStyle = config.lineColor;
-            ctx.lineWidth = 0.85;
-            ctx.stroke();
+          const p2 = screenNodes[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          if (dx * dx + dy * dy < maxDist2) {
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
           }
         }
-        for (let k = 0; k < closeNodes.length; k++) {
-          for (let m = k + 1; m < closeNodes.length; m++) {
-            let p2 = screenNodes[closeNodes[k].index];
-            let p3 = screenNodes[closeNodes[m].index];
-            let dx2 = p2.x - p3.x;
-            let dy2 = p2.y - p3.y;
-            let d2_2 = dx2 * dx2 + dy2 * dy2;
-            if (d2_2 < maxDist2) {
-              ctx.beginPath();
-              ctx.moveTo(screenNodes[i].x, screenNodes[i].y);
+      }
+      ctx.strokeStyle = config.lineColor;
+      ctx.lineWidth = config.lineWidth;
+      ctx.stroke();
+
+      // 3. Batch draw delicate polygon triangles (Single draw call, capped for 60fps)
+      const isMobile = displayWidth < 768;
+      const maxTriangles = isMobile ? 24 : 45;
+      let triCount = 0;
+      ctx.beginPath();
+      for (let i = 0; i < screenNodes.length && triCount < maxTriangles; i++) {
+        const p1 = screenNodes[i];
+        const close = [];
+        for (let j = i + 1; j < screenNodes.length; j++) {
+          const p2 = screenNodes[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          if (dx * dx + dy * dy < maxDist2) {
+            close.push(p2);
+            if (close.length >= 4) break;
+          }
+        }
+        for (let k = 0; k < close.length && triCount < maxTriangles; k++) {
+          for (let m = k + 1; m < close.length && triCount < maxTriangles; m++) {
+            const p2 = close[k];
+            const p3 = close[m];
+            const dx2 = p2.x - p3.x;
+            const dy2 = p2.y - p3.y;
+            if (dx2 * dx2 + dy2 * dy2 < maxDist2) {
+              ctx.moveTo(p1.x, p1.y);
               ctx.lineTo(p2.x, p2.y);
               ctx.lineTo(p3.x, p3.y);
               ctx.closePath();
-              ctx.fillStyle = config.polyColor;
-              ctx.fill();
+              triCount++;
             }
           }
         }
       }
+      ctx.fillStyle = config.polyColor;
+      ctx.fill();
     }
 
     function init() {
@@ -225,25 +296,42 @@ if ("serviceWorker" in navigator) {
       );
     }
 
-    function animate(now) {
-      if (document.hidden || isModalOrFullscreenActive() || window.scrollY > window.innerHeight * 2.2) {
+    function animate() {
+      if (!isRunning) return;
+      if (document.hidden) {
         animId = requestAnimationFrame(animate);
         return;
       }
-      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (isModalOrFullscreenActive()) {
         animId = requestAnimationFrame(animate);
         return;
       }
-      if (now - lastFrameAt < frameInterval) {
-        animId = requestAnimationFrame(animate);
-        return;
-      }
-      lastFrameAt = now;
       const displayWidth = window.innerWidth;
       const displayHeight = window.innerHeight;
       ctx.clearRect(0, 0, displayWidth, displayHeight);
       renderNetwork();
       animId = requestAnimationFrame(animate);
+    }
+
+    function startAnimation() {
+      if (isRunning) return;
+      isRunning = true;
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        // Draw elegant static network once for reduced motion accessibility
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        renderNetwork();
+        isRunning = false;
+        return;
+      }
+      animId = requestAnimationFrame(animate);
+    }
+
+    function stopAnimation() {
+      isRunning = false;
+      if (animId) {
+        cancelAnimationFrame(animId);
+        animId = null;
+      }
     }
 
     let lastWidth = 0;
@@ -254,55 +342,91 @@ if ("serviceWorker" in navigator) {
       const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
       const displayWidth = window.innerWidth;
       const displayHeight = window.innerHeight;
-      canvas.width = displayWidth * dpr;
-      canvas.height = displayHeight * dpr;
+
+      canvas.width = Math.round(displayWidth * dpr);
+      canvas.height = Math.round(displayHeight * dpr);
       canvas.style.width = displayWidth + "px";
       canvas.style.height = displayHeight + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      if (Math.abs(displayWidth - lastWidth) > 10 || Math.abs(displayHeight - lastHeight) > 150 || particles.length === 0) {
+      // Avoid reallocating particles on minor mobile address-bar height adjustments (<120px)
+      const widthChanged = Math.abs(displayWidth - lastWidth) > 8;
+      const heightChanged = Math.abs(displayHeight - lastHeight) > 120;
+      if (widthChanged || heightChanged || particles.length === 0) {
         lastWidth = displayWidth;
         lastHeight = displayHeight;
-        reduceParticles();
+        scaleConfigForViewport();
         updateThemeColors();
         init();
       }
+
+      // Guarantee immediate render so canvas is never left blank
+      ctx.clearRect(0, 0, displayWidth, displayHeight);
+      renderNetwork();
     }
 
-    document.addEventListener("mousemove", (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+    // Unified cursor and touch tracking
+    window.addEventListener("mousemove", (e) => {
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+      if (!mouse.active) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      }
+      mouse.active = true;
+    }, { passive: true });
+
+    window.addEventListener("mouseleave", () => {
+      mouse.active = false;
     });
-    document.addEventListener("mouseleave", () => {
-      mouse.x = null;
-      mouse.y = null;
-    });
-    document.addEventListener("touchstart", (e) => {
+
+    window.addEventListener("touchstart", (e) => {
       if (e.touches && e.touches.length > 0) {
-        mouse.x = e.touches[0].clientX;
-        mouse.y = e.touches[0].clientY;
+        mouse.targetX = e.touches[0].clientX;
+        mouse.targetY = e.touches[0].clientY;
+        if (!mouse.active) {
+          mouse.x = mouse.targetX;
+          mouse.y = mouse.targetY;
+        }
+        mouse.active = true;
       }
     }, { passive: true });
-    document.addEventListener("touchmove", (e) => {
+
+    window.addEventListener("touchmove", (e) => {
       if (e.touches && e.touches.length > 0) {
-        mouse.x = e.touches[0].clientX;
-        mouse.y = e.touches[0].clientY;
+        mouse.targetX = e.touches[0].clientX;
+        mouse.targetY = e.touches[0].clientY;
+        mouse.active = true;
       }
     }, { passive: true });
-    document.addEventListener("touchend", () => {
-      mouse.x = null;
-      mouse.y = null;
+
+    window.addEventListener("touchend", () => {
+      mouse.active = false;
     }, { passive: true });
+
+    window.addEventListener("touchcancel", () => {
+      mouse.active = false;
+    }, { passive: true });
+
     window.addEventListener("resize", resize);
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopAnimation();
+      } else {
+        startAnimation();
+      }
+    });
 
     const observer = new MutationObserver(() => {
       updateThemeColors();
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
+    scaleConfigForViewport();
+    updateThemeColors();
     resize();
-    lastFrameAt = performance.now();
-    animate(lastFrameAt);
+    startAnimation();
   };
 
   if (document.readyState === "loading") {
@@ -2545,7 +2669,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     },
-    { threshold: 0.01, rootMargin: "100px 0px 100px 0px" }
+    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
   );
 
   // Observe all reveal targets
