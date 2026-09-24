@@ -58,17 +58,17 @@ if ("serviceWorker" in navigator) {
       targetY: -9999,
       active: false,
       opacity: 0,
-      radius: 200
+      radius: 230
     };
 
     const config = {
       particleCount: 155,
       particleMaxRadius: 2.8,
       particleMinRadius: 1.0,
-      lineLength: 165,
-      lineWidth: 0.55,
-      rayLineWidth: 1.0,
-      particleSpeed: 0.28,
+      lineLength: 170,
+      lineWidth: 0.65,
+      rayLineWidth: 1.2,
+      particleSpeed: 0.68,
       dotColor: "rgba(165, 180, 252, 0.78)",
       lineColor: "rgba(129, 140, 248, 0.22)",
       polyColor: "rgba(167, 139, 250, 0.035)",
@@ -103,16 +103,19 @@ if ("serviceWorker" in navigator) {
       const isTablet = w >= 768 && w < 1024;
       if (isMobile) {
         config.particleCount = 52;
-        config.lineLength = 122;
-        mouse.radius = 140;
+        config.lineLength = 125;
+        config.particleSpeed = 0.45;
+        mouse.radius = 150;
       } else if (isTablet) {
-        config.particleCount = 94;
-        config.lineLength = 150;
-        mouse.radius = 180;
+        config.particleCount = 95;
+        config.lineLength = 155;
+        config.particleSpeed = 0.55;
+        mouse.radius = 190;
       } else {
         config.particleCount = 155;
-        config.lineLength = 165;
-        mouse.radius = 215;
+        config.lineLength = 170;
+        config.particleSpeed = 0.68;
+        mouse.radius = 230;
       }
     };
 
@@ -120,13 +123,15 @@ if ("serviceWorker" in navigator) {
       constructor(w, h) {
         this.x = Math.random() * w;
         this.y = Math.random() * h;
-        this.vx = (Math.random() - 0.5) * config.particleSpeed;
-        this.vy = (Math.random() - 0.5) * config.particleSpeed;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = (Math.random() * 0.5 + 0.5) * config.particleSpeed;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
         this.radius = Math.random() * (config.particleMaxRadius - config.particleMinRadius) + config.particleMinRadius;
       }
-      update(w, h) {
-        this.x += this.vx;
-        this.y += this.vy;
+      update(w, h, speedFactor = 1.0) {
+        this.x += this.vx * speedFactor;
+        this.y += this.vy * speedFactor;
         if (this.x < 0) this.x += w;
         if (this.x > w) this.x -= w;
         if (this.y < 0) this.y += h;
@@ -141,8 +146,15 @@ if ("serviceWorker" in navigator) {
 
     let targetScrollY = window.scrollY || 0;
     let currentScrollY = targetScrollY;
+    let wheelImpulse = 0;
+
     window.addEventListener("scroll", () => {
       targetScrollY = window.scrollY || 0;
+    }, { passive: true });
+
+    window.addEventListener("wheel", (e) => {
+      wheelImpulse += e.deltaY * 0.035;
+      wheelImpulse = Math.max(-25, Math.min(25, wheelImpulse));
     }, { passive: true });
 
     function renderNetwork() {
@@ -150,30 +162,34 @@ if ("serviceWorker" in navigator) {
       const displayHeight = window.innerHeight;
       if (displayWidth <= 0 || displayHeight <= 0) return;
 
-      // Adaptive scroll speed tracking: accelerates with fast scrolls and eases with silky momentum
+      // Adaptive scroll speed tracking + mouse wheel impulse
       const scrollDiff = targetScrollY - currentScrollY;
       const absDiff = Math.abs(scrollDiff);
-      const adaptiveLerp = Math.min(0.26, Math.max(0.09, absDiff * 0.0006 + 0.12));
+      const adaptiveLerp = Math.min(0.28, Math.max(0.10, absDiff * 0.0006 + 0.14));
       currentScrollY += scrollDiff * adaptiveLerp;
 
-      // Dynamic velocity drift for speed adaptation (particles react to scroll speed)
-      const speedDrift = Math.max(-14, Math.min(14, scrollDiff * 0.015));
+      wheelImpulse *= 0.92;
+      const speedDrift = Math.max(-18, Math.min(18, (scrollDiff * 0.015) + wheelImpulse));
 
       // Page-bound scroll movement so the background moves along with the website both up and down
       const yOffset = ((currentScrollY * 0.85) % displayHeight + displayHeight) % displayHeight;
 
+      // Check if user has reduced-motion preference (reduce speed organically, never freeze)
+      const isReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const speedFactor = isReduced ? 0.45 : 1.0;
+
       // Calculate screen positions for all particles
       const screenNodes = new Array(particles.length);
       for (let i = 0; i < particles.length; i++) {
-        particles[i].update(displayWidth, displayHeight);
+        particles[i].update(displayWidth, displayHeight, speedFactor);
         screenNodes[i] = particles[i].getScreenPos(yOffset, displayHeight, speedDrift);
       }
 
       // Smooth pointer / touch tracking and interaction
       if (mouse.active) {
-        mouse.opacity = Math.min(1, mouse.opacity + 0.12);
+        mouse.opacity = Math.min(1, mouse.opacity + 0.14);
       } else {
-        mouse.opacity = Math.max(0, mouse.opacity - 0.04);
+        mouse.opacity = Math.max(0, mouse.opacity - 0.03);
       }
 
       if (mouse.opacity > 0.01) {
@@ -190,10 +206,10 @@ if ("serviceWorker" in navigator) {
           if (dist < mRadius && dist > 0) {
             const force = ((mRadius - dist) / mRadius) * mouse.opacity;
             // Draw interactive luminous rays from cursor/finger to particle
-            rays.push({ x: node.x, y: node.y, alpha: force * 0.65 });
-            // Gentle physical repulsion
-            node.x -= (dx / dist) * force * 24;
-            node.y -= (dy / dist) * force * 24;
+            rays.push({ x: node.x, y: node.y, alpha: force * 0.85 });
+            // Smooth physical deflection
+            node.x -= (dx / dist) * force * 28;
+            node.y -= (dy / dist) * force * 28;
           }
         }
 
@@ -207,6 +223,16 @@ if ("serviceWorker" in navigator) {
           ctx.lineWidth = config.rayLineWidth;
           ctx.stroke();
         }
+
+        // Draw soft cursor glowing nexus aura
+        const glowRadius = Math.min(32, 14 + mouse.opacity * 18);
+        const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, glowRadius);
+        grad.addColorStop(0, `rgba(${config.rayRgb}, ${0.35 * mouse.opacity})`);
+        grad.addColorStop(1, `rgba(${config.rayRgb}, 0)`);
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, glowRadius, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
       }
 
       // 1. Batch draw particle dots (Single draw call)
@@ -316,13 +342,6 @@ if ("serviceWorker" in navigator) {
     function startAnimation() {
       if (isRunning) return;
       isRunning = true;
-      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        // Draw elegant static network once for reduced motion accessibility
-        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        renderNetwork();
-        isRunning = false;
-        return;
-      }
       animId = requestAnimationFrame(animate);
     }
 
@@ -365,38 +384,36 @@ if ("serviceWorker" in navigator) {
       renderNetwork();
     }
 
-    // Unified cursor and touch tracking
-    window.addEventListener("mousemove", (e) => {
-      mouse.targetX = e.clientX;
-      mouse.targetY = e.clientY;
+    // Unified cursor and touch tracking with pointer events
+    const updatePointer = (clientX, clientY) => {
+      mouse.targetX = clientX;
+      mouse.targetY = clientY;
       if (!mouse.active) {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
+        mouse.x = clientX;
+        mouse.y = clientY;
       }
       mouse.active = true;
+    };
+
+    window.addEventListener("mousemove", (e) => {
+      updatePointer(e.clientX, e.clientY);
     }, { passive: true });
 
-    window.addEventListener("mouseleave", () => {
-      mouse.active = false;
+    document.addEventListener("mouseleave", (e) => {
+      if (!e.relatedTarget && !e.toElement) {
+        mouse.active = false;
+      }
     });
 
     window.addEventListener("touchstart", (e) => {
       if (e.touches && e.touches.length > 0) {
-        mouse.targetX = e.touches[0].clientX;
-        mouse.targetY = e.touches[0].clientY;
-        if (!mouse.active) {
-          mouse.x = mouse.targetX;
-          mouse.y = mouse.targetY;
-        }
-        mouse.active = true;
+        updatePointer(e.touches[0].clientX, e.touches[0].clientY);
       }
     }, { passive: true });
 
     window.addEventListener("touchmove", (e) => {
       if (e.touches && e.touches.length > 0) {
-        mouse.targetX = e.touches[0].clientX;
-        mouse.targetY = e.touches[0].clientY;
-        mouse.active = true;
+        updatePointer(e.touches[0].clientX, e.touches[0].clientY);
       }
     }, { passive: true });
 
@@ -2669,7 +2686,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     },
-    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
   );
 
   // Observe all reveal targets
@@ -2679,6 +2696,38 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".hero-grid .reveal-on-scroll, .hero-grid .stagger-children, .hero-grid").forEach((el) => {
     el.classList.add("revealed");
   });
+
+  // ============================================================
+  // DESKTOP INTERACTIVE 3D CARD TILT & SPOTLIGHT ENGINE
+  // Adds tactile 3D perspective tilt and dynamic cursor spotlight
+  // to all .glass-card elements on desktop devices (width >= 769px)
+  // ============================================================
+  if (window.matchMedia && window.matchMedia("(min-width: 769px)").matches) {
+    const desktopCards = document.querySelectorAll(".glass-card");
+    desktopCards.forEach((card) => {
+      let isHovered = false;
+      card.addEventListener("mouseenter", () => {
+        isHovered = true;
+        card.style.transition = "transform 0.15s ease-out, box-shadow 0.25s ease-out";
+      });
+      card.addEventListener("mousemove", (e) => {
+        if (!isHovered) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((centerY - y) / centerY) * 4.5;
+        const rotateY = ((x - centerX) / centerX) * 4.5;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px) scale3d(1.012, 1.012, 1.012)`;
+      });
+      card.addEventListener("mouseleave", () => {
+        isHovered = false;
+        card.style.transition = "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1)";
+        card.style.transform = "";
+      });
+    });
+  }
 
   // ============================================================
   // SCROLL-DRIVEN PARALLAX FLOAT ENGINE
