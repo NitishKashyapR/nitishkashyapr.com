@@ -716,17 +716,14 @@ body::after {
   transform: translateY(0);
 }
 
-/* Accessibility: Respect reduced motion preference */
+/* Accessibility: Respect reduced motion preference with gentle, non-jarring transitions */
 @media (prefers-reduced-motion: reduce) {
-
   .reveal-on-scroll,
   .stagger-children>*,
   .section-chip,
   .section-title,
   .section-desc {
-    transition: none !important;
-    opacity: 1 !important;
-    transform: none !important;
+    transition: opacity 0.35s ease, transform 0.35s ease !important;
     transition-delay: 0ms !important;
   }
 }
