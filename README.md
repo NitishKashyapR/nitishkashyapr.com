@@ -1,7 +1,7 @@
 # Nitish Kashyap R (Nitish Kashyap) — Official Portfolio & Personal Website
 
 > 🌐 **Official Live Website**: [https://nitishkashyapr.github.io/nitishkashyapr.com/](https://nitishkashyapr.github.io/nitishkashyapr.com/)  
-> 📄 **ATS-Optimized Resume**: [https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html](https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html)  
+> 📄 **Official Resume**: [https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html](https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html)  
 > 📋 **Comprehensive Curriculum Vitae (CV)**: [https://nitishkashyapr.github.io/nitishkashyapr.com/cv.html](https://nitishkashyapr.github.io/nitishkashyapr.com/cv.html)  
 > 🤖 **Machine-Readable LLM Data**: [llms.txt](https://nitishkashyapr.github.io/nitishkashyapr.com/llms.txt) | [llms-full.txt](https://nitishkashyapr.github.io/nitishkashyapr.com/llms-full.txt)
 
