@@ -41,6 +41,7 @@ User-agent: *
 Allow: /
 Allow: /index.html
 Allow: /resume.html
+Allow: /cv.html
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /LLMS.txt

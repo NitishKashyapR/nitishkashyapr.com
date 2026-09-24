@@ -1,3 +1,10 @@
+# Nitish Kashyap R (Nitish Kashyap) — Official Portfolio & Personal Website
+
+> 🌐 **Official Live Website**: [https://nitishkashyapr.github.io/nitishkashyapr.com/](https://nitishkashyapr.github.io/nitishkashyapr.com/)  
+> 📄 **ATS-Optimized Resume**: [https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html](https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html)  
+> 📋 **Comprehensive Curriculum Vitae (CV)**: [https://nitishkashyapr.github.io/nitishkashyapr.com/cv.html](https://nitishkashyapr.github.io/nitishkashyapr.com/cv.html)  
+> 🤖 **Machine-Readable LLM Data**: [llms.txt](https://nitishkashyapr.github.io/nitishkashyapr.com/llms.txt) | [llms-full.txt](https://nitishkashyapr.github.io/nitishkashyapr.com/llms-full.txt)
+
 <div align="center">
 
   <!-- Animated Typing Banner -->
@@ -17,14 +24,18 @@
 
 ---
 
-### ✨ About Me
+### ✨ About Nitish Kashyap (Nitish Kashyap R)
+
+Welcome to the official portfolio and professional repository of **Nitish Kashyap R** (commonly searched as **Nitish Kashyap** or **Nitish**). I am an AI-Enabled Human Resources Professional and MBA Candidate at VIMTECH, Tumkur, Karnataka, India.
 
 ```yaml
+👤 Name                 Nitish Kashyap R (Nitish Kashyap)
 💼 MBA (HR)            @ VIMTECH, Tumkur · 2025 — Present
 🎓 B.Com (Accounting)  @ Vidyavahini First Grade College · 2022 — 2025
 🧭 Focus               People Strategy · AI in HR · Talent Acquisition · L&D
 🎯 Open To             HR Internships · People Analytics · Collaborations
-📍 Location            Karnataka, India
+📍 Location            Tumkur / Bengaluru, Karnataka, India
+🌐 Website             https://nitishkashyapr.github.io/nitishkashyapr.com/
 ```
 
 ---
