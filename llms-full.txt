@@ -1,6 +1,6 @@
 # Nitish Kashyap R (Nitish Kashyap) — Full Machine-Readable Profile & Resume Dataset
 
-> Comprehensive Data Source for AI Models, LLM Agents, ATS Systems, and Automated Resume Crawlers.
+> Comprehensive Data Source for AI Models, LLM Agents, Search Engines, and Automated Profile Crawlers.
 > Also Known As / Searched As: Nitish Kashyap, Nitish Kashyap R, Nitish, NitishKashyapR
 
 ## Profile Summary
@@ -14,7 +14,7 @@ Nitish Kashyap R (also known as Nitish Kashyap) is a future-ready HR professiona
 - **LinkedIn:** https://www.linkedin.com/in/nitishkashyapr
 - **GitHub:** https://github.com/NitishKashyapR
 - **Portfolio Website:** https://nitishkashyapr.github.io/nitishkashyapr.com/
-- **ATS Resume Page:** https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html
+- **Official Resume Page:** https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html
 - **Location:** Tumkur / Bengaluru, Karnataka, India
 
 ---
@@ -233,7 +233,7 @@ Nitish Kashyap R (also known as Nitish Kashyap) is a future-ready HR professiona
 - **Category:** Personal Project & Digital Representation
 - **Role:** Creator & Web Designer ("Vibe Coded")
 - **Tech Stack:** HTML5, Vanilla CSS3, JavaScript (ES6+), Plexus Canvas Particle System, JSON-LD Schema.org Data.
-- **Features:** Glassmorphism UI design, fluid responsive typography clamp system, accessible theme toggle (light/dark mode), dynamic certification counter, interactive project modals, 100/100 ATS-friendly resume page.
+- **Features:** Glassmorphism UI design, fluid responsive typography clamp system, accessible theme toggle (light/dark mode), dynamic certification counter, interactive project modals, professional single-page resume.
 - **URL:** https://nitishkashyapr.github.io/nitishkashyapr.com/
 
 ---
