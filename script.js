@@ -1,4 +1,37 @@
 // ============================================================
+// REAL-TIME CACHE-BUSTING & LIVE DATA ENGINE
+// Configured with cache: "no-store", no-cache headers, and dynamic
+// query param busting so all external/JSON data is pulled live.
+// ============================================================
+window.freshFetch = async function (url, options = {}) {
+  const separator = url.includes("?") ? "&" : "?";
+  const cacheBustUrl = `${url}${separator}_cb=${Date.now()}`;
+  const defaultHeaders = {
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    "Pragma": "no-cache",
+    "Expires": "0"
+  };
+  const fetchOptions = {
+    ...options,
+    cache: "no-store",
+    headers: {
+      ...defaultHeaders,
+      ...(options.headers || {})
+    }
+  };
+  return fetch(cacheBustUrl, fetchOptions);
+};
+
+// Purge any stale or legacy Service Workers that might trap cached assets
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    for (let registration of registrations) {
+      registration.unregister();
+    }
+  }).catch(() => {});
+}
+
+// ============================================================
 // INTERACTIVE PLEXUS PARTICLE BACKGROUND ENGINE
 // Dots + Lines + Triangulated Polygon fills
 // Mouse + Touch interactive magnetic attraction
@@ -132,15 +165,16 @@
         ctx.fill();
       }
 
-      // Draw connecting lines & mesh between particles
+      // Draw connecting lines & mesh between particles (optimized with squared distances)
+      const maxDist2 = config.lineLength * config.lineLength;
       for (let i = 0; i < screenNodes.length; i++) {
         let closeNodes = [];
         for (let j = i + 1; j < screenNodes.length; j++) {
           let dx = screenNodes[i].x - screenNodes[j].x;
           let dy = screenNodes[i].y - screenNodes[j].y;
-          let dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < config.lineLength) {
-            closeNodes.push({ index: j, dist: dist });
+          let d2 = dx * dx + dy * dy;
+          if (d2 < maxDist2) {
+            closeNodes.push({ index: j });
             ctx.beginPath();
             ctx.moveTo(screenNodes[i].x, screenNodes[i].y);
             ctx.lineTo(screenNodes[j].x, screenNodes[j].y);
@@ -155,8 +189,8 @@
             let p3 = screenNodes[closeNodes[m].index];
             let dx2 = p2.x - p3.x;
             let dy2 = p2.y - p3.y;
-            let dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-            if (dist2 < config.lineLength) {
+            let d2_2 = dx2 * dx2 + dy2 * dy2;
+            if (d2_2 < maxDist2) {
               ctx.beginPath();
               ctx.moveTo(screenNodes[i].x, screenNodes[i].y);
               ctx.lineTo(p2.x, p2.y);
@@ -192,7 +226,7 @@
     }
 
     function animate(now) {
-      if (document.hidden || isModalOrFullscreenActive()) {
+      if (document.hidden || isModalOrFullscreenActive() || window.scrollY > window.innerHeight * 2.2) {
         animId = requestAnimationFrame(animate);
         return;
       }
@@ -2535,13 +2569,15 @@ document.addEventListener("DOMContentLoaded", () => {
     ticking = true;
     requestAnimationFrame(() => {
       const scrollY = window.scrollY;
-      parallaxElements.forEach(el => {
-        const speed = parseFloat(el.dataset.parallax) || 0.05;
-        const rect = el.getBoundingClientRect();
-        const centerOffset = (rect.top + rect.height / 2 - window.innerHeight / 2);
-        const yShift = centerOffset * speed;
-        el.style.transform = `translateY(${yShift}px)`;
-      });
+      if (scrollY <= window.innerHeight * 1.5) {
+        parallaxElements.forEach(el => {
+          const speed = parseFloat(el.dataset.parallax) || 0.05;
+          const rect = el.getBoundingClientRect();
+          const centerOffset = (rect.top + rect.height / 2 - window.innerHeight / 2);
+          const yShift = centerOffset * speed;
+          el.style.transform = `translateY(${yShift}px)`;
+        });
+      }
       ticking = false;
     });
   };

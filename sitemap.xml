@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://nitishkashyapr.github.io/nitishkashyapr.com/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://nitishkashyapr.github.io/nitishkashyapr.com/assets/hero-photo.png</image:loc>
+      <image:title>Nitish Kashyap R (Nitish Kashyap) — AI-Enabled HR Professional</image:title>
+      <image:caption>Official portrait of Nitish Kashyap R, HR professional and MBA candidate</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://nitishkashyapr.github.io/nitishkashyapr.com/assets/hero-photo.png</image:loc>
+      <image:title>Nitish Kashyap R Resume &amp; Profile</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://nitishkashyapr.github.io/nitishkashyapr.com/cv.html</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nitishkashyapr.github.io/nitishkashyapr.com/llms.txt</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nitishkashyapr.github.io/nitishkashyapr.com/llms-full.txt</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

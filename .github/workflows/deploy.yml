@@ -27,6 +27,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Automated Cache-Busting Versioning
+        run: |
+          python scripts/cache_bust.py "${{ github.sha }}"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -35,3 +39,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Ping Search Engines & IndexNow
+        continue-on-error: true
+        run: |
+          python scripts/ping_search_engines.py
