@@ -80,10 +80,13 @@ if ("serviceWorker" in navigator) {
       light:    { dot: "rgba(99, 102, 241, 0.50)",   line: "rgba(99, 102, 241, 0.15)",  poly: "rgba(99, 102, 241, 0.020)", ray: "99, 102, 241" },
       ocean:    { dot: "rgba(125, 211, 252, 0.78)", line: "rgba(56, 189, 248, 0.22)",  poly: "rgba(129, 140, 248, 0.035)", ray: "125, 211, 252" },
       sunrise:  { dot: "rgba(234, 88, 12, 0.55)",   line: "rgba(249, 115, 22, 0.16)",  poly: "rgba(234, 179, 8, 0.020)",   ray: "234, 88, 12" },
+      dune:     { dot: "rgba(194, 65, 12, 0.55)",   line: "rgba(217, 119, 6, 0.16)",   poly: "rgba(234, 88, 12, 0.020)",   ray: "194, 65, 12" },
       lavender: { dot: "rgba(124, 58, 237, 0.55)",  line: "rgba(147, 51, 234, 0.16)",  poly: "rgba(168, 85, 247, 0.020)", ray: "124, 58, 237" },
+      platinum: { dot: "rgba(71, 85, 105, 0.55)",   line: "rgba(100, 116, 139, 0.16)", poly: "rgba(148, 163, 184, 0.020)", ray: "71, 85, 105" },
       bloom:    { dot: "rgba(219, 39, 119, 0.55)",  line: "rgba(236, 72, 153, 0.16)",  poly: "rgba(244, 114, 182, 0.020)", ray: "219, 39, 119" },
       forge:    { dot: "rgba(221, 214, 254, 0.78)", line: "rgba(167, 139, 250, 0.22)", poly: "rgba(244, 114, 182, 0.035)", ray: "221, 214, 254" },
       breeze:   { dot: "rgba(2, 132, 199, 0.55)",   line: "rgba(14, 165, 233, 0.16)",  poly: "rgba(56, 189, 248, 0.020)", ray: "2, 132, 199" },
+      sage:     { dot: "rgba(46, 111, 64, 0.55)",   line: "rgba(74, 124, 89, 0.16)",   poly: "rgba(113, 142, 110, 0.020)", ray: "46, 111, 64" },
       slate:    { dot: "rgba(226, 232, 240, 0.75)", line: "rgba(148, 163, 184, 0.20)", poly: "rgba(148, 163, 184, 0.030)", ray: "226, 232, 240" },
       meadow:   { dot: "rgba(22, 163, 74, 0.55)",   line: "rgba(34, 197, 94, 0.16)",   poly: "rgba(13, 148, 136, 0.020)", ray: "22, 163, 74" }
     };
@@ -453,20 +456,23 @@ if ("serviceWorker" in navigator) {
   }
 })();
 
-// Alternating dark/light order so every click flips brightness and the
-// change is unmistakable: dark → light → ocean → sunrise → emerald → bloom
-// → forge → breeze → slate → meadow → (back to dark)
-const THEME_ORDER = ["dark", "light", "ocean", "sunrise", "lavender", "bloom", "forge", "breeze", "slate", "meadow"];
+// Dynamic 13-Theme Palette Engine with rich dark/light variety:
+// dark → light → ocean → sunrise → dune → lavender → platinum → bloom
+// → forge → breeze → sage → slate → meadow → (loop to dark)
+const THEME_ORDER = ["dark", "light", "ocean", "sunrise", "dune", "lavender", "platinum", "bloom", "forge", "breeze", "sage", "slate", "meadow"];
 const THEME_LABELS = {
   dark: "Dark (Indigo)",
-  ocean: "Ocean (Navy)",
-  lavender: "Lavender (Lilac)",
-  forge: "Forge (Violet)",
-  slate: "Slate (Graphite)",
   light: "Light (Paper)",
+  ocean: "Ocean (Navy)",
   sunrise: "Sunrise (Amber)",
+  dune: "Dune (Terracotta)",
+  lavender: "Lavender (Lilac)",
+  platinum: "Platinum (Silver Slate)",
   bloom: "Bloom (Pink)",
+  forge: "Forge (Violet)",
   breeze: "Breeze (Ice Blue)",
+  sage: "Sage (Eucalyptus)",
+  slate: "Slate (Graphite)",
   meadow: "Meadow (Green)"
 };
 
@@ -2252,7 +2258,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div style="display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
-              ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-primary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View ${icons.external}</a>` : ''}
+              ${p.live ? `<a href="${p.live}" ${p.live.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} onclick="event.stopPropagation()" class="btn-primary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View ${icons.external}</a>` : ''}
               ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View ${icons.file}</a>` : ''}
               <button onclick="event.stopPropagation(); openProjectModal('${p.id}')" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">
                 Details ${icons.info}
@@ -2309,7 +2315,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding-top: 1.25rem; margin-top: 0.75rem; border-top: 1px solid var(--border);">
-              ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View ${icons.external}</a>` : ''}
+              ${p.live ? `<a href="${p.live}" ${p.live.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="btn-primary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View ${icons.external}</a>` : ''}
               ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View ${icons.file}</a>` : ''}
               <button onclick="openProjectModal('${p.id}')" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">
                 Details ${icons.info}
@@ -2827,7 +2833,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       ${(p.live || (p.pdf && p.id !== 'union-bank')) ? `
       <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem;">
-        ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" class="btn-primary" style="text-decoration: none;">View ↗</a>` : ''}
+        ${p.live ? `<a href="${p.live}" ${p.live.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="btn-primary" style="text-decoration: none;">View ↗</a>` : ''}
         ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration: none;">View ↗</a>` : ''}
       </div>` : ''}
     `;
@@ -3139,7 +3145,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- ENGINE 1: FEATURED PROJECTS (3D Orbital Arc Deck) ---
 let currentArcIndex = 0;
-const totalArcCards = 4;
+let totalArcCards = 8;
 let isArcAnimating = false;
 
 function updateArcDeckStack() {
@@ -3147,6 +3153,8 @@ function updateArcDeckStack() {
   const deck = document.getElementById("projectsArcDeck");
   const counter = document.getElementById("projectsArcCounter");
   if (!cards.length) return;
+
+  totalArcCards = cards.length;
 
   // Suppress CSS transitions temporarily so depth re-ordering doesn't fly back across screen
   cards.forEach((card) => {
@@ -3415,56 +3423,75 @@ const totalSkillCards = 3;
 let isSkillAnimating = false;
 
 window.switchSkillsCard = function (idx) {
-  if (currentSkillIndex === idx || isSkillAnimating) return;
+  if (currentSkillIndex === idx) return;
 
-  const cards = document.querySelectorAll(".mobile-tilt-card");
-  const activeCard = document.querySelector(".mobile-tilt-card.active");
-  const tabs = document.querySelectorAll(".skill-tab-pill");
+  const cards = Array.from(document.querySelectorAll(".mobile-tilt-card"));
+  const tabs = Array.from(document.querySelectorAll(".skill-tab-pill"));
+  if (!cards.length) return;
 
-  if (activeCard) {
-    isSkillAnimating = true;
-    const dir = idx > currentSkillIndex ? 1 : -1;
-    activeCard.style.transition = "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
-    activeCard.style.transform = `translate3d(${dir * -300}px, 0, 0) rotate(${dir * -20}deg)`;
-    activeCard.style.opacity = "0";
+  // 1. Instant tab pill active indicator (eliminates perceived tap lag)
+  tabs.forEach((tab, i) => tab.classList.toggle("active", i === idx));
 
-    setTimeout(() => {
-      const outgoing = cards[currentSkillIndex];
-      currentSkillIndex = idx;
-      cards.forEach((card, i) => {
-        card.classList.toggle("active", i === idx);
-        if (card === outgoing) card.style.transition = "none";
-        card.style.transform = "";
-        card.style.opacity = "";
-      });
-      cards.forEach((card) => {
-        card.style.transition = "";
-      });
-      tabs.forEach((tab, i) => tab.classList.toggle("active", i === idx));
-      isSkillAnimating = false;
-    }, 200);
-  } else {
-    currentSkillIndex = idx;
-    cards.forEach((card, i) => {
-      card.classList.toggle("active", i === idx);
-      card.style.transform = "";
-      card.style.opacity = "";
-    });
-    tabs.forEach((tab, i) => tab.classList.toggle("active", i === idx));
+  const prevIdx = currentSkillIndex;
+  currentSkillIndex = idx;
+
+  const outgoingCard = cards[prevIdx];
+  const incomingCard = cards[idx];
+
+  if (!outgoingCard || !incomingCard) {
+    cards.forEach((c, i) => c.classList.toggle("active", i === idx));
+    return;
   }
+
+  isSkillAnimating = true;
+  const dir = idx > prevIdx ? 1 : -1;
+
+  // Animate outgoing card
+  outgoingCard.style.transition = "transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease";
+  outgoingCard.style.transform = `translate3d(${dir * -140}px, 0, 0) rotate(${dir * -8}deg)`;
+  outgoingCard.style.opacity = "0";
+
+  // Prepare incoming card
+  incomingCard.classList.add("active");
+  incomingCard.style.transition = "none";
+  incomingCard.style.transform = `translate3d(${dir * 120}px, 0, 0) rotate(${dir * 8}deg)`;
+  incomingCard.style.opacity = "0";
+
+  // Force reflow
+  void incomingCard.offsetHeight;
+
+  // Animate incoming card into center
+  incomingCard.style.transition = "transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease";
+  incomingCard.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
+  incomingCard.style.opacity = "1";
+
+  setTimeout(() => {
+    outgoingCard.classList.remove("active");
+    outgoingCard.style.transition = "";
+    outgoingCard.style.transform = "";
+    outgoingCard.style.opacity = "";
+    incomingCard.style.transition = "";
+    incomingCard.style.transform = "";
+    incomingCard.style.opacity = "";
+    isSkillAnimating = false;
+  }, 250);
 };
 
 function initSkillsTiltSwipeGesture() {
   const deck = document.getElementById("skillsTiltDeck");
   if (!deck) return;
 
-  let startX = 0, startY = 0, currentX = 0, isDragging = false;
+  let startX = 0, startY = 0, currentX = 0, currentY = 0;
+  let startTime = 0;
+  let isDragging = false;
   let animFrameId = null;
   const glowLeft = document.getElementById("skillsGlowLeft");
   const glowRight = document.getElementById("skillsGlowRight");
 
   let isLockedHorizontal = false;
   let isLockedVertical = false;
+
+  const getActiveCard = () => deck.querySelector(".mobile-tilt-card.active") || deck.querySelector(".mobile-tilt-card");
 
   const onStart = (e) => {
     if (isSkillAnimating) return;
@@ -3477,7 +3504,9 @@ function initSkillsTiltSwipeGesture() {
     const pt = e.touches ? e.touches[0] : e;
     startX = pt.clientX;
     startY = pt.clientY;
+    startTime = Date.now();
     currentX = 0;
+    currentY = 0;
     card.style.transition = "none";
   };
 
@@ -3492,7 +3521,7 @@ function initSkillsTiltSwipeGesture() {
 
     if (!isLockedHorizontal && !isLockedVertical) {
       if (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6) {
-        if (Math.abs(deltaX) > Math.abs(deltaY) + 3) {
+        if (Math.abs(deltaX) >= Math.abs(deltaY)) {
           isLockedHorizontal = true;
         } else {
           isLockedVertical = true;
@@ -3517,12 +3546,14 @@ function initSkillsTiltSwipeGesture() {
     if (animFrameId) cancelAnimationFrame(animFrameId);
     animFrameId = requestAnimationFrame(() => {
       if (!isDragging) return;
-      const rot = currentX * 0.08;
+      const rot = currentX * 0.07;
       card.style.transform = `translate3d(${currentX}px, 0, 0) rotate(${rot}deg)`;
 
       if (glowLeft && glowRight) {
-        glowLeft.classList.toggle("active", currentX < -25);
-        glowRight.classList.toggle("active", currentX > 25);
+        // Dragging left (negative deltaX) advances to NEXT card -> highlight right glow (NEXT)
+        // Dragging right (positive deltaX) goes back to PREV card -> highlight left glow (PREV)
+        glowLeft.classList.toggle("active", currentX > 20);
+        glowRight.classList.toggle("active", currentX < -20);
       }
     });
   };
@@ -3540,37 +3571,65 @@ function initSkillsTiltSwipeGesture() {
       glowRight.classList.remove("active");
     }
 
-    card.style.transition = "transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.18s ease";
+    const elapsed = Date.now() - startTime;
+    const velocity = Math.abs(currentX) / Math.max(elapsed, 1) * 1000; // px/sec
 
-    if (Math.abs(currentX) > 70) {
-      const dir = currentX > 0 ? 1 : -1;
-      card.style.transform = `translate3d(${dir * 360}px, 0, 0) rotate(${dir * 25}deg)`;
+    // Responsive threshold: 45px drag OR fast flick (>320px/s)
+    if (Math.abs(currentX) > 45 || velocity > 320) {
+      const isNext = currentX < 0;
+      const nextIdx = isNext
+        ? (currentSkillIndex + 1) % totalSkillCards
+        : (currentSkillIndex - 1 + totalSkillCards) % totalSkillCards;
+
+      const throwDir = isNext ? -1 : 1;
+      card.style.transition = "transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.16s ease";
+      card.style.transform = `translate3d(${throwDir * 320}px, 0, 0) rotate(${throwDir * 18}deg)`;
       card.style.opacity = "0";
 
       isSkillAnimating = true;
       setTimeout(() => {
-        const nextIdx = (currentSkillIndex + (dir < 0 ? 1 : -1) + totalSkillCards) % totalSkillCards;
+        const cards = Array.from(document.querySelectorAll(".mobile-tilt-card"));
+        const tabs = Array.from(document.querySelectorAll(".skill-tab-pill"));
         currentSkillIndex = nextIdx;
 
-        const cards = document.querySelectorAll(".mobile-tilt-card");
-        const tabs = document.querySelectorAll(".skill-tab-pill");
-        cards.forEach((c, i) => {
-          c.classList.toggle("active", i === nextIdx);
-          if (c === card) c.style.transition = "none";
-          c.style.transform = "";
-          c.style.opacity = "";
-        });
-        cards.forEach((c) => {
-          c.style.transition = "";
-        });
         tabs.forEach((tab, i) => tab.classList.toggle("active", i === nextIdx));
-        isSkillAnimating = false;
-      }, 200);
+
+        const incoming = cards[nextIdx];
+        if (incoming) {
+          incoming.classList.add("active");
+          incoming.style.transition = "none";
+          incoming.style.transform = `translate3d(${throwDir * -100}px, 0, 0) rotate(${throwDir * -6}deg)`;
+          incoming.style.opacity = "0";
+          void incoming.offsetHeight;
+          incoming.style.transition = "transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease";
+          incoming.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
+          incoming.style.opacity = "1";
+        }
+
+        cards.forEach((c, i) => {
+          if (i !== nextIdx) {
+            c.classList.remove("active");
+            c.style.transition = "none";
+            c.style.transform = "";
+            c.style.opacity = "";
+          }
+        });
+
+        setTimeout(() => {
+          if (incoming) {
+            incoming.style.transition = "";
+            incoming.style.transform = "";
+            incoming.style.opacity = "";
+          }
+          isSkillAnimating = false;
+        }, 230);
+      }, 180);
     } else {
-      card.style.transform = "translate3d(0,0,0) rotate(0deg)";
+      card.style.transition = "transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)";
+      card.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
     }
 
-    startX = startY = currentX = 0;
+    startX = startY = currentX = currentY = 0;
   };
 
   const onCancel = () => {
@@ -3583,9 +3642,9 @@ function initSkillsTiltSwipeGesture() {
       glowLeft.classList.remove("active");
       glowRight.classList.remove("active");
     }
-    card.style.transition = "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)";
+    card.style.transition = "transform 0.2s ease";
     card.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
-    startX = startY = currentX = 0;
+    startX = startY = currentX = currentY = 0;
   };
 
   deck.addEventListener("touchstart", onStart, { passive: true });
