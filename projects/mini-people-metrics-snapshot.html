@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini People Metrics Snapshot — Nitish Kashyap R</title>
+  <meta name="description" content="A practical people metrics and recruitment analytics snapshot with operational funnel trackers, metric formulas, plain-language insights, and executive recommendations. Formulated by Nitish Kashyap R (MBA HR Candidate).">
+  <meta name="author" content="Nitish Kashyap R">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #334155;
+      --text-subtle: #64748b;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-tint: #f0f9ff;
+      --emerald: #059669;
+      --emerald-tint: #ecfdf5;
+      --amber: #d97706;
+      --amber-tint: #fffbeb;
+      --radius: 10px;
+      --rule: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.55;
+      padding: 24px 16px 40px;
+      -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    /* Screen Top Toolbar */
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .back-link a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-subtle);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+
+    .back-link a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .print-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: none;
+      border-radius: 8px;
+      padding: 0.55rem 1.25rem;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .print-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.38);
+    }
+
+    /* Sheet Architecture */
+    .sheet-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .doc-sheet {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.07);
+      padding: 12mm 14mm 10mm 14mm;
+      width: 100%;
+      min-height: 297mm;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Header & Meta */
+    .doc-header {
+      margin-bottom: 0.85rem;
+      border-bottom: 1.5px solid var(--rule);
+      padding-bottom: 0.75rem;
+    }
+
+    .badge-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.55rem;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.22rem 0.65rem;
+      border-radius: 6px;
+      background: var(--primary-tint);
+      color: var(--primary);
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    .badge-sub {
+      background: #f1f5f9;
+      color: var(--text-subtle);
+      border-color: var(--border);
+    }
+
+    h1.doc-title {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.25rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text-main);
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .doc-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-subtle);
+      line-height: 1.45;
+      margin-bottom: 0.45rem;
+    }
+
+    .doc-author-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .doc-author-bar strong {
+      color: var(--text-main);
+    }
+
+    .doc-author-bar a {
+      color: #0b57d0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Running Subhead (Page 2) */
+    .page-subhead {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1.5px solid var(--rule);
+      padding-bottom: 2mm;
+      margin-bottom: 4mm;
+      font-size: 7.8pt;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .page-subhead strong {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* Practitioner Callout */
+    .callout-box {
+      background: #f8fafc;
+      border-left: 3.5px solid var(--primary);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.15rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.1rem;
+      line-height: 1.55;
+    }
+
+    .callout-box strong {
+      color: var(--text-main);
+    }
+
+    /* KPI Summary Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .kpi-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 0.75rem;
+      text-align: center;
+    }
+
+    .kpi-value {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.15;
+      margin-bottom: 0.2rem;
+    }
+
+    .kpi-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-subtle);
+      margin-bottom: 0.25rem;
+    }
+
+    .kpi-sub {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--emerald);
+    }
+
+    /* Section Cards & Headings */
+    .section-card {
+      margin-bottom: 1.15rem;
+    }
+
+    h2.section-heading {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h2.section-heading span.num-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    p.section-intro {
+      font-size: 0.86rem;
+      color: var(--text-subtle);
+      margin-bottom: 0.55rem;
+      line-height: 1.45;
+    }
+
+    /* Operational Insights List */
+    .insight-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .insight-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--primary);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+    }
+
+    .insight-title {
+      font-weight: 700;
+      color: var(--text-main);
+      font-size: 0.88rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .insight-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Sourcing Channel Highlights Grid */
+    .channel-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.65rem;
+      margin-top: 0.45rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .channel-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.65rem 0.75rem;
+      border-top: 3px solid var(--primary);
+    }
+
+    .channel-label {
+      font-size: 0.70rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .channel-val {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.15rem;
+    }
+
+    .channel-metric {
+      font-size: 0.74rem;
+      color: var(--text-subtle);
+      line-height: 1.35;
+    }
+
+    /* Tables (Clean, Spacious, Professional) */
+    .table-container {
+      overflow-x: auto;
+      margin: 0.5rem 0 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: var(--text-main);
+      font-weight: 700;
+      padding: 0.55rem 0.65rem;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.55rem 0.65rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      vertical-align: middle;
+      font-size: 0.81rem;
+      line-height: 1.4;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) td {
+      background: #fafafa;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: #f1f5f9;
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.76rem;
+      color: var(--primary-dark);
+    }
+
+    /* Status Pills */
+    .status-pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 9999px;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .status-closed { background: var(--emerald-tint); color: var(--emerald); border: 1px solid rgba(5,150,105,0.25); }
+    .status-panel { background: var(--primary-tint); color: var(--primary); border: 1px solid rgba(2,132,199,0.25); }
+    .status-screen { background: var(--amber-tint); color: var(--amber); border: 1px solid rgba(217,119,6,0.25); }
+
+    /* Recommendations Cards */
+    .rec-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .rec-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+    }
+
+    .rec-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.25rem;
+      gap: 8px;
+    }
+
+    .rec-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      background: #e2e8f0;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .rec-title {
+      font-weight: 700;
+      color: var(--text-main);
+      font-size: 0.88rem;
+    }
+
+    .rec-action {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.48;
+    }
+
+    /* Governance Note Box */
+    .gov-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.65rem 0.95rem;
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+      line-height: 1.45;
+      margin-bottom: 0.75rem;
+    }
+
+    .gov-box strong {
+      color: var(--text-main);
+    }
+
+    /* Running Page Footer Marker */
+    .page-footer {
+      margin-top: auto;
+      padding-top: 2.2mm;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.4pt;
+      color: var(--text-subtle);
+    }
+
+    .page-footer a {
+      color: #0b57d0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 600;
+    }
+
+    .page-footer a:hover {
+      color: #0842a0;
+      text-decoration: underline;
+    }
+
+    /* =========================================================
+       RESPONSIVE & PRINT MEDIA RULES
+       ========================================================= */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px 12px 36px;
+      }
+      .doc-sheet {
+        padding: 1.5rem 1.15rem;
+        border-radius: 10px;
+        min-height: auto;
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .rec-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .rec-tag {
+        margin-top: 2px;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      html, body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 210mm !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .toolbar, .print-btn, .back-link {
+        display: none !important;
+      }
+
+      .container {
+        max-width: none !important;
+        width: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .sheet-wrapper {
+        gap: 0 !important;
+      }
+
+      .doc-sheet {
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 9.5mm 13.5mm 9mm 13.5mm !important;
+        background: #ffffff !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      .doc-sheet:last-child {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      /* Clean, Non-Congested Print Typography */
+      h1.doc-title {
+        font-size: 16.5pt !important;
+        margin-bottom: 0.18rem !important;
+        line-height: 1.15 !important;
+      }
+
+      .doc-subtitle {
+        font-size: 8.6pt !important;
+        margin-bottom: 0.35rem !important;
+        line-height: 1.35 !important;
+      }
+
+      .badge-strip {
+        margin-bottom: 0.35rem !important;
+        gap: 0.35rem !important;
+      }
+
+      .badge {
+        font-size: 6.8pt !important;
+        padding: 0.14rem 0.5rem !important;
+      }
+
+      .doc-author-bar {
+        font-size: 7.5pt !important;
+      }
+
+      .callout-box {
+        padding: 0.55rem 0.8rem !important;
+        font-size: 7.8pt !important;
+        line-height: 1.38 !important;
+        margin-bottom: 0.65rem !important;
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        border-left: 3.5px solid #0284c7 !important;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 0.5rem !important;
+        margin-bottom: 0.75rem !important;
+      }
+
+      .kpi-card {
+        padding: 0.5rem 0.45rem !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      .kpi-value {
+        font-size: 1.35rem !important;
+        margin-bottom: 0.12rem !important;
+      }
+
+      .kpi-label {
+        font-size: 6.6pt !important;
+        margin-bottom: 0.15rem !important;
+      }
+
+      .kpi-sub {
+        font-size: 6.6pt !important;
+      }
+
+      h2.section-heading {
+        font-size: 10.2pt !important;
+        margin-bottom: 0.25rem !important;
+      }
+
+      h2.section-heading span.num-badge {
+        width: 19px !important;
+        height: 19px !important;
+        font-size: 7.0pt !important;
+      }
+
+      p.section-intro {
+        font-size: 7.8pt !important;
+        margin-bottom: 0.35rem !important;
+        line-height: 1.32 !important;
+      }
+
+      .insight-list {
+        gap: 0.45rem !important;
+      }
+
+      .insight-card {
+        padding: 0.45rem 0.75rem !important;
+        border: 1px solid #cbd5e1 !important;
+        border-left: 3.5px solid #0284c7 !important;
+      }
+
+      .insight-title {
+        font-size: 8.2pt !important;
+        margin-bottom: 0.12rem !important;
+      }
+
+      .insight-desc {
+        font-size: 7.5pt !important;
+        line-height: 1.34 !important;
+      }
+
+      .channel-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 0.45rem !important;
+        margin-top: 0.35rem !important;
+        margin-bottom: 0.55rem !important;
+      }
+
+      .channel-card {
+        padding: 0.35rem 0.55rem !important;
+        border: 1px solid #cbd5e1 !important;
+        border-top: 2.5px solid #0284c7 !important;
+      }
+
+      .channel-label {
+        font-size: 6.4pt !important;
+        margin-bottom: 0.1rem !important;
+      }
+
+      .channel-val {
+        font-size: 7.6pt !important;
+        margin-bottom: 0.08rem !important;
+      }
+
+      .channel-metric {
+        font-size: 6.8pt !important;
+        line-height: 1.25 !important;
+      }
+
+      .table-container {
+        margin: 0.35rem 0 0.65rem !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      table {
+        font-size: 7.5pt !important;
+      }
+
+      th {
+        padding: 0.35rem 0.5rem !important;
+        background: #f1f5f9 !important;
+      }
+
+      td {
+        padding: 0.32rem 0.5rem !important;
+        font-size: 7.4pt !important;
+      }
+
+      .status-pill {
+        font-size: 6.4pt !important;
+        padding: 0.12rem 0.4rem !important;
+      }
+
+      .rec-list {
+        gap: 0.45rem !important;
+        margin-bottom: 0.65rem !important;
+      }
+
+      .rec-card {
+        padding: 0.45rem 0.75rem !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      .rec-title {
+        font-size: 8.2pt !important;
+      }
+
+      .rec-tag {
+        font-size: 6.4pt !important;
+        padding: 0.1rem 0.4rem !important;
+      }
+
+      .rec-action {
+        font-size: 7.5pt !important;
+        line-height: 1.34 !important;
+      }
+
+      .gov-box {
+        padding: 0.45rem 0.75rem !important;
+        font-size: 7.2pt !important;
+        line-height: 1.32 !important;
+        margin-bottom: 0.45rem !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      .page-footer {
+        padding-top: 1.8mm !important;
+        border-top: 1px solid #cbd5e1 !important;
+        font-size: 7.2pt !important;
+      }
+
+      a {
+        color: #0b57d0 !important;
+        text-decoration: underline !important;
+        text-underline-offset: 2px !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+  <script>
+    function handleBackToPortfolio(e) {
+      if (e) e.preventDefault();
+      if (window.opener && !window.opener.closed) {
+        try {
+          window.opener.focus();
+          window.close();
+          return;
+        } catch (err) {}
+      }
+      if (window.history.length > 1 && document.referrer && (document.referrer.includes('/index.html') || document.referrer.includes(window.location.host))) {
+        window.history.back();
+        return;
+      }
+      window.location.href = '../index.html#projects';
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <!-- Top Actions Toolbar (Hidden in Print) -->
+    <div class="toolbar">
+      <div class="back-link">
+        <a href="../index.html#projects" onclick="handleBackToPortfolio(event)" rel="home">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          Back to Official Portfolio
+        </a>
+      </div>
+      <button onclick="window.print()" class="print-btn" aria-label="Print or save this document as PDF">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print / Save as PDF
+      </button>
+    </div>
+
+    <!-- Paper Sheet Wrapper -->
+    <div class="sheet-wrapper" itemscope itemtype="https://schema.org/CreativeWork">
+
+      <!-- =========================================================
+           SHEET 1: Executive Dashboard & Operational Insights
+           ========================================================= -->
+      <article class="doc-sheet" id="doc-page-1">
+        <!-- Document Header -->
+        <header class="doc-header">
+          <div class="badge-strip">
+            <span class="badge">Human Resource Analytics</span>
+            <span class="badge badge-sub">Recruitment Reporting</span>
+            <span class="badge badge-sub">Executive Work Sample</span>
+          </div>
+
+          <h1 class="doc-title" itemprop="name">Mini People Metrics Snapshot</h1>
+          <div class="doc-subtitle">A practical operational reporting model evaluating hiring pipeline velocity, stage-by-stage funnel conversion ratios, early joiner retention, and executive briefing notes.</div>
+
+          <div class="doc-author-bar">
+            <span>Formulated by <strong>Nitish Kashyap R</strong></span>
+            <span>&middot;</span>
+            <span>MBA (HR) Candidate</span>
+            <span>&middot;</span>
+            <span>VIMTECH, Tumkur</span>
+            <span>&middot;</span>
+            <a href="mailto:nitishkashyapr8@gmail.com">nitishkashyapr8@gmail.com</a>
+          </div>
+        </header>
+
+        <!-- Practitioner Context -->
+        <div class="callout-box">
+          <strong>Practitioner Context &amp; Purpose:</strong> Formulated by <strong>Nitish Kashyap R</strong> (MBA Candidate, Specialization in Human Resources) as a data-driven HR reporting demonstration. In modern talent operations, raw numbers are only useful when translated into operational clarity and actionable insights. This snapshot illustrates spreadsheet hygiene, standard metric formula calculations, plain-English analytical storytelling, and prioritized management interventions.
+        </div>
+
+        <!-- Executive KPI Dashboard -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-value">28 Days</div>
+            <div class="kpi-label">Avg. Time-to-Fill</div>
+            <div class="kpi-sub">&#8595; 7d vs. 35d Target</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">75.0%</div>
+            <div class="kpi-label">Offer Acceptance (OAR)</div>
+            <div class="kpi-sub">3 of 4 Offers Accepted</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">94.4%</div>
+            <div class="kpi-label">90-Day Retention</div>
+            <div class="kpi-sub">17 of 18 Joiners Retained</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value">4.62 / 5</div>
+            <div class="kpi-label">Onboarding CSAT</div>
+            <div class="kpi-sub">N = 18 Respondents</div>
+          </div>
+        </div>
+
+        <!-- 1. Operational Insights (Executive Briefing) -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">1</span> 5 Plain-Language Operational Insights</h2>
+          <p class="section-intro">Synthesizing hiring cohort data into practical observations for talent acquisition and business leadership:</p>
+
+          <div class="insight-list">
+            <div class="insight-card">
+              <div class="insight-title">1. Employee Referrals Outperform Job Boards by 3.2x in Conversion</div>
+              <div class="insight-desc">Candidate profiles sourced through internal employee referrals reached final interview stages in 18 days vs. 32 days for inbound portal applicants, with an interview-to-offer ratio of 20% compared to 5.8% for cold job board applications.</div>
+            </div>
+
+            <div class="insight-card">
+              <div class="insight-title">2. Technical Panel Scheduling Represents the Primary Process Bottleneck</div>
+              <div class="insight-desc">Data reveals an average lag of 5.8 business days between initial recruiter phone screen clearance and technical panel availability. This scheduling delay increases candidate drop-off risk by 22% due to concurrent competing processes.</div>
+            </div>
+
+            <div class="insight-card">
+              <div class="insight-title">3. Offer Rejection Linked to Remote Work Policy Inflexibility</div>
+              <div class="insight-desc">The single declined offer in REQ-2026-03 cited a competing Bangalore offer providing full-time remote flexibility. Our 3-day on-site hybrid expectation was acceptable, but candidate chose zero commute during monsoon months.</div>
+            </div>
+
+            <div class="insight-card">
+              <div class="insight-title">4. 100% Day 1 Arrival Compliance via Dedicated Pre-Boarding Check-ins</div>
+              <div class="insight-desc">All 4 accepted candidates reported on their scheduled Day 1 without attendance slips. Weekly touchpoints by the HR coordinator and pre-assignment of the peer buddy successfully insulated new hires against ghosting.</div>
+            </div>
+
+            <div class="insight-card">
+              <div class="insight-title">5. Onboarding Satisfaction (CSAT 4.62 / 5.0) Strongest in Tool Access</div>
+              <div class="insight-desc">New joiner survey responses highlighted IT hardware punctuality (100% laptops pre-configured before Day 1 start) as the highest satisfaction driver, while training documentation clarity was noted as an area for improvement.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sourcing Channel Velocity & Conversion Highlights -->
+        <section class="section-card" style="margin-bottom: 0.65rem;">
+          <h2 class="section-heading" style="font-size: 9.8pt; margin-bottom: 0.22rem;"><span class="num-badge" style="width: 18px; height: 18px; font-size: 6.8pt;">★</span> Sourcing Channel Velocity &amp; Conversion Breakdown</h2>
+          <div class="channel-grid">
+            <div class="channel-card">
+              <div class="channel-label">Employee Referral</div>
+              <div class="channel-val">Highest Velocity (18d TTF)</div>
+              <div class="channel-metric">20% Final Conversion &middot; 0% 90-Day Early Attrition</div>
+            </div>
+            <div class="channel-card">
+              <div class="channel-label">LinkedIn Recruiter</div>
+              <div class="channel-val">Specialized Sourcing</div>
+              <div class="channel-metric">Joined Day 15 &middot; 100% SLA Turnaround Adherence</div>
+            </div>
+            <div class="channel-card">
+              <div class="channel-label">Campus Placement</div>
+              <div class="channel-val">Foundational Pipeline</div>
+              <div class="channel-metric">38 Applicants &middot; Offer Extended &middot; Cost-Optimized</div>
+            </div>
+            <div class="channel-card">
+              <div class="channel-label">Job Boards (Naukri)</div>
+              <div class="channel-val">Broad Volume Funnel</div>
+              <div class="channel-metric">52 Inbound Profiles &middot; Tech Evaluation Active</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Executive Reporting Scope & Governance Note -->
+        <div class="gov-box" style="margin-bottom: 0.45rem;">
+          <strong>Executive Reporting Scope &amp; Cohort Demographics:</strong> Synthesized from simulated Bangalore and Tumkur business ecosystem requisitions across a 90-day review cycle. Demonstrates spreadsheet discipline, standard metric formula rigor, candidate experience governance (CSAT 4.62 / 5.0), and proactive retention interventions.
+        </div>
+
+        <!-- Sheet 1 Footer -->
+        <footer class="page-footer">
+          <span>Nitish Kashyap R · Mini People Metrics Snapshot | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
+          <span>Page 1 of 2</span>
+        </footer>
+      </article>
+
+      <!-- =========================================================
+           SHEET 2: Pipeline Funnel, Formulas & Leadership Actions
+           ========================================================= -->
+      <article class="doc-sheet" id="doc-page-2">
+        <!-- Running Subheader -->
+        <div class="page-subhead">
+          <span><strong>Nitish Kashyap R</strong> — Mini People Metrics Snapshot</span>
+          <span>Talent Pipeline Funnel, Metric Formulas &amp; Strategic Actions</span>
+        </div>
+
+        <!-- 2. Pipeline Funnel Tracker (Starts at Top of Page 2 Clean & Fresh) -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">2</span> Active Requisition Funnel Tracker (Demo Model)</h2>
+          <p class="section-intro">A structured spreadsheet view tracking open headcount across hiring stages, channel sources, and SLA health:</p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Req ID</th>
+                  <th>Role Title</th>
+                  <th>Primary Source</th>
+                  <th>Applied</th>
+                  <th>Screened</th>
+                  <th>Tech Round</th>
+                  <th>Panel Final</th>
+                  <th>Offers</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>REQ-2026-01</strong></td>
+                  <td>HR Coordinator</td>
+                  <td>Employee Referral</td>
+                  <td>28</td>
+                  <td>12</td>
+                  <td>5</td>
+                  <td>2</td>
+                  <td>1</td>
+                  <td><span class="status-pill status-closed">Offer Accepted</span></td>
+                </tr>
+                <tr>
+                  <td><strong>REQ-2026-02</strong></td>
+                  <td>Talent Sourcing Specialist</td>
+                  <td>LinkedIn Recruiter</td>
+                  <td>46</td>
+                  <td>14</td>
+                  <td>4</td>
+                  <td>2</td>
+                  <td>1</td>
+                  <td><span class="status-pill status-closed">Joined (Day 15)</span></td>
+                </tr>
+                <tr>
+                  <td><strong>REQ-2026-03</strong></td>
+                  <td>People Analytics Associate</td>
+                  <td>Campus Placement</td>
+                  <td>38</td>
+                  <td>16</td>
+                  <td>6</td>
+                  <td>3</td>
+                  <td>1</td>
+                  <td><span class="status-pill status-panel">Offer Extended</span></td>
+                </tr>
+                <tr>
+                  <td><strong>REQ-2026-04</strong></td>
+                  <td>HR Operations Trainee</td>
+                  <td>Naukri Portal</td>
+                  <td>52</td>
+                  <td>18</td>
+                  <td>5</td>
+                  <td>2</td>
+                  <td>1</td>
+                  <td><span class="status-pill status-screen">Tech Round (In Progress)</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 3. Metric Formulas & Definitions -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">3</span> Standardized People Metric Formulas &amp; Definitions</h2>
+          <p class="section-intro">Mathematical definitions utilized by the HR coordinator to ensure consistency across weekly executive reporting:</p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Metric Name</th>
+                  <th style="width: 36%;">Standard Calculation Formula</th>
+                  <th style="width: 39%;">Operational Significance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Time-to-Fill (TTF)</strong></td>
+                  <td><code>Date Offer Accepted &minus; Requisition Approved (Days)</code></td>
+                  <td>Measures recruiting cycle efficiency from budget greenlight to candidate commitment.</td>
+                </tr>
+                <tr>
+                  <td><strong>Offer Acceptance Rate (OAR)</strong></td>
+                  <td><code>(Accepted Offers &divide; Total Formal Offers Extended) &times; 100</code></td>
+                  <td>Evaluates compensation competitiveness, candidate engagement, and market positioning.</td>
+                </tr>
+                <tr>
+                  <td><strong>Funnel Stage Conversion Rate</strong></td>
+                  <td><code>(Candidates in Stage N+1 &divide; Candidates in Stage N) &times; 100</code></td>
+                  <td>Pinpoints pipeline friction points, interviewer calibration gaps, or screening misalignment.</td>
+                </tr>
+                <tr>
+                  <td><strong>90-Day Early Attrition Rate</strong></td>
+                  <td><code>(New Hires Exiting &le; 90 Days &divide; Total New Hires) &times; 100</code></td>
+                  <td>Reflects onboarding quality, job expectation realism, and early manager-employee integration.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 4. Leadership Recommendations -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">4</span> Prioritized Operational Recommendations for HR Leadership</h2>
+          <p class="section-intro">Three concrete, practical interventions prioritized for execution in the upcoming operational cycle:</p>
+
+          <div class="rec-list">
+            <div class="rec-card">
+              <div class="rec-header">
+                <span class="rec-title">1. Implement Pre-Blocked Interview Windows for Engineering Panels</span>
+                <span class="rec-tag">Priority: High (14 Days)</span>
+              </div>
+              <div class="rec-action"><strong>Action:</strong> Partner with technical team leads to reserve recurring 2-hour interview blocks on Tuesdays and Thursdays. This will compress the phone-screen-to-interview turnaround from 5.8 days to &le; 2.5 days, reducing candidate fall-off by an estimated 15%.</div>
+            </div>
+
+            <div class="rec-card">
+              <div class="rec-header">
+                <span class="rec-title">2. Formalize Quarterly Employee Referral Drive &amp; Recognition</span>
+                <span class="rec-tag">Priority: Medium (30 Days)</span>
+              </div>
+              <div class="rec-action"><strong>Action:</strong> Given the 3.2x conversion superiority of referral hires, launch a monthly "Talent Ambassador" shoutout during team all-hands. Provide modest financial incentives (₹15,000 for early career roles) paid out after 90 days of successful joiner retention.</div>
+            </div>
+
+            <div class="rec-card">
+              <div class="rec-header">
+                <span class="rec-title">3. Establish Pre-Joining "Coffee Connect" with Immediate Team</span>
+                <span class="rec-tag">Priority: Immediate</span>
+              </div>
+              <div class="rec-action"><strong>Action:</strong> For all candidates serving notice periods &gt; 15 days, schedule an informal 30-minute virtual coffee session with their future teammates at the T-7 day mark. This deepens psychological commitment and eliminates counter-offer vulnerability.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Data Governance & Methodology Note -->
+        <div class="gov-box">
+          <strong>Methodology &amp; Data Governance:</strong> Data model synthesized from simulated 18-hire cohort records adhering to SHRM/HRCI analytics guidelines. All metrics calculated using calendar-day elapsed duration and verified through double-entry audit principles.
+        </div>
+
+        <!-- Sheet 2 Footer -->
+        <footer class="page-footer">
+          <span>Nitish Kashyap R · Mini People Metrics Snapshot | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
+          <span>Page 2 of 2</span>
+        </footer>
+      </article>
+
+    </div>
+  </div>
+</body>
+</html>

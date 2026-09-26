@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talent Acquisition Starter Kit — Nitish Kashyap R</title>
+  <meta name="description" content="A practical talent acquisition starter kit for entry-level hiring support: sample job description, screening criteria, shortlisting score sheet, interview questions, and candidate email templates. Formulated by Nitish Kashyap R (MBA HR Candidate).">
+  <meta name="author" content="Nitish Kashyap R">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #334155;
+      --text-subtle: #64748b;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-tint: #eff6ff;
+      --success: #059669;
+      --success-tint: #ecfdf5;
+      --amber: #d97706;
+      --amber-tint: #fffbeb;
+      --radius: 12px;
+      --rule: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px 16px 40px;
+      -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    /* Screen Top Toolbar (Matches Resume/CV Toolbar Standard) */
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .back-link a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-subtle);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+
+    .back-link a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .print-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: none;
+      border-radius: 8px;
+      padding: 0.55rem 1.25rem;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .print-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.38);
+    }
+
+    /* Sheet Wrapper & Individual A4 Sheets */
+    .sheet-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .doc-sheet {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.07);
+      padding: 12mm 14mm 10mm 14mm;
+      width: 100%;
+      min-height: 297mm;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Document Header & Metadata */
+    .doc-header {
+      margin-bottom: 0.9rem;
+      border-bottom: 1.5px solid var(--rule);
+      padding-bottom: 0.8rem;
+    }
+
+    .badge-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.22rem 0.65rem;
+      border-radius: 6px;
+      background: var(--primary-tint);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+    }
+
+    .badge-sub {
+      background: #f1f5f9;
+      color: var(--text-subtle);
+      border-color: var(--border);
+    }
+
+    h1.doc-title {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    .doc-subtitle {
+      font-size: 0.96rem;
+      color: var(--text-subtle);
+      line-height: 1.45;
+      margin-bottom: 0.5rem;
+    }
+
+    .doc-author-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .doc-author-bar strong {
+      color: var(--text-main);
+    }
+
+    .doc-author-bar a {
+      color: #0b57d0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Running Subheader (Pages 2 & 3) */
+    .page-subhead {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1.5px solid var(--rule);
+      padding-bottom: 2mm;
+      margin-bottom: 3.5mm;
+      font-size: 7.6pt;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .page-subhead strong {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* Practitioner Context Callout */
+    .callout-box {
+      background: #f8fafc;
+      border-left: 3.5px solid var(--primary);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.8rem 1.15rem;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 1.15rem;
+      line-height: 1.55;
+    }
+
+    .callout-box strong {
+      color: var(--text-main);
+    }
+
+    /* Section Cards & Headings */
+    .section-card {
+      margin-bottom: 1.1rem;
+    }
+
+    h2.section-heading {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h2.section-heading span.num-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    h3.sub-heading {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0.55rem 0 0.3rem;
+    }
+
+    p.section-intro, p.body-text {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+      line-height: 1.5;
+    }
+
+    ul.clean-list {
+      padding-left: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    ul.clean-list li {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+      line-height: 1.45;
+    }
+
+    ol.screening-steps {
+      padding-left: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    ol.screening-steps li {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+      line-height: 1.48;
+    }
+
+    /* Intake Parameters Grid */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .meta-item {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.55rem 0.75rem;
+    }
+
+    .meta-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-subtle);
+      margin-bottom: 0.2rem;
+    }
+
+    .meta-val {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* Dual-Tier Criteria Panels */
+    .criteria-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin: 0.5rem 0 0.65rem;
+    }
+
+    .criteria-panel {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      background: #ffffff;
+    }
+
+    .criteria-panel.must-have {
+      border-top: 3.5px solid var(--primary);
+    }
+
+    .criteria-panel.good-to-have {
+      border-top: 3.5px solid var(--success);
+    }
+
+    .criteria-panel-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .criteria-panel ul {
+      padding-left: 1.15rem;
+      margin: 0;
+    }
+
+    .criteria-panel li {
+      font-size: 0.79rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+      line-height: 1.4;
+    }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      margin: 0.5rem 0 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: var(--text-main);
+      font-weight: 700;
+      padding: 0.55rem 0.65rem;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.5rem 0.65rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      vertical-align: top;
+      font-size: 0.80rem;
+      line-height: 1.42;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) td {
+      background: #fafafa;
+    }
+
+    /* Protocol Step Cards */
+    .protocol-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin: 0.5rem 0 0.85rem;
+    }
+
+    .protocol-card {
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--primary);
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+      background: #ffffff;
+    }
+
+    .protocol-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .protocol-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .protocol-duration {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      background: #f1f5f9;
+      color: var(--text-subtle);
+    }
+
+    .protocol-script {
+      font-size: 0.81rem;
+      color: var(--text-muted);
+      line-height: 1.48;
+    }
+
+    .protocol-script em {
+      color: var(--text-main);
+    }
+
+    /* Template Cards (Email Suite) */
+    .template-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .template-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .template-header {
+      background: #f8fafc;
+      padding: 0.5rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .template-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.14rem 0.45rem;
+      border-radius: 4px;
+      background: var(--primary-tint);
+      color: var(--primary);
+    }
+
+    .template-body {
+      padding: 0.65rem 0.85rem;
+      font-size: 0.80rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      background: #ffffff;
+    }
+
+    .template-subject {
+      font-size: 0.80rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    /* Execution Checklist */
+    .checklist-list {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .checklist-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      padding: 0.55rem 0.75rem;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.81rem;
+      line-height: 1.42;
+      color: var(--text-muted);
+    }
+
+    .check-box-icon {
+      width: 17px;
+      height: 17px;
+      border-radius: 4px;
+      border: 1.5px solid var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    /* Candidate Experience Note */
+    .experience-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.65rem 0.95rem;
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+      line-height: 1.45;
+      margin-bottom: 0.75rem;
+    }
+
+    .experience-box strong {
+      color: var(--text-main);
+    }
+
+    /* Running Page Footer Marker */
+    .page-footer {
+      margin-top: auto;
+      padding-top: 2.2mm;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.4pt;
+      color: var(--text-subtle);
+    }
+
+    .page-footer a {
+      color: #0b57d0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 600;
+    }
+
+    .page-footer a:hover {
+      color: #0842a0;
+      text-decoration: underline;
+    }
+
+    /* =========================================================
+       RESPONSIVE & PRINT MEDIA RULES
+       ========================================================= */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px 12px 36px;
+      }
+      .doc-sheet {
+        padding: 1.5rem 1.15rem;
+        border-radius: 10px;
+        min-height: auto;
+      }
+      .meta-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .criteria-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      html, body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 210mm !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .toolbar, .print-btn, .back-link {
+        display: none !important;
+      }
+
+      .container {
+        max-width: none !important;
+        width: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .sheet-wrapper {
+        gap: 0 !important;
+      }
+
+      .doc-sheet {
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 8.5mm 13.5mm 8mm 13.5mm !important;
+        background: #ffffff !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      .doc-sheet:last-child {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      /* Clean, Non-Congested Print Typography */
+      h1.doc-title {
+        font-size: 15.2pt !important;
+        margin-bottom: 0.15rem !important;
+        line-height: 1.15 !important;
+      }
+
+      .doc-subtitle {
+        font-size: 8.2pt !important;
+        margin-bottom: 0.28rem !important;
+        line-height: 1.3 !important;
+      }
+
+      .badge-strip {
+        margin-bottom: 0.3rem !important;
+        gap: 0.35rem !important;
+      }
+
+      .badge {
+        font-size: 6.6pt !important;
+        padding: 0.12rem 0.45rem !important;
+      }
+
+      .doc-author-bar {
+        font-size: 7.3pt !important;
+      }
+
+      .callout-box {
+        padding: 0.45rem 0.75rem !important;
+        font-size: 7.5pt !important;
+        line-height: 1.34 !important;
+        margin-bottom: 0.5rem !important;
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        border-left: 3.5px solid #2563eb !important;
+      }
+
+      h2.section-heading {
+        font-size: 9.8pt !important;
+        margin-bottom: 0.22rem !important;
+      }
+
+      h2.section-heading span.num-badge {
+        width: 18px !important;
+        height: 18px !important;
+        font-size: 6.8pt !important;
+      }
+
+      h3.sub-heading {
+        font-size: 8.2pt !important;
+        margin: 0.22rem 0 0.08rem !important;
+      }
+
+      p.section-intro, p.body-text {
+        font-size: 7.5pt !important;
+        margin-bottom: 0.22rem !important;
+        line-height: 1.28 !important;
+      }
+
+      ul.clean-list {
+        margin-bottom: 0.25rem !important;
+        padding-left: 1.1rem !important;
+      }
+
+      ul.clean-list li {
+        font-size: 7.3pt !important;
+        margin-bottom: 0.12rem !important;
+        line-height: 1.28 !important;
+      }
+
+      .meta-grid {
+        gap: 0.38rem !important;
+        margin-bottom: 0.45rem !important;
+      }
+
+      .meta-item {
+        padding: 0.3rem 0.5rem !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      .meta-label {
+        font-size: 6.2pt !important;
+        margin-bottom: 0.08rem !important;
+      }
+
+      .meta-val {
+        font-size: 7.5pt !important;
+      }
+
+      .criteria-grid {
+        gap: 0.55rem !important;
+        margin: 0.25rem 0 0.4rem !important;
+      }
+
+      .criteria-panel {
+        padding: 0.48rem 0.68rem !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      .criteria-panel.must-have {
+        border-top: 3px solid #2563eb !important;
+      }
+
+      .criteria-panel.good-to-have {
+        border-top: 3px solid #059669 !important;
+      }
+
+      .criteria-panel-title {
+        font-size: 7.8pt !important;
+        margin-bottom: 0.25rem !important;
+      }
+
+      .criteria-panel li {
+        font-size: 7.2pt !important;
+        margin-bottom: 0.14rem !important;
+        line-height: 1.25 !important;
+      }
+
+      .table-container {
+        margin: 0.35rem 0 0.55rem !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      table {
+        font-size: 7.5pt !important;
+      }
+
+      th {
+        padding: 0.36rem 0.5rem !important;
+        background: #f1f5f9 !important;
+      }
+
+      td {
+        padding: 0.32rem 0.5rem !important;
+        font-size: 7.4pt !important;
+        line-height: 1.3 !important;
+      }
+
+      .protocol-list {
+        gap: 0.38rem !important;
+        margin: 0.35rem 0 0.55rem !important;
+      }
+
+      .protocol-card {
+        padding: 0.42rem 0.65rem !important;
+        border: 1px solid #cbd5e1 !important;
+        border-left: 3.5px solid #2563eb !important;
+      }
+
+      .protocol-title {
+        font-size: 8.0pt !important;
+      }
+
+      .protocol-duration {
+        font-size: 6.4pt !important;
+        padding: 0.08rem 0.35rem !important;
+      }
+
+      .protocol-script {
+        font-size: 7.4pt !important;
+        line-height: 1.32 !important;
+      }
+
+      .template-list {
+        gap: 0.4rem !important;
+        margin-bottom: 0.55rem !important;
+      }
+
+      .template-card {
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      .template-header {
+        padding: 0.32rem 0.65rem !important;
+        font-size: 7.8pt !important;
+      }
+
+      .template-tag {
+        font-size: 6.4pt !important;
+        padding: 0.08rem 0.35rem !important;
+      }
+
+      .template-subject {
+        font-size: 7.4pt !important;
+        margin-bottom: 0.25rem !important;
+        padding-bottom: 0.15rem !important;
+      }
+
+      .template-body {
+        padding: 0.45rem 0.65rem !important;
+        font-size: 7.4pt !important;
+        line-height: 1.32 !important;
+      }
+
+      .checklist-list {
+        gap: 0.28rem !important;
+        margin-bottom: 0.45rem !important;
+      }
+
+      .checklist-list li {
+        padding: 0.32rem 0.55rem !important;
+        font-size: 7.4pt !important;
+        border: 1px solid #cbd5e1 !important;
+        line-height: 1.3 !important;
+      }
+
+      .check-box-icon {
+        width: 14px !important;
+        height: 14px !important;
+        font-size: 9px !important;
+        margin-top: 1px !important;
+      }
+
+      .experience-box {
+        padding: 0.42rem 0.75rem !important;
+        font-size: 7.2pt !important;
+        line-height: 1.32 !important;
+        margin-bottom: 0.45rem !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      .page-footer {
+        padding-top: 1.8mm !important;
+        border-top: 1px solid #cbd5e1 !important;
+        font-size: 7.2pt !important;
+      }
+
+      a {
+        color: #0b57d0 !important;
+        text-decoration: underline !important;
+        text-underline-offset: 2px !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+  <script>
+    function handleBackToPortfolio(e) {
+      if (e) e.preventDefault();
+      if (window.opener && !window.opener.closed) {
+        try {
+          window.opener.focus();
+          window.close();
+          return;
+        } catch (err) {}
+      }
+      if (window.history.length > 1 && document.referrer && (document.referrer.includes('/index.html') || document.referrer.includes(window.location.host))) {
+        window.history.back();
+        return;
+      }
+      window.location.href = '../index.html#projects';
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <!-- Top Actions Toolbar (Hidden in Print) -->
+    <div class="toolbar">
+      <div class="back-link">
+        <a href="../index.html#projects" onclick="handleBackToPortfolio(event)" rel="home">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          Back to Official Portfolio
+        </a>
+      </div>
+      <button onclick="window.print()" class="print-btn" aria-label="Print or save this document as PDF">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print / Save as PDF
+      </button>
+    </div>
+
+    <!-- Paper Sheet Wrapper -->
+    <div class="sheet-wrapper" itemscope itemtype="https://schema.org/CreativeWork">
+
+      <!-- =========================================================
+           SHEET 1: Requisition Intake, Job Description & Screening Matrix
+           ========================================================= -->
+      <article class="doc-sheet" id="doc-page-1">
+        <!-- Document Header -->
+        <header class="doc-header">
+          <div class="badge-strip">
+            <span class="badge">Human Resource Management</span>
+            <span class="badge badge-sub">Talent Acquisition Operations</span>
+            <span class="badge badge-sub">Executive Work Sample</span>
+          </div>
+
+          <h1 class="doc-title" itemprop="name">Talent Acquisition Starter Kit</h1>
+          <div class="doc-subtitle">A standardized operational framework for entry-level hiring support, candidate evaluation rubrics, and structured interview coordination.</div>
+
+          <div class="doc-author-bar">
+            <span>Formulated by <strong>Nitish Kashyap R</strong></span>
+            <span>&middot;</span>
+            <span>MBA (HR) Candidate</span>
+            <span>&middot;</span>
+            <span>VIMTECH, Tumkur</span>
+            <span>&middot;</span>
+            <a href="mailto:nitishkashyapr8@gmail.com">nitishkashyapr8@gmail.com</a>
+          </div>
+        </header>
+
+        <!-- Practitioner Context -->
+        <div class="callout-box">
+          <strong>Practitioner Context &amp; Purpose:</strong> Formulated by <strong>Nitish Kashyap R</strong> (MBA Candidate, Specialization in Human Resources) as a practical operational work sample. Designed to reflect structured corporate recruitment standards in Bangalore and Tumkur business ecosystems, this kit demonstrates end-to-end competence in intake drafting, screening criteria standardization, structured behavioral evaluation, and empathetic candidate communication.
+        </div>
+
+        <!-- 1. Intake Parameters -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">1</span> Target Role Specification &amp; Intake Parameters</h2>
+          <p class="section-intro">This operational framework simulates an intake requirement for an early-career Human Resources Coordinator position supporting an active corporate talent acquisition team:</p>
+          
+          <div class="meta-grid">
+            <div class="meta-item">
+              <div class="meta-label">Position Title</div>
+              <div class="meta-val">HR Operations Coordinator</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Department</div>
+              <div class="meta-val">People Operations &amp; TA</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Target Location</div>
+              <div class="meta-val">Bengaluru / Hybrid (3+2)</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Experience Bracket</div>
+              <div class="meta-val">0–1 Year (Early Career / Intern)</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">CTC Budget Range</div>
+              <div class="meta-val">₹4.20 – ₹5.40 LPA</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Notice Period SLA</div>
+              <div class="meta-val">Immediate to 15 Days Max</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Job Description -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">2</span> Structured Job Description (JD)</h2>
+          <h3 class="sub-heading">Role Objective</h3>
+          <p class="body-text">The HR Operations Coordinator serves as the administrative backbone of our hiring lifecycle. The incumbent manages inbound candidate pipelines, coordinates multi-stage panel interviews across Google Calendar and Microsoft Teams, verifies early applicant documentation, and maintains meticulous tracker hygiene to ensure a respectful, high-touch candidate experience.</p>
+
+          <h3 class="sub-heading">Key Duties &amp; Operational Deliverables</h3>
+          <ul class="clean-list">
+            <li><strong>Pipeline Screening:</strong> Review inbound resumes on ATS against defined educational and foundational skill criteria within a 48-hour SLA.</li>
+            <li><strong>Interview Logistics:</strong> Coordinate interview schedules between hiring managers and prospective candidates; resolve scheduling conflicts proactively.</li>
+            <li><strong>Candidate Communication:</strong> Issue timely status updates, interview briefing packs, and feedback summaries to eliminate candidate ghosting.</li>
+            <li><strong>Tracker Hygiene:</strong> Maintain daily updates across applicant spreadsheets (source tag, screening status, scorecard completion, offer release).</li>
+            <li><strong>Pre-Offer Verification:</strong> Collect and catalog primary verification credentials (marks cards, ID proofs, relieving letters, internship certificates).</li>
+          </ul>
+
+          <h3 class="sub-heading">Success Metrics &amp; SLAs</h3>
+          <p class="body-text">Target initial resume screening turnaround: &le; 48 hours; Candidate interview attendance rate: &ge; 90%; Data entry error rate across trackers: 0%.</p>
+        </section>
+
+        <!-- 3. Screening Criteria Matrix -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">3</span> Dual-Tier Screening Criteria Matrix</h2>
+          <p class="section-intro">To prevent recruiter bias and reduce downstream panel fatigue, candidate profiles are evaluated against strict objective parameters:</p>
+
+          <div class="criteria-grid">
+            <div class="criteria-panel must-have">
+              <div class="criteria-panel-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Must-Have Criteria (Non-Negotiable)
+              </div>
+              <ul>
+                <li><strong>Academic Foundation:</strong> Regular full-time Bachelor's degree (B.Com, BBA, BBM, or equivalent) with consistent academic performance.</li>
+                <li><strong>Spreadsheet Proficiency:</strong> Proven command of Google Sheets or MS Excel (VLOOKUP, Pivot Tables, conditional formatting, data validation).</li>
+                <li><strong>Written Articulation:</strong> Clear, grammatically sound professional English correspondence without jargon or typographical errors.</li>
+                <li><strong>Information Discretion:</strong> Strict commitment to maintaining applicant confidentiality and data privacy (handling compensation and contact data).</li>
+                <li><strong>Location Feasibility:</strong> Resident of Bangalore/Tumkur region or immediate readiness for hybrid office attendance.</li>
+              </ul>
+            </div>
+
+            <div class="criteria-panel good-to-have">
+              <div class="criteria-panel-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Good-to-Have Criteria (Value-Add)
+              </div>
+              <ul>
+                <li><strong>ATS Exposure:</strong> Hands-on familiarity with modern ATS workflows (Greenhouse, Lever, Zoho Recruit, or Workday).</li>
+                <li><strong>Verified Certifications:</strong> Completed foundational coursework in HR management, talent sourcing, or people analytics (SHRM, HRCI, Google).</li>
+                <li><strong>Campus Coordination:</strong> Prior experience participating in college placement committees, event logistics, or team leadership.</li>
+                <li><strong>AI-Assisted Productivity:</strong> Experience utilizing structured prompts for job description drafting and email correspondence refinement.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sheet 1 Footer -->
+        <footer class="page-footer">
+          <span>Nitish Kashyap R · Talent Acquisition Starter Kit | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
+          <span>Page 1 of 3</span>
+        </footer>
+      </article>
+
+      <!-- =========================================================
+           SHEET 2: Candidate Evaluation Scorecard & Screening Protocol
+           ========================================================= -->
+      <article class="doc-sheet" id="doc-page-2">
+        <!-- Running Subheader -->
+        <div class="page-subhead">
+          <span><strong>Nitish Kashyap R</strong> — Talent Acquisition Starter Kit</span>
+          <span>Candidate Evaluation Scorecard &amp; Telephone Screening Protocol</span>
+        </div>
+
+        <!-- 4. Scorecard (Starts Fresh at Top of Page 2!) -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">4</span> Standardized Candidate Evaluation Scorecard</h2>
+          <p class="section-intro">Evaluation scoring is anchored on a 1-to-5 scale (1 = Unsatisfactory, 3 = Meets Expectations, 5 = Exceptional) with explicit behavioral benchmarks to calibrate panel feedback:</p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 22%;">Core Competency</th>
+                  <th style="width: 10%;">Weight</th>
+                  <th style="width: 34%;">Score 3 Benchmark (Meets Expectations)</th>
+                  <th style="width: 34%;">Score 5 Benchmark (Exceeds Expectations)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Process Discipline &amp; Attention to Detail</strong></td>
+                  <td>25%</td>
+                  <td>Demonstrates systematic task tracking using checklists; accurately logs dates, names, and status tags in demo spreadsheet without prompts.</td>
+                  <td>Anticipates workflow bottlenecks; proactively identifies tracker discrepancy and establishes self-auditing routines to maintain data integrity.</td>
+                </tr>
+                <tr>
+                  <td><strong>Written &amp; Verbal Communication</strong></td>
+                  <td>25%</td>
+                  <td>Communicates with professional tone, clarity, and grammatical precision; handles phone queries courteously and accurately summarizes call notes.</td>
+                  <td>Demonstrates exceptional empathy and executive presence; handles candidate frustration or ambiguity with diplomacy and poise.</td>
+                </tr>
+                <tr>
+                  <td><strong>Ethics &amp; Data Discretion</strong></td>
+                  <td>20%</td>
+                  <td>Articulates clear understanding of candidate confidential information; treats salary details, phone numbers, and resumes with strict privacy.</td>
+                  <td>Demonstrates deep grasp of compliance and POSH/statutory norms; can navigate ethical dilemmas involving peer pressure or unauthorized data requests.</td>
+                </tr>
+                <tr>
+                  <td><strong>Coordination &amp; Follow-Through</strong></td>
+                  <td>15%</td>
+                  <td>Follows up on pending tasks methodically; sends calendar invites and reminder nudges within established operational SLAs.</td>
+                  <td>Multitasks seamlessly across 15+ concurrent applicant workflows; manages sudden interviewer cancellations with zero candidate friction.</td>
+                </tr>
+                <tr>
+                  <td><strong>Learning Agility &amp; Tool Readiness</strong></td>
+                  <td>15%</td>
+                  <td>Comfortable learning new HR software; open to feedback; possesses baseline knowledge of modern spreadsheets and digital workplace tools.</td>
+                  <td>Independent learner who self-upskills via certified programs; quickly leverages modern digital tools to improve administrative speed.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size: 0.76rem; color: var(--text-subtle); margin-top: 0.35rem;"><em>Qualifying Threshold: Composite score &ge; 3.4 / 5.0 with no single competency rated below 2.5 is required to advance to manager round.</em></p>
+        </section>
+
+        <!-- 5. Phone Screen Protocol -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">5</span> 15-Minute Telephone Screening Protocol</h2>
+          <p class="section-intro">Conducted by the HR Coordinator to validate logistical availability, communication clarity, and candidate interest prior to panel scheduling:</p>
+
+          <div class="protocol-list">
+            <div class="protocol-card">
+              <div class="protocol-header">
+                <span class="protocol-title">1. Opening &amp; Context Setting</span>
+                <span class="protocol-duration">2 Mins &middot; Objective: Rapport</span>
+              </div>
+              <div class="protocol-script"><em>"Hello [Candidate Name], this is Nitish from People Operations at [Company Name]. Calling regarding your application for the HR Operations Coordinator role. Is this a convenient 10-15 minute window to speak?"</em></div>
+            </div>
+
+            <div class="protocol-card">
+              <div class="protocol-header">
+                <span class="protocol-title">2. Role Motivation &amp; Career Orientation</span>
+                <span class="protocol-duration">4 Mins &middot; Objective: Alignment</span>
+              </div>
+              <div class="protocol-script"><em>"We noted your academic background in commerce/management. What specifically drew your interest to HR operations, and how does this role align with where you want to build your early career foundation?"</em></div>
+            </div>
+
+            <div class="protocol-card">
+              <div class="protocol-header">
+                <span class="protocol-title">3. Spreadsheet Proficiency &amp; Process Hygiene</span>
+                <span class="protocol-duration">4 Mins &middot; Objective: Technical Competence</span>
+              </div>
+              <div class="protocol-script"><em>"Managing interview logs and candidate records in Google Sheets is a daily routine here. Could you share an example of a project where you used spreadsheets to track data, coordinate schedules, or calculate metrics?"</em></div>
+            </div>
+
+            <div class="protocol-card">
+              <div class="protocol-header">
+                <span class="protocol-title">4. Situational Agility &amp; Escalation Discipline</span>
+                <span class="protocol-duration">3 Mins &middot; Objective: Problem Solving</span>
+              </div>
+              <div class="protocol-script"><em>"Suppose an interviewer has not joined a scheduled virtual meeting 5 minutes past start time, and the candidate is waiting in the room. What exact steps would you take?"</em> (Look for proactive panelist contact, candidate reassurance, and manager escalation).</div>
+            </div>
+
+            <div class="protocol-card">
+              <div class="protocol-header">
+                <span class="protocol-title">5. Logistics &amp; Availability Confirmation</span>
+                <span class="protocol-duration">2 Mins &middot; Objective: Feasibility</span>
+              </div>
+              <div class="protocol-script">Confirm residential location, commute feasibility to Bengaluru office, notice period (&le; 15 days), and alignment with ₹4.20–₹5.40 LPA budget band.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Gatekeeper & Calibration Note -->
+        <div class="experience-box">
+          <strong>Screening Gatekeeper Standard:</strong> Candidates advancing to panel interviews must demonstrate fluent English articulation, confirmed &le; 15-day joining availability, and verified baseline spreadsheet comfort.
+        </div>
+
+        <!-- Sheet 2 Footer -->
+        <footer class="page-footer">
+          <span>Nitish Kashyap R · Talent Acquisition Starter Kit | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
+          <span>Page 2 of 3</span>
+        </footer>
+      </article>
+
+      <!-- =========================================================
+           SHEET 3: Candidate Communication Email Suite & Execution SLAs
+           ========================================================= -->
+      <article class="doc-sheet" id="doc-page-3">
+        <!-- Running Subheader -->
+        <div class="page-subhead">
+          <span><strong>Nitish Kashyap R</strong> — Talent Acquisition Starter Kit</span>
+          <span>Candidate Communication Email Suite &amp; Day-of-Interview SLAs</span>
+        </div>
+
+        <!-- 6. Candidate Email Suite -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">6</span> Candidate Communication Email Suite</h2>
+          <p class="section-intro">Professional, human-crafted communication templates designed to preserve candidate dignity, represent employer brand, and maintain full transparency:</p>
+
+          <div class="template-list">
+            <!-- Template 1 -->
+            <div class="template-card">
+              <div class="template-header">
+                <span>Template 1: Formal Virtual Panel Interview Invitation</span>
+                <span class="template-tag">Stage: Round 1</span>
+              </div>
+              <div class="template-body">
+                <div class="template-subject">Subject: Interview Invitation: HR Operations Coordinator at [Company Name]</div>
+                <p>Dear [Candidate Name], thank you for speaking with us yesterday. We are pleased to invite you for a 45-minute virtual panel interview with [Interviewer 1, Title] and [Interviewer 2, Title] focusing on organizational experience, spreadsheet problem-solving, and situational coordination skills.</p>
+                <p style="margin: 0.25rem 0;"><strong>Proposed Timeslots (IST):</strong> Option A: Thursday [Date] 11:00 AM – 11:45 AM &middot; Option B: Thursday [Date] 03:30 PM – 04:15 PM &middot; Option C: Friday [Date] 10:30 AM – 11:15 AM</p>
+                <p>Meeting Format: Google Meet (video active). Please reply with your preferred timeslot by 5:00 PM today. Warm regards, Nitish Kashyap R — People Operations &amp; TA.</p>
+              </div>
+            </div>
+
+            <!-- Template 2 -->
+            <div class="template-card">
+              <div class="template-header">
+                <span>Template 2: Constructive &amp; Respectful Application Rejection</span>
+                <span class="template-tag">Stage: Post-Interview</span>
+              </div>
+              <div class="template-body">
+                <div class="template-subject">Subject: Application Status: HR Operations Coordinator at [Company Name]</div>
+                <p>Dear [Candidate Name], thank you for taking the time to speak with our hiring panel regarding the HR Operations Coordinator role on [Date]. While our team was impressed by your professional drive and academic grounding, we have chosen to proceed with candidates possessing deeper hands-on exposure to our active ATS environment.</p>
+                <p style="margin-top: 0.25rem;">With your permission, we will keep your profile in our active talent pool for upcoming openings across People Operations over the next 6 months. We sincerely appreciate your courtesy and wish you every success. Warm regards, Nitish Kashyap R — People Operations &amp; TA.</p>
+              </div>
+            </div>
+
+            <!-- Template 3 -->
+            <div class="template-card">
+              <div class="template-header">
+                <span>Template 3: Pre-Offer Intent &amp; Document Collection</span>
+                <span class="template-tag">Stage: Verification</span>
+              </div>
+              <div class="template-body">
+                <div class="template-subject">Subject: Next Steps &amp; Document Verification: HR Operations Coordinator | [Company Name]</div>
+                <p>Dear [Candidate Name], following your successful final round interview, our team has recommended you for appointment to the HR Operations Coordinator position. Prior to formal Offer Letter issuance, kindly share soft copies of the following verification records by [Date, 2:00 PM IST]:</p>
+                <p style="margin: 0.25rem 0;">1. Government Identity (Self-attested PAN &amp; Aadhaar) &middot; 2. Academic Credentials (Degree Certificates &amp; 10th/12th/Graduation Marks Cards) &middot; 3. Relieving Letter / Course Completion &middot; 4. Bank Account Verification (Cancelled Cheque / Passbook).</p>
+                <p>Please upload these to our secure onboarding portal. We look forward to welcoming you! Warm regards, Nitish Kashyap R — People Operations &amp; TA.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Execution Checklist -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">7</span> Recruiter Day-of-Interview Execution Checklist</h2>
+          <p class="section-intro">A rigorous operational checklist for the talent acquisition coordinator to eliminate scheduling glitches and ensure 100% SLA compliance:</p>
+
+          <ul class="checklist-list">
+            <li>
+              <span class="check-box-icon">&#10003;</span>
+              <div><strong>T-24 Hours (Day Prior):</strong> Send calendar reconfirmation and dial-in links to candidate and panel; verify resume is attached to the calendar invite.</div>
+            </li>
+            <li>
+              <span class="check-box-icon">&#10003;</span>
+              <div><strong>T-1 Hour:</strong> Verify that the primary panelist has accepted the calendar invite; identify back-up panelist if primary is in conflicting client meetings.</div>
+            </li>
+            <li>
+              <span class="check-box-icon">&#10003;</span>
+              <div><strong>T-10 Minutes:</strong> Log in to virtual meeting room; confirm audio/video clarity and ensure waiting room admittance settings are active.</div>
+            </li>
+            <li>
+              <span class="check-box-icon">&#10003;</span>
+              <div><strong>T+0 Minutes:</strong> Admit candidate punctually; deliver warm 1-minute welcome and introduce panel before handing over meeting floor.</div>
+            </li>
+            <li>
+              <span class="check-box-icon">&#10003;</span>
+              <div><strong>T+2 Hours (Post-Meeting):</strong> Collect structured scorecard ratings and written notes from panel; record composite score in recruitment tracker; trigger candidate status update within 24 hours.</div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Candidate Experience & SLA Commitment Note -->
+        <div class="experience-box">
+          <strong>Candidate Experience Commitment:</strong> Enforces a strict 48-hour response turnaround SLA across all application stages. Every candidate receives transparent, respectful communication to protect employer branding and eliminate ghosting.
+        </div>
+
+        <!-- Sheet 3 Footer -->
+        <footer class="page-footer">
+          <span>Nitish Kashyap R · Talent Acquisition Starter Kit | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
+          <span>Page 3 of 3</span>
+        </footer>
+      </article>
+
+    </div>
+  </div>
+</body>
+</html>

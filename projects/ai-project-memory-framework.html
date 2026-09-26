@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI Project Memory Architecture Framework — Nitish Kashyap R</title>
+  <meta name="description" content="A robust, drift-free persistent memory architecture framework for AI coding assistants (Antigravity, Claude Code, Cursor, Windsurf, OpenCode). Engineered by Nitish Kashyap R. Includes turnkey replication prompt.">
+  <meta name="author" content="Nitish Kashyap R">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #334155;
+      --text-subtle: #64748b;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-tint: #eff6ff;
+      --indigo: #4f46e5;
+      --indigo-tint: #eef2ff;
+      --emerald: #059669;
+      --emerald-dark: #047857;
+      --emerald-tint: #ecfdf5;
+      --violet: #7c3aed;
+      --violet-tint: #f5f3ff;
+      --amber: #d97706;
+      --amber-tint: #fffbeb;
+      --code-bg: #090d16;
+      --code-header: #131b2e;
+      --radius: 10px;
+      --rule: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 24px 16px 40px;
+      -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Screen Top Toolbar */
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .back-link a {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-subtle);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+
+    .back-link a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .print-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1.35rem;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .print-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.38);
+    }
+
+    /* Sheet Wrapper & Individual A4 Sheets */
+    .sheet-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .doc-sheet {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.07);
+      padding: 11mm 14mm 10mm 14mm;
+      width: 100%;
+      min-height: 297mm;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Document Header & Metadata */
+    .doc-header {
+      margin-bottom: 0.75rem;
+      border-bottom: 1.5px solid var(--rule);
+      padding-bottom: 0.75rem;
+    }
+
+    .badge-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge {
+      font-size: 0.71rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.65rem;
+      border-radius: 6px;
+      background: var(--primary-tint);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+    }
+
+    .badge-emerald {
+      background: var(--emerald-tint);
+      color: var(--emerald);
+      border-color: rgba(5, 150, 105, 0.2);
+    }
+
+    .badge-violet {
+      background: var(--violet-tint);
+      color: var(--violet);
+      border-color: rgba(124, 58, 237, 0.2);
+    }
+
+    h1.doc-title {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: clamp(1.75rem, 3.2vw, 2.15rem);
+      font-weight: 800;
+      line-height: 1.16;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    .doc-subtitle {
+      font-size: 0.94rem;
+      color: var(--text-subtle);
+      line-height: 1.45;
+      margin-bottom: 0.55rem;
+    }
+
+    .doc-author-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .doc-author-bar strong {
+      color: var(--text-main);
+    }
+
+    .doc-author-bar a {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Running Subheader (Pages 2 & 3) */
+    .page-subhead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid var(--rule);
+      padding-bottom: 2mm;
+      margin-bottom: 4mm;
+      font-size: 7.5pt;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .page-subhead strong {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* Executive Callout Boxes */
+    .callout-box {
+      background: #f8fafc;
+      border-left: 3.5px solid var(--primary);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.05rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.95rem;
+      line-height: 1.52;
+    }
+
+    .callout-box.emerald {
+      border-left-color: var(--emerald);
+      background: #f0fdf4;
+    }
+
+    .callout-box.indigo {
+      border-left-color: var(--indigo);
+      background: #f5f3ff;
+    }
+
+    .callout-box strong {
+      color: var(--text-main);
+    }
+
+    .callout-box ul {
+      margin-top: 0.4rem;
+      padding-left: 1.2rem;
+    }
+
+    .callout-box li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* Section Headings */
+    .section-card {
+      margin-bottom: 0.95rem;
+    }
+
+    h2.section-heading {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    h2.section-heading span.num-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.73rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    p.body-text {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      margin-bottom: 0.55rem;
+      line-height: 1.52;
+    }
+
+    /* System Architecture SVG Container */
+    .arch-diagram-wrapper {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 3px 14px rgba(15, 23, 42, 0.04);
+    }
+
+    .arch-diagram-wrapper svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Code Blocks */
+    .code-container {
+      background: var(--code-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 0.95rem;
+      border: 1px solid #1e293b;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    }
+
+    .code-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.45rem 0.85rem;
+      background: var(--code-header);
+      border-bottom: 1px solid #1e293b;
+      font-size: 0.73rem;
+      color: #94a3b8;
+      font-family: 'Fira Code', monospace;
+      font-weight: 600;
+    }
+
+    .code-topbar .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .code-topbar .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .code-topbar .dot-r { background: #ef4444; }
+    .code-topbar .dot-y { background: #f59e0b; }
+    .code-topbar .dot-g { background: #10b981; }
+
+    pre.code-block {
+      padding: 0.7rem 0.95rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      line-height: 1.46;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+    }
+
+    /* Syntax Highlighting Tokens */
+    .k-blue { color: #38bdf8; font-weight: 600; }
+    .k-green { color: #34d399; }
+    .k-yellow { color: #fde047; }
+    .k-pink { color: #f472b6; font-weight: 600; }
+    .k-gray { color: #64748b; }
+    .k-purple { color: #c084fc; font-weight: 600; }
+
+    /* Benefit Highlight Cards Grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .benefit-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .benefit-header {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.81rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .benefit-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.44;
+    }
+
+    /* Guardrails Grid (Pillar 2) */
+    .guardrails-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+      margin-bottom: 0.95rem;
+    }
+
+    .guardrail-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 3px solid #ef4444;
+      border-radius: 6px;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.74rem;
+      line-height: 1.4;
+      color: var(--text-muted);
+    }
+
+    .guardrail-card strong {
+      color: #991b1b;
+      display: block;
+      margin-bottom: 0.12rem;
+    }
+
+    /* Lifecycle Timeline on Sheet 2 */
+    .lifecycle-flow {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.55rem;
+      margin-bottom: 0.95rem;
+    }
+
+    .lifecycle-step {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      border-top: 3.5px solid var(--primary);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .lifecycle-step.step-1 { border-top-color: #2563eb; }
+    .lifecycle-step.step-2 { border-top-color: #7c3aed; }
+    .lifecycle-step.step-3 { border-top-color: #0891b2; }
+    .lifecycle-step.step-4 { border-top-color: #059669; }
+
+    .step-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .step-badge {
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 0.16rem 0.42rem;
+      border-radius: 4px;
+      background: #e2e8f0;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .step-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .step-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .cascade-flow-pill {
+      background: #eef2ff;
+      border: 1px dashed #6366f1;
+      border-radius: 6px;
+      padding: 0.35rem 0.65rem;
+      margin-top: 0.35rem;
+      font-size: 0.71rem;
+      font-weight: 700;
+      color: #3730a3;
+      text-align: center;
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* Setup Recipe 4-Step Cards (Sheet 2) */
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .recipe-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 0.85rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.03);
+    }
+
+    .recipe-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .recipe-content h4 {
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.2rem;
+    }
+
+    .recipe-content p {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      line-height: 1.42;
+      margin-bottom: 0.3rem;
+    }
+
+    .recipe-content code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.69rem;
+      background: #f1f5f9;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    /* Invariants & Best Practices Table on Sheet 3 */
+    .invariants-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0.95rem;
+      font-size: 0.78rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+
+    .invariants-table thead {
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    .invariants-table th {
+      padding: 0.6rem 0.8rem;
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: 0.73rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: left;
+    }
+
+    .invariants-table td {
+      padding: 0.52rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.42;
+      color: var(--text-muted);
+    }
+
+    .invariants-table tbody tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .invariants-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .invariants-table td.col-practice {
+      font-weight: 700;
+      color: var(--text-main);
+      width: 25%;
+    }
+
+    .invariants-table td.col-practice .practice-badge {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.1rem 0.38rem;
+      border-radius: 4px;
+      background: #e2e8f0;
+      color: #334155;
+      margin-top: 0.15rem;
+    }
+
+    .invariants-table td.col-impl {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.71rem;
+      color: #0f172a;
+      width: 38%;
+    }
+
+    .invariants-table td.col-value {
+      width: 37%;
+    }
+
+    /* Master Replication Prompt Box (Sheet 3) */
+    .prompt-container {
+      background: #090d16;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 0.85rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+    }
+
+    .prompt-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.45rem 0.85rem;
+      background: #131b2e;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .prompt-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .prompt-title-text {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: 0.02em;
+    }
+
+    .copy-prompt-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: var(--primary);
+      border: none;
+      border-radius: 6px;
+      padding: 0.32rem 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .copy-prompt-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    pre.prompt-body {
+      padding: 0.65rem 0.9rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      line-height: 1.42;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+    }
+
+    /* Running Page Footer */
+    .page-footer {
+      margin-top: auto;
+      padding-top: 2.2mm;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.4pt;
+      color: var(--text-subtle);
+    }
+
+    .page-footer a {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 600;
+    }
+
+    /* =========================================================
+       PRINT MEDIA HYGIENE (Strict A4, Zero Default Headers/Footers)
+       ========================================================= */
+    @media print {
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      html, body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 210mm !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .toolbar, .print-btn, .back-link, .copy-prompt-btn {
+        display: none !important;
+      }
+
+      .container {
+        max-width: none !important;
+        width: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .sheet-wrapper {
+        gap: 0 !important;
+      }
+
+      .doc-sheet {
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 9.5mm 13mm 8.5mm 13mm !important;
+        background: #ffffff !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      .doc-sheet:last-child {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      /* Balanced Print Typography */
+      h1.doc-title {
+        font-size: 15.5pt !important;
+        margin-bottom: 0.18rem !important;
+        line-height: 1.15 !important;
+      }
+
+      .doc-subtitle {
+        font-size: 8.3pt !important;
+        margin-bottom: 0.32rem !important;
+        line-height: 1.35 !important;
+      }
+
+      .badge-strip {
+        margin-bottom: 0.32rem !important;
+        gap: 0.38rem !important;
+      }
+
+      .badge {
+        font-size: 6.5pt !important;
+        padding: 0.13rem 0.45rem !important;
+      }
+
+      .doc-author-bar {
+        font-size: 7.2pt !important;
+      }
+
+      .page-subhead {
+        font-size: 7.2pt !important;
+        padding-bottom: 1.6mm !important;
+        margin-bottom: 3.2mm !important;
+      }
+
+      .callout-box {
+        padding: 0.48rem 0.75rem !important;
+        font-size: 7.3pt !important;
+        margin-bottom: 0.55rem !important;
+        line-height: 1.42 !important;
+      }
+
+      h2.section-heading {
+        font-size: 9.6pt !important;
+        margin-bottom: 0.28rem !important;
+      }
+
+      p.body-text {
+        font-size: 7.4pt !important;
+        margin-bottom: 0.35rem !important;
+        line-height: 1.4 !important;
+      }
+
+      pre.code-block {
+        font-size: 6.7pt !important;
+        padding: 0.45rem 0.65rem !important;
+        line-height: 1.36 !important;
+      }
+
+      .code-topbar {
+        padding: 0.25rem 0.6rem !important;
+        font-size: 6.5pt !important;
+      }
+
+      .code-container {
+        margin-bottom: 0.55rem !important;
+      }
+
+      .benefits-grid {
+        gap: 0.45rem !important;
+        margin-bottom: 0.5rem !important;
+      }
+
+      .benefit-card {
+        padding: 0.5rem 0.6rem !important;
+      }
+
+      .benefit-header {
+        font-size: 7.2pt !important;
+      }
+
+      .benefit-desc {
+        font-size: 6.7pt !important;
+        line-height: 1.32 !important;
+      }
+
+      .guardrails-grid {
+        gap: 0.38rem !important;
+        margin-bottom: 0.55rem !important;
+      }
+
+      .guardrail-card {
+        padding: 0.38rem 0.5rem !important;
+        font-size: 6.7pt !important;
+      }
+
+      .lifecycle-flow {
+        gap: 0.45rem !important;
+        margin-bottom: 0.55rem !important;
+      }
+
+      .lifecycle-step {
+        padding: 0.5rem 0.65rem !important;
+      }
+
+      .step-name {
+        font-size: 7.2pt !important;
+      }
+
+      .step-desc {
+        font-size: 6.7pt !important;
+        line-height: 1.32 !important;
+      }
+
+      .recipe-grid {
+        gap: 0.45rem !important;
+        margin-bottom: 0.55rem !important;
+      }
+
+      .recipe-card {
+        padding: 0.45rem 0.6rem !important;
+      }
+
+      .recipe-content h4 {
+        font-size: 7.2pt !important;
+      }
+
+      .recipe-content p {
+        font-size: 6.7pt !important;
+        line-height: 1.3 !important;
+      }
+
+      .invariants-table {
+        font-size: 6.9pt !important;
+        margin-bottom: 0.55rem !important;
+      }
+
+      .invariants-table th {
+        padding: 0.42rem 0.58rem !important;
+        font-size: 6.6pt !important;
+      }
+
+      .invariants-table td {
+        padding: 0.38rem 0.58rem !important;
+        line-height: 1.32 !important;
+      }
+
+      .prompt-container {
+        margin-bottom: 0.55rem !important;
+      }
+
+      .prompt-topbar {
+        padding: 0.28rem 0.6rem !important;
+      }
+
+      .prompt-title-text {
+        font-size: 7pt !important;
+      }
+
+      pre.prompt-body {
+        font-size: 6.5pt !important;
+        padding: 0.45rem 0.65rem !important;
+        line-height: 1.32 !important;
+      }
+
+      .page-footer {
+        font-size: 6.8pt !important;
+        padding-top: 1.6mm !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top Action Toolbar -->
+    <header class="toolbar">
+      <div class="back-link">
+        <a href="../index.html#projects">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back to Portfolio
+        </a>
+      </div>
+      <div class="toolbar-actions">
+        <button class="print-btn" onclick="window.print()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          Print / Save as PDF
+        </button>
+      </div>
+    </header>
+
+    <div class="sheet-wrapper">
+
+      <!-- =========================================================
+           SHEET 1: TITLE, VECTOR ARCHITECTURE, PILLAR 1 & SCHEMA
+           ========================================================= -->
+      <article class="doc-sheet" id="sheet-1">
+        <!-- Header -->
+        <header class="doc-header">
+          <div class="badge-strip">
+            <span class="badge">Architecture Framework</span>
+            <span class="badge badge-emerald">Agentic AI Workflows</span>
+            <span class="badge badge-violet">Drift-Free Persistence</span>
+          </div>
+          <h1 class="doc-title">The AI Project Memory Architecture Framework</h1>
+          <p class="doc-subtitle">A robust, drift-free persistent memory system for autonomous AI coding assistants</p>
+          <div class="doc-author-bar">
+            <span>Authored by: <strong>Nitish Kashyap R</strong></span>
+            <span>·</span>
+            <span>Lead Architect &amp; AI Systems Specialist</span>
+            <span>·</span>
+            <a href="https://nitishkashyapr.com" target="_blank" rel="noopener">nitishkashyapr.com</a>
+            <span>·</span>
+            <span>Applicable: Antigravity, Claude Code, Cursor, Windsurf, OpenCode</span>
+          </div>
+        </header>
+
+        <!-- Executive Summary Callout -->
+        <div class="callout-box">
+          <strong>Executive Summary:</strong> When building complex production software with AI coding assistants, models frequently encounter <em>session amnesia</em>, <em>context drift</em>, and <em>hallucinated decisions</em>. This architecture establishes a battle-tested <strong>3-Pillar Autonomous Memory System</strong> to guarantee absolute alignment across hundreds of development sessions:
+          <ul>
+            <li><strong>Pillar 1 — The Living Knowledge Base (<code>PROJECT_MEMORY.md</code>):</strong> Single source of truth preserved at the repository root.</li>
+            <li><strong>Pillar 2 — The Sandboxed Subagent (<code>memory-keeper</code>):</strong> Dedicated agent with restricted permissions for audits and atomic updates.</li>
+            <li><strong>Pillar 3 — Session Lifecycle Hooks (<code>AGENTS.md</code>):</strong> Deterministic triggers for session start, active work, cascade sync, and session end.</li>
+          </ul>
+        </div>
+
+        <!-- High-End Vector SVG Architecture Diagram -->
+        <div class="arch-diagram-wrapper">
+          <svg viewBox="0 0 820 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background Glows -->
+            <rect width="820" height="220" rx="10" fill="#090d16"/>
+            <circle cx="410" cy="110" r="170" fill="#2563eb" opacity="0.08"/>
+
+            <!-- Node 1: Developer / User -->
+            <rect x="250" y="10" width="320" height="34" rx="7" fill="#131b2e" stroke="#3b82f6" stroke-width="1.4"/>
+            <text x="410" y="32" fill="#ffffff" font-family="'Inter', sans-serif" font-size="11.5" font-weight="700" text-anchor="middle" letter-spacing="0.04em">DEVELOPER / USER (Prompts &amp; Objectives)</text>
+
+            <!-- Arrow 1: Down from User to Main Orchestrator -->
+            <path d="M 410 44 L 410 65" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <polygon points="406,65 414,65 410,71" fill="#60a5fa"/>
+
+            <!-- Node 2: Main Orchestrator Agent -->
+            <rect x="160" y="71" width="500" height="42" rx="8" fill="#1e1b4b" stroke="#818cf8" stroke-width="1.6"/>
+            <text x="410" y="90" fill="#ffffff" font-family="'Outfit', 'Inter', sans-serif" font-size="12.5" font-weight="800" text-anchor="middle">MAIN ORCHESTRATOR AGENT</text>
+            <text x="410" y="104" fill="#c7d2fe" font-family="'Inter', sans-serif" font-size="9" font-weight="500" text-anchor="middle">Writes Production Code · Fixes Bugs · Implements UI · Dispatches Tools</text>
+
+            <!-- Dispatch Arrows: Start (Left) & End (Right) -->
+            <path d="M 280 113 L 280 137" stroke="#34d399" stroke-width="1.5"/>
+            <polygon points="276,137 284,137 280,143" fill="#34d399"/>
+            <rect x="215" y="119" width="130" height="16" rx="3" fill="#064e3b"/>
+            <text x="280" y="130" fill="#6ee7b7" font-family="'Fira Code', monospace" font-size="7.5" font-weight="600" text-anchor="middle">Session Start: Verify</text>
+
+            <path d="M 540 113 L 540 137" stroke="#f59e0b" stroke-width="1.5"/>
+            <polygon points="536,137 544,137 540,143" fill="#f59e0b"/>
+            <rect x="475" y="119" width="130" height="16" rx="3" fill="#78350f"/>
+            <text x="540" y="130" fill="#fde68a" font-family="'Fira Code', monospace" font-size="7.5" font-weight="600" text-anchor="middle">Session End: Record</text>
+
+            <!-- Node 3: Memory-Keeper Subagent (Sandboxed) -->
+            <rect x="110" y="143" width="600" height="35" rx="7" fill="#064e3b" stroke="#34d399" stroke-width="1.5"/>
+            <circle cx="128" cy="160.5" r="5" fill="#10b981"/>
+            <text x="140" y="164.5" fill="#ffffff" font-family="'Inter', sans-serif" font-size="10.5" font-weight="800">MEMORY-KEEPER SUBAGENT</text>
+            <text x="450" y="164.5" fill="#a7f3d0" font-family="'Inter', sans-serif" font-size="8.6" font-weight="500">Edit Permission ONLY for Memory File · Cross-References SSoT · Appends Durable Rules</text>
+
+            <!-- Arrow: From Subagent to Durable Artifact -->
+            <path d="M 410 178 L 410 189" stroke="#34d399" stroke-width="1.5"/>
+            <polygon points="406,189 414,189 410,194" fill="#34d399"/>
+
+            <!-- Node 4: The Durable Artifact -->
+            <rect x="70" y="193" width="680" height="23" rx="5" fill="#131b2e" stroke="#64748b" stroke-width="1.2"/>
+            <text x="410" y="208.5" fill="#f8fafc" font-family="'Fira Code', monospace" font-size="8.8" font-weight="600" text-anchor="middle">PROJECT_MEMORY.md [ §1 Overview · §2 Architecture &amp; Tech Stack · §3 Enforced Skills · §4 Append-Only Rules ]</text>
+          </svg>
+        </div>
+
+        <!-- Pillar 1 Section -->
+        <section class="section-card">
+          <h2 class="section-heading">
+            <span class="num-badge">1</span>
+            Pillar 1: The Durable Artifact (<code>PROJECT_MEMORY.md</code>)
+          </h2>
+          <p class="body-text">
+            Instead of relying on ephemeral chat context, hidden vector embeddings, or lossy summarizations, project truth is preserved in a clean, human-auditable markdown file at the repository root. This file serves as the canonical memory bank for every AI session.
+          </p>
+
+          <!-- 4-Section Schema Code Container -->
+          <div class="code-container">
+            <div class="code-topbar">
+              <div class="dots">
+                <span class="dot dot-r"></span>
+                <span class="dot dot-y"></span>
+                <span class="dot dot-g"></span>
+              </div>
+              <span>PROJECT_MEMORY.md — 4-Section Canonical Schema</span>
+              <span>Markdown</span>
+            </div>
+            <pre class="code-block"><span class="k-pink"># Project Memory &amp; Architecture Standards (`PROJECT_MEMORY.md`)</span>
+
+<span class="k-blue">## 1. Overview</span>
+High-level purpose, active project goals, stakeholders, and baseline constraints.
+
+<span class="k-blue">## 2. Core Architecture &amp; Tech Stack Rules</span>
+Design systems, CSS tokens, performance budgets (Core Web Vitals), WCAG 2.1 AA accessibility, and SEO directives.
+
+<span class="k-blue">## 3. Installed Skills &amp; Tooling Suite</span>
+List of active agent skills, plugins, and custom tool suites configured and enforced in the workspace.
+
+<span class="k-blue">## 4. Custom Rules &amp; Regulations (Append-Only Numbered Directives)</span>
+<span class="k-green">1. **[Rule Name]**:</span> Specific non-negotiable constraint or architectural requirement.
+<span class="k-green">2. **[Rule Name]**:</span> Durable decision recorded from past sessions; never renumbered or pruned without approval.</pre>
+          </div>
+
+          <!-- Why This Format Works Grid -->
+          <div class="benefits-grid">
+            <div class="benefit-card">
+              <div class="benefit-header">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span>Human Auditable</span>
+              </div>
+              <div class="benefit-desc">Reviewable in plain text by engineering leads at any time; zero black-box vector stores or opaque embeddings.</div>
+            </div>
+            <div class="benefit-card">
+              <div class="benefit-header">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><path d="M12 12v3"/></svg>
+                <span>Git Versioned</span>
+              </div>
+              <div class="benefit-desc">Every single update generates an explicit, line-by-line reviewable diff in standard version control history.</div>
+            </div>
+            <div class="benefit-card">
+              <div class="benefit-header">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <span>LLM Optimized</span>
+              </div>
+              <div class="benefit-desc">Zero token bloat; clear imperative phrasing (<code>MUST</code>, <code>NEVER</code>) ensures deterministic agent constraint adherence.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+          <span>The AI Project Memory Architecture Framework · Nitish Kashyap R</span>
+          <span>Section 1: Durable Artifact &amp; Schema</span>
+          <span>Page 1 of 3</span>
+        </footer>
+      </article>
+
+      <!-- =========================================================
+           SHEET 2: PILLAR 2, PILLAR 3 & QUICK SETUP RECIPE
+           ========================================================= -->
+      <article class="doc-sheet" id="sheet-2">
+        <!-- Running Subheader -->
+        <div class="page-subhead">
+          <span>AI Project Memory Architecture Framework · Pillars 2, 3 &amp; Setup</span>
+          <span>Subagents, Lifecycle Protocol &amp; Implementation Recipe · <strong>Page 2 of 3</strong></span>
+        </div>
+
+        <!-- Pillar 2 Section -->
+        <section class="section-card">
+          <h2 class="section-heading">
+            <span class="num-badge">2</span>
+            Pillar 2: The Dedicated Sandboxed Subagent (<code>memory-keeper</code>)
+          </h2>
+
+          <div class="callout-box indigo">
+            <strong>Core Design Principle:</strong> The main orchestrator agent never modifies project memory directly. It delegates all memory verification, synchronization, and updates exclusively to the dedicated <code>memory-keeper</code> subagent.
+          </div>
+
+          <!-- Subagent Configuration YAML & Prompt Code Container -->
+          <div class="code-container">
+            <div class="code-topbar">
+              <div class="dots">
+                <span class="dot dot-r"></span>
+                <span class="dot dot-y"></span>
+                <span class="dot dot-g"></span>
+              </div>
+              <span>.agents/agent/memory-keeper.md — Permission Mask &amp; Mandate</span>
+              <span>YAML Frontmatter + Prompt</span>
+            </div>
+            <pre class="code-block"><span class="k-gray">---</span>
+<span class="k-blue">description:</span> <span class="k-yellow">Maintains the project memory file. Reads, verifies, and updates PROJECT_MEMORY.md checking it against actual project state.</span>
+<span class="k-blue">mode:</span> <span class="k-pink">subagent</span>
+<span class="k-blue">permission:</span>
+  <span class="k-blue">edit:</span>
+    <span class="k-pink">"*"</span>: <span class="k-yellow">"deny"</span>                    <span class="k-gray"># Strict lockdown: Zero write access to source code or assets</span>
+    <span class="k-green">"PROJECT_MEMORY.md"</span>: <span class="k-yellow">"allow"</span>       <span class="k-gray"># Exclusive single-file edit permission</span>
+  <span class="k-blue">bash:</span> <span class="k-pink">deny</span>                        <span class="k-gray"># Cannot execute shell commands or git operations</span>
+  <span class="k-blue">webfetch:</span> <span class="k-pink">deny</span> · <span class="k-blue">websearch:</span> <span class="k-pink">deny</span> · <span class="k-blue">todowrite:</span> <span class="k-pink">deny</span>
+<span class="k-gray">---</span>
+<span class="k-purple">You are the Memory Keeper for this project. You are the sole owner of `PROJECT_MEMORY.md`.</span>
+
+<span class="k-pink">## Operational Responsibilities:</span>
+<span class="k-blue">1. Read:</span> Ingest `PROJECT_MEMORY.md` in full at the start of every dispatch.
+<span class="k-blue">2. Verify:</span> Cross-reference facts against actual repository source code (Single Source of Truth).
+<span class="k-blue">3. Fix &amp; Update:</span> Correct drift in entity counts, dates, names, or file inventories; record durable rules.
+<span class="k-blue">4. Preserve Structure:</span> Keep headers intact; append new rules sequentially (<span class="k-yellow">1., 2., ...</span>); never renumber or delete.
+<span class="k-blue">5. Report:</span> Return a concise summary of what was synced or "No changes needed".</pre>
+          </div>
+
+          <!-- Explicit Guardrails Grid -->
+          <div class="guardrails-grid">
+            <div class="guardrail-card">
+              <strong>Strict Scope Isolation</strong>
+              Only edit <code>PROJECT_MEMORY.md</code>. Never request or accept write access to source code or assets.
+            </div>
+            <div class="guardrail-card">
+              <strong>Durable Fact Filtering</strong>
+              Do not log conversational chatter—only record durable, future-useful architectural facts.
+            </div>
+            <div class="guardrail-card">
+              <strong>Zero Git Authority</strong>
+              Never execute git commands (<code>commit</code> / <code>push</code>). Requires explicit human instruction.
+            </div>
+          </div>
+        </section>
+
+        <!-- Pillar 3 Section -->
+        <section class="section-card">
+          <h2 class="section-heading">
+            <span class="num-badge">3</span>
+            Pillar 3: Session Lifecycle &amp; Synchronization Protocol (<code>AGENTS.md</code>)
+          </h2>
+
+          <!-- 4-Phase Lifecycle Flow Grid -->
+          <div class="lifecycle-flow">
+            <!-- Phase 1 -->
+            <div class="lifecycle-step step-1">
+              <div class="step-title-row">
+                <span class="step-badge">Phase 1</span>
+                <span class="step-name">Session Start: Grounding &amp; Drift Audit</span>
+              </div>
+              <div class="step-desc">
+                Orchestrator dispatches <code>memory-keeper</code> before initiating user tasks to verify <code>PROJECT_MEMORY.md</code> against live code and resolve stale data.
+              </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="lifecycle-step step-2">
+              <div class="step-title-row">
+                <span class="step-badge">Phase 2</span>
+                <span class="step-name">During Session: Isolated Execution</span>
+              </div>
+              <div class="step-desc">
+                Main agent writes production features, runs tests, and refactors UI without modifying memory files, ensuring speed and zero doc contamination.
+              </div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="lifecycle-step step-3">
+              <div class="step-title-row">
+                <span class="step-badge">Phase 3</span>
+                <span class="step-name">Cascading Synchronization</span>
+              </div>
+              <div class="step-desc">
+                When core domain data or schemas change, updates propagate across file owners deterministically:
+                <div class="cascade-flow-pill">
+                  Source of Truth (Code) → Domain Sync Agents → Memory Keeper
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 4 -->
+            <div class="lifecycle-step step-4">
+              <div class="step-title-row">
+                <span class="step-badge">Phase 4</span>
+                <span class="step-name">Session End: Fact Recording</span>
+              </div>
+              <div class="step-desc">
+                Before session close, <code>memory-keeper</code> extracts durable decisions, updates entity counts, and appends new numbered rules to Section 4.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Setup Recipe Section -->
+        <section class="section-card">
+          <h2 class="section-heading">
+            <span class="num-badge">4</span>
+            Quick Setup Recipe (4-Step Implementation Guide)
+          </h2>
+
+          <div class="recipe-grid">
+            <div class="recipe-card">
+              <span class="recipe-badge">1</span>
+              <div class="recipe-content">
+                <h4>Create Memory Bank</h4>
+                <p>Add <code>PROJECT_MEMORY.md</code> at root using the standardized 4-section schema.</p>
+                <code>touch PROJECT_MEMORY.md</code>
+              </div>
+            </div>
+
+            <div class="recipe-card">
+              <span class="recipe-badge">2</span>
+              <div class="recipe-content">
+                <h4>Define Sandboxed Subagent</h4>
+                <p>Create <code>.agents/agent/memory-keeper.md</code> with locked permission masks.</p>
+                <code>edit: {"*": "deny", "PROJECT_MEMORY.md": "allow"}</code>
+              </div>
+            </div>
+
+            <div class="recipe-card">
+              <span class="recipe-badge">3</span>
+              <div class="recipe-content">
+                <h4>Configure Lifecycle Hooks</h4>
+                <p>Add session start/end dispatch directives in <code>.agents/AGENTS.md</code> or <code>CLAUDE.md</code>.</p>
+                <code>Dispatch memory-keeper at session start &amp; end</code>
+              </div>
+            </div>
+
+            <div class="recipe-card">
+              <span class="recipe-badge">4</span>
+              <div class="recipe-content">
+                <h4>Run Seamlessly</h4>
+                <p>Your AI assistant automatically maintains verified state across hundreds of sessions.</p>
+                <code>Zero amnesia · Zero context drift</code>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+          <span>The AI Project Memory Architecture Framework · Nitish Kashyap R</span>
+          <span>Section 2: Subagents, Lifecycle Protocol &amp; Setup Recipe</span>
+          <span>Page 2 of 3</span>
+        </footer>
+      </article>
+
+      <!-- =========================================================
+           SHEET 3: INVARIANTS TABLE, MASTER PROMPT & GOVERNANCE
+           ========================================================= -->
+      <article class="doc-sheet" id="sheet-3">
+        <!-- Running Subheader -->
+        <div class="page-subhead">
+          <span>AI Project Memory Architecture Framework · Invariants &amp; Replication</span>
+          <span>Architecture Invariants &amp; Master Replication Prompt · <strong>Page 3 of 3</strong></span>
+        </div>
+
+        <!-- Invariants & Best Practices Table (Starts Fresh at Top of Page 3) -->
+        <section class="section-card">
+          <h2 class="section-heading">
+            <span class="num-badge">5</span>
+            Key Architecture Invariants &amp; Best Practices
+          </h2>
+          <p class="body-text">
+            These five architectural invariants are strictly enforced by the system to maintain absolute data integrity across long-running project lifecycles:
+          </p>
+
+          <table class="invariants-table">
+            <thead>
+              <tr>
+                <th>Best Practice</th>
+                <th>Implementation Mechanism</th>
+                <th>Architectural Value &amp; Rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-practice">
+                  <strong>Append-Only Rules</strong>
+                  <span class="practice-badge">Data Integrity</span>
+                </td>
+                <td class="col-impl">
+                  Sequential numbered list (<code>1.</code>, <code>2.</code>, ...) in Section 4; never renumber, overwrite, or prune without explicit approval.
+                </td>
+                <td class="col-value">
+                  Prevents silent regression of historical design constraints, tech stack boundaries, and user preferences across long conversation threads.
+                </td>
+              </tr>
+              <tr>
+                <td class="col-practice">
+                  <strong>Single Source of Truth</strong>
+                  <span class="practice-badge">Grounding</span>
+                </td>
+                <td class="col-impl">
+                  Memory is actively audited and verified against real repository source files on every session boot.
+                </td>
+                <td class="col-value">
+                  Eliminates hallucinated assumptions, stale counts, and out-of-date documentation by grounding memory strictly in live executable code.
+                </td>
+              </tr>
+              <tr>
+                <td class="col-practice">
+                  <strong>Strict Sandboxing</strong>
+                  <span class="practice-badge">Security</span>
+                </td>
+                <td class="col-impl">
+                  Subagent permission mask grants write access exclusively to <code>PROJECT_MEMORY.md</code> (deny <code>*</code>).
+                </td>
+                <td class="col-value">
+                  Guarantees zero accidental side-effects, syntax breakages, or unintended file overwrites in production application code.
+                </td>
+              </tr>
+              <tr>
+                <td class="col-practice">
+                  <strong>Zero-Touch Git</strong>
+                  <span class="practice-badge">Governance</span>
+                </td>
+                <td class="col-impl">
+                  Subagents are strictly denied bash and git execution permissions (<code>commit</code>, <code>push</code>).
+                </td>
+                <td class="col-value">
+                  Keeps the human developer in complete sovereign control over version control history, commit messages, and deployment triggers.
+                </td>
+              </tr>
+              <tr>
+                <td class="col-practice">
+                  <strong>Cross-IDE Portability</strong>
+                  <span class="practice-badge">Interoperability</span>
+                </td>
+                <td class="col-impl">
+                  Standard Markdown format with declarative YAML frontmatter and standard prompt structures.
+                </td>
+                <td class="col-value">
+                  Functions seamlessly and interchangeably across Google Antigravity, Claude Code, Cursor, Windsurf, OpenCode, and GitHub Copilot.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Master Replication Prompt Section (Requested by User) -->
+        <section class="section-card">
+          <h2 class="section-heading">
+            <span class="num-badge">6</span>
+            Prompt to Replicate This Framework in Your Codebase
+          </h2>
+          <p class="body-text">
+            Copy and paste this turnkey master directive into any AI coding assistant (Claude Code, Antigravity, Cursor, Windsurf, OpenCode) to automatically generate the complete 3-pillar memory system with 1-to-1 fidelity:
+          </p>
+
+          <div class="prompt-container">
+            <div class="prompt-topbar">
+              <div class="prompt-title-group">
+                <div class="dots">
+                  <span class="dot dot-r"></span>
+                  <span class="dot dot-y"></span>
+                  <span class="dot dot-g"></span>
+                </div>
+                <span class="prompt-title-text">MASTER_REPLICATION_PROMPT.md — Copy &amp; Run in Your AI Assistant</span>
+              </div>
+              <button class="copy-prompt-btn" id="copyPromptBtn" onclick="copyReplicationPrompt()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy Prompt
+              </button>
+            </div>
+            <pre class="prompt-body" id="replicationPromptText">Act as an expert AI Systems Architect. Implement the "AI Project Memory Architecture Framework" in this codebase with 100% fidelity:
+
+1. CREATE MEMORY BANK (`PROJECT_MEMORY.md` at repo root):
+   - ## 1. Overview (high-level purpose, active goals, baseline constraints)
+   - ## 2. Core Architecture &amp; Tech Stack Rules (design systems, CSS guidelines, WCAG, SEO)
+   - ## 3. Installed Skills &amp; Tooling Suite (configured agent skills &amp; plugins)
+   - ## 4. Custom Rules &amp; Regulations (Append-Only Numbered Directives: 1. [Rule], 2. [Rule])
+
+2. DEFINE SANDBOXED SUBAGENT (`.agents/agent/memory-keeper.md` &amp; `.opencode/agent/`):
+   - Set YAML frontmatter: mode: subagent; edit: {"*": "deny", "PROJECT_MEMORY.md": "allow"}; bash: deny; webfetch: deny; task: deny.
+   - Prompt Mandate: Sole owner of PROJECT_MEMORY.md. Read on dispatch, verify against code SSoT, correct drift, preserve headers, append new rules sequentially (never renumber/delete).
+   - Strict Guardrails: Edit ONLY PROJECT_MEMORY.md; no conversational chatter; NEVER run git commands (`commit`/`push`).
+
+3. CONFIGURE LIFECYCLE HOOKS (`.agents/AGENTS.md` or `CLAUDE.md`):
+   - Session Start: Dispatch memory-keeper to audit PROJECT_MEMORY.md against live code before starting tasks.
+   - During Session: Main agent writes features and executes tasks without modifying memory files.
+   - Cascading Sync: Code (SSoT) -&gt; Domain Sync Agents -&gt; Memory Keeper.
+   - Session End: Dispatch memory-keeper to record durable decisions &amp; append new numbered rules to Section 4.
+
+4. CONFIGURE GIT HYGIENE:
+   - Add `PROJECT_MEMORY.md` and `.agents/` to `.gitignore` so agent memory remains sovereign and zero-touch.
+
+5. EXECUTE INITIAL GROUNDING PASS:
+   - Inspect codebase and populate Sections 1-3 with verified facts. Confirm setup when complete.</pre>
+          </div>
+        </section>
+
+        <!-- Engineering Governance Callout Box -->
+        <div class="callout-box emerald">
+          <strong>Why This Pattern Outperforms Vector Databases:</strong> Traditional RAG and vector database memory injects unbounded, noisy semantic chunks into prompt windows, frequently causing hallucination, token exhaustion, and context pollution. By enforcing a <em>git-tracked, human-auditable markdown artifact</em> maintained by an <em>isolated, sandboxed subagent</em>, teams achieve deterministic zero-drift persistent alignment at zero infrastructure cost.
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+          <span>The AI Project Memory Architecture Framework · Nitish Kashyap R</span>
+          <span>Section 3: Invariants, Master Replication Prompt &amp; Governance</span>
+          <span>Page 3 of 3</span>
+        </footer>
+      </article>
+
+    </div>
+  </div>
+
+  <script>
+    function copyReplicationPrompt() {
+      const textElem = document.getElementById('replicationPromptText');
+      if (!textElem) return;
+      const text = textElem.innerText || textElem.textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        const btn = document.getElementById('copyPromptBtn');
+        if (!btn) return;
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!`;
+        btn.style.background = '#059669';
+        setTimeout(function() {
+          btn.innerHTML = originalHtml;
+          btn.style.background = '';
+        }, 2200);
+      }).catch(function(err) {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  </script>
+
+</body>
+</html>

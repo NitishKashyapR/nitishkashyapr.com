@@ -4,18 +4,18 @@
 > Also Known As / Searched As: Nitish Kashyap, Nitish Kashyap R, Nitish, NitishKashyapR
 
 ## Profile Summary
-Nitish Kashyap R (also known as Nitish Kashyap) is a future-ready HR professional and MBA student at VIMTECH (Tumkur), specializing in Human Resource Management, Organizational Behavior, Talent Strategy, and AI-enabled workplace workflows. He combines foundational HR competencies with prompt engineering, generative AI tools, and vibe coding to optimize people strategy and organizational effectiveness.
+Nitish Kashyap R (also known as Nitish Kashyap) is an MBA student specializing in Human Resources at VIMTECH, Tumkur, with a Bachelor of Commerce background in Accounting and Finance. He is seeking an HR internship in talent acquisition, HR operations, onboarding, or people analytics to apply this knowledge in real work settings. He combines a practical, people-process first approach with structured spreadsheet tracking and careful, human-reviewed AI-aware methods.
 
 ## Contact & Online Profiles
 - **Full Name:** Nitish Kashyap R (Nitish Kashyap)
 - **Alternate Names / Search Queries:** Nitish Kashyap, Nitish, NitishKashyapR, Nitish R
-- **Professional Title:** AI-Enabled HR Professional | MBA Student | People Strategy Enthusiast
+- **Professional Title:** MBA (HR) Student | Open to HR Internships
 - **Email:** nitishkashyapr8@gmail.com
 - **LinkedIn:** https://www.linkedin.com/in/nitishkashyapr
 - **GitHub:** https://github.com/NitishKashyapR
 - **Portfolio Website:** https://nitishkashyapr.github.io/nitishkashyapr.com/
 - **Official Resume Page:** https://nitishkashyapr.github.io/nitishkashyapr.com/resume.html
-- **Location:** Tumkur / Bengaluru, Karnataka, India
+- **Location:** Open to: Bangalore · Tumkur · Yelahanka (Hybrid or On-site) | College: VIMTECH, Tumkur, Karnataka, India
 
 ---
 
@@ -209,36 +209,66 @@ Nitish Kashyap R (also known as Nitish Kashyap) is a future-ready HR professiona
 
 ## Projects & Deliverables
 
-### 1. DigiColibri — Business Promotion Platform
+### 1. Talent Acquisition Starter Kit
+- **Category:** Human Resource Project & Hiring Toolkit
+- **Description:** A practical starter kit for entry-level hiring support: sample job description, screening criteria, shortlisting format, interview questions, and candidate email templates with downloadable PDF.
+- **Detailed Structure:** Example entry-level role, sample Job Description, must-have vs good-to-have criteria, CV shortlisting score sheet table, phone screen questions, structured interview questions with evaluation focus, candidate communication email templates (interview invite, polite rejection, status update), intern process checklist, and internship practice disclaimer.
+- **Page URL:** https://nitishkashyapr.github.io/nitishkashyapr.com/projects/talent-acquisition-starter-kit.html
+
+### 2. New Joiner Onboarding Checklist
+- **Category:** Human Resource Project & Onboarding Workflow
+- **Description:** A complete onboarding checklist covering pre-joining, Day 1, first week, and 30-60-90 checkpoints for smooth new-hire coordination.
+- **Detailed Structure:** Purpose statement, pre-joining checklist, Day 1 checklist, first-week checklist, 30/60/90 checkpoints, RACI stakeholder responsibility hints, welcome message template, document tracker table template, common onboarding pitfalls to avoid, and internship practice disclaimer.
+- **Page URL:** https://nitishkashyapr.github.io/nitishkashyapr.com/projects/new-joiner-onboarding-checklist.html
+
+### 3. Mini People Metrics Snapshot
+- **Category:** Human Resource Project & People Reporting Sample
+- **Description:** A beginner-friendly people metrics sample with example trackers, definitions, insights, and recommended actions for hiring pipeline or engagement-style data.
+- **Detailed Structure:** Simple explanation of people metrics, metric definitions (time-to-screen, interview-to-offer, onboarding completion, engagement response rate), sample tracker table with clearly labelled demo numbers, 5 plain-language insights, 3 recommended actions, weekly intern maintenance notes, manager-ready 1-minute summary block, and demo data disclaimer.
+- **Page URL:** https://nitishkashyapr.github.io/nitishkashyapr.com/projects/mini-people-metrics-snapshot.html
+
+### 4. DigiColibri — Business Promotion Platform
 - **Category:** Academic Initiative (Shark Tank Competition, 1st Semester MBA)
-- **Role:** Pitch contributor & Lead Web Designer (Team of 12)
+- **Role:** Lead Web Designer & Prototyper (Team of 12)
 - **Award:** 1st Place Winner in College Shark Tank Investment Competition
-- **Description:** Developed a conceptual digital promotion service helping small and medium-sized businesses establish an online presence and optimize marketing outreach. Created a live working web application using AI-assisted development tools.
+- **Description:** Led design and prototyping in a 12-member team for a college Shark Tank-style competition. Coordinated workflows, prepared the pitch, and delivered a live prototype under deadline. Result: 1st place.
 - **Live Deployed URL:** https://digicolibri.lovable.app/
 
-### 2. Seva Setu — Public Services & Civic Tech Proposal
+### 5. Seva Setu — Public Services & Civic Tech Proposal
 - **Category:** Innovation Proposal (1st Semester MBA, Team of 4)
-- **Role:** Core Conceptualizer & Co-Author
-- **Description:** Designed a civic tech digital platform proposal connecting citizens with municipal and government authorities. Features real-time civic issue reporting (roads, water supply, public lighting), engineer assessment workflows, public job creation, and emergency SOS response mechanisms.
+- **Role:** Digital Civic Platform Architecture (Team of 4)
+- **Description:** Team proposal for a digital channel connecting citizens with local administration for issue reporting and follow-up. Focused on process flow, clarity of roles, and practical escalation steps.
 - **Document PDF:** `pdfs/Seva Satu.pdf`
 
-### 3. Market Research Studies — Union Bank of India & Semiconductor Industry
+### 6. Market Research Studies — Union Bank of India & Semiconductor Industry
 - **Category:** Academic Research Projects (MBA 1st & 2nd Semesters)
 - **Role:** Lead Researcher & Strategic Analyst
 - **Reports:**
-  1. **Union Bank of India (MBA 1st Semester):** Conducted an empirical market research study analyzing consumer perception, brand positioning, customer satisfaction gaps, and the alignment between marketing claims and actual branch service delivery. Document: `pdfs/Union bank of India.pdf`.
-  2. **Semiconductor Industry Analysis (MBA 2nd Semester):** Conducted a comprehensive 58-page industry analysis evaluating India's semiconductor ecosystem, cleanroom fab and OSAT operations, macroeconomic drivers (PESTLE), B2B marketing channels, and strategic policy alignment under the India Semiconductor Mission (ISM) with ₹76,000 Crore fiscal outlay and PLI frameworks. Document: `pdfs/Semicondustor Industory Analysis.pdf`.
+  1. **Union Bank of India (MBA 1st Semester):** Led structured research projects, including an empirical consumer study for Union Bank of India analyzing retail service delivery and customer satisfaction gaps. Document: `pdfs/Union bank of India.pdf`.
+  2. **Semiconductor Industry Analysis (MBA 2nd Semester):** Conducted a detailed 58-page industry analysis of India's semiconductor ecosystem under the ISM policy framework. Strengthened skills in data review, writing, and recommendation quality. Document: `pdfs/Semicondustor Industory Analysis.pdf`.
 
-### 4. Personal Interactive Portfolio Website
-- **Category:** Personal Project & Digital Representation
-- **Role:** Creator & Web Designer ("Vibe Coded")
-- **Tech Stack:** HTML5, Vanilla CSS3, JavaScript (ES6+), Plexus Canvas Particle System, JSON-LD Schema.org Data.
-- **Features:** Glassmorphism UI design, fluid responsive typography clamp system, accessible theme toggle (light/dark mode), dynamic certification counter, interactive project modals, professional single-page resume.
+### 7. Personal Interactive Portfolio Website
+- **Category:** Personal Project & Professional Presentation
+- **Role:** Creator & Web Designer
+- **Tech Stack:** Pure HTML5, Vanilla CSS3, JavaScript (ES6+), Canvas Particle Plexus System, JSON-LD Schema.org Data.
+- **Features:** 10 dynamic color themes, fluid responsive layout, accessible theme toggle, dynamic certification modal, interactive project filters, professional single-page resume.
 - **URL:** https://nitishkashyapr.github.io/nitishkashyapr.com/
+
+### 8. AI Project Memory Architecture Framework
+- **Category:** Innovation & Autonomous AI Systems Architecture
+- **Role:** Lead Systems Architect & Framework Designer
+- **Tech Stack:** Declarative Markdown Schema, YAML Subagent Permission Masks, Session Lifecycle Hooks (`AGENTS.md`), Multi-Agent Sandboxing.
+- **Features:** Establishes a reproducible 3-pillar autonomous memory system:
+  1. *Living Knowledge Base (`PROJECT_MEMORY.md`):* Human-auditable, git-versioned single source of truth at the repository root with standardized 4-section schema.
+  2. *Sandboxed Subagent (`memory-keeper`):* Strict permission-masked agent with edit rights exclusively to `PROJECT_MEMORY.md`, zero git authority, and automated code-grounded drift audits.
+  3. *Session Lifecycle Protocol:* Predictable execution hooks (Session Start drift check, Active task execution, Cascading domain updates, Session End fact recording).
+  4. *Invariants & Setup:* 5 architecture invariants (Append-only rules, SSoT, strict sandboxing, zero-touch git, cross-IDE portability) and a 4-step setup recipe.
+- **Documentation & Printable PDF:** https://nitishkashyapr.github.io/nitishkashyapr.com/projects/ai-project-memory-framework.html
 
 ---
 
 ## Technical & Professional Skills Matrix
-- **Human Resources:** HR Management, Talent Acquisition, Learning & Development (L&D), Employee Engagement, Compensation & Benefits, Employee Relations, Compliance & Risk Management, Managing Organizational Change.
-- **AI & Productivity:** Prompt Engineering, Generative AI Tools (ChatGPT, Gemini, Claude), Local LLM Deployment (Ollama/LM Studio), No-Code & AI-Assisted Development ("Vibe Coding"), AI Productivity Integration.
-- **Methodologies & Soft Skills:** Strategic Thinking, Organizational Behavior, Public Speaking, Academic Research, Leadership & Team Collaboration, Analytical Problem Solving.
+- **HR & People Processes:** Talent acquisition support, screening coordination, onboarding checklists, candidate communication, employee engagement support, basic HR documentation, stakeholder follow-up, managing organizational change.
+- **Tools & Platforms:** Microsoft Excel, Google Sheets, Google Forms & Workspace, MS Office, LinkedIn (basic sourcing), Notion, presentation & reporting.
+- **Analysis & AI-Aware Productivity:** Structured problem solving, basic people reporting, research & synthesis, clear written communication, AI-assisted drafting (with mandatory human review), fast learning on new workflows.
+- **Academic & Knowledge Disclosure:** Advanced HR topics such as compensation, employee relations, and performance systems are part of coursework and continuous learning. They are presented as knowledge areas, not independent full-time work experience.

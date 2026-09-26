@@ -1,10 +1,10 @@
 # Nitish Kashyap R (Nitish Kashyap) — Profile & Resume Information
 
-> AI-Enabled HR Professional | MBA Student | People Strategy
+> MBA (HR) Student | Open to HR Internships
 > Also Known As / Searched As: Nitish Kashyap, Nitish Kashyap R, Nitish, NitishKashyapR
 
 ## Overview
-Future-ready HR professional passionate about building strong workplace cultures, enhancing employee engagement, and supporting organizational growth through people-focused strategies and modern technology. Combining human resource principles with prompt engineering and AI-assisted productivity to deliver high-impact organizational results. Seeking internship and full-time HR opportunities.
+MBA student specializing in Human Resources at VIMTECH, Tumkur, with a Bachelor of Commerce background in Accounting and Finance. Seeking an HR internship in talent acquisition, HR operations, onboarding, or people analytics to apply this knowledge in real work settings. Combines a practical, people-process first approach with structured spreadsheet tracking and careful, human-reviewed AI-aware methods. Open to hybrid or on-site opportunities in Bangalore, Tumkur, and Yelahanka.
 
 ## Key Links & Resources
 - **Official Web Portfolio:** https://nitishkashyapr.github.io/nitishkashyapr.com/
@@ -13,26 +13,25 @@ Future-ready HR professional passionate about building strong workplace cultures
 - **Email:** nitishkashyapr8@gmail.com
 - **LinkedIn:** https://www.linkedin.com/in/nitishkashyapr
 - **GitHub:** https://github.com/NitishKashyapR
-- **Location:** Tumkur / Bengaluru, Karnataka, India
+- **Location:** Open to: Bangalore · Tumkur · Yelahanka (Hybrid or On-site) | College: VIMTECH, Tumkur, Karnataka, India
 
 ## Key Skills & Competencies
-### Core HR & People Strategy
-- Human Resource Management
-- Talent Acquisition & Talent Management
-- Employee Engagement & Relations
-- Learning & Development (L&D)
-- Organizational Behavior & Development
+### Core HR & People Process
+- Talent Acquisition Support & Screening Coordination
+- Onboarding Checklists & New Joiner Coordination
+- HR Operations & Basic Documentation
+- Employee Communication & Pulse Survey Summaries
+- Basic People Reporting & Spreadsheet Trackers
 - Managing Organizational Change (SHRM Aligned)
-- Workplace Culture & Retention Strategy
-- Strategic Thinking & Leadership
+- Stakeholder Follow-Up & Process Coordination
 
-### Technical & AI Proficiency
-- Prompt Engineering & Context Management
-- Generative AI Tools & Workflows (ChatGPT, Gemini, Claude)
-- No-Code & AI-Assisted Development ("Vibe Coding")
-- AI-Assisted Productivity Optimization
-- Local LLM Deployment & Integration
-- Modern Web Design & Semantic HTML5
+### Tools & AI-Aware Productivity
+- Microsoft Excel & Google Sheets (Trackers & Basic Metrics)
+- Google Workspace, Google Forms, Google Docs
+- LinkedIn (Basic Sourcing)
+- Notion & Project Documentation
+- Structured Problem Solving & Research Synthesis
+- AI-Assisted Drafting (with mandatory human review)
 
 ## Education History
 - **Master of Business Administration (MBA) — HR Specialization** (2025 — Present)
@@ -49,27 +48,48 @@ Future-ready HR professional passionate about building strong workplace cultures
   - Status: Completed
 
 ## Key Projects
-1. **DigiColibri — Business Promotion Platform (1st Place Winner)**
+1. **Talent Acquisition Starter Kit**
+   - *Category:* Human Resource Project
+   - *Description:* A practical starter kit for entry-level hiring support: sample job description, screening criteria, shortlisting format, interview questions, and candidate email templates with downloadable PDF.
+   - *URL:* https://nitishkashyapr.github.io/nitishkashyapr.com/projects/talent-acquisition-starter-kit.html
+
+2. **New Joiner Onboarding Checklist**
+   - *Category:* Human Resource Project
+   - *Description:* A complete onboarding checklist covering pre-joining, Day 1, first week, and 30-60-90 checkpoints for smooth new-hire coordination with document tracker template and downloadable PDF.
+   - *URL:* https://nitishkashyapr.github.io/nitishkashyapr.com/projects/new-joiner-onboarding-checklist.html
+
+3. **Mini People Metrics Snapshot**
+   - *Category:* Human Resource Project
+   - *Description:* A beginner-friendly people metrics sample with example trackers, definitions, 5 plain-language insights, and recommended actions for hiring pipeline or engagement-style data with downloadable PDF.
+   - *URL:* https://nitishkashyapr.github.io/nitishkashyapr.com/projects/mini-people-metrics-snapshot.html
+
+4. **DigiColibri — Business Promotion Platform (1st Place Winner)**
    - *Category:* Academic Initiative (Shark Tank Competition, 1st Semester MBA)
    - *Role:* Lead Web Designer & Pitch Contributor (Team of 12)
-   - *Description:* Developed a conceptual digital promotion service helping small and medium-sized brands build an online presence. Built a live working web application using AI-assisted development tools which earned 1st place in a college investment pitch event.
+   - *Description:* Led design and prototyping in a 12-member team for a college Shark Tank-style competition. Coordinated workflows, prepared the pitch, and delivered a live prototype under deadline. Result: 1st place.
    - *Live App:* https://digicolibri.lovable.app/
 
-2. **Seva Setu — Public Services & Civic Tech Proposal**
+5. **Seva Setu — Public Services & Civic Tech Proposal**
    - *Category:* Innovation Proposal (1st Semester MBA, Team of 4)
    - *Role:* Core Conceptualizer & Co-Author
-   - *Description:* Conceptualized and designed a digital platform bridging citizens and government bodies for real-time civic issue reporting (roads, water, utilities) and emergency responses.
+   - *Description:* Team proposal for a digital channel connecting citizens with local administration for issue reporting and follow-up. Focused on process flow, clarity of roles, and practical escalation steps.
+   - *Document:* `pdfs/Seva Satu.pdf`
 
-3. **Market Research Studies — Union Bank of India & Semiconductor Industry**
+6. **Market Research Studies — Union Bank of India & Semiconductor Industry**
    - *Category:* Academic Research Studies (MBA 1st & 2nd Semesters)
    - *Reports:*
-     - **Union Bank of India (MBA Sem 1):** Conducted an empirical study analyzing consumer perception, brand positioning, and the alignment between marketing claims and branch service delivery.
-     - **Semiconductor Industry Analysis (MBA Sem 2):** Conducted a comprehensive 58-page industry analysis evaluating India's semiconductor ecosystem, cleanroom fab/OSAT operations, PESTLE macroeconomic environment, and policy alignment under the India Semiconductor Mission (ISM).
+     - **Union Bank of India (MBA Sem 1):** Led structured research projects, including an empirical consumer study for Union Bank of India analyzing retail service delivery and customer satisfaction gaps.
+     - **Semiconductor Industry Analysis (MBA Sem 2):** Conducted a detailed 58-page industry analysis of India's semiconductor ecosystem under the ISM policy framework. Strengthened skills in data review, writing, and recommendation quality.
 
-4. **Personal Interactive Portfolio Website**
+7. **Personal Interactive Portfolio Website**
    - *Category:* Personal Project
-   - *Description:* Designed and vibe-coded a modern portfolio website featuring custom glassmorphism, responsive particle canvas background, interactive project modals, and certification listings.
+   - *Description:* Personal professional website designed and built to present education, credentials, and work samples in a clear, accessible format.
    - *URL:* https://nitishkashyapr.github.io/nitishkashyapr.com/
+
+8. **AI Project Memory Architecture Framework**
+   - *Category:* Innovation & AI Systems Architecture
+   - *Description:* A robust, drift-free persistent memory architecture framework for AI coding assistants (Antigravity, Claude Code, Cursor, Windsurf, OpenCode). Establishes a 3-pillar system: a living markdown knowledge base (`PROJECT_MEMORY.md`), a sandboxed subagent (`memory-keeper`), and deterministic session lifecycle hooks. Includes complete schema, YAML permission masks, 5 architectural invariants, and a 4-step quick setup recipe with printable executive A4 documentation.
+   - *URL:* https://nitishkashyapr.github.io/nitishkashyapr.com/projects/ai-project-memory-framework.html
 
 ## Certifications, Credentials & Digital Badges (20+ Certifications & 27 Verified Badges)
 Nitish holds 20+ professional certificates and 27 verified Credly & Google Cloud digital badges spanning:
