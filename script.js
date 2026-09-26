@@ -605,6 +605,65 @@ const icons = {
 // Certifications Data matching certifications.ts
 const certCategories = [
   {
+    id: "hr",
+    label: "HR",
+    provider: "LinkedIn Learning",
+    mainCert: "HR Certifications",
+    iconKey: "users",
+    subGroups: [
+      {
+        heading: "HRCI Human Resource Associate",
+        name: "Human Resource Associate Professional",
+        provider: "HRCI — Coursera",
+        mainCertUrl: "https://coursera.org/share/0677f1802c28bdf8f8ea40a0dc930750",
+        courses: [
+          { name: "Talent Acquisition", certUrl: "https://coursera.org/share/ec4c4ccc79accbd5900ae2da4f575235" },
+          { name: "Learning and Development", certUrl: "https://coursera.org/share/8d80ad7e85a056d1aeeeae01e434a674" },
+          { name: "Compensation and Benefits", certUrl: "https://coursera.org/share/d862fc715256db3c57e65c3bf85b9baa" },
+          { name: "Employee Relations", certUrl: "https://coursera.org/share/7cf06002f79dc207504f2bcd1dfdaa79" },
+          { name: "Compliance and Risk Management", certUrl: "https://coursera.org/share/0b221ec09e359b730570a38bc038689b" }
+        ],
+        description: "Comprehensive HRCI professional certification covering talent acquisition, learning & development, total rewards, employee relations, and compliance & risk management."
+      },
+      {
+        heading: "Managing Organizational Change for HR Professionals",
+        provider: "SHRM — LinkedIn Learning",
+        mainCertUrl: "https://www.linkedin.com/learning/certificates/6a758a5ef9ca2ed64b8a26393c9c5b032c74ab4365e990d067fa6da5062cb92b?trk=share_certificate",
+        courses: [],
+        description: "Focused on how HR professionals can lead and support organizational change initiatives. Covers change models, employee communication, and reducing resistance during transitions."
+      },
+      {
+        heading: "Generative AI in HR",
+        provider: "SHRM — LinkedIn Learning",
+        mainCertUrl: "https://www.linkedin.com/learning/certificates/c25f3a120f6adf4b4bf48854e1f44485a8b6362933f8b33bb533e37f999b8c44?trk=share_certificate",
+        courses: [],
+        description: "Explores practical use cases of generative AI across core HR functions. Covers policy drafting, employee communication, and everyday HR workflows."
+      },
+      {
+        heading: "Generative AI: Recruiting and Talent Acquisition",
+        provider: "NASBA — LinkedIn Learning",
+        mainCertUrl: "https://www.linkedin.com/learning/certificates/c41db3e9cb5342ac05bcbdbc85ece86db1cfcf974db6be852549e9a28a275177?trk=share_certificate",
+        courses: [],
+        description: "Covers how generative AI is reshaping recruiting and talent acquisition, candidate screening, and candidate experience."
+      },
+      {
+        heading: "Leveraging Agentic AI in HR",
+        provider: "SHRM — LinkedIn Learning",
+        mainCertUrl: "https://www.linkedin.com/learning/certificates/d7810c38ccb3af32748d4828b827466005ab4bae11136afa7ceec51a8bb2343f?trk=share_certificate",
+        courses: [],
+        description: "Explores how agentic AI systems and autonomous AI agents can support HR workflows — automating multi-step people processes, assisting decision-making, and reshaping HR operations."
+      },
+      {
+        heading: "Data-Driven HR: AI-Powered People Analytics for Workforce Planning and Employee Experience",
+        provider: "SHRM — LinkedIn Learning",
+        mainCertUrl: "https://www.linkedin.com/learning/certificates/d309c26775d59ac3aab3da08894c1457f8b1e67861e5ffe8c033d1d187969c56?trk=share_certificate",
+        courses: [],
+        description: "Covers AI-powered people analytics for workforce planning, talent forecasting, and elevating employee experience through data-driven HR decisions."
+      }
+    ],
+    description: "HR-focused certifications covering HRCI associate competencies, people-side change management, and generative AI in HR operations."
+  },
+  {
     id: "project-management",
     label: "Advanced Management",
     provider: "Coursera",
@@ -769,65 +828,6 @@ const certCategories = [
       }
     ],
     description: "Built a strong understanding of human behavior, motivation, resilience, collaboration, and workplace well-being."
-  },
-  {
-    id: "hr",
-    label: "HR",
-    provider: "LinkedIn Learning",
-    mainCert: "HR Certifications",
-    iconKey: "users",
-    subGroups: [
-      {
-        heading: "HRCI Human Resource Associate",
-        name: "Human Resource Associate Professional",
-        provider: "HRCI — Coursera",
-        mainCertUrl: "https://coursera.org/share/0677f1802c28bdf8f8ea40a0dc930750",
-        courses: [
-          { name: "Talent Acquisition", certUrl: "https://coursera.org/share/ec4c4ccc79accbd5900ae2da4f575235" },
-          { name: "Learning and Development", certUrl: "https://coursera.org/share/8d80ad7e85a056d1aeeeae01e434a674" },
-          { name: "Compensation and Benefits", certUrl: "https://coursera.org/share/d862fc715256db3c57e65c3bf85b9baa" },
-          { name: "Employee Relations", certUrl: "https://coursera.org/share/7cf06002f79dc207504f2bcd1dfdaa79" },
-          { name: "Compliance and Risk Management", certUrl: "https://coursera.org/share/0b221ec09e359b730570a38bc038689b" }
-        ],
-        description: "Comprehensive HRCI professional certification covering talent acquisition, learning & development, total rewards, employee relations, and compliance & risk management."
-      },
-      {
-        heading: "Managing Organizational Change for HR Professionals",
-        provider: "SHRM — LinkedIn Learning",
-        mainCertUrl: "https://www.linkedin.com/learning/certificates/6a758a5ef9ca2ed64b8a26393c9c5b032c74ab4365e990d067fa6da5062cb92b?trk=share_certificate",
-        courses: [],
-        description: "Focused on how HR professionals can lead and support organizational change initiatives. Covers change models, employee communication, and reducing resistance during transitions."
-      },
-      {
-        heading: "Generative AI in HR",
-        provider: "SHRM — LinkedIn Learning",
-        mainCertUrl: "https://www.linkedin.com/learning/certificates/c25f3a120f6adf4b4bf48854e1f44485a8b6362933f8b33bb533e37f999b8c44?trk=share_certificate",
-        courses: [],
-        description: "Explores practical use cases of generative AI across core HR functions. Covers policy drafting, employee communication, and everyday HR workflows."
-      },
-      {
-        heading: "Generative AI: Recruiting and Talent Acquisition",
-        provider: "NASBA — LinkedIn Learning",
-        mainCertUrl: "https://www.linkedin.com/learning/certificates/c41db3e9cb5342ac05bcbdbc85ece86db1cfcf974db6be852549e9a28a275177?trk=share_certificate",
-        courses: [],
-        description: "Covers how generative AI is reshaping recruiting and talent acquisition, candidate screening, and candidate experience."
-      },
-      {
-        heading: "Leveraging Agentic AI in HR",
-        provider: "SHRM — LinkedIn Learning",
-        mainCertUrl: "https://www.linkedin.com/learning/certificates/d7810c38ccb3af32748d4828b827466005ab4bae11136afa7ceec51a8bb2343f?trk=share_certificate",
-        courses: [],
-        description: "Explores how agentic AI systems and autonomous AI agents can support HR workflows — automating multi-step people processes, assisting decision-making, and reshaping HR operations."
-      },
-      {
-        heading: "Data-Driven HR: AI-Powered People Analytics for Workforce Planning and Employee Experience",
-        provider: "SHRM — LinkedIn Learning",
-        mainCertUrl: "https://www.linkedin.com/learning/certificates/d309c26775d59ac3aab3da08894c1457f8b1e67861e5ffe8c033d1d187969c56?trk=share_certificate",
-        courses: [],
-        description: "Covers AI-powered people analytics for workforce planning, talent forecasting, and elevating employee experience through data-driven HR decisions."
-      }
-    ],
-    description: "HR-focused certifications covering HRCI associate competencies, people-side change management, and generative AI in HR operations."
   }
 ];
 
@@ -844,16 +844,67 @@ const getTotalCertCount = () => certCategories.reduce((sum, cat) => sum + countC
 // Projects Data matching projects.ts
 const projectsData = [
   {
+    id: "ta-starter-kit",
+    title: "Talent Acquisition Starter Kit",
+    subtitle: "Hiring & Sourcing Framework",
+    description: "A practical starter kit for entry-level hiring support: sample job description, screening criteria, shortlisting format, interview questions, and candidate email templates.",
+    category: "Human Resource",
+    status: "Completed",
+    live: "projects/talent-acquisition-starter-kit.html",
+    headerStyle: "linear-gradient(135deg, #1e1b4b, #312e81)",
+    skills: ["Talent Acquisition", "Job Descriptions", "CV Screening", "Interviewing", "Candidate Outreach"],
+    note: "Practical practice starter kit built for internship readiness and structured hiring support.",
+    details: {
+      overview: "A practical starter kit for entry-level hiring support: sample job description, screening criteria, shortlisting format, interview questions, and candidate email templates.",
+      objective: "To standardize candidate screening, streamline interview coordination, and provide professional communication templates for an active hiring pipeline.",
+      summary: "Includes sample JD drafts, must-have vs good-to-have criteria, CV shortlisting scorecard, phone screen questions, structured interview questions, email templates, and intern execution checklist."
+    }
+  },
+  {
+    id: "onboarding-checklist",
+    title: "New Joiner Onboarding Checklist",
+    subtitle: "People Operations Framework",
+    description: "A complete onboarding checklist covering pre-joining, Day 1, first week, and 30-60-90 checkpoints for smooth new-hire coordination.",
+    category: "Human Resource",
+    status: "Completed",
+    live: "projects/new-joiner-onboarding-checklist.html",
+    headerStyle: "linear-gradient(135deg, #064e3b, #047857)",
+    skills: ["HR Operations", "Onboarding", "Process Coordination", "Documentation", "Stakeholder Alignment"],
+    note: "Practical workflow framework built for structured new-hire experience and operations coordination.",
+    details: {
+      overview: "A complete onboarding checklist covering pre-joining, Day 1, first week, and 30-60-90 checkpoints for smooth new-hire coordination.",
+      objective: "To track documentation, coordinate orientation checkpoints, and deliver a welcoming, structured experience from pre-joining through the first 90 days.",
+      summary: "Includes pre-joining checklist, Day 1 schedule, week-1 milestones, 30-60-90 review criteria, document tracker, and common pitfalls to avoid."
+    }
+  },
+  {
+    id: "people-metrics",
+    title: "Mini People Metrics Snapshot",
+    subtitle: "HR Analytics & Reporting",
+    description: "A beginner-friendly people metrics sample with example trackers, definitions, insights, and recommended actions for hiring pipeline or engagement-style data.",
+    category: "Human Resource",
+    status: "Completed",
+    live: "projects/mini-people-metrics-snapshot.html",
+    headerStyle: "linear-gradient(135deg, #78350f, #92400e)",
+    skills: ["People Analytics", "Spreadsheet Tracking", "HR Metrics", "Data Insights", "Reporting"],
+    note: "Practice analytics snapshot with demo numbers demonstrating reporting hygiene and manager-ready summaries.",
+    details: {
+      overview: "A beginner-friendly people metrics sample with example trackers, definitions, insights, and recommended actions for hiring pipeline or engagement-style data.",
+      objective: "To establish standard metric definitions, maintain weekly status trackers, and generate concise 1-minute briefing notes for HR leadership.",
+      summary: "Includes time-to-screen and offer conversion calculations, sample demo trackers, 5 plain-language insights, and 3 recommended management actions."
+    }
+  },
+  {
     id: "digicolibri",
     title: "DigiColibri",
     subtitle: "Business Promotion Design",
-    description: "A conceptual business designer to promote brands through strategic outreach and digital presence.",
+    description: "Led design and prototyping in a 12-member team for a college Shark Tank-style competition. Coordinated workflows, prepared the pitch, and delivered a live prototype under deadline. Result: 1st place.",
     category: "Academic",
     status: "Completed",
     live: "https://digicolibri.lovable.app/",
     headerStyle: "linear-gradient(135deg, #1e1b4b, #4338ca)",
     skills: ["Business Model", "Market Strategy", "Digital Marketing"],
-    note: "Undertaken during my 1st semester of MBA as part of an academic initiative. Our team of 12 members won 1st place in a Shark Tank-style college competition. I took on the website design and created a live working prototype using AI tools.",
+    note: "Undertaken during my 1st semester of MBA as part of an academic initiative. Our team of 12 members won 1st place in a Shark Tank-style college competition. I took on the website design and created a live working prototype using modern tools.",
     details: {
       overview: "DigiColibri is a conceptual business model built around helping small and medium-sized brands grow their digital presence through strategic outreach and creative content.",
       objective: "To create an accessible and affordable digital promotion service that empowers emerging brands to compete online.",
@@ -861,10 +912,27 @@ const projectsData = [
     }
   },
   {
+    id: "ai-project-memory",
+    title: "AI Project Memory Framework",
+    subtitle: "Autonomous Agentic Memory",
+    description: "A robust, drift-free persistent memory architecture for AI coding assistants using living markdown knowledge bases, sandboxed subagents, and session lifecycle hooks.",
+    category: "Innovation",
+    status: "Completed",
+    live: "projects/ai-project-memory-framework.html",
+    headerStyle: "linear-gradient(135deg, #090d16, #1e1b4b)",
+    skills: ["Agentic AI", "Subagent Sandboxing", "Workflow Automation", "System Architecture", "Prompt Engineering"],
+    note: "Production-grade autonomous AI memory architecture pattern engineered for persistent context alignment across Claude Code, Antigravity, Cursor, and OpenCode.",
+    details: {
+      overview: "A robust, drift-free persistent memory architecture framework designed to eliminate session amnesia, context drift, and hallucinated decisions across multi-session AI coding projects.",
+      objective: "To establish a reproducible 3-pillar autonomous memory system: a durable human-auditable markdown artifact, a permission-locked sandboxed subagent, and deterministic session lifecycle hooks.",
+      summary: "Includes complete PROJECT_MEMORY.md schema, memory-keeper subagent YAML configuration with strict permission masks, session lifecycle protocols (start/active/cascade/end), 5 architecture invariants, and a 4-step quick setup recipe."
+    }
+  },
+  {
     id: "seva-setu",
     title: "Seva Setu",
     subtitle: "Public Services App Proposal",
-    description: "A digital platform connecting citizens with government authorities to improve issue reporting and emergency response.",
+    description: "Team proposal for a digital channel connecting citizens with local administration for issue reporting and follow-up. Focused on process flow, clarity of roles, and practical escalation steps.",
     category: "Innovation",
     status: "Completed",
     headerStyle: "linear-gradient(135deg, #064e3b, #059669)",
@@ -881,7 +949,7 @@ const projectsData = [
     id: "union-bank",
     title: "Market Research Study",
     subtitle: "Union Bank & Semiconductor Industry",
-    description: "In-depth academic research studies covering banking consumer perception and Indian semiconductor industry dynamics.",
+    description: "Led structured research projects, including a consumer study for Union Bank of India and a detailed industry analysis of India’s semiconductor ecosystem. Strengthened skills in data review, writing, and recommendation quality.",
     category: "Research",
     status: "Completed",
     headerStyle: "linear-gradient(135deg, #78350f, #b45309)",
@@ -892,12 +960,12 @@ const projectsData = [
   {
     id: "portfolio",
     title: "This Portfolio Website",
-    subtitle: "Vibe Coded & Built by Me",
-    description: "This very website you're viewing — designed, vibe coded, and built entirely by me using modern web technologies.",
+    subtitle: "Personal Professional Portfolio",
+    description: "Personal professional website designed and built to present education, credentials, and work samples in a clear format.",
     category: "Personal",
     status: "Live",
     headerStyle: "linear-gradient(135deg, #4a1942, #9b59b6)",
-    skills: ["Vibe Coding", "AI Tools", "Web Design"],
+    skills: ["Web Architecture", "UI Design", "Clean Code"],
     details: {
       overview: "A fully responsive, modern portfolio website built from the ground up.",
       objective: "To create a polished, professional online presence that reflects my skills, personality, and growth.",
@@ -1357,7 +1425,7 @@ const educationData = [
 const PORTFOLIO_DATA = {
   profile: {
     name: "Nitish Kashyap R",
-    title: "AI-Enabled HR Professional",
+    title: "MBA (HR) Student | Open to HR Internships",
     email: "nitishkashyapr8@gmail.com",
     location: "Tumkur / Bengaluru, Karnataka, India",
     linkedin: "https://www.linkedin.com/in/nitishkashyapr",
@@ -1519,22 +1587,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   let savedScrollY = 0;
+  let isScrollLocked = false;
+
   const lockBodyScroll = () => {
-    savedScrollY = window.scrollY || window.pageYOffset || 0;
+    if (isScrollLocked) return;
+    savedScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
     document.body.style.position = "fixed";
     document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
     document.body.style.width = "100%";
     document.body.style.overflow = "hidden";
     document.body.classList.add("modal-open");
+    isScrollLocked = true;
   };
 
   const unlockBodyScroll = () => {
+    if (!isScrollLocked) return;
+    const restoreY = savedScrollY;
     document.body.style.position = "";
     document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
     document.body.style.width = "";
     document.body.style.overflow = "";
     document.body.classList.remove("modal-open");
-    window.scrollTo(0, savedScrollY);
+    isScrollLocked = false;
+    window.scrollTo({ top: restoreY, behavior: "instant" });
   };
 
   window.openCertificationsFullView = () => {
@@ -1675,7 +1754,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Helper for generating mobile reference vector thumbnails for projects
   const getProjectMobileThumbSVG = (id) => {
-    if (id === 'digicolibri') {
+    if (id === 'ta-starter-kit') {
+      return `<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="#0C0D1C"/>
+        <circle cx="50" cy="50" r="35" fill="url(#hrBlueGlow)" opacity="0.3"/>
+        <circle cx="50" cy="40" r="14" fill="#312E81" stroke="#818CF8" stroke-width="2"/>
+        <path d="M26 76C26 64 36 58 50 58C64 58 74 64 74 76" stroke="#818CF8" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="28" cy="44" r="8" fill="#1E1B4B" stroke="#6366F1" stroke-width="1.5"/>
+        <path d="M14 74C14 66 20 62 28 62" stroke="#6366F1" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="72" cy="44" r="8" fill="#1E1B4B" stroke="#6366F1" stroke-width="1.5"/>
+        <path d="M86 74C86 66 80 62 72 62" stroke="#6366F1" stroke-width="1.5" stroke-linecap="round"/>
+        <defs>
+          <radialGradient id="hrBlueGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(35)">
+            <stop stop-color="#6366F1"/>
+            <stop offset="1" stop-color="#6366F1" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>`;
+    } else if (id === 'onboarding-checklist') {
+      return `<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="#061814"/>
+        <circle cx="50" cy="50" r="35" fill="url(#onboardGreenGlow)" opacity="0.3"/>
+        <rect x="28" y="24" width="44" height="54" rx="6" fill="#064E3B" stroke="#34D399" stroke-width="2"/>
+        <rect x="40" y="18" width="20" height="8" rx="2" fill="#10B981"/>
+        <path d="M38 40L44 46L54 34" stroke="#A7F3D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="58" y1="40" x2="64" y2="40" stroke="#6EE7B7" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M38 56L44 62L54 50" stroke="#A7F3D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="58" y1="56" x2="64" y2="56" stroke="#6EE7B7" stroke-width="1.5" stroke-linecap="round"/>
+        <defs>
+          <radialGradient id="onboardGreenGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(35)">
+            <stop stop-color="#10B981"/>
+            <stop offset="1" stop-color="#10B981" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>`;
+    } else if (id === 'people-metrics') {
+      return `<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="#1A1208"/>
+        <circle cx="50" cy="50" r="35" fill="url(#metricsOrangeGlow)" opacity="0.3"/>
+        <line x1="25" y1="75" x2="75" y2="75" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
+        <rect x="30" y="52" width="9" height="23" rx="2" fill="#D97706" stroke="#FBBF24" stroke-width="1.5"/>
+        <rect x="45" y="38" width="9" height="37" rx="2" fill="#D97706" stroke="#FBBF24" stroke-width="1.5"/>
+        <rect x="60" y="26" width="9" height="49" rx="2" fill="#D97706" stroke="#FBBF24" stroke-width="1.5"/>
+        <polyline points="34 46 49 32 65 20" stroke="#FCD34D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="65" cy="20" r="3" fill="#FFF"/>
+        <defs>
+          <radialGradient id="metricsOrangeGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(35)">
+            <stop stop-color="#F59E0B"/>
+            <stop offset="1" stop-color="#F59E0B" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>`;
+    } else if (id === 'digicolibri') {
       return `<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="100" height="100" fill="#090D16"/>
         <circle cx="50" cy="50" r="35" fill="url(#blueGlow)" opacity="0.25"/>
@@ -1733,6 +1863,24 @@ document.addEventListener("DOMContentLoaded", () => {
           <radialGradient id="purpleGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(35)">
             <stop stop-color="#A855F7"/>
             <stop offset="1" stop-color="#A855F7" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>`;
+    } else if (id === 'ai-project-memory') {
+      return `<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="#090D16"/>
+        <circle cx="50" cy="50" r="35" fill="url(#aiMemBlueGlow)" opacity="0.3"/>
+        <rect x="22" y="24" width="56" height="52" rx="7" fill="#131B2E" stroke="#3B82F6" stroke-width="2"/>
+        <rect x="28" y="32" width="20" height="4" rx="2" fill="#60A5FA"/>
+        <rect x="28" y="40" width="44" height="3" rx="1.5" fill="#38BDF8" opacity="0.8"/>
+        <rect x="28" y="46" width="36" height="3" rx="1.5" fill="#34D399" opacity="0.8"/>
+        <rect x="28" y="52" width="40" height="3" rx="1.5" fill="#F472B6" opacity="0.8"/>
+        <circle cx="64" cy="62" r="10" fill="#064E3B" stroke="#34D399" stroke-width="1.5"/>
+        <path d="M60 62L63 65L68 59" stroke="#6EE7B7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs>
+          <radialGradient id="aiMemBlueGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(35)">
+            <stop stop-color="#3B82F6"/>
+            <stop offset="1" stop-color="#3B82F6" stop-opacity="0"/>
           </radialGradient>
         </defs>
       </svg>`;
@@ -1873,10 +2021,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Sidebar HTML
     let sidebarHtml = `<div class="glass-card cert-sidebar" style="padding: 0.5rem; position: sticky; top: 1.5rem; height: fit-content; align-self: start;">`;
     const sidebarItems = [
+      { id: "hr", label: "HR", iconKey: "users" },
       { id: "project-management", label: "Advanced Management", iconKey: "chart" },
       { id: "artificial-intelligence", label: "AI & Technical Skills", iconKey: "lightbulb" },
-      { id: "psychology", label: "Psychology & Human Behavior", iconKey: "heart" },
-      { id: "hr", label: "HR", iconKey: "users" }
+      { id: "psychology", label: "Psychology & Human Behavior", iconKey: "heart" }
     ];
 
     sidebarItems.forEach(item => {
@@ -2037,6 +2185,10 @@ document.addEventListener("DOMContentLoaded", () => {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             <span>All</span>
           </button>
+          <button onclick="setProjectCategory('Human Resource')" class="mobile-ref-filter-btn ${activeProjectCategory === 'Human Resource' ? 'active' : ''}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Human Resource</span>
+          </button>
           <button onclick="setProjectCategory('Academic')" class="mobile-ref-filter-btn ${activeProjectCategory === 'Academic' ? 'active' : ''}">
             ${icons.graduation}
             <span>Academic</span>
@@ -2059,13 +2211,18 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
 
       const metaMap = {
+        'ta-starter-kit': { date: 'Aug 2024', team: 'HR Portfolio', rating: '5.0' },
+        'onboarding-checklist': { date: 'Sep 2024', team: 'HR Operations', rating: '5.0' },
+        'people-metrics': { date: 'Oct 2024', team: 'People Analytics', rating: '5.0' },
         'digicolibri': { date: 'May 15, 2024', team: 'Team of 12', rating: '4.9' },
+        'ai-project-memory': { date: 'Sep 2024', team: 'Solo Architecture', rating: '5.0' },
         'seva-setu': { date: 'Apr 28, 2024', team: 'Team of 4', rating: '4.8' },
         'union-bank': { date: 'Mar 10, 2024', team: 'Team of 2', rating: '4.7' },
         'portfolio': { date: 'Feb 18, 2024', team: 'Solo Project', rating: '4.9' }
       };
 
       const catBadgeClassMap = {
+        'Human Resource': 'mobile-ref-cat-hr',
         'Academic': 'mobile-ref-cat-academic',
         'Innovation': 'mobile-ref-cat-innovation',
         'Research': 'mobile-ref-cat-research',
@@ -2095,8 +2252,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div style="display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
-              ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-primary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View Website ${icons.external}</a>` : ''}
-              ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View Project ${icons.file}</a>` : ''}
+              ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-primary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View ${icons.external}</a>` : ''}
+              ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View ${icons.file}</a>` : ''}
               <button onclick="event.stopPropagation(); openProjectModal('${p.id}')" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">
                 Details ${icons.info}
               </button>
@@ -2152,8 +2309,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding-top: 1.25rem; margin-top: 0.75rem; border-top: 1px solid var(--border);">
-              ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View Live ${icons.external}</a>` : ''}
-              ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View the Project ${icons.file}</a>` : ''}
+              ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" class="btn-primary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View ${icons.external}</a>` : ''}
+              ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View ${icons.file}</a>` : ''}
               <button onclick="openProjectModal('${p.id}')" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">
                 Details ${icons.info}
               </button>
@@ -2552,11 +2709,22 @@ document.addEventListener("DOMContentLoaded", () => {
     modalBackdrop.addEventListener("click", (e) => {
       if (e.target === modalBackdrop) closeModal();
     });
+    modalBackdrop.addEventListener("wheel", (e) => {
+      if (e.target === modalBackdrop) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+    modalBackdrop.addEventListener("touchmove", (e) => {
+      if (e.target === modalBackdrop) {
+        e.preventDefault();
+      }
+    }, { passive: false });
   }
 
   window.openProjectModal = (projId) => {
     const p = projectsData.find(pr => pr.id === projId);
     if (!p) return;
+    lockBodyScroll();
 
     let extraResearchHtml = "";
     if (p.id === "union-bank") {
@@ -2659,8 +2827,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       ${(p.live || (p.pdf && p.id !== 'union-bank')) ? `
       <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem;">
-        ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" class="btn-primary" style="text-decoration: none;">Visit Website ↗</a>` : ''}
-        ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration: none;">View Project ↗</a>` : ''}
+        ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener" class="btn-primary" style="text-decoration: none;">View ↗</a>` : ''}
+        ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration: none;">View ↗</a>` : ''}
       </div>` : ''}
     `;
     modalBackdrop.classList.add("active");
@@ -3658,4 +3826,16 @@ function initMobileCardSwipeEngines() {
   updateStrengthsReelStack();
   initStrengthsRolodexGesture();
 }
+
+// Guarantee smooth scroll to section hash on initial load or back navigation
+window.addEventListener("load", () => {
+  if (window.location.hash) {
+    const targetEl = document.querySelector(window.location.hash);
+    if (targetEl) {
+      setTimeout(() => {
+        targetEl.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }
+});
 

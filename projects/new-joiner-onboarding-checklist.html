@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Joiner Onboarding Checklist — Nitish Kashyap R</title>
+  <meta name="description" content="A complete onboarding checklist covering pre-joining compliance, Day 1 orientation, first week milestones, and 30-60-90 review roadmap. Formulated by Nitish Kashyap R (MBA HR Candidate).">
+  <meta name="author" content="Nitish Kashyap R">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #334155;
+      --text-subtle: #64748b;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --primary: #059669;
+      --primary-dark: #047857;
+      --primary-tint: #ecfdf5;
+      --blue: #2563eb;
+      --blue-tint: #eff6ff;
+      --amber: #d97706;
+      --amber-tint: #fffbeb;
+      --radius: 12px;
+      --rule: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px 16px 40px;
+      -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    /* Screen Top Toolbar (Matches Resume/CV Toolbar Standard) */
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .back-link a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-subtle);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+
+    .back-link a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .print-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: none;
+      border-radius: 8px;
+      padding: 0.55rem 1.25rem;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .print-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.38);
+    }
+
+    /* Sheet Wrapper & Individual A4 Sheets */
+    .sheet-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .doc-sheet {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.07);
+      padding: 12mm 14mm 10mm 14mm;
+      width: 100%;
+      min-height: 297mm;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Document Header & Metadata */
+    .doc-header {
+      margin-bottom: 1rem;
+      border-bottom: 1.5px solid var(--rule);
+      padding-bottom: 0.85rem;
+    }
+
+    .badge-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.65rem;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.22rem 0.65rem;
+      border-radius: 6px;
+      background: var(--primary-tint);
+      color: var(--primary);
+      border: 1px solid rgba(5, 150, 105, 0.2);
+    }
+
+    .badge-sub {
+      background: #f1f5f9;
+      color: var(--text-subtle);
+      border-color: var(--border);
+    }
+
+    h1.doc-title {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    .doc-subtitle {
+      font-size: 0.96rem;
+      color: var(--text-subtle);
+      line-height: 1.45;
+      margin-bottom: 0.5rem;
+    }
+
+    .doc-author-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .doc-author-bar strong {
+      color: var(--text-main);
+    }
+
+    .doc-author-bar a {
+      color: #0b57d0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Running Subheader (Pages 2 & 3) */
+    .page-subhead {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1.5px solid var(--rule);
+      padding-bottom: 2mm;
+      margin-bottom: 3.5mm;
+      font-size: 7.6pt;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .page-subhead strong {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* Practitioner Context Callout */
+    .callout-box {
+      background: #f8fafc;
+      border-left: 3.5px solid var(--primary);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.15rem;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 1.15rem;
+      line-height: 1.55;
+    }
+
+    .callout-box strong {
+      color: var(--text-main);
+    }
+
+    /* Section Cards & Headings */
+    .section-card {
+      margin-bottom: 1.15rem;
+    }
+
+    h2.section-heading {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h2.section-heading span.num-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    p.section-intro {
+      font-size: 0.84rem;
+      color: var(--text-subtle);
+      margin-bottom: 0.55rem;
+      line-height: 1.45;
+    }
+
+    /* Checklist Groups & Items */
+    .checklist-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0.95rem;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .check-box {
+      width: 18px;
+      height: 18px;
+      border: 1.8px solid var(--primary);
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .check-content {
+      flex: 1;
+    }
+
+    .check-title {
+      font-weight: 700;
+      color: var(--text-main);
+      font-size: 0.86rem;
+      margin-bottom: 0.18rem;
+    }
+
+    .check-desc {
+      font-size: 0.81rem;
+      color: var(--text-subtle);
+      line-height: 1.48;
+    }
+
+    .check-owner {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      background: #f1f5f9;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      margin: 0.55rem 0 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: var(--text-main);
+      font-weight: 700;
+      padding: 0.55rem 0.65rem;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.5rem 0.65rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      vertical-align: top;
+      font-size: 0.80rem;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) td {
+      background: #fafafa;
+    }
+
+    /* 30-60-90 Milestone Grid */
+    .milestone-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.85rem;
+      margin: 0.55rem 0 0.95rem;
+    }
+
+    .milestone-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 0.95rem;
+      background: #ffffff;
+      border-top: 3.5px solid var(--primary);
+    }
+
+    .milestone-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .milestone-tag {
+      font-size: 0.70rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+    }
+
+    .milestone-title {
+      font-size: 0.90rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+    }
+
+    .milestone-desc {
+      font-size: 0.80rem;
+      color: var(--text-subtle);
+      margin-bottom: 0.5rem;
+      line-height: 1.42;
+    }
+
+    .milestone-bullets {
+      font-size: 0.78rem;
+      padding-left: 1.15rem;
+      margin-bottom: 0.55rem;
+      color: var(--text-muted);
+    }
+
+    .milestone-bullets li {
+      margin-bottom: 0.22rem;
+    }
+
+    .milestone-action {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Quality Assurance & Governance Boxes */
+    .assurance-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.65rem 0.95rem;
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+      line-height: 1.45;
+      margin-bottom: 0.75rem;
+    }
+
+    .assurance-box strong {
+      color: var(--text-main);
+    }
+
+    /* Running Page Footer Marker */
+    .page-footer {
+      margin-top: auto;
+      padding-top: 2.2mm;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.4pt;
+      color: var(--text-subtle);
+    }
+
+    .page-footer a {
+      color: #0b57d0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 600;
+    }
+
+    .page-footer a:hover {
+      color: #0842a0;
+      text-decoration: underline;
+    }
+
+    /* =========================================================
+       RESPONSIVE & PRINT MEDIA RULES
+       ========================================================= */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px 12px 36px;
+      }
+      .doc-sheet {
+        padding: 1.5rem 1.15rem;
+        border-radius: 10px;
+        min-height: auto;
+      }
+      .milestone-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      html, body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 210mm !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .toolbar, .print-btn, .back-link {
+        display: none !important;
+      }
+
+      .container {
+        max-width: none !important;
+        width: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .sheet-wrapper {
+        gap: 0 !important;
+      }
+
+      .doc-sheet {
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 9.5mm 13.5mm 9mm 13.5mm !important;
+        background: #ffffff !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      .doc-sheet:last-child {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      /* Clean, Non-Congested Print Typography */
+      h1.doc-title {
+        font-size: 16.5pt !important;
+        margin-bottom: 0.18rem !important;
+        line-height: 1.15 !important;
+      }
+
+      .doc-subtitle {
+        font-size: 8.6pt !important;
+        margin-bottom: 0.35rem !important;
+        line-height: 1.35 !important;
+      }
+
+      .badge-strip {
+        margin-bottom: 0.35rem !important;
+        gap: 0.35rem !important;
+      }
+
+      .badge {
+        font-size: 6.8pt !important;
+        padding: 0.14rem 0.5rem !important;
+      }
+
+      .doc-author-bar {
+        font-size: 7.5pt !important;
+      }
+
+      .callout-box {
+        padding: 0.55rem 0.8rem !important;
+        font-size: 7.8pt !important;
+        line-height: 1.38 !important;
+        margin-bottom: 0.75rem !important;
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        border-left: 3.5px solid #059669 !important;
+      }
+
+      h2.section-heading {
+        font-size: 10.2pt !important;
+        margin-bottom: 0.28rem !important;
+      }
+
+      h2.section-heading span.num-badge {
+        width: 19px !important;
+        height: 19px !important;
+        font-size: 7.0pt !important;
+      }
+
+      p.section-intro {
+        font-size: 7.8pt !important;
+        margin-bottom: 0.38rem !important;
+        line-height: 1.32 !important;
+      }
+
+      .checklist-group {
+        gap: 0.45rem !important;
+        margin-bottom: 0.65rem !important;
+      }
+
+      .check-item {
+        padding: 0.45rem 0.7rem !important;
+        border: 1px solid #cbd5e1 !important;
+        gap: 0.55rem !important;
+      }
+
+      .check-box {
+        width: 15px !important;
+        height: 15px !important;
+        font-size: 10px !important;
+        border-width: 1.5px !important;
+        margin-top: 1px !important;
+      }
+
+      .check-title {
+        font-size: 8.2pt !important;
+        margin-bottom: 0.1rem !important;
+      }
+
+      .check-desc {
+        font-size: 7.5pt !important;
+        line-height: 1.34 !important;
+      }
+
+      .check-owner {
+        font-size: 6.5pt !important;
+        padding: 0.08rem 0.4rem !important;
+        margin-top: 0.2rem !important;
+      }
+
+      .table-container {
+        margin: 0.35rem 0 0.65rem !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      table {
+        font-size: 7.5pt !important;
+      }
+
+      th {
+        padding: 0.38rem 0.5rem !important;
+        background: #f1f5f9 !important;
+      }
+
+      td {
+        padding: 0.34rem 0.5rem !important;
+        font-size: 7.4pt !important;
+        line-height: 1.32 !important;
+      }
+
+      .milestone-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.55rem !important;
+        margin: 0.45rem 0 0.65rem !important;
+      }
+
+      .milestone-card {
+        padding: 0.55rem 0.65rem !important;
+        border: 1px solid #cbd5e1 !important;
+        border-top: 3px solid #059669 !important;
+      }
+
+      .milestone-tag {
+        font-size: 6.6pt !important;
+      }
+
+      .milestone-title {
+        font-size: 8.3pt !important;
+        margin-bottom: 0.2rem !important;
+      }
+
+      .milestone-desc {
+        font-size: 7.3pt !important;
+        margin-bottom: 0.3rem !important;
+        line-height: 1.28 !important;
+      }
+
+      .milestone-bullets {
+        font-size: 7.2pt !important;
+        padding-left: 1.05rem !important;
+        margin-bottom: 0.35rem !important;
+      }
+
+      .milestone-bullets li {
+        margin-bottom: 0.15rem !important;
+      }
+
+      .milestone-action {
+        font-size: 6.8pt !important;
+      }
+
+      .assurance-box {
+        padding: 0.45rem 0.75rem !important;
+        font-size: 7.2pt !important;
+        line-height: 1.32 !important;
+        margin-bottom: 0.45rem !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      .page-footer {
+        padding-top: 1.8mm !important;
+        border-top: 1px solid #cbd5e1 !important;
+        font-size: 7.2pt !important;
+      }
+
+      a {
+        color: #0b57d0 !important;
+        text-decoration: underline !important;
+        text-underline-offset: 2px !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+  <script>
+    function handleBackToPortfolio(e) {
+      if (e) e.preventDefault();
+      if (window.opener && !window.opener.closed) {
+        try {
+          window.opener.focus();
+          window.close();
+          return;
+        } catch (err) {}
+      }
+      if (window.history.length > 1 && document.referrer && (document.referrer.includes('/index.html') || document.referrer.includes(window.location.host))) {
+        window.history.back();
+        return;
+      }
+      window.location.href = '../index.html#projects';
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <!-- Top Actions Toolbar (Hidden in Print) -->
+    <div class="toolbar">
+      <div class="back-link">
+        <a href="../index.html#projects" onclick="handleBackToPortfolio(event)" rel="home">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          Back to Official Portfolio
+        </a>
+      </div>
+      <button onclick="window.print()" class="print-btn" aria-label="Print or save this document as PDF">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print / Save as PDF
+      </button>
+    </div>
+
+    <!-- Paper Sheet Wrapper -->
+    <div class="sheet-wrapper" itemscope itemtype="https://schema.org/CreativeWork">
+
+      <!-- =========================================================
+           SHEET 1: Pre-Boarding Operations & Statutory Verification
+           ========================================================= -->
+      <article class="doc-sheet" id="doc-page-1">
+        <!-- Document Header -->
+        <header class="doc-header">
+          <div class="badge-strip">
+            <span class="badge">Human Resource Management</span>
+            <span class="badge badge-sub">People Operations Lifecycle</span>
+            <span class="badge badge-sub">Executive Work Sample</span>
+          </div>
+
+          <h1 class="doc-title" itemprop="name">New Joiner Onboarding Checklist</h1>
+          <div class="doc-subtitle">A standardized operational framework covering pre-boarding compliance, Day 1 orientation, week-1 assimilation, and 30-60-90 day performance checkpoints.</div>
+
+          <div class="doc-author-bar">
+            <span>Formulated by <strong>Nitish Kashyap R</strong></span>
+            <span>&middot;</span>
+            <span>MBA (HR) Candidate</span>
+            <span>&middot;</span>
+            <span>VIMTECH, Tumkur</span>
+            <span>&middot;</span>
+            <a href="mailto:nitishkashyapr8@gmail.com">nitishkashyapr8@gmail.com</a>
+          </div>
+        </header>
+
+        <!-- Practitioner Context -->
+        <div class="callout-box">
+          <strong>Practitioner Context &amp; Purpose:</strong> Formulated by <strong>Nitish Kashyap R</strong> (MBA Candidate, Specialization in Human Resources) as an operational reference framework. Onboarding is a decisive touchpoint in the employee journey: early confusion or administrative delay significantly elevates 90-day attrition risk. This toolkit bridges human warmth with rigorous process coordination—ensuring complete statutory documentation, punctual IT enablement, peer buddy alignment, and structured performance touchpoints.
+        </div>
+
+        <!-- 1. Pre-Boarding Phase -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">1</span> Phase 1: Pre-Boarding Operations (Offer Acceptance to T-1 Day)</h2>
+          <p class="section-intro">The pre-boarding period sets the professional tone of the organization and mitigates offer drop-out risk. The coordinator oversees document verification, IT provisioning, and proactive candidate engagement:</p>
+
+          <div class="checklist-group">
+            <div class="check-item">
+              <span class="check-box">&#10003;</span>
+              <div class="check-content">
+                <div class="check-title">1. Welcome Call &amp; Welcome Kit Briefing (Within 48h of Offer Acceptance)</div>
+                <div class="check-desc">Initiate a friendly check-in call with candidate; congratulate them; outline pre-boarding milestones, expected joining date, office reporting address, and point-of-contact details.</div>
+                <span class="check-owner">Owner: HR Coordinator | SLA: T+2 Days</span>
+              </div>
+            </div>
+
+            <div class="check-item">
+              <span class="check-box">&#10003;</span>
+              <div class="check-content">
+                <div class="check-title">2. Statutory Compliance Documentation Collection &amp; Audit</div>
+                <div class="check-desc">Collect soft copies and verify authenticity of mandatory Indian statutory records: PAN Card, Aadhaar Card, UAN/EPFO Number, Bank Account details, Degree Certificates, and previous employer Relieving Letter.</div>
+                <span class="check-owner">Owner: HR Operations | SLA: T-7 Days</span>
+              </div>
+            </div>
+
+            <div class="check-item">
+              <span class="check-box">&#10003;</span>
+              <div class="check-content">
+                <div class="check-title">3. Third-Party Background Verification (BGV) Hand-off</div>
+                <div class="check-desc">Initiate BGV case file with authorized verification partner covering address verification, criminal record check, and past employment history.</div>
+                <span class="check-owner">Owner: BGV Partner / HR Operations | SLA: T-7 Days</span>
+              </div>
+            </div>
+
+            <div class="check-item">
+              <span class="check-box">&#10003;</span>
+              <div class="check-content">
+                <div class="check-title">4. IT Asset, Email, &amp; Software Provisioning Ticket</div>
+                <div class="check-desc">Submit formal IT Helpdesk request for laptop provisioning, standard software suite installation, official corporate email ID creation, and Slack/Teams channel permissions. For remote joiners, track courier shipment tracking number.</div>
+                <span class="check-owner">Owner: IT Systems Support | SLA: T-3 Days</span>
+              </div>
+            </div>
+
+            <div class="check-item">
+              <span class="check-box">&#10003;</span>
+              <div class="check-content">
+                <div class="check-title">5. Onboarding Buddy Selection &amp; Pre-Joining Introduction</div>
+                <div class="check-desc">Coordinate with hiring manager to assign an onboarding peer buddy; send pre-joining intro email connecting buddy and new joiner to answer informal cultural/commute questions.</div>
+                <span class="check-owner">Owner: Department Manager / HR | SLA: T-2 Days</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pre-Boarding Governance & Statutory Box -->
+        <div class="assurance-box">
+          <strong>Pre-Boarding Governance Standard:</strong> Ensures full compliance with statutory documentation lead-times under the Employees' Provident Funds (EPF) Act and Payment of Gratuity Act. Weekly candidate check-ins during notice periods reduce candidate no-show probability by up to 35%.
+        </div>
+
+        <!-- Sheet 1 Footer -->
+        <footer class="page-footer">
+          <span>Nitish Kashyap R · New Joiner Onboarding Checklist | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
+          <span>Page 1 of 3</span>
+        </footer>
+      </article>
+
+      <!-- =========================================================
+           SHEET 2: Day 1 Schedule & Week 1 Integration Milestones
+           ========================================================= -->
+      <article class="doc-sheet" id="doc-page-2">
+        <!-- Running Subheader -->
+        <div class="page-subhead">
+          <span><strong>Nitish Kashyap R</strong> — New Joiner Onboarding Checklist</span>
+          <span>Day 1 Orientation Schedule &amp; Week 1 Assimilation</span>
+        </div>
+
+        <!-- 2. Day 1 Schedule (Starts Fresh at Top of Page 2!) -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">2</span> Phase 2: Day 1 Structured Orientation Schedule</h2>
+          <p class="section-intro">A structured, welcoming itinerary designed to eliminate first-day anxiety, ensure statutory form sign-offs, and facilitate meaningful team immersion:</p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Time Slot</th>
+                  <th style="width: 27%;">Session Title</th>
+                  <th style="width: 37%;">Operational Details &amp; Objectives</th>
+                  <th style="width: 16%;">Facilitator</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>09:30 AM – 10:15 AM</strong></td>
+                  <td><strong>Front Desk Welcome &amp; Access</strong></td>
+                  <td>Reception greeting, photo capture for biometric ID card, physical access badge encoding, desk allocation, and welcome swag kit handover.</td>
+                  <td>Facilities / HR</td>
+                </tr>
+                <tr>
+                  <td><strong>10:15 AM – 11:30 AM</strong></td>
+                  <td><strong>Document Audit &amp; Form Signing</strong></td>
+                  <td>In-person verification of original certificates; physical signing of Gratuity nomination (Form F), EPFO Declaration (Form 11), NDA, and Code of Conduct.</td>
+                  <td>HR Operations</td>
+                </tr>
+                <tr>
+                  <td><strong>11:30 AM – 01:00 PM</strong></td>
+                  <td><strong>IT Hardware Handover &amp; SSO</strong></td>
+                  <td>Laptop handover, asset receipt sign-off, enterprise SSO login setup, multi-factor authentication (MFA) enrollment, password policy, and VPN testing.</td>
+                  <td>IT Support</td>
+                </tr>
+                <tr>
+                  <td><strong>01:00 PM – 02:15 PM</strong></td>
+                  <td><strong>Team Welcome Lunch</strong></td>
+                  <td>Informal lunch hosted by assigned Onboarding Buddy and immediate team members to foster peer belonging and psychological comfort.</td>
+                  <td>Buddy &amp; Team</td>
+                </tr>
+                <tr>
+                  <td><strong>02:15 PM – 03:45 PM</strong></td>
+                  <td><strong>HR Policy &amp; Culture Briefing</strong></td>
+                  <td>Interactive overview of office timings, hybrid work guidelines, attendance logging (HRMS), leave policy (Earned, Sick, Casual), and POSH awareness.</td>
+                  <td>HR Specialist</td>
+                </tr>
+                <tr>
+                  <td><strong>04:00 PM – 05:00 PM</strong></td>
+                  <td><strong>Hiring Manager Alignment</strong></td>
+                  <td>First formal 1-on-1 check-in with department manager; walk-through of team mission, immediate Week 1 assignments, and introductory schedule.</td>
+                  <td>Reporting Manager</td>
+                </tr>
+                <tr>
+                  <td><strong>05:00 PM – 05:30 PM</strong></td>
+                  <td><strong>Day 1 Wrap-up &amp; Check-out</strong></td>
+                  <td>Quick coordinator check-in: resolve any pending laptop or access glitches; confirm Day 2 start time and arrival details.</td>
+                  <td>HR Operations</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 3. Week 1 Milestones -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">3</span> Phase 3: Week 1 Integration Milestones</h2>
+          <p class="section-intro">Focuses on role clarity, tool competence, and cultural immersion through structured touchpoints:</p>
+
+          <div class="checklist-group">
+            <div class="check-item">
+              <span class="check-box">&#10003;</span>
+              <div class="check-content">
+                <div class="check-title">Daily 15-Minute Buddy Syncs</div>
+                <div class="check-desc">Informal morning touchpoint between new hire and buddy to address navigation, lunch routines, organizational acronyms, and practical day-to-day workflow questions.</div>
+                <span class="check-owner">Cadence: Daily (Mon–Fri) | Facilitator: Onboarding Peer Buddy</span>
+              </div>
+            </div>
+
+            <div class="check-item">
+              <span class="check-box">&#10003;</span>
+              <div class="check-content">
+                <div class="check-title">Stakeholder Introductory 1-on-1s</div>
+                <div class="check-desc">Brief 20-minute introductory meetings with cross-functional partners (Finance, Operations, Marketing, Product) to build organizational context and cross-team relationships.</div>
+                <span class="check-owner">Cadence: Days 2 to 4 | Facilitator: Hiring Manager / Joiner</span>
+              </div>
+            </div>
+
+            <div class="check-item">
+              <span class="check-box">&#10003;</span>
+              <div class="check-content">
+                <div class="check-title">Mandatory Compliance &amp; InfoSec Learning Modules</div>
+                <div class="check-desc">Self-paced completion of Prevention of Sexual Harassment (POSH) training, Data Privacy (GDPR/DPDP Act) modules, and Information Security protocols on company LMS.</div>
+                <span class="check-owner">Deadline: Day 5 (5:00 PM) | Facilitator: L&amp;D / Compliance</span>
+              </div>
+            </div>
+
+            <div class="check-item">
+              <span class="check-box">&#10003;</span>
+              <div class="check-content">
+                <div class="check-title">Week 1 Pulse Check Survey (Friday 3:00 PM)</div>
+                <div class="check-desc">A brief 4-question pulse survey sent via HRMS: (1) Were your tools ready? (2) Did you feel welcomed by team? (3) Understand immediate role goals? (4) What can HR support next week?</div>
+                <span class="check-owner">SLA: Friday EOD | Facilitator: HR Operations Coordinator</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sheet 2 Footer -->
+        <footer class="page-footer">
+          <span>Nitish Kashyap R · New Joiner Onboarding Checklist | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
+          <span>Page 2 of 3</span>
+        </footer>
+      </article>
+
+      <!-- =========================================================
+           SHEET 3: 30-60-90 Roadmap & Troubleshooting Guide
+           ========================================================= -->
+      <article class="doc-sheet" id="doc-page-3">
+        <!-- Running Subheader -->
+        <div class="page-subhead">
+          <span><strong>Nitish Kashyap R</strong> — New Joiner Onboarding Checklist</span>
+          <span>30-60-90 Roadmap &amp; Contingency Protocols</span>
+        </div>
+
+        <!-- 4. 30-60-90 Days -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">4</span> Phase 4: 30-60-90 Day Milestone Roadmap &amp; Probation Review</h2>
+          <p class="section-intro">A progressive roadmap providing role clarity, incremental autonomy, and an objective basis for probation confirmation:</p>
+
+          <div class="milestone-grid">
+            <div class="milestone-card">
+              <div class="milestone-header">
+                <span class="milestone-tag">Day 30 Milestone</span>
+              </div>
+              <div class="milestone-title">Absorption &amp; Learning</div>
+              <div class="milestone-desc">Focus: Understanding internal processes, shadowing peer tasks, and executing basic workflows under supervision.</div>
+              <ul class="milestone-bullets">
+                <li>100% compliance modules completed.</li>
+                <li>Understands primary SOPs and file structures.</li>
+                <li>Participates actively in team stand-ups.</li>
+              </ul>
+              <div class="milestone-action">HR Action: 30-Day Check-in with Joiner &amp; Manager</div>
+            </div>
+
+            <div class="milestone-card">
+              <div class="milestone-header">
+                <span class="milestone-tag">Day 60 Milestone</span>
+              </div>
+              <div class="milestone-title">Autonomous Execution</div>
+              <div class="milestone-desc">Focus: Managing daily deliverables independently; solving routine challenges; suggesting operational improvements.</div>
+              <ul class="milestone-bullets">
+                <li>Independent execution with &lt; 5% oversight.</li>
+                <li>Constructive collaboration with cross-teams.</li>
+                <li>Identifies any tool or knowledge gaps.</li>
+              </ul>
+              <div class="milestone-action">HR Action: Mid-Probation Performance Feedback Sync</div>
+            </div>
+
+            <div class="milestone-card">
+              <div class="milestone-header">
+                <span class="milestone-tag">Day 90 Milestone</span>
+              </div>
+              <div class="milestone-title">Full Ownership &amp; Confirmation</div>
+              <div class="milestone-desc">Focus: Consistent goal delivery; full ownership of assigned metrics; ready for formal confirmation of employment.</div>
+              <ul class="milestone-bullets">
+                <li>Meets role KPIs established at intake.</li>
+                <li>Peer &amp; manager feedback collected.</li>
+                <li>Formal probation assessment completed.</li>
+              </ul>
+              <div class="milestone-action">HR Action: Issue Formal Probation Confirmation Letter</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Troubleshooting Coordinator Guide (Table) -->
+        <section class="section-card">
+          <h2 class="section-heading"><span class="num-badge">5</span> Operational Troubleshooting Guide for HR Coordinators</h2>
+          <p class="section-intro">Practical protocols for handling common onboarding contingencies encountered in corporate HR operations:</p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Contingency Scenario</th>
+                  <th style="width: 38%;">Root Cause &amp; Operational Risk</th>
+                  <th style="width: 37%;">Coordinator Resolution Protocol</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Laptop Hardware Delay (Remote Joiner)</strong></td>
+                  <td>Courier transit delay causes new hire to sit idle without access on Day 1, creating negative first impression.</td>
+                  <td>Notify joiner 24h prior; provide temp access via web client / mobile authenticator; coordinate with IT for cloud-based virtual desktop environment until courier delivery.</td>
+                </tr>
+                <tr>
+                  <td><strong>EPFO / UAN Discrepancy (Previous Employer)</strong></td>
+                  <td>Name or Date of Birth mismatch in Aadhaar vs. EPFO database prevents automatic PF account transfer.</td>
+                  <td>Obtain previous member ID; issue Joint Declaration Form to regional PF commissioner; assist employee in online Aadhaar-UAN seeding via EPFO portal.</td>
+                </tr>
+                <tr>
+                  <td><strong>Joiner Feeling Isolated / Disengaged</strong></td>
+                  <td>Remote team busy in sprint deadlines; joiner does not receive sufficient attention during week 1.</td>
+                  <td>Intervene proactively after Week 1 survey; schedule immediate check-in with department lead; re-assign a more proactive peer buddy.</td>
+                </tr>
+                <tr>
+                  <td><strong>Missing Relieving Letter from Prior Firm</strong></td>
+                  <td>Previous organization delayed exit clearance documentation, holding up formal employee file completion.</td>
+                  <td>Collect formal resignation acceptance email and final salary slips as provisional proof; grant a 30-day provisional grace period with employee undertaking.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Process Assurance Note -->
+        <div class="assurance-box">
+          <strong>Process Assurance Note:</strong> Designed in compliance with standard Indian employment statutory requirements (PF/EPFO, Gratuity Form F, POSH) and best-in-class employee experience standards.
+        </div>
+
+        <!-- Sheet 3 Footer -->
+        <footer class="page-footer">
+          <span>Nitish Kashyap R · New Joiner Onboarding Checklist | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
+          <span>Page 3 of 3</span>
+        </footer>
+      </article>
+
+    </div>
+  </div>
+</body>
+</html>

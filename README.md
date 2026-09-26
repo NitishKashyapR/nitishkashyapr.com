@@ -9,7 +9,7 @@
 
   <!-- Animated Typing Banner -->
   <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/">
-    <img src="https://readme-typing-svg.demolab.com?font=Outfit&size=34&duration=3200&pause=900&color=8B5CF6&center=true&vCenter=true&width=780&lines=Hey+There%2C+I'm+Nitish+Kashyap+R+%F0%9F%91%8B;AI-Enabled+HR+Professional+%F0%9F%A4%96;MBA+Student+%40+VIMTECH%2C+Tumkur+%F0%9F%8E%93;People+Strategy+%26+AI+Enthusiast+%E2%9C%A8;Let's+Build+Something+Meaningful+%F0%9F%9A%80" alt="Animated Typing Banner" />
+    <img src="https://readme-typing-svg.demolab.com?font=Outfit&size=34&duration=3200&pause=900&color=8B5CF6&center=true&vCenter=true&width=780&lines=Hey+There%2C+I'm+Nitish+Kashyap+R+%F0%9F%91%8B;MBA+(HR)+Student+%F0%9F%8E%93;Open+to+HR+Internships+%F0%9F%9A%80;Talent+Acquisition+%26+HR+Operations+%E2%9C%A8;Let's+Connect+%26+Collaborate+%F0%9F%A4%9D" alt="Animated Typing Banner" />
   </a>
 
   <br />
@@ -26,15 +26,15 @@
 
 ### ✨ About Nitish Kashyap (Nitish Kashyap R)
 
-Welcome to the official portfolio and professional repository of **Nitish Kashyap R** (commonly searched as **Nitish Kashyap** or **Nitish**). I am an AI-Enabled Human Resources Professional and MBA Candidate at VIMTECH, Tumkur, Karnataka, India.
+Welcome to the official portfolio and professional repository of **Nitish Kashyap R** (commonly searched as **Nitish Kashyap** or **Nitish**). I am an MBA student specializing in Human Resources at VIMTECH, Tumkur, looking for HR internship opportunities across Bangalore, Tumkur, and Yelahanka.
 
 ```yaml
 👤 Name                 Nitish Kashyap R (Nitish Kashyap)
 💼 MBA (HR)            @ VIMTECH, Tumkur · 2025 — Present
 🎓 B.Com (Accounting)  @ Vidyavahini First Grade College · 2022 — 2025
-🧭 Focus               People Strategy · AI in HR · Talent Acquisition · L&D
-🎯 Open To             HR Internships · People Analytics · Collaborations
-📍 Location            Tumkur / Bengaluru, Karnataka, India
+🧭 Focus               Talent Acquisition · HR Operations · People Analytics · AI-aware HR support
+🎯 Open To             HR Internships (3–6 months) · Hybrid or On-site
+📍 Location            Open to: Bangalore · Tumkur · Yelahanka (College: Tumkur)
 🌐 Website             https://nitishkashyapr.github.io/nitishkashyapr.com/
 ```
 
@@ -79,11 +79,15 @@ Welcome to the official portfolio and professional repository of **Nitish Kashya
 
 | Project | Description | Link |
 | :--- | :--- | :---: |
-| 🚀 **DigiColibri** | Digital promotion platform for SMEs · **1st Place**, College Shark Tank Competition | [Live App](https://digicolibri.lovable.app/) |
-| 🌐 **Portfolio Website** | Vibe-coded, AI-accessible portfolio with canvas animations & glassmorphism | [View Site](https://nitishkashyapr.github.io/nitishkashyapr.com/) |
-| 🏛️ **Seva Setu** | Civic-tech proposal connecting citizens with government for issue reporting | [View PDF](pdfs/Seva%20Satu.pdf) |
-| 📊 **Union Bank Study** | Market research on consumer perception vs. actual service delivery (MBA Sem 1) | [View PDF](pdfs/Union%20bank%20of%20India.pdf) |
-| 🔬 **Semiconductor Analysis** | Comprehensive 58-page MBA industry & ecosystem analysis under ISM (MBA Sem 2) | [View PDF](pdfs/Semicondustor%20Industory%20Analysis.pdf) |
+| 📁 **Talent Acquisition Starter Kit** | Practical starter kit for entry-level hiring support: sample JD, screening criteria, shortlisting format, questions, and email templates | [View Page](projects/talent-acquisition-starter-kit.html) |
+| 📋 **New Joiner Onboarding Checklist** | Complete onboarding checklist covering pre-joining, Day 1, first week, and 30-60-90 checkpoints | [View Page](projects/new-joiner-onboarding-checklist.html) |
+| 📈 **Mini People Metrics Snapshot** | Beginner-friendly people metrics sample with example trackers, definitions, insights, and recommended actions | [View Page](projects/mini-people-metrics-snapshot.html) |
+| 🧠 **AI Project Memory Framework** | Robust, drift-free persistent memory architecture for AI coding assistants: living knowledge base, sandboxed subagents, and lifecycle hooks | [View Page](projects/ai-project-memory-framework.html) |
+| 🚀 **DigiColibri** | Led design and prototyping in a 12-member team for a college Shark Tank-style competition · **1st Place Winner** | [Live App](https://digicolibri.lovable.app/) |
+| 🌐 **Portfolio Website** | Personal professional website designed and built to present education, credentials, and work samples | [View Site](https://nitishkashyapr.github.io/nitishkashyapr.com/) |
+| 🏛️ **Seva Setu** | Team proposal for a digital channel connecting citizens with local administration for issue reporting and follow-up | [View PDF](pdfs/Seva%20Satu.pdf) |
+| 📊 **Union Bank Study** | Led consumer study analyzing retail service delivery and customer satisfaction gaps (MBA Sem 1) | [View PDF](pdfs/Union%20bank%20of%20India.pdf) |
+| 🔬 **Semiconductor Analysis** | Comprehensive 58-page MBA industry and ecosystem analysis under ISM policy framework (MBA Sem 2) | [View PDF](pdfs/Semicondustor%20Industory%20Analysis.pdf) |
 
 ---
 
@@ -148,6 +152,6 @@ Welcome to the official portfolio and professional repository of **Nitish Kashya
 
   <br />
 
-  <sub>Crafted with ❤️ — pure HTML, CSS &amp; vanilla JavaScript. No frameworks, all vibes.</sub>
+  <sub>Crafted with dedication — pure HTML, CSS &amp; vanilla JavaScript. Professional &amp; accessible design.</sub>
 
 </div>
