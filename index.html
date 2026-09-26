@@ -57,7 +57,7 @@
 
     <script>
       (function() {
-        var themes = ['dark', 'light', 'ocean', 'sunrise', 'lavender', 'bloom', 'forge', 'breeze', 'slate', 'meadow'];
+        var themes = ['dark', 'light', 'ocean', 'sunrise', 'dune', 'lavender', 'platinum', 'bloom', 'forge', 'breeze', 'sage', 'slate', 'meadow'];
         var istDate;
         try {
           istDate = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
@@ -1493,7 +1493,7 @@
               <button onclick="openProjectModal('ta-starter-kit')" class="btn-primary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem;">
                 View Details →
               </button>
-              <a href="projects/talent-acquisition-starter-kit.html" target="_blank" rel="noopener" class="btn-secondary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem; text-decoration: none;">
+              <a href="projects/talent-acquisition-starter-kit.html" class="btn-secondary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem; text-decoration: none;">
                 View ↗
               </a>
             </div>
@@ -1515,7 +1515,7 @@
               <button onclick="openProjectModal('onboarding-checklist')" class="btn-primary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem;">
                 View Details →
               </button>
-              <a href="projects/new-joiner-onboarding-checklist.html" target="_blank" rel="noopener" class="btn-secondary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem; text-decoration: none;">
+              <a href="projects/new-joiner-onboarding-checklist.html" class="btn-secondary" style="flex: 1; justify-content: center; padding: 0.7rem 0.85rem; font-size: 0.82rem; text-decoration: none;">
                 View ↗
               </a>
             </div>
@@ -1561,7 +1561,7 @@
         <div class="mobile-only-view mobile-projects-wrapper">
           <div class="arc-deck-header-bar">
             <span class="arc-deck-badge">3D ARC STACK DECK</span>
-            <div id="projectsArcCounter" class="arc-counter-pill">01 / 04 <span class="arr">→</span> 02 / 04</div>
+            <div id="projectsArcCounter" class="arc-counter-pill">01 / 08 <span class="arr">→</span> 02 / 08</div>
           </div>
 
           <div class="arc-deck-stage">
@@ -1577,7 +1577,7 @@
                 <p class="arc-card-desc">Practical recruiting toolkit: JD drafting, candidate screening rubrics, interview evaluation scorecards, and email outreach templates.</p>
                 <div class="arc-card-actions">
                   <button onclick="openProjectModal('ta-starter-kit')" class="btn-primary" style="padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
-                  <a href="projects/talent-acquisition-starter-kit.html" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.8rem; text-decoration: none;">View ↗</a>
+                  <a href="projects/talent-acquisition-starter-kit.html" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.8rem; text-decoration: none;">View ↗</a>
                 </div>
                 <div class="arc-drag-hint">Swipe up along arc to cycle deck ↗</div>
               </div>
@@ -1593,13 +1593,77 @@
                 <p class="arc-card-desc">End-to-end employee onboarding: pre-boarding readiness, Day 1 orientation schedule, week-1 milestones, and 30-60-90 review roadmap.</p>
                 <div class="arc-card-actions">
                   <button onclick="openProjectModal('onboarding-checklist')" class="btn-primary" style="padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
-                  <a href="projects/new-joiner-onboarding-checklist.html" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.8rem; text-decoration: none;">View ↗</a>
+                  <a href="projects/new-joiner-onboarding-checklist.html" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.8rem; text-decoration: none;">View ↗</a>
                 </div>
                 <div class="arc-drag-hint">Swipe up along arc to cycle deck ↗</div>
               </div>
 
-              <!-- Arc Card 3: Market Research Study -->
+              <!-- Arc Card 3: Mini People Metrics Snapshot -->
               <div class="mobile-arc-card" data-index="2" data-depth="2" style="border-top: 4px solid var(--o1);">
+                <div class="arc-card-header">
+                  <span class="arc-card-tag" style="color: var(--o1);">01 DRAG • 02 RELEASE • 03 LOOP</span>
+                  <span class="arc-card-status">Completed</span>
+                </div>
+                <h3 class="arc-card-title">Mini People Metrics Snapshot</h3>
+                <div class="arc-card-sub">HR Analytics &amp; Reporting</div>
+                <p class="arc-card-desc">Beginner-friendly people metrics sample with example trackers, metric definitions, insights, and recommended actions for hiring pipeline data.</p>
+                <div class="arc-card-actions">
+                  <button onclick="openProjectModal('people-metrics')" class="btn-primary" style="padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
+                  <a href="projects/mini-people-metrics-snapshot.html" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.8rem; text-decoration: none;">View ↗</a>
+                </div>
+                <div class="arc-drag-hint">Swipe up along arc to cycle deck ↗</div>
+              </div>
+
+              <!-- Arc Card 4: DigiColibri -->
+              <div class="mobile-arc-card" data-index="3" data-depth="3" style="border-top: 4px solid var(--p2);">
+                <div class="arc-card-header">
+                  <span class="arc-card-tag" style="color: var(--p2);">01 DRAG • 02 RELEASE • 03 LOOP</span>
+                  <span class="arc-card-status">Completed</span>
+                </div>
+                <h3 class="arc-card-title">DigiColibri</h3>
+                <div class="arc-card-sub">Business Promotion Design</div>
+                <p class="arc-card-desc">Led design and prototyping in a 12-member team for a college Shark Tank competition. Coordinated workflows, pitch, and live prototype. 1st place.</p>
+                <div class="arc-card-actions">
+                  <button onclick="openProjectModal('digicolibri')" class="btn-primary" style="padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
+                  <a href="https://digicolibri.lovable.app/" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.8rem; text-decoration: none;">Live ↗</a>
+                </div>
+                <div class="arc-drag-hint">Swipe up along arc to cycle deck ↗</div>
+              </div>
+
+              <!-- Arc Card 5: AI Project Memory Framework -->
+              <div class="mobile-arc-card" data-index="4" data-depth="4" style="border-top: 4px solid var(--p1);">
+                <div class="arc-card-header">
+                  <span class="arc-card-tag" style="color: var(--p1);">01 DRAG • 02 RELEASE • 03 LOOP</span>
+                  <span class="arc-card-status">Completed</span>
+                </div>
+                <h3 class="arc-card-title">AI Project Memory Framework</h3>
+                <div class="arc-card-sub">Autonomous Agentic Memory</div>
+                <p class="arc-card-desc">Robust persistent memory architecture for AI coding assistants using living markdown knowledge bases, sandboxed subagents, and session lifecycle hooks.</p>
+                <div class="arc-card-actions">
+                  <button onclick="openProjectModal('ai-project-memory')" class="btn-primary" style="padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
+                  <a href="projects/ai-project-memory-framework.html" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.8rem; text-decoration: none;">View ↗</a>
+                </div>
+                <div class="arc-drag-hint">Swipe up along arc to cycle deck ↗</div>
+              </div>
+
+              <!-- Arc Card 6: Seva Setu -->
+              <div class="mobile-arc-card" data-index="5" data-depth="5" style="border-top: 4px solid var(--g1);">
+                <div class="arc-card-header">
+                  <span class="arc-card-tag" style="color: var(--g1);">01 DRAG • 02 RELEASE • 03 LOOP</span>
+                  <span class="arc-card-status">Completed</span>
+                </div>
+                <h3 class="arc-card-title">Seva Setu</h3>
+                <div class="arc-card-sub">Public Services App Proposal</div>
+                <p class="arc-card-desc">Digital channel connecting citizens with local administration for civic issue reporting and follow-up. Focus on process flow, clarity of roles, and escalation.</p>
+                <div class="arc-card-actions">
+                  <button onclick="openProjectModal('seva-setu')" class="btn-primary" style="padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
+                  <a href="pdfs/Seva Satu.pdf" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.8rem; text-decoration: none;">PDF ↗</a>
+                </div>
+                <div class="arc-drag-hint">Swipe up along arc to cycle deck ↗</div>
+              </div>
+
+              <!-- Arc Card 7: Market Research Study -->
+              <div class="mobile-arc-card" data-index="6" data-depth="6" style="border-top: 4px solid var(--o1);">
                 <div class="arc-card-header">
                   <span class="arc-card-tag" style="color: var(--o1);">01 DRAG • 02 RELEASE • 03 LOOP</span>
                   <span class="arc-card-status">Completed</span>
@@ -1608,13 +1672,14 @@
                 <div class="arc-card-sub">Union Bank &amp; Semiconductor Industry</div>
                 <p class="arc-card-desc">Led structured research projects including a Union Bank consumer study and India semiconductor ecosystem analysis.</p>
                 <div class="arc-card-actions">
-                  <button onclick="openProjectModal('union-bank')" class="btn-primary" style="width: 100%; justify-content: center; padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
+                  <button onclick="openProjectModal('union-bank')" class="btn-primary" style="padding: 0.65rem 1rem; font-size: 0.8rem;">Details →</button>
+                  <a href="pdfs/Union bank of India.pdf" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.65rem 1rem; font-size: 0.8rem; text-decoration: none;">PDF ↗</a>
                 </div>
                 <div class="arc-drag-hint">Swipe up along arc to cycle deck ↗</div>
               </div>
 
-              <!-- Arc Card 4: Portfolio Website -->
-              <div class="mobile-arc-card" data-index="3" data-depth="3" style="border-top: 4px solid var(--r1);">
+              <!-- Arc Card 8: Portfolio Website -->
+              <div class="mobile-arc-card" data-index="7" data-depth="7" style="border-top: 4px solid var(--r1);">
                 <div class="arc-card-header">
                   <span class="arc-card-tag" style="color: var(--r1);">01 DRAG • 02 RELEASE • 03 LOOP</span>
                   <span class="arc-card-status">Live</span>
@@ -1703,7 +1768,7 @@
             <a href="mailto:nitishkashyapr8@gmail.com?subject=HR%20Internship%20Opportunity" class="floating-glowing-btn-lg" style="display: inline-flex; align-items: center; gap: 0.65rem; padding: 0.95rem 2rem; font-size: 0.92rem; font-weight: 700; font-family: var(--font-sans); color: #fff; background: linear-gradient(135deg, #7c3aed, #a855f7, #d946ef); border: none; border-radius: 9999px; cursor: pointer; text-decoration: none;">
               Email Me <span style="font-size: 1.15rem;">✉️</span>
             </a>
-            <a href="resume.html" target="_blank" rel="noopener" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.8rem; font-size: 0.92rem; font-weight: 700; border-radius: 9999px; text-decoration: none; color: #fff; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.06);">
+            <a href="resume.html" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.8rem; font-size: 0.92rem; font-weight: 700; border-radius: 9999px; text-decoration: none; color: #fff; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.06);">
               View Resume ↗
             </a>
           </div>
