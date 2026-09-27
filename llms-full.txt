@@ -259,10 +259,10 @@ Nitish Kashyap R (also known as Nitish Kashyap) is an MBA student specializing i
 - **Role:** Lead Systems Architect & Framework Designer
 - **Tech Stack:** Declarative Markdown Schema, YAML Subagent Permission Masks, Session Lifecycle Hooks (`AGENTS.md`), Multi-Agent Sandboxing.
 - **Features:** Establishes a reproducible 3-pillar autonomous memory system:
-  1. *Living Knowledge Base (`PROJECT_MEMORY.md`):* Human-auditable, git-versioned single source of truth at the repository root with standardized 4-section schema.
-  2. *Sandboxed Subagent (`memory-keeper`):* Strict permission-masked agent with edit rights exclusively to `PROJECT_MEMORY.md`, zero git authority, and automated code-grounded drift audits.
+  1. *Living Knowledge Base (`PROJECT_MEMORY.md` rules + `PROJECT_LOGS.md` session logs):* Human-auditable, local-only source of truth at the repository root - a decoupled two-file model with a standardized sectioned schema (numbered rules vs. chronological session history).
+  2. *Sandboxed Subagent (`memory-keeper`):* Strict permission-masked agent with edit rights exclusively to `PROJECT_MEMORY.md` and `PROJECT_LOGS.md`, zero git authority, and automated code-grounded drift audits.
   3. *Session Lifecycle Protocol:* Predictable execution hooks (Session Start drift check, Active task execution, Cascading domain updates, Session End fact recording).
-  4. *Invariants & Setup:* 5 architecture invariants (Append-only rules, SSoT, strict sandboxing, zero-touch git, cross-IDE portability) and a 4-step setup recipe.
+  4. *Invariants & Setup:* 5 architecture invariants (controlled rule lifecycle, SSoT, strict sandboxing, zero-touch git, cross-IDE portability) and a 4-step setup recipe.
 - **Documentation & Printable PDF:** https://nitishkashyapr.github.io/nitishkashyapr.com/projects/ai-project-memory-framework.html
 
 ---

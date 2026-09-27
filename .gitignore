@@ -6,6 +6,9 @@ cover-letter.pdf
 .agents/
 .opencode/
 PROJECT_MEMORY.md
+PROJECT_LOGS.md
+scratch/
+opencode.json
 .gemini/
 .antigravity/
 .claude/

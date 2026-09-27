@@ -930,8 +930,8 @@ const projectsData = [
     note: "Production-grade autonomous AI memory architecture pattern engineered for persistent context alignment across Claude Code, Antigravity, Cursor, and OpenCode.",
     details: {
       overview: "A robust, drift-free persistent memory architecture framework designed to eliminate session amnesia, context drift, and hallucinated decisions across multi-session AI coding projects.",
-      objective: "To establish a reproducible 3-pillar autonomous memory system: a durable human-auditable markdown artifact, a permission-locked sandboxed subagent, and deterministic session lifecycle hooks.",
-      summary: "Includes complete PROJECT_MEMORY.md schema, memory-keeper subagent YAML configuration with strict permission masks, session lifecycle protocols (start/active/cascade/end), 5 architecture invariants, and a 4-step quick setup recipe."
+      objective: "To establish a reproducible 3-pillar autonomous memory system: durable human-auditable markdown artifacts (rules vs. session logs), a permission-locked sandboxed subagent, and deterministic session lifecycle hooks.",
+      summary: "Includes complete PROJECT_MEMORY.md and PROJECT_LOGS.md two-file schema, memory-keeper subagent YAML configuration with strict two-file permission masks, session lifecycle protocols (start/active/cascade/end), 5 architecture invariants, and a 4-step quick setup recipe."
     }
   },
   {

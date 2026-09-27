@@ -88,7 +88,7 @@ MBA student specializing in Human Resources at VIMTECH, Tumkur, with a Bachelor 
 
 8. **AI Project Memory Architecture Framework**
    - *Category:* Innovation & AI Systems Architecture
-   - *Description:* A robust, drift-free persistent memory architecture framework for AI coding assistants (Antigravity, Claude Code, Cursor, Windsurf, OpenCode). Establishes a 3-pillar system: a living markdown knowledge base (`PROJECT_MEMORY.md`), a sandboxed subagent (`memory-keeper`), and deterministic session lifecycle hooks. Includes complete schema, YAML permission masks, 5 architectural invariants, and a 4-step quick setup recipe with printable executive A4 documentation.
+   - *Description:* A robust, drift-free persistent memory architecture framework for AI coding assistants (Antigravity, Claude Code, Cursor, Windsurf, OpenCode). Establishes a 3-pillar system: a living markdown knowledge base (`PROJECT_MEMORY.md` rules + `PROJECT_LOGS.md` session logs), a sandboxed subagent (`memory-keeper`), and deterministic session lifecycle hooks. Includes complete schema, YAML permission masks, 5 architectural invariants, and a 4-step quick setup recipe with printable executive A4 documentation.
    - *URL:* https://nitishkashyapr.github.io/nitishkashyapr.com/projects/ai-project-memory-framework.html
 
 ## Certifications, Credentials & Digital Badges (20+ Certifications & 27 Verified Badges)
