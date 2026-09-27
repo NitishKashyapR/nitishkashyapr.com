@@ -251,7 +251,7 @@ Nitish Kashyap R (also known as Nitish Kashyap) is an MBA student specializing i
 - **Category:** Personal Project & Professional Presentation
 - **Role:** Creator & Web Designer
 - **Tech Stack:** Pure HTML5, Vanilla CSS3, JavaScript (ES6+), Canvas Particle Plexus System, JSON-LD Schema.org Data.
-- **Features:** 10 dynamic color themes, fluid responsive layout, accessible theme toggle, dynamic certification modal, interactive project filters, professional single-page resume.
+- **Features:** 13 dynamic color themes, fluid responsive layout, accessible theme toggle, dynamic certification modal, interactive project filters, professional single-page resume.
 - **URL:** https://nitishkashyapr.github.io/nitishkashyapr.com/
 
 ### 8. AI Project Memory Architecture Framework

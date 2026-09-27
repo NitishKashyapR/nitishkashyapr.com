@@ -1,6 +1,7 @@
 # Local-Only Documents (per-job personalization; never deploy)
 cover-letter.html
 cover-letter.pdf
+ATS_AI_FILTERING_SPEC.md
 
 # AI Agent Internal Configuration & Memory Files (DO NOT COMMIT)
 .agents/
