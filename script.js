@@ -605,7 +605,8 @@ const icons = {
   info: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`,
   close: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
   chevronDown: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`,
-  chevronUp: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>`
+  chevronUp: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>`,
+  github: `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.79 2.74 1.27 3.4.97.11-.76.41-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.67.42.36.8 1.07.8 2.17v3.22c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>`
 };
 
 // Certifications Data matching certifications.ts
@@ -898,6 +899,24 @@ const projectsData = [
       overview: "A beginner-friendly people metrics sample with example trackers, definitions, insights, and recommended actions for hiring pipeline or engagement-style data.",
       objective: "To establish standard metric definitions, maintain weekly status trackers, and generate concise 1-minute briefing notes for HR leadership.",
       summary: "Includes time-to-screen and offer conversion calculations, sample demo trackers, 5 plain-language insights, and 3 recommended management actions."
+    }
+  },
+  {
+    id: "peoplecore-hris",
+    title: "PeopleCore — Enterprise HRIS Sandbox",
+    subtitle: "Enterprise HRIS & Workforce Academy",
+    description: "A zero-server, 100% client-side enterprise HRIS simulator and certified training academy featuring multi-jurisdiction statutory payroll (US, UK, DE, IN), ATS pipeline, org design, and interactive compliance labs.",
+    category: "Human Resource",
+    status: "Completed",
+    live: "https://nitishkashyapr.github.io/peoplecore-hris-sandbox/",
+    github: "https://github.com/NitishKashyapR/peoplecore-hris-sandbox",
+    headerStyle: "linear-gradient(135deg, #042f2e, #0e7490)",
+    skills: ["Enterprise HRIS", "Statutory Payroll", "ATS Pipeline", "Labor Compliance", "Workforce Analytics"],
+    note: "Zero-server, 100% client-side HRIS simulation and certified academy covering statutory payroll, ATS, Bradford factor, and regulatory labs.",
+    details: {
+      overview: "PeopleCore is an open-source, zero-server enterprise HRIS simulator and workforce operations academy. It bridges the gap between workforce management theory and practical enterprise operations by providing a realistic, hands-on simulation environment for HR practitioners, people-ops specialists, and workforce analysts.",
+      objective: "To enable risk-free operational practice across multi-jurisdiction statutory payroll (US, UK, DE, IN), ATS recruitment pipelines, position-centric org management, and immutable audit logging directly in the browser.",
+      summary: "Features end-to-end employee lifecycle workflows, interactive compliance & formula laboratories (Bradford Factor, EEOC 4/5ths selection ratio, EOR risk), a 10-module workforce operations curriculum, and automated certification testing."
     }
   },
   {
@@ -1890,6 +1909,26 @@ document.addEventListener("DOMContentLoaded", () => {
           </radialGradient>
         </defs>
       </svg>`;
+    } else if (id === 'peoplecore-hris') {
+      return `<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="#041E1C"/>
+        <circle cx="50" cy="50" r="35" fill="url(#hrisTealGlow)" opacity="0.35"/>
+        <rect x="24" y="24" width="52" height="52" rx="10" fill="#064E3B" stroke="#14B8A6" stroke-width="2"/>
+        <rect x="32" y="32" width="16" height="14" rx="3" fill="#0D9488" stroke="#5EEAD4" stroke-width="1.2"/>
+        <circle cx="40" cy="38" r="3" fill="#FFF"/>
+        <path d="M35 44C35 41.5 37 41 40 41C43 41 45 41.5 45 44" stroke="#FFF" stroke-width="1.2" stroke-linecap="round"/>
+        <rect x="52" y="32" width="16" height="14" rx="3" fill="#0D9488" stroke="#5EEAD4" stroke-width="1.2"/>
+        <path d="M56 39L59 42L65 36" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="32" y="52" width="36" height="16" rx="4" fill="#0F766E" stroke="#2DD4BF" stroke-width="1.2"/>
+        <line x1="38" y1="58" x2="52" y2="58" stroke="#A7F3D0" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="38" y1="62" x2="62" y2="62" stroke="#6EE7B7" stroke-width="1.2" stroke-linecap="round"/>
+        <defs>
+          <radialGradient id="hrisTealGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(35)">
+            <stop stop-color="#14B8A6"/>
+            <stop offset="1" stop-color="#14B8A6" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>`;
     } else {
       return `<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="100" height="100" fill="#1A120B"/>
@@ -2220,6 +2259,7 @@ document.addEventListener("DOMContentLoaded", () => {
         'ta-starter-kit': { date: 'Aug 2024', team: 'HR Portfolio', rating: '5.0' },
         'onboarding-checklist': { date: 'Sep 2024', team: 'HR Operations', rating: '5.0' },
         'people-metrics': { date: 'Oct 2024', team: 'People Analytics', rating: '5.0' },
+        'peoplecore-hris': { date: 'Oct 2024', team: 'HR Software', rating: '5.0' },
         'digicolibri': { date: 'May 15, 2024', team: 'Team of 12', rating: '4.9' },
         'ai-project-memory': { date: 'Sep 2024', team: 'Solo Architecture', rating: '5.0' },
         'seva-setu': { date: 'Apr 28, 2024', team: 'Team of 4', rating: '4.8' },
@@ -2259,6 +2299,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div style="display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
               ${p.live ? `<a href="${p.live}" ${p.live.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} onclick="event.stopPropagation()" class="btn-primary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View ${icons.external}</a>` : ''}
+              ${p.github ? `<a href="${p.github}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">GitHub ${icons.external}</a>` : ''}
               ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">View ${icons.file}</a>` : ''}
               <button onclick="event.stopPropagation(); openProjectModal('${p.id}')" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.75rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.35rem;">
                 Details ${icons.info}
@@ -2316,6 +2357,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding-top: 1.25rem; margin-top: 0.75rem; border-top: 1px solid var(--border);">
               ${p.live ? `<a href="${p.live}" ${p.live.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="btn-primary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View ${icons.external}</a>` : ''}
+              ${p.github ? `<a href="${p.github}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">GitHub ${icons.external}</a>` : ''}
               ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">View ${icons.file}</a>` : ''}
               <button onclick="openProjectModal('${p.id}')" class="btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.75rem;">
                 Details ${icons.info}
@@ -2831,9 +2873,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       ${extraResearchHtml}
 
-      ${(p.live || (p.pdf && p.id !== 'union-bank')) ? `
+      ${(p.live || (p.pdf && p.id !== 'union-bank') || p.github) ? `
       <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem;">
-        ${p.live ? `<a href="${p.live}" ${p.live.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="btn-primary" style="text-decoration: none;">View ↗</a>` : ''}
+        ${p.live ? `<a href="${p.live}" ${p.live.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="btn-primary" style="text-decoration: none;">${p.github ? 'Visit Website ↗' : 'View ↗'}</a>` : ''}
+        ${p.github ? `<a href="${p.github}" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration: none;">Checkout Repository ↗</a>` : ''}
         ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration: none;">View ↗</a>` : ''}
       </div>` : ''}
     `;
@@ -3145,7 +3188,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- ENGINE 1: FEATURED PROJECTS (3D Orbital Arc Deck) ---
 let currentArcIndex = 0;
-let totalArcCards = 8;
+let totalArcCards = 9;
 let isArcAnimating = false;
 
 function updateArcDeckStack() {

@@ -265,6 +265,22 @@ Nitish Kashyap R (also known as Nitish Kashyap) is an MBA student specializing i
   4. *Invariants & Setup:* 5 architecture invariants (controlled rule lifecycle, SSoT, strict sandboxing, zero-touch git, cross-IDE portability) and a 4-step setup recipe.
 - **Documentation & Printable PDF:** https://nitishkashyapr.github.io/nitishkashyapr.com/projects/ai-project-memory-framework.html
 
+### 9. PeopleCore — Enterprise HRIS Sandbox & Professional Academy
+- **Category:** Human Resource Project & Enterprise HRIS Simulator
+- **Role:** Creator & HR Systems Architect
+- **Tech Stack:** Pure Vanilla JavaScript (Zero Dependencies, Zero-Server), Semantic HTML5, CSS3 Custom Properties, Client-Side LocalStorage Persistence, Canvas Visualizations, Export Engines (CSV, Audit Logs).
+- **Core Modules & Capabilities:**
+  1. *Employee Directory & Org Hierarchy:* Complete employee lifecycle management with search, multi-faceted filtering (department, location, status), department tree visualization, reporting line hierarchies, and position management.
+  2. *ATS Recruitment & Hiring Pipeline:* Visual Kanban applicant tracking board spanning Sourcing, Screening, Interview, Offer, and Hired stages with candidate scorecards and stage transition tracking.
+  3. *Multi-Jurisdiction Global Payroll Engine:* Comprehensive payroll processing supporting localized compliance and tax calculations across four jurisdictions: United States (W-4, FICA, Federal/State withholding), United Kingdom (PAYE, National Insurance), Germany (Lohnsteuer, Social Security), and India (Income Tax slab, EPF, Professional Tax).
+  4. *Time & Absence Management:* Leave balance accruals, multi-type time-off requests (PTO, Sick, Parental, Unpaid), approval workflows, and automated Bradford Factor disruption scoring.
+  5. *Performance & Talent Reviews:* Goal tracking, 9-Box talent grid categorization, 360-degree review cycles, and competency assessments.
+  6. *Interactive HR Compliance Labs & Calculators:* Interactive regulatory and metric calculation sandboxes including EEOC 4/5ths Selection Ratio Adverse Impact analysis, Bradford Factor absenteeism index, and Employer of Record (EOR) risk classification.
+  7. *HR Academy & Hands-On Case Scenarios:* 8 real-world interactive HR scenarios with guided tasks, evaluation scoring, and downloadable completion certificates.
+  8. *Enterprise Security & Auditing:* Immutable tamper-evident audit logging of all system actions, role-based access control (RBAC) simulation (Admin, HR Manager, Recruiter, Employee), and privacy/compliance sandbox controls.
+- **Live Deployed Simulator:** https://nitishkashyapr.github.io/peoplecore-hris-sandbox/
+- **GitHub Repository:** https://github.com/NitishKashyapR/peoplecore-hris-sandbox
+
 ---
 
 ## Technical & Professional Skills Matrix

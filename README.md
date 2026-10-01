@@ -79,6 +79,7 @@ Welcome to the official portfolio and professional repository of **Nitish Kashya
 
 | Project | Description | Link |
 | :--- | :--- | :---: |
+| ⚙️ **PeopleCore — Enterprise HRIS Sandbox** | Zero-server enterprise HRIS simulator and training academy: statutory payroll (US/UK/DE/IN), ATS, org design, and compliance labs | [Live App](https://nitishkashyapr.github.io/peoplecore-hris-sandbox/) · [GitHub](https://github.com/NitishKashyapR/peoplecore-hris-sandbox) |
 | 📁 **Talent Acquisition Starter Kit** | Practical starter kit for entry-level hiring support: sample JD, screening criteria, shortlisting format, questions, and email templates | [View Page](projects/talent-acquisition-starter-kit.html) |
 | 📋 **New Joiner Onboarding Checklist** | Complete onboarding checklist covering pre-joining, Day 1, first week, and 30-60-90 checkpoints | [View Page](projects/new-joiner-onboarding-checklist.html) |
 | 📈 **Mini People Metrics Snapshot** | Beginner-friendly people metrics sample with example trackers, definitions, insights, and recommended actions | [View Page](projects/mini-people-metrics-snapshot.html) |
