@@ -91,9 +91,10 @@ MBA student specializing in Human Resources at VIMTECH, Tumkur, with a Bachelor 
    - *Description:* A robust, drift-free persistent memory architecture framework for AI coding assistants (Antigravity, Claude Code, Cursor, Windsurf, OpenCode). Establishes a 3-pillar system: a living markdown knowledge base (`PROJECT_MEMORY.md` rules + `PROJECT_LOGS.md` session logs), a sandboxed subagent (`memory-keeper`), and deterministic session lifecycle hooks. Includes complete schema, YAML permission masks, 5 architectural invariants, and a 4-step quick setup recipe with printable executive A4 documentation.
    - *URL:* https://nitishkashyapr.github.io/nitishkashyapr.com/projects/ai-project-memory-framework.html
 
-9. **PeopleCore — Enterprise HRIS Sandbox & Professional Academy**
-   - *Category:* Human Resource Project & HRIS Simulator
-   - *Description:* A zero-server, 100% client-side enterprise HRIS simulator and certified training academy featuring multi-jurisdiction payroll (US, UK, DE, IN), ATS recruitment pipelines, org structure design, immutable audit logs, and interactive compliance labs (Bradford Factor, EEOC 4/5ths selection ratio, EOR risk).
+9. **PeopleCore — Enterprise HR Simulator & Academy**
+   - *Category:* Human Resource Project & HR Software Simulation
+   - *Subtitle:* Hands-on HR Software Simulation & Practical Workforce Training
+   - *Description:* A free, interactive HR software simulator designed to help HR students, job seekers, and people operations teams practice real-world HR tasks in a safe, risk-free environment. Includes global payroll operations (US, UK, DE, IN), hiring & recruitment pipeline, org charts & team management, built-in HR compliance calculators, and a two-tier learning academy with certification and executive audio masterclass.
    - *Live App:* https://nitishkashyapr.github.io/peoplecore-hris-sandbox/
    - *GitHub Repository:* https://github.com/NitishKashyapR/peoplecore-hris-sandbox
 

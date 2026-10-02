@@ -265,19 +265,19 @@ Nitish Kashyap R (also known as Nitish Kashyap) is an MBA student specializing i
   4. *Invariants & Setup:* 5 architecture invariants (controlled rule lifecycle, SSoT, strict sandboxing, zero-touch git, cross-IDE portability) and a 4-step setup recipe.
 - **Documentation & Printable PDF:** https://nitishkashyapr.github.io/nitishkashyapr.com/projects/ai-project-memory-framework.html
 
-### 9. PeopleCore — Enterprise HRIS Sandbox & Professional Academy
-- **Category:** Human Resource Project & Enterprise HRIS Simulator
+### 9. PeopleCore — Enterprise HR Simulator & Academy
+- **Subtitle:** Hands-on HR Software Simulation & Practical Workforce Training
+- **Category:** Human Resource Project & HR Software Simulator
 - **Role:** Creator & HR Systems Architect
-- **Tech Stack:** Pure Vanilla JavaScript (Zero Dependencies, Zero-Server), Semantic HTML5, CSS3 Custom Properties, Client-Side LocalStorage Persistence, Canvas Visualizations, Export Engines (CSV, Audit Logs).
-- **Core Modules & Capabilities:**
-  1. *Employee Directory & Org Hierarchy:* Complete employee lifecycle management with search, multi-faceted filtering (department, location, status), department tree visualization, reporting line hierarchies, and position management.
-  2. *ATS Recruitment & Hiring Pipeline:* Visual Kanban applicant tracking board spanning Sourcing, Screening, Interview, Offer, and Hired stages with candidate scorecards and stage transition tracking.
-  3. *Multi-Jurisdiction Global Payroll Engine:* Comprehensive payroll processing supporting localized compliance and tax calculations across four jurisdictions: United States (W-4, FICA, Federal/State withholding), United Kingdom (PAYE, National Insurance), Germany (Lohnsteuer, Social Security), and India (Income Tax slab, EPF, Professional Tax).
-  4. *Time & Absence Management:* Leave balance accruals, multi-type time-off requests (PTO, Sick, Parental, Unpaid), approval workflows, and automated Bradford Factor disruption scoring.
-  5. *Performance & Talent Reviews:* Goal tracking, 9-Box talent grid categorization, 360-degree review cycles, and competency assessments.
-  6. *Interactive HR Compliance Labs & Calculators:* Interactive regulatory and metric calculation sandboxes including EEOC 4/5ths Selection Ratio Adverse Impact analysis, Bradford Factor absenteeism index, and Employer of Record (EOR) risk classification.
-  7. *HR Academy & Hands-On Case Scenarios:* 8 real-world interactive HR scenarios with guided tasks, evaluation scoring, and downloadable completion certificates.
-  8. *Enterprise Security & Auditing:* Immutable tamper-evident audit logging of all system actions, role-based access control (RBAC) simulation (Admin, HR Manager, Recruiter, Employee), and privacy/compliance sandbox controls.
+- **About the Project:** PeopleCore is a free, interactive HR software simulator designed to help HR students, job seekers, and people operations teams practice real-world HR tasks in a safe, risk-free environment. Instead of just reading about HR theory, users get hands-on experience using modern HR software directly in their browser.
+- **Why It Matters:** Most enterprise HR software (like Workday or SAP) requires expensive company subscriptions, making it difficult for newcomers to practice. PeopleCore gives anyone instant access to realistic HR workflows with zero setup required.
+- **What You Can Practice & Learn:**
+  1. *Global Payroll Operations:* Run payroll calculations and see real deductions for employees across the US, UK, Germany, and India.
+  2. *Hiring & Recruitment:* Track candidates through an interactive recruiting pipeline, from job posting to offer letter.
+  3. *Org Charts & Team Management:* Manage company hierarchies, promotions, manager changes, and open headcount.
+  4. *HR Compliance Tools:* Use built-in calculators to measure workplace absence patterns, fair-hiring rates, and contractor risks.
+  5. *Two-Tier Learning Academy:* Complete 10 step-by-step training modules to earn a certification, unlocking an exclusive executive audio masterclass.
+- **Tech Stack:** Pure Vanilla JavaScript (Zero Dependencies, Zero-Server), Semantic HTML5, CSS3 Custom Properties, Client-Side LocalStorage Persistence, Interactive Canvas Visualizations, and Export Engines (CSV, Audit Logs).
 - **Live Deployed Simulator:** https://nitishkashyapr.github.io/peoplecore-hris-sandbox/
 - **GitHub Repository:** https://github.com/NitishKashyapR/peoplecore-hris-sandbox
 

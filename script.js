@@ -903,20 +903,29 @@ const projectsData = [
   },
   {
     id: "peoplecore-hris",
-    title: "PeopleCore — Enterprise HRIS Sandbox",
-    subtitle: "Enterprise HRIS & Workforce Academy",
-    description: "A zero-server, 100% client-side enterprise HRIS simulator and certified training academy featuring multi-jurisdiction statutory payroll (US, UK, DE, IN), ATS pipeline, org design, and interactive compliance labs.",
+    title: "PeopleCore — Enterprise HR Simulator & Academy",
+    subtitle: "Hands-on HR Software Simulation & Practical Workforce Training",
+    description: "A free, interactive HR software simulator designed to help HR students, job seekers, and people operations teams practice real-world HR tasks in a safe, risk-free environment directly in the browser.",
     category: "Human Resource",
     status: "Completed",
     live: "https://nitishkashyapr.github.io/peoplecore-hris-sandbox/",
     github: "https://github.com/NitishKashyapR/peoplecore-hris-sandbox",
     headerStyle: "linear-gradient(135deg, #042f2e, #0e7490)",
-    skills: ["Enterprise HRIS", "Statutory Payroll", "ATS Pipeline", "Labor Compliance", "Workforce Analytics"],
-    note: "Zero-server, 100% client-side HRIS simulation and certified academy covering statutory payroll, ATS, Bradford factor, and regulatory labs.",
+    skills: ["HR Software Simulation", "Global Payroll", "Recruitment Pipeline", "HR Compliance", "Workforce Training"],
+    note: "Free, interactive HR software simulator providing hands-on operational practice across payroll, recruitment pipelines, org structures, and compliance calculators.",
     details: {
-      overview: "PeopleCore is an open-source, zero-server enterprise HRIS simulator and workforce operations academy. It bridges the gap between workforce management theory and practical enterprise operations by providing a realistic, hands-on simulation environment for HR practitioners, people-ops specialists, and workforce analysts.",
-      objective: "To enable risk-free operational practice across multi-jurisdiction statutory payroll (US, UK, DE, IN), ATS recruitment pipelines, position-centric org management, and immutable audit logging directly in the browser.",
-      summary: "Features end-to-end employee lifecycle workflows, interactive compliance & formula laboratories (Bradford Factor, EEOC 4/5ths selection ratio, EOR risk), a 10-module workforce operations curriculum, and automated certification testing."
+      about: "PeopleCore is a free, interactive HR software simulator designed to help HR students, job seekers, and people operations teams practice real-world HR tasks in a safe, risk-free environment. Instead of just reading about HR theory, users get hands-on experience using modern HR software directly in their browser.",
+      practiceList: [
+        { label: "Global Payroll Operations", text: "Run payroll calculations and see real deductions for employees across the US, UK, Germany, and India." },
+        { label: "Hiring & Recruitment", text: "Track candidates through an interactive recruiting pipeline, from job posting to offer letter." },
+        { label: "Org Charts & Team Management", text: "Manage company hierarchies, promotions, manager changes, and open headcount." },
+        { label: "HR Compliance Tools", text: "Use built-in calculators to measure workplace absence patterns, fair-hiring rates, and contractor risks." },
+        { label: "Two-Tier Learning Academy", text: "Complete 10 step-by-step training modules to earn a certification, unlocking an exclusive executive audio masterclass." }
+      ],
+      whyItMatters: "Most enterprise HR software (like Workday or SAP) requires expensive company subscriptions, making it difficult for newcomers to practice. PeopleCore gives anyone instant access to realistic HR workflows with zero setup required.",
+      overview: "PeopleCore is a free, interactive HR software simulator designed to help HR students, job seekers, and people operations teams practice real-world HR tasks in a safe, risk-free environment. Instead of just reading about HR theory, users get hands-on experience using modern HR software directly in their browser.",
+      objective: "To enable risk-free practical workforce training across multi-jurisdiction payroll, recruiting pipelines, org chart management, and compliance calculations directly in the browser.",
+      summary: "Features global payroll for 4 countries (US, UK, DE, IN), interactive recruiting pipeline, hierarchy management, built-in compliance calculators, and a 10-module academy with certification and executive masterclass."
     }
   },
   {
@@ -2862,7 +2871,25 @@ document.addEventListener("DOMContentLoaded", () => {
       <h2 style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800; color: var(--foreground); margin-bottom: 0.25rem;">${p.title}</h2>
       ${p.id !== 'union-bank' && p.subtitle ? `<div style="font-size: 0.9rem; font-weight: 600; color: var(--p2); margin-bottom: 1.25rem;">${p.subtitle}</div>` : ''}
       
-      ${p.details ? `
+      ${p.details && p.details.about ? `
+      <div style="font-size: 0.85rem; color: var(--ink-2); line-height: 1.7; margin-bottom: 1.25rem;">
+        <div style="margin-bottom: 0.95rem;">
+          <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.35rem; letter-spacing: 0.04em;">About the Project</div>
+          <p style="margin: 0; line-height: 1.7;">${p.details.about}</p>
+        </div>
+        ${p.details.practiceList ? `
+        <div style="margin-bottom: 0.95rem;">
+          <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.45rem; letter-spacing: 0.04em;">What You Can Practice &amp; Learn</div>
+          <ul style="margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.45rem;">
+            ${p.details.practiceList.map(item => `<li><strong>${item.label}:</strong> ${item.text}</li>`).join('')}
+          </ul>
+        </div>` : ''}
+        ${p.details.whyItMatters ? `
+        <div style="margin-bottom: 0.5rem;">
+          <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.35rem; letter-spacing: 0.04em;">Why It Matters</div>
+          <p style="margin: 0; line-height: 1.7;">${p.details.whyItMatters}</p>
+        </div>` : ''}
+      </div>` : p.details ? `
       <div style="font-size: 0.85rem; color: var(--ink-2); line-height: 1.7; margin-bottom: 1.25rem;">
         <p style="margin-bottom: 0.75rem;"><strong>Overview:</strong> ${p.details.overview}</p>
         <p style="margin-bottom: 0.75rem;"><strong>Objective:</strong> ${p.details.objective}</p>
@@ -2875,8 +2902,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       ${(p.live || (p.pdf && p.id !== 'union-bank') || p.github) ? `
       <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem;">
-        ${p.live ? `<a href="${p.live}" ${p.live.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="btn-primary" style="text-decoration: none;">${p.github ? 'Visit Website ↗' : 'View ↗'}</a>` : ''}
-        ${p.github ? `<a href="${p.github}" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration: none;">Checkout Repository ↗</a>` : ''}
+        ${p.live ? `<a href="${p.live}" ${p.live.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="btn-primary" style="text-decoration: none;">${p.github ? 'View Website ↗' : 'View ↗'}</a>` : ''}
+        ${p.github ? `<a href="${p.github}" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration: none;">View on GitHub ↗</a>` : ''}
         ${p.pdf && p.id !== 'union-bank' ? `<a href="${p.pdf}" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration: none;">View ↗</a>` : ''}
       </div>` : ''}
     `;
