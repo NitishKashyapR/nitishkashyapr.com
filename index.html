@@ -53,7 +53,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700;800&display=swap" />
 
-    <link rel="stylesheet" href="index.css?v=7ec705d_anim24" />
+    <link rel="stylesheet" href="index.css?v=7ec705d_v5wheel" />
 
     <script>
       (function() {
@@ -1342,10 +1342,10 @@
             </div>
             
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-              <button onclick="openCertificationsFullView(); switchCertTab('certificates');" class="btn-primary" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 0.82rem; padding: 0.6rem 1.1rem;">
+              <button onclick="openCertificationsFullView('certificates');" class="btn-primary" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 0.82rem; padding: 0.6rem 1.1rem;">
                 View Certifications →
               </button>
-              <button onclick="openCertificationsFullView(); switchCertTab('badges');" class="btn-primary" style="background: linear-gradient(135deg, var(--p1), var(--p2)); border: none; color: #fff; font-size: 0.82rem; padding: 0.6rem 1.1rem;">
+              <button onclick="openCertificationsFullView('badges');" class="btn-primary" style="background: linear-gradient(135deg, var(--p1), var(--p2)); border: none; color: #fff; font-size: 0.82rem; padding: 0.6rem 1.1rem;">
                 View 27 Badges →
               </button>
             </div>
@@ -2004,6 +2004,8 @@
       </div>
     </noscript>
 
-    <script src="script.js?v=7ec705d_anim24"></script>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/vendor/Flip.min.js"></script>
+    <script src="script.js?v=7ec705d_v5wheel"></script>
   </body>
 </html>

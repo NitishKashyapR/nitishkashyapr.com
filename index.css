@@ -1434,6 +1434,208 @@ section,
   height: 100%;
 }
 
+/* ==========================================================================
+   EASTER EGG BADGE SHUFFLING & CARDISTRY ANIMATION SYSTEM
+   ========================================================================== */
+.badges-grid-container {
+  width: 100%;
+  transition: opacity 0.4s var(--ease-butter);
+}
+
+.badges-grid-container.is-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+.badges-grid-container.is-visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+}
+
+#badgeShuffleStage {
+  position: relative;
+  width: 100%;
+  min-height: 640px;
+  perspective: 1600px;
+  -webkit-perspective: 1600px;
+  perspective-origin: 50% 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0 3.5rem 0;
+  margin-bottom: 2rem;
+  overflow: visible;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#badgeShuffleStage::before {
+  content: "";
+  position: absolute;
+  top: 54%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(65deg);
+  width: 540px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(139, 92, 246, 0.06) 45%, transparent 70%);
+  filter: blur(24px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 3D Card Deck Arena & Real Physical Badge Cards */
+.badge-deck-arena {
+  position: relative;
+  width: 285px;
+  height: 560px;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  margin: 0 auto;
+  will-change: transform;
+}
+
+.cardistry-stage-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 285px;
+  height: 560px;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+  outline: 1px solid transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateZ(0);
+  cursor: pointer;
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.14));
+}
+
+.cardistry-stage-card .badge-card {
+  width: 100% !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Card Arrival Micro-Pulse Gleam */
+@keyframes card-arrival-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.8), 0 0 25px rgba(245, 158, 11, 0.6);
+    transform: scale(1.04);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0), 0 0 15px rgba(245, 158, 11, 0.3);
+  }
+  100% {
+    box-shadow: none;
+    transform: scale(1);
+  }
+}
+
+.card-arrival-gleam {
+  animation: card-arrival-pulse 0.55s var(--ease-spring) forwards !important;
+}
+
+/* Skip Animation Button */
+.badge-skip-btn {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), 0 0 16px rgba(99, 102, 241, 0.3);
+  cursor: pointer;
+  transition: all 0.22s var(--ease-spring);
+  animation: skip-btn-glow 2.5s infinite ease-in-out;
+}
+
+@keyframes skip-btn-glow {
+  0%, 100% { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), 0 0 12px rgba(99, 102, 241, 0.25); }
+  50% { box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(99, 102, 241, 0.55); border-color: rgba(99, 102, 241, 0.5); }
+}
+
+.badge-skip-btn:hover {
+  background: rgba(15, 23, 42, 0.98);
+  border-color: var(--p1);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 28px rgba(99, 102, 241, 0.6);
+}
+
+.badge-skip-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Mobile & Low-End Device Responsive Adjustments */
+@media (max-width: 768px) {
+  #badgeShuffleStage {
+    min-height: 440px;
+    padding: 1rem 0 2rem 0;
+  }
+
+  .badge-deck-arena {
+    width: 320px;
+    max-width: 90vw;
+    height: 260px;
+  }
+
+  .cardistry-stage-card {
+    width: 320px;
+    max-width: 90vw;
+    height: 260px;
+  }
+
+  .cardistry-stage-card .mobile-ref-card {
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    pointer-events: none !important;
+  }
+}
+
+  .badge-skip-btn {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.72rem;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  #badgeShuffleStage,
+  .badge-skip-btn {
+    display: none !important;
+  }
+  .badges-grid-container.is-hidden {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    visibility: visible !important;
+  }
+}
+
 /* Full Screen Overlay Views (Certifications & Projects) */
 .fullscreen-view {
   position: fixed;

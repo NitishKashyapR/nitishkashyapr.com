@@ -1650,11 +1650,33 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo({ top: restoreY, behavior: "instant" });
   };
 
-  window.openCertificationsFullView = () => {
+  window.openCertificationsFullView = (initialTab = "certificates") => {
     if (certFullView) {
       certFullView.classList.add("active");
       lockBodyScroll();
-      renderCertFullView();
+      if (initialTab === "badges") {
+        activeCertTab = "badges";
+        const certBtn = document.getElementById("certTabBtn");
+        const badgeBtn = document.getElementById("badgeTabBtn");
+        const titleEl = document.getElementById("certFullViewTitle");
+        if (certBtn && badgeBtn) {
+          badgeBtn.classList.add("active");
+          certBtn.classList.remove("active");
+          if (titleEl) titleEl.innerText = "Earned Badges";
+        }
+        startBadgeShuffleAnimation();
+      } else {
+        activeCertTab = "certificates";
+        const certBtn = document.getElementById("certTabBtn");
+        const badgeBtn = document.getElementById("badgeTabBtn");
+        const titleEl = document.getElementById("certFullViewTitle");
+        if (certBtn && badgeBtn) {
+          certBtn.classList.add("active");
+          badgeBtn.classList.remove("active");
+          if (titleEl) titleEl.innerText = "All Certifications";
+        }
+        renderCertFullView();
+      }
     }
   };
 
@@ -1662,6 +1684,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (certFullView) {
       certFullView.classList.remove("active");
       unlockBodyScroll();
+      if (typeof closeBadgeAnimation === "function") {
+        closeBadgeAnimation();
+      }
     }
   };
 
@@ -1685,7 +1710,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     activeOpenBlock = null;
-    renderCertFullView();
+
+    if (tabName === "certificates") {
+      if (typeof closeBadgeAnimation === "function") {
+        closeBadgeAnimation();
+      }
+      renderCertFullView();
+    } else {
+      if (typeof startBadgeShuffleAnimation === "function") {
+        startBadgeShuffleAnimation();
+      } else {
+        renderCertFullView();
+      }
+    }
   };
 
   window.setCertFilter = (catId) => {
@@ -1956,10 +1993,139 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const renderBadgesFullView = () => {
-    if (!certFullContent) return;
+  // ==========================================================================
+  // EASTER EGG BADGE SHUFFLING & CARDISTRY ANIMATION SYSTEM
+  // 5 Distinct Cardistry / Magic Flourish Choreographies:
+  // 1. "The Magician's Card Spring" (High-Arc Fountain)
+  // 2. "The Giant Faro Fan" (Circular Radial Spread & Clockwise Peel)
+  // 3. "The 3D Riffle & Cascade Waterfall" (Dual Packet Interlace)
+  // 4. "The Orbital Deck Burst" (Cosmic 360° Scatter & 3D Flip)
+  // 5. "The Casino Rapid Deal" (High-Speed Snap Deal)
+  // ==========================================================================
 
-    // Mobile-first Reference Redesign for Badges Section (< 769px)
+  let badgeAnimationPhase = 'IDLE'; // 'IDLE' | 'SHUFFLING' | 'DEALING' | 'RESOLVED'
+  let currentShuffleTimeline = null;
+  let lastShuffleVariant = 0;
+
+  const SHUFFLE_STYLES = [
+    {
+      id: 1,
+      name: "360° Sunburst Wheel",
+      subtitle: "360° Card Rounding Pinwheel & Spin",
+      icon: "✨"
+    },
+    {
+      id: 2,
+      name: "Riffle Waterfall",
+      subtitle: "Dual Packet Interlace & Waterfall Cascade",
+      icon: "🌊"
+    },
+    {
+      id: 3,
+      name: "Overhand Mix",
+      subtitle: "Running Hand-to-Hand Packet Mix",
+      icon: "🃏"
+    },
+    {
+      id: 4,
+      name: "Card Spring",
+      subtitle: "Parabolic High-Arc Aerial Stream",
+      icon: "⚡"
+    },
+    {
+      id: 5,
+      name: "180° Pressure Fan",
+      subtitle: "Radial Peacock Spread & Snap-Close",
+      icon: "🪭"
+    },
+    {
+      id: 6,
+      name: "Casino Table Wash",
+      subtitle: "Felt Scramble & Two-Handed Gather",
+      icon: "🎲"
+    }
+  ];
+
+  const getShuffleVariant = (seed) => {
+    let chosen;
+    if (typeof seed === "number" && seed >= 1 && seed <= 6) {
+      chosen = seed;
+    } else {
+      const candidates = [1, 2, 3, 4, 5, 6].filter(v => v !== lastShuffleVariant);
+      chosen = candidates[Math.floor(Math.random() * candidates.length)] || 1;
+    }
+    lastShuffleVariant = chosen;
+    return chosen;
+  };
+
+  const buildSingleBadgeCardHTML = (badge, index, isMobile = false) => {
+    if (isMobile) {
+      return `
+        <div class="mobile-ref-card" data-badge-index="${index}">
+          <div class="mobile-ref-card-body">
+            <div class="mobile-ref-card-thumb mobile-ref-card-thumb-badge">
+              <img src="${badge.badgeImg}" alt="${badge.title}" onerror="this.onerror=null; this.src='https://nitishkashyapr.github.io/nitishkashyapr.com/' + this.getAttribute('src');" />
+            </div>
+            <div class="mobile-ref-card-content">
+              <div class="mobile-ref-cat-badge mobile-ref-cat-verified">
+                VERIFIED BADGE
+              </div>
+              <h3 class="mobile-ref-card-title">${badge.title}</h3>
+              <div style="font-size: 0.76rem; font-weight: 600; color: var(--p1); margin-bottom: 0.35rem;">
+                ${badge.issuer} • ${badge.platform}
+              </div>
+              <p class="mobile-ref-card-desc">${badge.description}</p>
+              <div class="mobile-ref-skills-row">
+                ${(badge.skills || []).map(s => `<span class="mobile-ref-skill-tag">${s}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
+            <a href="${badge.badgeUrl}" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; justify-content: center; font-size: 0.8rem; padding: 0.6rem 1rem; border-radius: 9999px; font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem;">
+              Verify Badge ${icons.external}
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    let imgScale = "scale(1.48)";
+    if (badge.title.toLowerCase().includes("people management") || badge.title.toLowerCase().includes("project management") || badge.title.toLowerCase().includes("prompting")) {
+      imgScale = "scale(1.58)";
+    }
+
+    return `
+      <div class="glass-card badge-card" data-badge-index="${index}" style="padding: 2.25rem 1.6rem 2rem 1.6rem; border-radius: 140px; display: flex; flex-direction: column; justify-content: space-between; text-align: center; border: 1.5px solid var(--border-strong); background: var(--card); overflow: hidden; transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-spring);">
+        <div>
+          <div style="width: 175px; height: 175px; border-radius: 50%; background: var(--surface-1); border: 2px solid var(--border-strong); padding: 12px; margin: 0 auto 1.35rem auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); position: relative; overflow: hidden; transition: transform 0.35s var(--ease-spring);">
+            <img src="${badge.badgeImg}" alt="${badge.title}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transform: ${imgScale}; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));" onerror="this.onerror=null; this.src='https://nitishkashyapr.github.io/nitishkashyapr.com/' + this.getAttribute('src');" />
+          </div>
+          <h3 style="font-family: var(--font-heading); font-size: 1.08rem; font-weight: 800; color: var(--foreground); line-height: 1.3; margin-bottom: 0.35rem;">
+            ${badge.title}
+          </h3>
+          <div style="font-size: 0.8rem; font-weight: 600; color: var(--p1); margin-bottom: 0.75rem;">
+            ${badge.issuer} • ${badge.platform}
+          </div>
+          <div style="margin-bottom: 0.85rem;">
+            <span style="font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.32rem 0.75rem; border-radius: 9999px; background: rgba(16, 185, 129, 0.15); color: var(--g1); border: 1px solid rgba(16, 185, 129, 0.3); display: inline-flex; align-items: center; gap: 0.35rem;">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--g1); box-shadow: 0 0 8px var(--g1);"></span> Verified Badge
+            </span>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--ink-2); line-height: 1.6; margin-bottom: 1.15rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+            ${badge.description}
+          </p>
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; margin-bottom: 1.35rem;">
+            ${(badge.skills || []).map(s => `<span style="font-size: 0.68rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 9999px; background: var(--surface-1); color: var(--ink-1); border: 1px solid rgba(99, 102, 241, 0.15);">${s}</span>`).join('')}
+          </div>
+        </div>
+        <a href="${badge.badgeUrl}" target="_blank" rel="noopener" class="btn-primary" style="width: fit-content; min-width: 150px; max-width: 82%; margin: 0 auto 0.4rem auto; justify-content: center; font-size: 0.78rem; padding: 0.55rem 1.15rem; font-weight: 700; border-radius: 9999px;">
+          Verify Badge ${icons.external}
+        </a>
+      </div>
+    `;
+  };
+
+  const buildBadgesGridHTML = () => {
     if (window.innerWidth <= 768) {
       let mobileHtml = `
         <div class="mobile-ref-view-header">
@@ -1972,44 +2138,13 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="mobile-ref-cards-container">
       `;
-
-      badgesData.forEach(badge => {
-        mobileHtml += `
-          <div class="mobile-ref-card">
-            <div class="mobile-ref-card-body">
-              <div class="mobile-ref-card-thumb mobile-ref-card-thumb-badge">
-                <img src="${badge.badgeImg}" alt="${badge.title}" onerror="this.onerror=null; this.src='https://nitishkashyapr.github.io/nitishkashyapr.com/' + this.getAttribute('src');" />
-              </div>
-              <div class="mobile-ref-card-content">
-                <div class="mobile-ref-cat-badge mobile-ref-cat-verified">
-                  VERIFIED BADGE
-                </div>
-                <h3 class="mobile-ref-card-title">${badge.title}</h3>
-                <div style="font-size: 0.76rem; font-weight: 600; color: var(--p1); margin-bottom: 0.35rem;">
-                  ${badge.issuer} • ${badge.platform}
-                </div>
-                <p class="mobile-ref-card-desc">${badge.description}</p>
-                <div class="mobile-ref-skills-row">
-                  ${(badge.skills || []).map(s => `<span class="mobile-ref-skill-tag">${s}</span>`).join('')}
-                </div>
-              </div>
-            </div>
-
-            <div style="margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
-              <a href="${badge.badgeUrl}" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; justify-content: center; font-size: 0.8rem; padding: 0.6rem 1rem; border-radius: 9999px; font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem;">
-                Verify Badge ${icons.external}
-              </a>
-            </div>
-          </div>
-        `;
+      badgesData.forEach((badge, index) => {
+        mobileHtml += buildSingleBadgeCardHTML(badge, index, true);
       });
-
       mobileHtml += `</div>`;
-      certFullContent.innerHTML = mobileHtml;
-      return;
+      return mobileHtml;
     }
 
-    // Desktop view preserved 100% unchanged
     let badgesHtml = `
       <div style="margin-bottom: 2.5rem; text-align: center;">
         <p style="font-size: 0.95rem; color: var(--ink-3); max-width: 650px; margin: 0 auto; line-height: 1.7;">
@@ -2018,46 +2153,872 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
       <div class="badges-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 1.75rem;">
     `;
+    badgesData.forEach((badge, index) => {
+      badgesHtml += buildSingleBadgeCardHTML(badge, index, false);
+    });
+    badgesHtml += `</div>`;
+    return badgesHtml;
+  };
 
-    badgesData.forEach(badge => {
-      let imgScale = "scale(1.48)";
-      if (badge.title.toLowerCase().includes("people management") || badge.title.toLowerCase().includes("project management") || badge.title.toLowerCase().includes("prompting")) {
-        imgScale = "scale(1.58)";
+  const finishBadgeAnimation = () => {
+    badgeAnimationPhase = 'RESOLVED';
+    if (currentShuffleTimeline) {
+      currentShuffleTimeline.kill();
+      currentShuffleTimeline = null;
+    }
+
+    const stage = document.getElementById("badgeShuffleStage");
+    if (stage) stage.remove();
+
+    const skipBtn = document.getElementById("badgeSkipBtn");
+    if (skipBtn) skipBtn.remove();
+
+    const gridContainer = document.getElementById("badgeGridContainer");
+    if (gridContainer) {
+      gridContainer.classList.remove("is-hidden");
+      gridContainer.classList.add("is-visible");
+      const targetCards = gridContainer.querySelectorAll(".badge-card, .mobile-ref-card");
+      targetCards.forEach(tc => {
+        tc.style.opacity = "";
+        tc.style.visibility = "";
+        tc.style.transform = "";
+      });
+    }
+  };
+
+  window.skipBadgeAnimation = () => {
+    if (badgeAnimationPhase === 'RESOLVED') return;
+    if (currentShuffleTimeline) {
+      currentShuffleTimeline.kill();
+      currentShuffleTimeline = null;
+    }
+    finishBadgeAnimation();
+  };
+
+  window.playBadgeStyle = (styleId) => {
+    if (typeof startBadgeShuffleAnimation === "function") {
+      startBadgeShuffleAnimation(styleId);
+    }
+  };
+
+  window.replayBadgeShuffle = () => {
+    if (typeof startBadgeShuffleAnimation === "function") {
+      startBadgeShuffleAnimation();
+    }
+  };
+
+  const closeBadgeAnimation = () => {
+    if (currentShuffleTimeline) {
+      currentShuffleTimeline.kill();
+      currentShuffleTimeline = null;
+    }
+    const stage = document.getElementById("badgeShuffleStage");
+    if (stage) stage.remove();
+    const skipBtn = document.getElementById("badgeSkipBtn");
+    if (skipBtn) skipBtn.remove();
+    badgeAnimationPhase = 'IDLE';
+  };
+
+  const dealCardsToGrid = () => {
+    badgeAnimationPhase = 'DEALING';
+    const stageCards = Array.from(document.querySelectorAll("#badgeDeckArena .cardistry-stage-card"));
+    const gridContainer = document.getElementById("badgeGridContainer");
+    if (!gridContainer || !stageCards.length || typeof gsap === "undefined") {
+      finishBadgeAnimation();
+      return;
+    }
+
+    const targetCards = Array.from(gridContainer.querySelectorAll(".badge-card, .mobile-ref-card"));
+    if (!targetCards.length) {
+      finishBadgeAnimation();
+      return;
+    }
+
+    // Make grid container visible so children have real bounding client rects
+    gridContainer.classList.remove("is-hidden");
+    gridContainer.classList.add("is-visible");
+
+    // Hide target cards initially before they receive the gliding proxy
+    targetCards.forEach(tc => {
+      tc.style.opacity = "0";
+      tc.style.visibility = "hidden";
+    });
+
+    const isMobile = window.innerWidth <= 768;
+    const dealTimeline = gsap.timeline({
+      onComplete: () => {
+        finishBadgeAnimation();
+      }
+    });
+    currentShuffleTimeline = dealTimeline;
+
+    // Glide stage cards across the screen to their calculated grid coordinates
+    stageCards.forEach((stageCard, i) => {
+      const targetCard = targetCards[i];
+      if (!targetCard) return;
+
+      const stageRect = stageCard.getBoundingClientRect();
+      const targetRect = targetCard.getBoundingClientRect();
+
+      const deltaX = (targetRect.left + targetRect.width / 2) - (stageRect.left + stageRect.width / 2);
+      const deltaY = (targetRect.top + targetRect.height / 2) - (stageRect.top + stageRect.height / 2);
+      const scaleX = targetRect.width / stageCard.offsetWidth;
+      const scaleY = targetRect.height / stageCard.offsetHeight;
+
+      const delay = i * (isMobile ? 0.038 : 0.03);
+      const flightBankRot = Math.max(-8, Math.min(8, deltaX * 0.015));
+
+      dealTimeline.to(stageCard, {
+        x: `+=${deltaX}`,
+        y: `+=${deltaY}`,
+        scaleX: scaleX,
+        scaleY: scaleY,
+        rotate: flightBankRot,
+        rotateX: 0,
+        rotateY: 0,
+        duration: 0.58,
+        ease: "power2.out",
+        onComplete: () => {
+          targetCard.style.visibility = "visible";
+          targetCard.style.opacity = "1";
+          targetCard.classList.add("card-arrival-gleam");
+          stageCard.style.opacity = "0";
+        }
+      }, delay);
+    });
+
+    // Reveal remaining grid cards with a staggered wave
+    if (targetCards.length > stageCards.length) {
+      const baseDelay = (stageCards.length - 1) * (isMobile ? 0.038 : 0.03) + 0.12;
+      for (let j = stageCards.length; j < targetCards.length; j++) {
+        const remainingTarget = targetCards[j];
+        const extraDelay = baseDelay + ((j - stageCards.length) * 0.02);
+        dealTimeline.fromTo(remainingTarget, {
+          opacity: 0,
+          y: 25,
+          scale: 0.96
+        }, {
+          onStart: () => {
+            remainingTarget.style.visibility = "visible";
+          },
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.35,
+          ease: "power2.out",
+          onComplete: () => {
+            remainingTarget.classList.add("card-arrival-gleam");
+          }
+        }, extraDelay);
+      }
+    }
+  };
+
+  // --- STYLE 1: The 360° Sunburst Wheel (Card Rounding Pinwheel & Spin) ---
+  // Inspired by the professional 360° circular card fan & wheel rotation trick
+  const playStyle360Wheel = (stageCards, onFlourishDone) => {
+    const tl = gsap.timeline({ onComplete: onFlourishDone });
+    currentShuffleTimeline = tl;
+    const total = stageCards.length;
+    const isMobile = window.innerWidth <= 768;
+
+    const baseScale = isMobile ? 0.54 : 0.68;
+    const pivotOrigin = isMobile ? "50% 80%" : "50% 82%";
+
+    // Initial stacked deck centered cleanly with physical layering
+    gsap.set(stageCards, {
+      x: 0,
+      y: (i) => -i * 0.4,
+      z: (i) => i * 2,
+      rotate: 0,
+      rotateX: 0,
+      rotateY: 0,
+      scale: baseScale,
+      transformOrigin: pivotOrigin,
+      opacity: 1
+    });
+
+    const arena = document.getElementById("badgeDeckArena");
+    if (arena) {
+      gsap.set(arena, {
+        transformOrigin: pivotOrigin,
+        rotate: 0
+      });
+    }
+
+    // BEAT 1: Pivot compression & tension build-up
+    tl.to(stageCards, {
+      scale: baseScale * 0.96,
+      duration: 0.24,
+      ease: "power2.in"
+    });
+
+    // BEAT 2: 360° Circular Card Rounding Spread (Clockwise Sunburst Wheel)
+    const angleStep = 360 / total;
+    stageCards.forEach((card, i) => {
+      const targetAngle = i * angleStep;
+      tl.to(card, {
+        rotate: targetAngle,
+        z: i * 3,
+        scale: baseScale,
+        duration: 0.78,
+        ease: "power3.out"
+      }, 0.24 + (i * 0.032));
+    });
+
+    // BEAT 3: 360° Wheel Rotation (Smooth, Buttery, Hypnotic Spin)
+    const spinStart = 0.24 + (total * 0.032) + 0.45;
+    if (arena) {
+      tl.to(arena, {
+        rotate: 360,
+        duration: 1.85,
+        ease: "power1.inOut"
+      }, spinStart);
+    } else {
+      stageCards.forEach((card, i) => {
+        tl.to(card, {
+          rotate: "+=360",
+          duration: 1.85,
+          ease: "power1.inOut"
+        }, spinStart);
+      });
+    }
+
+    // Subtle breathing pulse during the spin
+    tl.to(stageCards, {
+      scale: baseScale * 1.03,
+      duration: 0.92,
+      ease: "sine.inOut"
+    }, spinStart);
+    tl.to(stageCards, {
+      scale: baseScale,
+      duration: 0.92,
+      ease: "sine.inOut"
+    }, spinStart + 0.92);
+
+    // BEAT 4: "Arrange Back" - Clockwise Aperture Collapse / Close
+    const collapseStart = spinStart + 1.9;
+    stageCards.forEach((card, i) => {
+      tl.to(card, {
+        rotate: 0,
+        x: 0,
+        y: (total - 1 - i) * -0.5,
+        z: i * 2,
+        scale: 1, // smoothly returns to 1.0 for the deal
+        duration: 0.46,
+        ease: "power3.inOut"
+      }, collapseStart + (i * 0.02));
+    });
+
+    if (arena) {
+      tl.set(arena, { rotate: 0, transformOrigin: "50% 50%" }, collapseStart + (total * 0.02) + 0.48);
+    }
+
+    // BEAT 5: Crisp Table Tap & Settle
+    const tapTime = collapseStart + (total * 0.02) + 0.5;
+    tl.to(stageCards, {
+      y: "+=12",
+      duration: 0.09,
+      ease: "power1.in"
+    }, tapTime);
+    tl.to(stageCards, {
+      y: (i) => (total - 1 - i) * -0.5,
+      duration: 0.12,
+      ease: "bounce.out"
+    }, tapTime + 0.09);
+
+    tl.to({}, { duration: 0.22 });
+  };
+
+  // --- STYLE 2: The Classic Real-Life Riffle Shuffle & Waterfall Cascade ---
+  const playStyle1RiffleWaterfall = (stageCards, onFlourishDone) => {
+    const tl = gsap.timeline({ onComplete: onFlourishDone });
+    currentShuffleTimeline = tl;
+    const total = stageCards.length;
+    const half = Math.ceil(total / 2);
+    const isMobile = window.innerWidth <= 768;
+
+    // Initial stacked deck with physical edge layering
+    gsap.set(stageCards, {
+      x: 0,
+      y: (i) => -i * 0.5,
+      z: (i) => i * 2,
+      rotate: 0,
+      rotateX: 0,
+      rotateY: 0,
+      scale: 1,
+      opacity: 1
+    });
+
+    const splitDist = isMobile ? 85 : 155;
+
+    // STEP 1: Clean deck cut into two packets (Left & Right)
+    stageCards.forEach((card, i) => {
+      const isLeft = i < half;
+      const targetX = isLeft ? -splitDist : splitDist;
+      const rotZ = isLeft ? -7 : 7;
+      const rotY = isLeft ? 18 : -18;
+      const packetIdx = isLeft ? i : (i - half);
+
+      tl.to(card, {
+        x: targetX,
+        y: isMobile ? -10 : -16,
+        z: packetIdx * 3,
+        rotate: rotZ,
+        rotateY: rotY,
+        scale: 0.98,
+        duration: 0.44,
+        ease: "power2.out"
+      }, packetIdx * 0.025);
+    });
+
+    // STEP 2: Alternating Riffle Zipper Interlace (Card-by-Card Thumb Peel)
+    const riffleStart = 0.48;
+    for (let k = 0; k < half; k++) {
+      const leftIdx = k;
+      const leftCard = stageCards[leftIdx];
+      const leftDelay = riffleStart + (k * 0.075);
+
+      if (leftCard) {
+        tl.to(leftCard, {
+          x: isMobile ? -6 : -10,
+          y: -8,
+          z: (k * 2) * 3,
+          rotate: -1.2,
+          rotateY: 4,
+          scale: 1,
+          duration: 0.22,
+          ease: "power3.out"
+        }, leftDelay);
       }
 
-      badgesHtml += `
-        <div class="glass-card badge-card" style="padding: 2.25rem 1.6rem 2rem 1.6rem; border-radius: 140px; display: flex; flex-direction: column; justify-content: space-between; text-align: center; border: 1.5px solid var(--border-strong); background: var(--card); overflow: hidden; transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-spring);">
-          <div>
-            <div style="width: 175px; height: 175px; border-radius: 50%; background: var(--surface-1); border: 2px solid var(--border-strong); padding: 12px; margin: 0 auto 1.35rem auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); position: relative; overflow: hidden; transition: transform 0.35s var(--ease-spring);">
-              <img src="${badge.badgeImg}" alt="${badge.title}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transform: ${imgScale}; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));" onerror="this.onerror=null; this.src='https://nitishkashyapr.github.io/nitishkashyapr.com/' + this.getAttribute('src');" />
-            </div>
-            <h3 style="font-family: var(--font-heading); font-size: 1.08rem; font-weight: 800; color: var(--foreground); line-height: 1.3; margin-bottom: 0.35rem;">
-              ${badge.title}
-            </h3>
-            <div style="font-size: 0.8rem; font-weight: 600; color: var(--p1); margin-bottom: 0.75rem;">
-              ${badge.issuer} • ${badge.platform}
-            </div>
-            <div style="margin-bottom: 0.85rem;">
-              <span style="font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.32rem 0.75rem; border-radius: 9999px; background: rgba(16, 185, 129, 0.15); color: var(--g1); border: 1px solid rgba(16, 185, 129, 0.3); display: inline-flex; align-items: center; gap: 0.35rem;">
-                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--g1); box-shadow: 0 0 8px var(--g1);"></span> Verified Badge
-              </span>
-            </div>
-            <p style="font-size: 0.82rem; color: var(--ink-2); line-height: 1.6; margin-bottom: 1.15rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
-              ${badge.description}
-            </p>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; margin-bottom: 1.35rem;">
-              ${(badge.skills || []).map(s => `<span style="font-size: 0.68rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 9999px; background: var(--surface-1); color: var(--ink-1); border: 1px solid rgba(99, 102, 241, 0.15);">${s}</span>`).join('')}
-            </div>
-          </div>
-          <a href="${badge.badgeUrl}" target="_blank" rel="noopener" class="btn-primary" style="width: fit-content; min-width: 150px; max-width: 82%; margin: 0 auto 0.4rem auto; justify-content: center; font-size: 0.78rem; padding: 0.55rem 1.15rem; font-weight: 700; border-radius: 9999px;">
-            Verify Badge ${icons.external}
-          </a>
+      const rightIdx = k + half;
+      const rightCard = stageCards[rightIdx];
+      const rightDelay = leftDelay + 0.038;
+
+      if (rightCard) {
+        tl.to(rightCard, {
+          x: isMobile ? 6 : 10,
+          y: -8,
+          z: (k * 2 + 1) * 3,
+          rotate: 1.2,
+          rotateY: -4,
+          scale: 1,
+          duration: 0.22,
+          ease: "power3.out"
+        }, rightDelay);
+      }
+    }
+
+    // STEP 3: High-Tension Pressure Bridge Arch
+    const bridgeStart = riffleStart + (half * 0.075) + 0.16;
+    stageCards.forEach((card, i) => {
+      const centerFactor = 1 - Math.abs(i - (total - 1) / 2) / ((total - 1) / 2);
+      const archY = isMobile ? (-18 - (centerFactor * 24)) : (-24 - (centerFactor * 38));
+
+      tl.to(card, {
+        x: 0,
+        y: archY,
+        z: 35 + (i * 2),
+        rotate: 0,
+        rotateX: 18,
+        rotateY: 0,
+        scaleX: 0.95,
+        duration: 0.36,
+        ease: "power2.out"
+      }, bridgeStart + (i * 0.01));
+    });
+
+    // STEP 4: The Waterfall Release & Cascade
+    const waterfallStart = bridgeStart + 0.4;
+    stageCards.forEach((card, i) => {
+      const dropDelay = waterfallStart + (i * 0.042);
+      tl.to(card, {
+        y: (total - 1 - i) * -0.5,
+        z: i * 2,
+        rotateX: 0,
+        scaleX: 1,
+        scale: 1,
+        duration: 0.22,
+        ease: "power2.in"
+      }, dropDelay);
+
+      tl.to(card, {
+        y: (total - 1 - i) * -0.5,
+        scale: 1,
+        duration: 0.12,
+        ease: "bounce.out"
+      }, dropDelay + 0.22);
+    });
+
+    tl.to({}, { duration: 0.22 });
+  };
+
+  // --- STYLE 2: The Overhand Shuffle & Running Card Mix ---
+  const playStyle2OverhandMix = (stageCards, onFlourishDone) => {
+    const tl = gsap.timeline({ onComplete: onFlourishDone });
+    currentShuffleTimeline = tl;
+    const total = stageCards.length;
+    const isMobile = window.innerWidth <= 768;
+
+    gsap.set(stageCards, {
+      x: 0,
+      y: (i) => -i * 0.5,
+      z: (i) => i * 2,
+      rotate: 0,
+      scale: 1,
+      opacity: 1
+    });
+
+    const handOffsetLeft = isMobile ? -60 : -105;
+    const handOffsetRight = isMobile ? 60 : 105;
+
+    // BEAT 1: Hold in Launch Hand
+    tl.to(stageCards, {
+      x: handOffsetLeft,
+      y: isMobile ? -10 : -16,
+      rotate: -10,
+      duration: 0.32,
+      ease: "power2.out"
+    });
+
+    // BEAT 2: Chop 1 (First packet of cards) drops across to receiving hand
+    const chop1 = stageCards.slice(0, Math.floor(total * 0.33));
+    chop1.forEach((card, i) => {
+      tl.to(card, {
+        x: handOffsetRight,
+        y: isMobile ? 8 : 14,
+        z: 30 + (i * 3),
+        rotate: 6,
+        duration: 0.3,
+        ease: "power2.inOut"
+      }, 0.34 + (i * 0.02));
+    });
+
+    // BEAT 3: Chop 2 (Middle packet) chops across in front
+    const chop2StartIdx = Math.floor(total * 0.33);
+    const chop2EndIdx = Math.floor(total * 0.66);
+    const chop2 = stageCards.slice(chop2StartIdx, chop2EndIdx);
+    chop2.forEach((card, i) => {
+      tl.to(card, {
+        x: handOffsetRight,
+        y: isMobile ? -5 : -8,
+        z: 50 + (i * 3),
+        rotate: -3,
+        duration: 0.3,
+        ease: "power2.inOut"
+      }, 0.68 + (i * 0.02));
+    });
+
+    // BEAT 4: Rapid Running Slip-Cuts for remaining cards
+    const chop3 = stageCards.slice(chop2EndIdx);
+    chop3.forEach((card, i) => {
+      const isEven = i % 2 === 0;
+      tl.to(card, {
+        x: handOffsetRight,
+        y: isMobile ? (isEven ? 4 : -4) : (isEven ? 8 : -8),
+        z: 70 + (i * 3),
+        rotate: isEven ? 4 : -4,
+        duration: 0.26,
+        ease: "power2.out"
+      }, 1.02 + (i * 0.055));
+    });
+
+    // BEAT 5: Square Up at Center
+    const squareTime = 1.02 + (chop3.length * 0.055) + 0.3;
+    stageCards.forEach((card, i) => {
+      tl.to(card, {
+        x: 0,
+        y: (total - 1 - i) * -0.5,
+        z: i * 2,
+        rotate: 0,
+        duration: 0.34,
+        ease: "power3.inOut"
+      }, squareTime + (i * 0.01));
+    });
+
+    // Double Tap against felt table (dealer's signature square-up move)
+    const tap1Time = squareTime + 0.38;
+    tl.to(stageCards, {
+      y: "+=12",
+      duration: 0.09,
+      ease: "power1.in"
+    }, tap1Time);
+    tl.to(stageCards, {
+      y: "-=12",
+      duration: 0.09,
+      ease: "power1.out"
+    }, tap1Time + 0.09);
+
+    const tap2Time = tap1Time + 0.2;
+    tl.to(stageCards, {
+      y: "+=8",
+      duration: 0.08,
+      ease: "power1.in"
+    }, tap2Time);
+    tl.to(stageCards, {
+      y: "-=8",
+      duration: 0.1,
+      ease: "bounce.out"
+    }, tap2Time + 0.08);
+
+    tl.to({}, { duration: 0.22 });
+  };
+
+  // --- STYLE 3: The Magician's High-Arc Card Spring ---
+  const playStyle3CardSpring = (stageCards, onFlourishDone) => {
+    const tl = gsap.timeline({ onComplete: onFlourishDone });
+    currentShuffleTimeline = tl;
+    const total = stageCards.length;
+    const isMobile = window.innerWidth <= 768;
+
+    gsap.set(stageCards, {
+      x: 0,
+      y: (i) => -i * 0.5,
+      z: (i) => i * 2,
+      rotate: 0,
+      scale: 1,
+      opacity: 1
+    });
+
+    // BEAT 1: Squeeze & Bow tension in launch hand
+    tl.to(stageCards, {
+      y: isMobile ? 30 : 50,
+      scaleY: 0.93,
+      scaleX: 1.03,
+      rotate: -3,
+      duration: 0.28,
+      ease: "power2.in"
+    });
+
+    // BEAT 2: Rapid Parabolic Spring Stream
+    const apexHeight = isMobile ? -150 : -220;
+    stageCards.forEach((card, i) => {
+      const launchDelay = 0.28 + (i * (isMobile ? 0.05 : 0.042));
+      const bankAngle = (i % 2 === 0 ? 1 : -1) * (5 + (i % 3) * 2);
+      const apexLateral = (i % 2 === 0 ? 1 : -1) * (isMobile ? 12 : 20);
+
+      // Launch to apex
+      tl.to(card, {
+        x: apexLateral,
+        y: apexHeight - (Math.sin((i / total) * Math.PI) * (isMobile ? 18 : 30)),
+        z: 80 + (i * 4),
+        rotate: bankAngle,
+        scaleX: 1,
+        scaleY: 1,
+        scale: 1.03,
+        duration: 0.36,
+        ease: "power2.out"
+      }, launchDelay);
+
+      // Descend into receiving hand
+      tl.to(card, {
+        x: 0,
+        y: (total - 1 - i) * -0.5,
+        z: i * 2,
+        rotate: 0,
+        scale: 1,
+        duration: 0.32,
+        ease: "power2.in"
+      }, launchDelay + 0.32);
+    });
+
+    // BEAT 3: Elastic Settle & Square Up
+    const springEndTime = 0.28 + (total * (isMobile ? 0.05 : 0.042)) + 0.65;
+    tl.to(stageCards, {
+      y: "+=12",
+      scale: 0.97,
+      duration: 0.12,
+      ease: "power1.in"
+    }, springEndTime);
+
+    tl.to(stageCards, {
+      y: (i) => (total - 1 - i) * -0.5,
+      scale: 1,
+      duration: 0.22,
+      ease: "elastic.out(1.2, 0.4)"
+    }, springEndTime + 0.12);
+
+    tl.to({}, { duration: 0.22 });
+  };
+
+  // --- STYLE 4: The 180° Pressure Fan & Magician's Snap-Close ---
+  const playStyle4PressureFan = (stageCards, onFlourishDone) => {
+    const tl = gsap.timeline({ onComplete: onFlourishDone });
+    currentShuffleTimeline = tl;
+    const total = stageCards.length;
+    const isMobile = window.innerWidth <= 768;
+
+    gsap.set(stageCards, {
+      x: 0,
+      y: 10,
+      z: (i) => i * 2,
+      rotate: 0,
+      scale: 1,
+      transformOrigin: "50% 120%",
+      opacity: 1
+    });
+
+    // BEAT 1: Pivot Bevel
+    tl.to(stageCards, {
+      y: 16,
+      duration: 0.2,
+      ease: "power1.out"
+    });
+
+    // BEAT 2: 180° Radial Peacock Fan Spread
+    const totalAngle = isMobile ? 75 : 145;
+    const xSpread = isMobile ? 20 : 40;
+    const yArch = isMobile ? 10 : 20;
+
+    stageCards.forEach((card, i) => {
+      const norm = (i - (total - 1) / 2) / ((total - 1) / 2);
+      const angle = norm * (totalAngle / 2);
+      const targetX = norm * ((total - 1) / 2) * xSpread;
+      const targetY = -Math.cos(norm * (Math.PI / 2.5)) * yArch;
+
+      tl.to(card, {
+        rotate: angle,
+        x: targetX,
+        y: targetY,
+        z: i * 3,
+        scale: 0.98,
+        duration: 0.62,
+        ease: "power3.out"
+      }, 0.2 + (i * 0.032));
+    });
+
+    // BEAT 3: Ripple Wave of Light / Shimmer across the fan
+    const waveStart = 0.2 + (total * 0.032) + 0.52;
+    stageCards.forEach((card, i) => {
+      const waveDelay = waveStart + (i * 0.032);
+      tl.to(card, {
+        y: "-=16",
+        z: "+=24",
+        scale: 1.02,
+        duration: 0.16,
+        ease: "power1.out"
+      }, waveDelay);
+      tl.to(card, {
+        y: "+=16",
+        z: "-=24",
+        scale: 0.98,
+        duration: 0.16,
+        ease: "power1.in"
+      }, waveDelay + 0.16);
+    });
+
+    // BEAT 4: Snappy One-Handed Fan Collapse (Snap-Close)
+    const snapStart = waveStart + (total * 0.032) + 0.38;
+    stageCards.forEach((card, i) => {
+      tl.to(card, {
+        rotate: 0,
+        x: 0,
+        y: (total - 1 - i) * -0.5,
+        z: i * 2,
+        scale: 1,
+        duration: 0.36,
+        ease: "power3.inOut"
+      }, snapStart + (i * 0.014));
+    });
+
+    tl.to({}, { duration: 0.22 });
+  };
+
+  // --- STYLE 5: The Professional Casino Felt Table Wash & Gather ---
+  const playStyle5TableWash = (stageCards, onFlourishDone) => {
+    const tl = gsap.timeline({ onComplete: onFlourishDone });
+    currentShuffleTimeline = tl;
+    const total = stageCards.length;
+    const isMobile = window.innerWidth <= 768;
+
+    gsap.set(stageCards, {
+      x: 0,
+      y: (i) => -i * 0.5,
+      z: (i) => i * 2,
+      rotate: 0,
+      scale: 1,
+      opacity: 1
+    });
+
+    const rx = isMobile ? 80 : 160;
+    const ry = isMobile ? 50 : 95;
+
+    // BEAT 1: Cut & Spread to 4 quadrants
+    stageCards.forEach((card, i) => {
+      const quadrant = i % 4;
+      let targetX = 0, targetY = 0, rot = 0;
+      if (quadrant === 0) {
+        targetX = -rx * 0.85; targetY = -ry * 0.8; rot = -14;
+      } else if (quadrant === 1) {
+        targetX = rx * 0.85; targetY = -ry * 0.75; rot = 12;
+      } else if (quadrant === 2) {
+        targetX = -rx * 0.75; targetY = ry * 0.75; rot = 9;
+      } else {
+        targetX = rx * 0.8; targetY = ry * 0.85; rot = -11;
+      }
+
+      tl.to(card, {
+        x: targetX,
+        y: targetY,
+        z: i * 2,
+        rotate: rot,
+        scale: 0.96,
+        duration: 0.42,
+        ease: "power2.out"
+      }, i * 0.028);
+    });
+
+    // BEAT 2: Mixing Vortex Swirl across table felt
+    const swirlStart = 0.45;
+    stageCards.forEach((card, i) => {
+      const angle = (i / total) * 2 * Math.PI;
+      const swirlX = Math.cos(angle + 1.2) * rx;
+      const swirlY = Math.sin(angle + 1.2) * ry;
+      const swirlRot = Math.sin(angle) * 16;
+
+      tl.to(card, {
+        x: swirlX,
+        y: swirlY,
+        rotate: swirlRot,
+        duration: 0.72,
+        ease: "sine.inOut"
+      }, swirlStart + (i * 0.024));
+    });
+
+    // BEAT 3: Two-Handed Sweep & Gather back to center
+    const gatherStart = swirlStart + 0.8;
+    stageCards.forEach((card, i) => {
+      tl.to(card, {
+        x: 0,
+        y: (total - 1 - i) * -0.5,
+        z: i * 2,
+        rotate: 0,
+        scale: 1,
+        duration: 0.4,
+        ease: "power3.inOut"
+      }, gatherStart + (i * 0.016));
+    });
+
+    // Final dealer tap
+    const tapTime = gatherStart + (total * 0.016) + 0.42;
+    tl.to(stageCards, {
+      y: "+=12",
+      duration: 0.09,
+      ease: "power1.in"
+    }, tapTime);
+    tl.to(stageCards, {
+      y: (i) => (total - 1 - i) * -0.5,
+      duration: 0.12,
+      ease: "bounce.out"
+    }, tapTime + 0.09);
+
+    tl.to({}, { duration: 0.22 });
+  };
+
+  const startBadgeShuffleAnimation = (forcedVariant = null) => {
+    if (!certFullContent) return;
+
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      badgeAnimationPhase = 'RESOLVED';
+      renderBadgesFullView(true);
+      return;
+    }
+
+    if (typeof gsap === "undefined") {
+      badgeAnimationPhase = 'RESOLVED';
+      renderBadgesFullView(true);
+      return;
+    }
+
+    if (currentShuffleTimeline) {
+      currentShuffleTimeline.kill();
+      currentShuffleTimeline = null;
+    }
+
+    const variantType = forcedVariant || getShuffleVariant();
+    const styleInfo = SHUFFLE_STYLES.find(s => s.id === variantType) || SHUFFLE_STYLES[0];
+    badgeAnimationPhase = 'SHUFFLING';
+
+    const isMobile = window.innerWidth <= 768;
+    const flourishLimit = isMobile ? 12 : 16;
+    const stageBadges = badgesData.slice(0, flourishLimit);
+
+    let stageCardsHtml = "";
+    stageBadges.forEach((b, i) => {
+      stageCardsHtml += `
+        <div class="cardistry-stage-card" data-cardistry-index="${i}" style="z-index: ${i + 1};">
+          ${buildSingleBadgeCardHTML(b, i, isMobile)}
         </div>
       `;
     });
 
-    badgesHtml += `</div>`;
-    certFullContent.innerHTML = badgesHtml;
+    const fullMarkup = `
+      <div id="badgeShuffleStage" onclick="skipBadgeAnimation()" title="Click anywhere to skip animation">
+        <div class="badge-deck-arena" id="badgeDeckArena">
+          ${stageCardsHtml}
+        </div>
+      </div>
+
+      <button id="badgeSkipBtn" onclick="skipBadgeAnimation()" class="badge-skip-btn" aria-label="Skip badge shuffling animation">
+        Skip Animation ⚡
+      </button>
+
+      <div id="badgeGridContainer" class="badges-grid-container is-hidden">
+        ${buildBadgesGridHTML()}
+      </div>
+    `;
+
+    certFullContent.innerHTML = fullMarkup;
+
+    if (certFullView) {
+      certFullView.scrollTo({ top: 0, behavior: "instant" });
+    }
+
+    const stageCards = Array.from(document.querySelectorAll("#badgeDeckArena .cardistry-stage-card"));
+    const handleFlourishComplete = () => {
+      dealCardsToGrid();
+    };
+
+    switch (variantType) {
+      case 1:
+        playStyle360Wheel(stageCards, handleFlourishComplete);
+        break;
+      case 2:
+        playStyle1RiffleWaterfall(stageCards, handleFlourishComplete);
+        break;
+      case 3:
+        playStyle2OverhandMix(stageCards, handleFlourishComplete);
+        break;
+      case 4:
+        playStyle3CardSpring(stageCards, handleFlourishComplete);
+        break;
+      case 5:
+        playStyle4PressureFan(stageCards, handleFlourishComplete);
+        break;
+      case 6:
+        playStyle5TableWash(stageCards, handleFlourishComplete);
+        break;
+      default:
+        playStyle360Wheel(stageCards, handleFlourishComplete);
+        break;
+    }
+  };
+
+  const renderBadgesFullView = (forceResolved = false) => {
+    if (!certFullContent) return;
+
+    if (forceResolved) {
+      badgeAnimationPhase = 'RESOLVED';
+      certFullContent.innerHTML = `
+        <div id="badgeGridContainer" class="badges-grid-container is-visible">
+          ${buildBadgesGridHTML()}
+        </div>
+      `;
+      return;
+    }
+
+    startBadgeShuffleAnimation();
   };
 
   const renderCertFullView = () => {
