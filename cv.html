@@ -171,7 +171,7 @@
       border: 1px solid var(--rule);
       border-radius: 12px;
       box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
-      padding: 10mm 14mm 9mm 14mm;
+      padding: 8.5mm 14mm 8.5mm 14mm;
       width: 100%;
       min-height: 297mm;
       box-sizing: border-box;
@@ -185,8 +185,8 @@
       align-items: center;
       gap: 6mm;
       border-bottom: 1.5px solid var(--banner-border);
-      padding-bottom: 4mm;
-      margin-bottom: 4mm;
+      padding-bottom: 2.5mm;
+      margin-bottom: 1.8mm;
     }
     .avatar-wrapper {
       position: relative;
@@ -251,12 +251,13 @@
       text-transform: uppercase;
       color: var(--banner-text);
       line-height: 1.35;
-      margin-bottom: 2.5mm;
+      margin-bottom: 1.8mm;
     }
     .header-contacts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2.5mm 5mm;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4mm 6mm;
+      font-size: 7.9pt;
     }
     .contact-item {
       display: inline-flex;
@@ -288,8 +289,8 @@
       justify-content: space-between;
       align-items: baseline;
       border-bottom: 1px solid var(--rule);
-      padding-bottom: 2mm;
-      margin-bottom: 2.8mm;
+      padding-bottom: 1.4mm;
+      margin-bottom: 2.0mm;
       font-size: 7.6pt;
       color: var(--light);
       text-transform: uppercase;
@@ -302,7 +303,7 @@
 
     /* ---------- Sections ---------- */
     .cv-section {
-      margin-bottom: 3mm;
+      margin-bottom: 2.2mm;
     }
     .section-title {
       display: flex;
@@ -313,7 +314,7 @@
       text-transform: uppercase;
       letter-spacing: 0.11em;
       color: var(--accent);
-      margin-bottom: 1.4mm;
+      margin-bottom: 1.0mm;
       padding-bottom: 0.4mm;
       border-bottom: 1px solid var(--rule);
       line-height: 1;
@@ -353,7 +354,7 @@
     .entries-wrap {
       display: flex;
       flex-direction: column;
-      gap: 2.3mm;
+      gap: 1.8mm;
     }
     .entry-card {
       margin-bottom: 0;
@@ -561,30 +562,6 @@
       font-weight: 700;
     }
 
-    /* Verification Notice */
-    .cv-verify-box {
-      font-size: 7.8pt;
-      color: var(--muted);
-      line-height: 1.42;
-      padding: 2.2mm 3.5mm;
-      background: #f8fafc;
-      border: 1px solid #edf2f7;
-      border-radius: 6px;
-      margin-top: 1mm;
-    }
-    .cv-verify-box strong {
-      color: var(--heading-color);
-    }
-    .cv-verify-box a {
-      color: #0b57d0;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      font-weight: 600;
-    }
-    .cv-verify-box a:hover {
-      color: #0842a0;
-      text-decoration: underline;
-    }
 
     /* Page Footer Marker */
     .page-footer {
@@ -665,7 +642,7 @@
         box-shadow: none !important;
         border: none !important;
         border-radius: 0 !important;
-        padding: 10mm 14mm 10mm 14mm !important;
+        padding: 8.5mm 14mm 8.5mm 14mm !important;
         background: #ffffff !important;
         width: 210mm !important;
         height: 297mm !important;
@@ -695,6 +672,161 @@
         display: none !important;
       }
     }
+  
+    /* Badge Chips on Page 3 */
+    .badge-chips-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2mm 1.8mm;
+      margin-top: 1mm;
+      margin-bottom: 2mm;
+    }
+    .badge-chip {
+      font-size: 7.2pt;
+      color: var(--heading-color);
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 0.7mm 2mm;
+      line-height: 1.25;
+      white-space: nowrap;
+    }
+    .badge-issuer-header {
+      font-size: 7.8pt;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 1.2mm;
+      margin-bottom: 0.6mm;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .badge-issuer-header::before {
+      content: "•";
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Tooling Chips on Page 3 */
+    .tools-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8mm;
+      margin-top: 1mm;
+    }
+    .tool-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8mm;
+    }
+    .tool-label {
+      font-size: 7.8pt;
+      font-weight: 700;
+      color: var(--heading-color);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .tool-label::before {
+      content: "•";
+      color: var(--accent);
+      font-weight: bold;
+    }
+    .tool-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2mm 1.8mm;
+      padding-left: 10px;
+    }
+    .tool-chip {
+      font-size: 7.2pt;
+      color: var(--muted);
+      background: #f8fafc;
+      border: 1px solid #edf2f7;
+      border-radius: 4px;
+      padding: 0.6mm 2mm;
+      line-height: 1.25;
+    }
+
+  
+    /* Language Cards Grid on Page 3 */
+    .lang-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2mm;
+      margin-top: 1mm;
+    }
+    .lang-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 1.5mm 2.2mm;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8mm;
+    }
+    .lang-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .lang-card-name {
+      font-size: 7.9pt;
+      font-weight: 700;
+      color: var(--heading-color);
+    }
+    .lang-card-level {
+      font-size: 6.8pt;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .lang-card-dots {
+      display: flex;
+      gap: 1.2mm;
+    }
+    .lang-card-desc {
+      font-size: 6.8pt;
+      line-height: 1.3;
+      color: var(--muted);
+    }
+
+    /* Interest Cards Grid on Page 3 */
+    .interests-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6mm 2.2mm;
+      margin-top: 1mm;
+    }
+    .interest-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 1.5mm 2.2mm;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6mm;
+    }
+    .interest-title {
+      font-size: 7.6pt;
+      font-weight: 700;
+      color: var(--heading-color);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .interest-title::before {
+      content: "•";
+      color: var(--accent);
+      font-weight: bold;
+    }
+    .interest-desc {
+      font-size: 7.0pt;
+      line-height: 1.32;
+      color: var(--muted);
+    }
+
   </style>
 </head>
 <body>
@@ -748,7 +880,7 @@
             </div>
             <div class="contact-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer" itemprop="url">https://nitishkashyapr.github.io/nitishkashyapr.com/</a>
+              <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer" itemprop="url">nitishkashyapr.com (Portfolio)</a>
             </div>
             <div class="contact-item">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
@@ -827,20 +959,6 @@
             </ul>
           </div>
 
-          <div class="entry-card">
-            <div class="entry-top">
-              <span class="entry-title">Pre-University Course (Commerce Stream)</span>
-              <span class="entry-badge-tag">Completed</span>
-            </div>
-            <div class="entry-sub">
-              <span class="entry-role">Sri Vani PU College, Tumkur</span>
-              <span class="entry-date">2020 — 2022</span>
-            </div>
-            <ul class="entry-bullets">
-              <li>Coursework: Accountancy, Business Studies, Economics, Basic Commercial Mathematics.</li>
-            </ul>
-          </div>
-
         </div>
       </section>
 
@@ -848,7 +966,7 @@
       <section class="cv-section" aria-label="Featured Projects">
         <div class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          KEY APPLIED INITIATIVES (FEATURED)
+          KEY APPLIED INITIATIVES &amp; RESEARCH (FEATURED)
         </div>
         <div class="entries-wrap">
           <div class="entry-card">
@@ -862,36 +980,9 @@
             </div>
             <ul class="entry-bullets">
               <li>Led design and prototyping in a 12-member team for a college Shark Tank-style competition; coordinated workflows, prepared the pitch, and delivered a live prototype under deadline. Result: 1st place.</li>
+              <li>Engineered interactive UI workflows connecting local vendors with customers to drive community digital adoption and business visibility.</li>
             </ul>
           </div>
-        </div>
-      </section>
-
-      <!-- Page 1 Footer -->
-      <footer class="page-footer">
-        <span>Nitish Kashyap R · Curriculum Vitae | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
-        <span>Page 1 of 3</span>
-      </footer>
-
-    </div>
-
-    <!-- =========================================================
-         PAGE 2: Key Projects Continued & Certifications Part 1 (HR & Management)
-         ========================================================= -->
-    <div class="cv-sheet" id="cv-page-2">
-
-      <div class="page-subhead">
-        <span><strong>Nitish Kashyap R</strong> — Curriculum Vitae</span>
-        <span>Projects &amp; Professional Certifications</span>
-      </div>
-
-      <!-- Applied Research & Projects (Continued) -->
-      <section class="cv-section" aria-label="Applied Research and Projects">
-        <div class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          APPLIED RESEARCH &amp; KEY PROJECTS (CONTINUED)
-        </div>
-        <div class="entries-wrap">
 
           <div class="entry-card">
             <div class="entry-top">
@@ -904,9 +995,38 @@
             </div>
             <ul class="entry-bullets">
               <li>Led structured consumer research in MBA 1st Semester, assessing retail banking service delivery, customer perception, and satisfaction gaps for Union&nbsp;Bank of India.</li>
-              <li>Synthesized customer feedback data to generate recommendations for branch service optimization and customer satisfaction.</li>
+              <li>Administered structured customer surveys across branch touchpoints, evaluating staff responsiveness, transaction turnaround times, and digital banking uptake.</li>
+              <li>Synthesized quantitative feedback data to formulate practical recommendations for branch service quality and customer satisfaction optimization.</li>
             </ul>
           </div>
+        </div>
+      </section>
+
+      <!-- Page 1 Footer -->
+      <footer class="page-footer">
+        <span>Nitish Kashyap R · Curriculum Vitae | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">nitishkashyapr.com (Portfolio)</a></span>
+        <span>Page 1 of 3</span>
+      </footer>
+
+    </div>
+
+    <!-- =========================================================
+         PAGE 2: Key Projects Continued & Certifications Part 1 (HR & Management)
+         ========================================================= -->
+    <div class="cv-sheet" id="cv-page-2">
+
+      <div class="page-subhead">
+        <span><strong>Nitish Kashyap R</strong> — Curriculum Vitae</span>
+        <span>Applied Deliverables &amp; Core Certifications</span>
+      </div>
+
+      <!-- Applied Research & Projects (Continued) -->
+      <section class="cv-section" aria-label="Applied Research and Projects">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          APPLIED INITIATIVES &amp; DELIVERABLES (CONTINUED)
+        </div>
+        <div class="entries-wrap">
 
           <div class="entry-card">
             <div class="entry-top">
@@ -944,7 +1064,6 @@
             </div>
             <div class="entry-sub">
               <span class="entry-role">Personal Professional Website &amp; Career Architecture</span>
-              <span class="entry-date"><a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
             </div>
             <ul class="entry-bullets">
               <li>Built a personal professional website with 13 dynamic themes and structured data to present education, credentials, and work samples in a clear, accessible format.</li>
@@ -970,7 +1089,7 @@
       <section class="cv-section" aria-label="Professional Certifications Part 1">
         <div class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-          PROFESSIONAL CERTIFICATIONS (HR &amp; MANAGEMENT)
+          PROFESSIONAL CERTIFICATIONS (HR, MANAGEMENT &amp; BEHAVIORAL)
         </div>
 
         <!-- Human Resources -->
@@ -1023,11 +1142,38 @@
           </div>
         </div>
 
+        <!-- Psychology & Human Behavior -->
+        <div class="cert-group">
+          <div class="cert-group-title">Psychology &amp; Human Behavior (5 Main Programs)</div>
+          <div class="cert-list">
+            <div class="cert-item">
+              <p class="cert-name">Foundations of Positive Psychology Specialization <span class="cert-meta">— University of Pennsylvania / Coursera</span></p>
+              <p class="cert-desc">5-course program under Dr. Martin Seligman covering human flourishing, grit, character strengths, and resilience.</p>
+            </div>
+            <div class="cert-item">
+              <p class="cert-name">Introduction to Psychology <span class="cert-meta">— Yale University / Coursera</span></p>
+              <p class="cert-desc">Cognitive science, human perception, decision-making biases, motivation, and mental processes.</p>
+            </div>
+            <div class="cert-item">
+              <p class="cert-name">The Science of Well-Being <span class="cert-meta">— Yale University / Coursera</span></p>
+              <p class="cert-desc">Evidence-based positive behavioral interventions, habit building, and productivity psychology.</p>
+            </div>
+            <div class="cert-item">
+              <p class="cert-name">Moralities of Everyday Life <span class="cert-meta">— Yale University / Coursera</span></p>
+              <p class="cert-desc">Ethical decision-making, moral psychology, empathy, and social cooperation.</p>
+            </div>
+            <div class="cert-item">
+              <p class="cert-name">Social Psychology <span class="cert-meta">— Wesleyan University / Coursera</span></p>
+              <p class="cert-desc">Social dynamics, group influence, cognitive biases, persuasion, and interpersonal conflict resolution.</p>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <!-- Page 2 Footer -->
       <footer class="page-footer">
-        <span>Nitish Kashyap R · Curriculum Vitae | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
+        <span>Nitish Kashyap R · Curriculum Vitae | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">nitishkashyapr.com (Portfolio)</a></span>
         <span>Page 2 of 3</span>
       </footer>
 
@@ -1040,14 +1186,14 @@
 
       <div class="page-subhead">
         <span><strong>Nitish Kashyap R</strong> — Curriculum Vitae</span>
-        <span>AI &amp; Behavioral Credentials · Badges · Tooling</span>
+        <span>AI &amp; Tech Credentials · Badges · Tooling</span>
       </div>
 
       <!-- Professional Certifications (Part 2) -->
       <section class="cv-section" aria-label="Professional Certifications Part 2">
         <div class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-          PROFESSIONAL CERTIFICATIONS (AI, TECH &amp; BEHAVIORAL)
+          PROFESSIONAL CERTIFICATIONS (AI &amp; EMERGING TECH)
         </div>
 
         <!-- AI & Technical Skills -->
@@ -1081,60 +1227,58 @@
           </div>
         </div>
 
-        <!-- Psychology & Human Behavior -->
-        <div class="cert-group">
-          <div class="cert-group-title">Psychology &amp; Human Behavior (5 Main Programs)</div>
-          <div class="cert-list">
-            <div class="cert-item">
-              <p class="cert-name">Foundations of Positive Psychology Specialization <span class="cert-meta">— University of Pennsylvania / Coursera</span></p>
-              <p class="cert-desc">5-course program under Dr. Martin Seligman covering human flourishing, grit, character strengths, and resilience.</p>
-            </div>
-            <div class="cert-item">
-              <p class="cert-name">Introduction to Psychology <span class="cert-meta">— Yale University / Coursera</span></p>
-              <p class="cert-desc">Cognitive science, human perception, decision-making biases, motivation, and mental processes.</p>
-            </div>
-            <div class="cert-item">
-              <p class="cert-name">The Science of Well-Being <span class="cert-meta">— Yale University / Coursera</span></p>
-              <p class="cert-desc">Evidence-based positive behavioral interventions, habit building, and productivity psychology.</p>
-            </div>
-            <div class="cert-item">
-              <p class="cert-name">Moralities of Everyday Life <span class="cert-meta">— Yale University / Coursera</span></p>
-              <p class="cert-desc">Ethical decision-making, moral psychology, empathy, and social cooperation.</p>
-            </div>
-            <div class="cert-item">
-              <p class="cert-name">Social Psychology <span class="cert-meta">— Wesleyan University / Coursera</span></p>
-              <p class="cert-desc">Social dynamics, group influence, cognitive biases, persuasion, and interpersonal conflict resolution.</p>
-            </div>
-          </div>
-        </div>
+
 
       </section>
 
-      <!-- Verified Digital Badges -->
+      <!-- Verified Digital Badges (27 Credentials) -->
       <section class="cv-section" aria-label="Digital Badges">
         <div class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           VERIFIED DIGITAL BADGES (27 CREDENTIALS)
         </div>
 
-        <div class="badge-group">
-          <div class="badge-group-title"><span class="badge-issuer-count">Google</span> — 15 Badges · Credly</div>
-          <p class="badge-group-line">Prompting Essentials · Project Management Professional · People Management Essentials · GenAI for Execs &amp; Business Leaders: Formulate Your Use Case · GenAI for Execs &amp; Business Leaders: Integration Strategy · GenAI for Executives &amp; Business Leaders: An Introduction · AI for App Building · AI for App Deployment · AI for Brainstorming and Planning · AI for Content Creation · AI for Data Analysis · AI for Research and Insights · AI for Writing and Communicating · AI Fundamentals · AI Professional Certificate</p>
+        <div class="badge-issuer-header">Google — 15 Badges · Credly Transcript</div>
+        <div class="badge-chips-wrap">
+          <span class="badge-chip">Prompting Essentials</span>
+          <span class="badge-chip">Project Management Professional</span>
+          <span class="badge-chip">People Management Essentials</span>
+          <span class="badge-chip">GenAI for Execs: Formulate Use Case</span>
+          <span class="badge-chip">GenAI for Execs: Integration Strategy</span>
+          <span class="badge-chip">GenAI for Execs: Introduction</span>
+          <span class="badge-chip">AI for App Building</span>
+          <span class="badge-chip">AI for App Deployment</span>
+          <span class="badge-chip">AI for Brainstorming & Planning</span>
+          <span class="badge-chip">AI for Content Creation</span>
+          <span class="badge-chip">AI for Data Analysis</span>
+          <span class="badge-chip">AI for Research & Insights</span>
+          <span class="badge-chip">AI for Writing & Communicating</span>
+          <span class="badge-chip">AI Fundamentals</span>
+          <span class="badge-chip">AI Professional Certificate</span>
         </div>
 
-        <div class="badge-group">
-          <div class="badge-group-title"><span class="badge-issuer-count">Google Cloud Skills Boost</span> — 7 Badges</div>
-          <p class="badge-group-line">Gen AI: Unlock Foundational Concepts · Attention Mechanism · Gen AI: Beyond the Chatbot · AI Boost Bites: Your Personal Feedback Agent · Gen AI: Navigate the Landscape · Gen AI Apps: Transform Your Work · Gen AI Agents: Transform Your Organization</p>
+        <div class="badge-issuer-header">Google Cloud Skills Boost — 7 Badges</div>
+        <div class="badge-chips-wrap">
+          <span class="badge-chip">Gen AI: Foundational Concepts</span>
+          <span class="badge-chip">Attention Mechanism</span>
+          <span class="badge-chip">Gen AI: Beyond the Chatbot</span>
+          <span class="badge-chip">AI Boost Bites: Feedback Agent</span>
+          <span class="badge-chip">Gen AI: Navigate the Landscape</span>
+          <span class="badge-chip">Gen AI Apps: Transform Work</span>
+          <span class="badge-chip">Gen AI Agents: Transform Organization</span>
         </div>
 
-        <div class="badge-group">
-          <div class="badge-group-title"><span class="badge-issuer-count">IBM</span> — 4 Badges · Credly</div>
-          <p class="badge-group-line">Artificial Intelligence Fundamentals · Generative AI for Business Leaders &amp; Executives Specialization · SkillsBuild — Customer Engagement: Communication and Personality Dynamics · SkillsBuild — Customer Engagement: Problem Solving and Process Controls</p>
+        <div class="badge-issuer-header">IBM — 4 Badges · Credly Transcript</div>
+        <div class="badge-chips-wrap">
+          <span class="badge-chip">AI Fundamentals</span>
+          <span class="badge-chip">GenAI for Business Leaders Specialization</span>
+          <span class="badge-chip">Customer Engagement: Personality Dynamics</span>
+          <span class="badge-chip">Customer Engagement: Process Controls</span>
         </div>
 
-        <div class="badge-group">
-          <div class="badge-group-title"><span class="badge-issuer-count">HRCI</span> — 1 Badge · Credly</div>
-          <p class="badge-group-line">Human Resource Associate Professional Certificate</p>
+        <div class="badge-issuer-header">HRCI — 1 Badge · Credly Transcript</div>
+        <div class="badge-chips-wrap">
+          <span class="badge-chip">Human Resource Associate Professional Certificate</span>
         </div>
       </section>
 
@@ -1144,10 +1288,38 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           TECHNICAL &amp; METHODOLOGICAL TOOLING
         </div>
-        <div class="tools-matrix">
-          <p><b>HR Operations &amp; Office:</b> MS Office Suite (Excel, Word, PowerPoint), Google Workspace, Google Forms, Notion, Slack</p>
-          <p><b>People Reporting &amp; Analysis:</b> Basic People Metrics, Spreadsheet Trackers, Structured Reporting, Survey Summaries, Employee Journey Mapping</p>
-          <p><b>AI-Aware Productivity:</b> AI-Assisted Drafting (with human review), Prompt Engineering (Google Certified), Research Synthesis</p>
+        <div class="tools-grid">
+          <div class="tool-row">
+            <span class="tool-label">HR Operations &amp; Office Systems:</span>
+            <div class="tool-chips">
+              <span class="tool-chip">Microsoft Excel</span>
+              <span class="tool-chip">Microsoft Word</span>
+              <span class="tool-chip">PowerPoint</span>
+              <span class="tool-chip">Google Workspace</span>
+              <span class="tool-chip">Google Forms</span>
+              <span class="tool-chip">Notion</span>
+              <span class="tool-chip">Slack</span>
+            </div>
+          </div>
+          <div class="tool-row">
+            <span class="tool-label">People Analytics &amp; Reporting:</span>
+            <div class="tool-chips">
+              <span class="tool-chip">Basic People Metrics</span>
+              <span class="tool-chip">Spreadsheet Trackers</span>
+              <span class="tool-chip">Structured Reporting</span>
+              <span class="tool-chip">Survey Summaries</span>
+              <span class="tool-chip">Employee Journey Mapping</span>
+            </div>
+          </div>
+          <div class="tool-row">
+            <span class="tool-label">AI &amp; Productivity Tooling:</span>
+            <div class="tool-chips">
+              <span class="tool-chip">AI-Assisted Drafting (Human Review)</span>
+              <span class="tool-chip">Prompt Architecture (Google Certified)</span>
+              <span class="tool-chip">Research Synthesis</span>
+              <span class="tool-chip">Workflow Automation</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1200,22 +1372,30 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
           AREAS OF INTEREST &amp; HOBBIES
         </div>
-        <div class="interests-matrix">
-          <p><b>Local AI Models:</b> Experimenting with lightweight open-weights LLMs (&lt;12B parameters) for offline task testing, workflows, and intelligent drafting.</p>
-          <p><b>Open-Source Software:</b> Exploring, testing, and experimenting with early-stage open-source tools and repositories on GitHub.</p>
-          <p><b>Continuous Learning:</b> Pursuing self-directed learning and deep-dive research into emerging tech, HR innovations, and organizational trends.</p>
-          <p><b>Technology Analysis &amp; Teardowns:</b> Following technology industry analysis, architecture breakdowns, and tech video teardowns on modern digital tooling.</p>
+        <div class="interests-cards-grid">
+          <div class="interest-card">
+            <span class="interest-title">Local AI Models &amp; Offline Systems</span>
+            <span class="interest-desc">Experimenting with lightweight open-weights LLMs (&lt;12B parameters) for secure, privacy-first offline drafting, summarization, and task automation.</span>
+          </div>
+          <div class="interest-card">
+            <span class="interest-title">Open-Source Software &amp; Developer Tools</span>
+            <span class="interest-desc">Exploring and testing early-stage repositories, productivity utilities, and modern open-source collaboration platforms on GitHub.</span>
+          </div>
+          <div class="interest-card">
+            <span class="interest-title">Continuous Learning in People Tech</span>
+            <span class="interest-desc">Pursuing self-directed research into modern HR innovations, AI-driven workplace analytics, organizational psychology, and change management.</span>
+          </div>
+          <div class="interest-card">
+            <span class="interest-title">Technology Analysis &amp; System Teardowns</span>
+            <span class="interest-desc">Analyzing semiconductor supply chain dynamics, hardware ecosystem architectures, and enterprise SaaS productivity teardowns.</span>
+          </div>
         </div>
       </section>
 
-      <!-- Official Credential Audit Notice -->
-      <div class="cv-verify-box">
-        <strong>Official Credentials &amp; Verification:</strong> All 20+ certifications, 27 digital badges, and academic milestones are verified via Credly transcripts and institutional portals. Live interactive portfolio: <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a>.
-      </div>
 
       <!-- Page 3 Footer -->
       <footer class="page-footer">
-        <span>Nitish Kashyap R · Curriculum Vitae | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">https://nitishkashyapr.github.io/nitishkashyapr.com/</a></span>
+        <span>Nitish Kashyap R · Curriculum Vitae | <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/" target="_blank" rel="noopener noreferrer">nitishkashyapr.com (Portfolio)</a></span>
         <span>Page 3 of 3</span>
       </footer>
 

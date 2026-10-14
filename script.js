@@ -2128,7 +2128,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const buildBadgesGridHTML = () => {
     if (window.innerWidth <= 768) {
       let mobileHtml = `
-        <div class="mobile-ref-view-header">
+        <div class="mobile-ref-view-header badge-header-intro">
           <div class="mobile-ref-title-group">
             <div class="mobile-ref-folder-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
@@ -2146,7 +2146,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     let badgesHtml = `
-      <div style="margin-bottom: 2.5rem; text-align: center;">
+      <div class="badge-header-intro" style="margin-bottom: 2.5rem; text-align: center;">
         <p style="font-size: 0.95rem; color: var(--ink-3); max-width: 650px; margin: 0 auto; line-height: 1.7;">
           Official verified digital credentials earned across Artificial Intelligence, HR Management, Project Leadership, and Emerging Technologies (${badgesData.length} Badges).
         </p>
@@ -2177,6 +2177,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (gridContainer) {
       gridContainer.classList.remove("is-hidden");
       gridContainer.classList.add("is-visible");
+
+      const introHeader = gridContainer.querySelector(".badge-header-intro");
+      if (introHeader) {
+        introHeader.classList.add("is-revealed");
+        introHeader.style.opacity = "";
+        introHeader.style.transform = "";
+      }
+
       const targetCards = gridContainer.querySelectorAll(".badge-card, .mobile-ref-card");
       targetCards.forEach(tc => {
         tc.style.opacity = "";
@@ -2221,9 +2229,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const dealCardsToGrid = () => {
     badgeAnimationPhase = 'DEALING';
-    const stageCards = Array.from(document.querySelectorAll("#badgeDeckArena .cardistry-stage-card"));
+    const stage = document.getElementById("badgeShuffleStage");
     const gridContainer = document.getElementById("badgeGridContainer");
-    if (!gridContainer || !stageCards.length || typeof gsap === "undefined") {
+    if (!gridContainer || typeof gsap === "undefined") {
       finishBadgeAnimation();
       return;
     }
@@ -2234,17 +2242,31 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Make grid container visible so children have real bounding client rects
-    gridContainer.classList.remove("is-hidden");
-    gridContainer.classList.add("is-visible");
+    const isMobile = window.innerWidth <= 768;
 
-    // Hide target cards initially before they receive the gliding proxy
+    // Initially hide target cards so they pour in one by one
     targetCards.forEach(tc => {
       tc.style.opacity = "0";
       tc.style.visibility = "hidden";
+      tc.style.transform = `translateY(${isMobile ? "-32px" : "-42px"}) scale(0.93)`;
     });
 
-    const isMobile = window.innerWidth <= 768;
+    // Make grid container visible
+    gridContainer.classList.remove("is-hidden");
+    gridContainer.classList.add("is-visible");
+
+    // Fade out and remove the shuffle stage smoothly
+    if (stage) {
+      gsap.to(stage, {
+        opacity: 0,
+        duration: 0.28,
+        ease: "power2.inOut",
+        onComplete: () => {
+          if (stage) stage.remove();
+        }
+      });
+    }
+
     const dealTimeline = gsap.timeline({
       onComplete: () => {
         finishBadgeAnimation();
@@ -2252,66 +2274,67 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     currentShuffleTimeline = dealTimeline;
 
-    // Glide stage cards across the screen to their calculated grid coordinates
-    stageCards.forEach((stageCard, i) => {
-      const targetCard = targetCards[i];
-      if (!targetCard) return;
-
-      const stageRect = stageCard.getBoundingClientRect();
-      const targetRect = targetCard.getBoundingClientRect();
-
-      const deltaX = (targetRect.left + targetRect.width / 2) - (stageRect.left + stageRect.width / 2);
-      const deltaY = (targetRect.top + targetRect.height / 2) - (stageRect.top + stageRect.height / 2);
-      const scaleX = targetRect.width / stageCard.offsetWidth;
-      const scaleY = targetRect.height / stageCard.offsetHeight;
-
-      const delay = i * (isMobile ? 0.038 : 0.03);
-      const flightBankRot = Math.max(-8, Math.min(8, deltaX * 0.015));
-
-      dealTimeline.to(stageCard, {
-        x: `+=${deltaX}`,
-        y: `+=${deltaY}`,
-        scaleX: scaleX,
-        scaleY: scaleY,
-        rotate: flightBankRot,
-        rotateX: 0,
-        rotateY: 0,
-        duration: 0.58,
+    // Reveal the header text smoothly as cards begin pouring into the grid
+    const introHeader = gridContainer.querySelector(".badge-header-intro");
+    if (introHeader) {
+      dealTimeline.fromTo(introHeader, {
+        opacity: 0,
+        y: -14
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
         ease: "power2.out",
-        onComplete: () => {
+        onStart: () => {
+          introHeader.classList.add("is-revealed");
+        }
+      }, 0.15);
+    }
+
+    // Deal cards ONE BY ONE ("someone poured the card one by one like this")
+    // Especially first 3 cards are distinctly dealt one by one
+    targetCards.forEach((targetCard, i) => {
+      let delay;
+      if (i === 0) {
+        delay = 0.08;
+      } else if (i === 1) {
+        delay = 0.35; // 270ms later: Card 2 pours into place
+      } else if (i === 2) {
+        delay = 0.62; // 270ms later: Card 3 pours into place
+      } else if (i === 3) {
+        delay = 0.86; // 240ms later: Card 4 pours into place
+      } else if (i === 4) {
+        delay = 1.06; // 200ms later: Card 5 pours into place
+      } else {
+        // Remaining cards cascade in smoothly
+        delay = 1.06 + (i - 4) * 0.055;
+      }
+
+      const slightTilt = isMobile
+        ? (i % 2 === 0 ? -1.8 : 1.8)
+        : (i % 3 === 0 ? -2.2 : (i % 3 === 1 ? 0 : 2.2));
+
+      dealTimeline.fromTo(targetCard, {
+        opacity: 0,
+        y: isMobile ? -32 : -42,
+        scale: 0.93,
+        rotate: slightTilt
+      }, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        duration: 0.46,
+        ease: "power2.out",
+        onStart: () => {
           targetCard.style.visibility = "visible";
-          targetCard.style.opacity = "1";
+        },
+        onComplete: () => {
           targetCard.classList.add("card-arrival-gleam");
-          stageCard.style.opacity = "0";
+          targetCard.style.transform = "";
         }
       }, delay);
     });
-
-    // Reveal remaining grid cards with a staggered wave
-    if (targetCards.length > stageCards.length) {
-      const baseDelay = (stageCards.length - 1) * (isMobile ? 0.038 : 0.03) + 0.12;
-      for (let j = stageCards.length; j < targetCards.length; j++) {
-        const remainingTarget = targetCards[j];
-        const extraDelay = baseDelay + ((j - stageCards.length) * 0.02);
-        dealTimeline.fromTo(remainingTarget, {
-          opacity: 0,
-          y: 25,
-          scale: 0.96
-        }, {
-          onStart: () => {
-            remainingTarget.style.visibility = "visible";
-          },
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.35,
-          ease: "power2.out",
-          onComplete: () => {
-            remainingTarget.classList.add("card-arrival-gleam");
-          }
-        }, extraDelay);
-      }
-    }
   };
 
   // --- STYLE 1: The 360° Sunburst Wheel (Card Rounding Pinwheel & Spin) ---
@@ -2954,7 +2977,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const fullMarkup = `
-      <div id="badgeShuffleStage" onclick="skipBadgeAnimation()" title="Click anywhere to skip animation">
+      <div id="badgeShuffleStage">
         <div class="badge-deck-arena" id="badgeDeckArena">
           ${stageCardsHtml}
         </div>

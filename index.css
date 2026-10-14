@@ -1454,6 +1454,18 @@ section,
   visibility: visible !important;
 }
 
+.badge-header-intro {
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  will-change: opacity, transform;
+}
+
+.badge-header-intro.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 #badgeShuffleStage {
   position: relative;
   width: 100%;
@@ -1513,7 +1525,7 @@ section,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transform: translateZ(0);
-  cursor: pointer;
+  cursor: default;
   filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.14));
 }
 
@@ -1613,7 +1625,6 @@ section,
     margin: 0 !important;
     pointer-events: none !important;
   }
-}
 
   .badge-skip-btn {
     bottom: 1.25rem;
