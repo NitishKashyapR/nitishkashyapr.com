@@ -284,7 +284,7 @@ Nitish Kashyap R (also known as Nitish Kashyap) is an MBA student specializing i
 ---
 
 ## Technical & Professional Skills Matrix
-- **HR & People Processes:** Talent acquisition support, screening coordination, onboarding checklists, candidate communication, employee engagement support, basic HR documentation, stakeholder follow-up, managing organizational change.
-- **Tools & Platforms:** Microsoft Excel, Google Sheets, Google Forms & Workspace, MS Office, LinkedIn (basic sourcing), Notion, presentation & reporting.
+- **HR & People Processes:** Recruitment coordination support, screening rubrics, onboarding checklists, candidate communication, employee engagement support, basic HR documentation, stakeholder follow-up, managing organizational change.
+- **Tools & Platforms:** Microsoft Excel, Google Sheets, Google Forms & Workspace, MS Office, LinkedIn (professional research & networking), Notion, presentation & reporting.
 - **Analysis & AI-Aware Productivity:** Structured problem solving, basic people reporting, research & synthesis, clear written communication, AI-assisted drafting (with mandatory human review), fast learning on new workflows.
 - **Academic & Knowledge Disclosure:** Advanced HR topics such as compensation, employee relations, and performance systems are part of coursework and continuous learning. They are presented as knowledge areas, not independent full-time work experience.

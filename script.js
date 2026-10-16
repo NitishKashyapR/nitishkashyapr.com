@@ -853,13 +853,13 @@ const projectsData = [
   {
     id: "ta-starter-kit",
     title: "Talent Acquisition Starter Kit",
-    subtitle: "Hiring & Sourcing Framework",
+    subtitle: "Recruitment & Coordination Framework",
     description: "A practical starter kit for entry-level hiring support: sample job description, screening criteria, shortlisting format, interview questions, and candidate email templates.",
     category: "Human Resource",
     status: "Completed",
     live: "projects/talent-acquisition-starter-kit.html",
     headerStyle: "linear-gradient(135deg, #1e1b4b, #312e81)",
-    skills: ["Talent Acquisition", "Job Descriptions", "CV Screening", "Interviewing", "Candidate Outreach"],
+    skills: ["Recruitment Support", "Job Descriptions", "Candidate Rubrics", "Interviewing", "Candidate Outreach"],
     note: "Practical practice starter kit built for internship readiness and structured hiring support.",
     details: {
       overview: "A practical starter kit for entry-level hiring support: sample job description, screening criteria, shortlisting format, interview questions, and candidate email templates.",
