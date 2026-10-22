@@ -619,6 +619,20 @@ const certCategories = [
     iconKey: "users",
     subGroups: [
       {
+        heading: "Microsoft HR Manager",
+        name: "Microsoft HR Manager Professional",
+        provider: "Microsoft — Coursera",
+        mainCertUrl: "https://coursera.org/share/3a37e4cc7fc6e45877ac27045e9a37c7",
+        courses: [
+          { name: "HR Data and Technology", certUrl: "https://coursera.org/share/0a4e7519d4351602098323e625477331" },
+          { name: "Process & Policy Execution", certUrl: "https://coursera.org/share/e9e80406cc7cbb1e4cd90b4266ad9055" },
+          { name: "Employee Development & Well-Being", certUrl: "https://coursera.org/share/85bf276ebb6236639704cb5820e324fc" },
+          { name: "AI-Driven HR Operations", certUrl: "https://coursera.org/share/7d1425ceacf2dddf9ad6be3a0666426a" },
+          { name: "Strategic HR Leadership", certUrl: "https://coursera.org/share/f7a50640c6abec8f15a1fb9cf8b70837" }
+        ],
+        description: "Comprehensive Microsoft professional certification covering HR data & technology systems, policy and process execution, employee development & well-being, AI-driven HR operations, and strategic HR leadership."
+      },
+      {
         heading: "HRCI Human Resource Associate",
         name: "Human Resource Associate Professional",
         provider: "HRCI — Coursera",
@@ -668,7 +682,7 @@ const certCategories = [
         description: "Covers AI-powered people analytics for workforce planning, talent forecasting, and elevating employee experience through data-driven HR decisions."
       }
     ],
-    description: "HR-focused certifications covering HRCI associate competencies, people-side change management, and generative AI in HR operations."
+    description: "HR-focused certifications covering Microsoft HR management, HRCI associate competencies, people-side change management, and generative AI in HR operations."
   },
   {
     id: "project-management",
@@ -1787,6 +1801,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const text = `${heading} ${provider || ''}`.toLowerCase();
     const style = `width: 38px; height: 38px; border-radius: 10px; background: #fff; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06); flex-shrink: 0;`;
     const fb = `onerror="this.onerror=null; this.src='https://nitishkashyapr.github.io/nitishkashyapr.com/' + this.getAttribute('src');"`;
+    if (text.includes("microsoft")) {
+      return `<div style="${style}"><svg width="20" height="20" viewBox="0 0 21 21"><rect x="1" y="1" width="9" height="9" fill="#f25022"/><rect x="11" y="1" width="9" height="9" fill="#7fba00"/><rect x="1" y="11" width="9" height="9" fill="#00a4ef"/><rect x="11" y="11" width="9" height="9" fill="#ffb900"/></svg></div>`;
+    }
     if (text.includes("hrci")) {
       return `<div style="${style}"><img src="assets/logos/HRCI.png" alt="HRCI" style="width: 28px; height: 28px; object-fit: contain;" ${fb} /></div>`;
     }

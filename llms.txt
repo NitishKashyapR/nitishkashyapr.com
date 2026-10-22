@@ -99,8 +99,8 @@ MBA student specializing in Human Resources at VIMTECH, Tumkur, with a Bachelor 
    - *GitHub Repository:* https://github.com/NitishKashyapR/peoplecore-hris-sandbox
 
 ## Certifications, Credentials & Digital Badges (20+ Certifications & 27 Verified Badges)
-Nitish holds 20+ professional certificates and 27 verified Credly & Google Cloud digital badges spanning:
-- **HR & Talent Management (6 Certifications):** HRCI Human Resource Associate (5 sub-courses), SHRM Managing Organizational Change for HR Professionals, SHRM Generative AI in HR, NASBA Generative AI: Recruiting & Talent Acquisition, SHRM Leveraging Agentic AI in HR, SHRM Data-Driven HR: AI-Powered People Analytics.
+Nitish holds 20+ professional certificates (21 credentials) and 27 verified Credly & Google Cloud digital badges spanning:
+- **HR & Talent Management (7 Certifications):** Microsoft HR Manager (5 sub-courses), HRCI Human Resource Associate (5 sub-courses), SHRM Managing Organizational Change for HR Professionals, SHRM Generative AI in HR, NASBA Generative AI: Recruiting & Talent Acquisition, SHRM Leveraging Agentic AI in HR, SHRM Data-Driven HR: AI-Powered People Analytics.
 - **AI & Emerging Technologies (6 Certifications):** Google AI Essentials, Google Prompting Essentials, Google AI Professional, Generative AI for Executives (IBM), Cyber Security Overview (Infosys), Claude 101 (Anthropic).
 - **Psychology & Human Behavior (5 Certifications):** UPenn Foundations of Positive Psychology (5 sub-courses), Yale Introduction to Psychology, Yale The Science of Well-Being, Yale Moralities of Everyday Life, Wesleyan Social Psychology.
 - **Advanced Management & Leadership (3 Certifications):** Google Project Management, Google People Management, Risk Management & Business Fundamentals.

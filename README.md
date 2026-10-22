@@ -96,7 +96,7 @@ Welcome to the official portfolio and professional repository of **Nitish Kashya
 
 <div align="center">
 
-![Human Resources](https://img.shields.io/badge/Human_Resources-6_Certifications-2563EB?style=for-the-badge)
+![Human Resources](https://img.shields.io/badge/Human_Resources-7_Certifications-2563EB?style=for-the-badge)
 ![AI & Technical](https://img.shields.io/badge/AI_%26_Technical-6_Certifications-7C3AED?style=for-the-badge)
 ![Advanced Management](https://img.shields.io/badge/Advanced_Management-3_Certifications-F59E0B?style=for-the-badge)
 ![Psychology & Behavior](https://img.shields.io/badge/Psychology_%26_Behavior-5_Certifications-059669?style=for-the-badge)
@@ -105,7 +105,7 @@ Welcome to the official portfolio and professional repository of **Nitish Kashya
 <br />
 
 <p>
-  Issued by <b>HRCI · SHRM · NASBA · Google · IBM · Infosys · Anthropic · Yale · Wesleyan · UPenn</b>
+  Issued by <b>Microsoft · HRCI · SHRM · NASBA · Google · IBM · Infosys · Anthropic · Yale · Wesleyan · UPenn</b>
   <br />
   View all 20+ certifications with verification links →
   <a href="https://nitishkashyapr.github.io/nitishkashyapr.com/#certifications">my portfolio</a>

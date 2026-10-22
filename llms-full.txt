@@ -41,8 +41,16 @@ Nitish Kashyap R (also known as Nitish Kashyap) is an MBA student specializing i
 
 ## Complete Certifications, Credentials & Digital Badges Catalog (20+ Main Credentials & 27 Verified Badges)
 
-### Category A: Human Resource Management (6 Main Programs / 11 Total Certifications)
-1. **HRCI Human Resource Associate** (Provider: HRCI via Coursera)
+### Category A: Human Resource Management (7 Main Programs / 16 Total Certifications)
+1. **Microsoft HR Manager** (Provider: Microsoft via Coursera)
+   - *Main Certificate Share Link:* https://coursera.org/share/3a37e4cc7fc6e45877ac27045e9a37c7
+   - *Description:* Comprehensive Microsoft professional certification covering 5 core domain sub-courses:
+     a) HR Data and Technology: https://coursera.org/share/0a4e7519d4351602098323e625477331
+     b) Process & Policy Execution: https://coursera.org/share/e9e80406cc7cbb1e4cd90b4266ad9055
+     c) Employee Development & Well-Being: https://coursera.org/share/85bf276ebb6236639704cb5820e324fc
+     d) AI-Driven HR Operations: https://coursera.org/share/7d1425ceacf2dddf9ad6be3a0666426a
+     e) Strategic HR Leadership: https://coursera.org/share/f7a50640c6abec8f15a1fb9cf8b70837
+2. **HRCI Human Resource Associate** (Provider: HRCI via Coursera)
    - *Main Certificate Share Link:* https://coursera.org/share/0677f1802c28bdf8f8ea40a0dc930750
    - *Description:* Comprehensive HRCI professional certification covering 5 core domain sub-courses:
      a) Talent Acquisition: https://coursera.org/share/ec4c4ccc79accbd5900ae2da4f575235
@@ -50,19 +58,19 @@ Nitish Kashyap R (also known as Nitish Kashyap) is an MBA student specializing i
      c) Compensation and Benefits: https://coursera.org/share/d862fc715256db3c57e65c3bf85b9baa
      d) Employee Relations: https://coursera.org/share/7cf06002f79dc207504f2bcd1dfdaa79
      e) Compliance and Risk Management: https://coursera.org/share/0b221ec09e359b730570a38bc038689b
-2. **Managing Organizational Change for HR Professionals** (Provider: SHRM via LinkedIn Learning)
+3. **Managing Organizational Change for HR Professionals** (Provider: SHRM via LinkedIn Learning)
    - *Certificate Link:* https://www.linkedin.com/learning/certificates/6a758a5ef9ca2ed64b8a26393c9c5b032c74ab4365e990d067fa6da5062cb92b?trk=share_certificate
    - *Description:* Focused on leading and supporting organizational change initiatives, change models, employee communication, and reducing resistance.
-3. **Generative AI in HR** (Provider: SHRM via LinkedIn Learning)
+4. **Generative AI in HR** (Provider: SHRM via LinkedIn Learning)
    - *Certificate Link:* https://www.linkedin.com/learning/certificates/c25f3a120f6adf4b4bf48854e1f44485a8b6362933f8b33bb533e37f999b8c44?trk=share_certificate
    - *Description:* Explores practical use cases of generative AI across core HR functions, policy drafting, employee communication, and HR automation.
-4. **Generative AI: Recruiting and Talent Acquisition** (Provider: NASBA via LinkedIn Learning)
+5. **Generative AI: Recruiting and Talent Acquisition** (Provider: NASBA via LinkedIn Learning)
    - *Certificate Link:* https://www.linkedin.com/learning/certificates/c41db3e9cb5342ac05bcbdbc85ece86db1cfcf974db6be852549e9a28a275177?trk=share_certificate
    - *Description:* Reshaping recruiting, candidate screening, talent acquisition workflows, and candidate experience through AI.
-5. **Leveraging Agentic AI in HR** (Provider: SHRM via LinkedIn Learning)
+6. **Leveraging Agentic AI in HR** (Provider: SHRM via LinkedIn Learning)
    - *Certificate Link:* https://www.linkedin.com/learning/certificates/d7810c38ccb3af32748d4828b827466005ab4bae11136afa7ceec51a8bb2343f?trk=share_certificate
    - *Description:* Covers agentic AI systems and autonomous AI agents applied across HR workflows — automating multi-step people processes and supporting HR decision-making.
-6. **Data-Driven HR: AI-Powered People Analytics for Workforce Planning and Employee Experience** (Provider: SHRM via LinkedIn Learning)
+7. **Data-Driven HR: AI-Powered People Analytics for Workforce Planning and Employee Experience** (Provider: SHRM via LinkedIn Learning)
    - *Certificate Link:* https://www.linkedin.com/learning/certificates/d309c26775d59ac3aab3da08894c1457f8b1e67861e5ffe8c033d1d187969c56?trk=share_certificate
    - *Description:* Covers AI-powered people analytics for workforce planning, talent forecasting, and improving employee experience through data-driven HR decisions.
 
