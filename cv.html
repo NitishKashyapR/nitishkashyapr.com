@@ -171,7 +171,7 @@
       border: 1px solid var(--rule);
       border-radius: 12px;
       box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
-      padding: 8.5mm 14mm 8.5mm 14mm;
+      padding: 7.0mm 14mm 7.0mm 14mm;
       width: 100%;
       min-height: 297mm;
       box-sizing: border-box;
@@ -185,8 +185,8 @@
       align-items: center;
       gap: 6mm;
       border-bottom: 1.5px solid var(--banner-border);
-      padding-bottom: 2.5mm;
-      margin-bottom: 1.8mm;
+      padding-bottom: 2.0mm;
+      margin-bottom: 1.4mm;
     }
     .avatar-wrapper {
       position: relative;
@@ -237,26 +237,26 @@
       text-transform: uppercase;
       color: var(--heading-color);
       line-height: 1.1;
-      margin-bottom: 1.5mm;
+      margin-bottom: 1.0mm;
     }
     .role-banner {
       display: inline-block;
       background: var(--banner-bg);
       border: 1px solid var(--banner-border);
       border-radius: 6px;
-      padding: 2.2mm 3.8mm;
-      font-size: 7.2pt;
+      padding: 1.8mm 3.4mm;
+      font-size: 7.1pt;
       font-weight: 800;
       letter-spacing: 0.07em;
       text-transform: uppercase;
       color: var(--banner-text);
       line-height: 1.35;
-      margin-bottom: 1.8mm;
+      margin-bottom: 1.4mm;
     }
     .header-contacts {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.4mm 6mm;
+      gap: 1.2mm 6mm;
       font-size: 7.9pt;
     }
     .contact-item {
@@ -303,19 +303,19 @@
 
     /* ---------- Sections ---------- */
     .cv-section {
-      margin-bottom: 2.2mm;
+      margin-bottom: 1.8mm;
     }
     .section-title {
       display: flex;
       align-items: center;
       gap: 6.5px;
-      font-size: 9.1pt;
+      font-size: 9.0pt;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.11em;
       color: var(--accent);
-      margin-bottom: 1.0mm;
-      padding-bottom: 0.4mm;
+      margin-bottom: 0.8mm;
+      padding-bottom: 0.3mm;
       border-bottom: 1px solid var(--rule);
       line-height: 1;
     }
@@ -328,8 +328,8 @@
 
     /* Summary */
     .summary-text {
-      font-size: 8.5pt;
-      line-height: 1.52;
+      font-size: 8.3pt;
+      line-height: 1.46;
       color: var(--muted);
       text-align: justify;
     }
@@ -338,11 +338,11 @@
     .skills-block {
       display: flex;
       flex-direction: column;
-      gap: 1.6mm;
+      gap: 1.3mm;
     }
     .skill-category {
-      font-size: 8.3pt;
-      line-height: 1.46;
+      font-size: 8.2pt;
+      line-height: 1.42;
       color: var(--muted);
     }
     .skill-category b {
@@ -354,7 +354,7 @@
     .entries-wrap {
       display: flex;
       flex-direction: column;
-      gap: 1.8mm;
+      gap: 1.4mm;
     }
     .entry-card {
       margin-bottom: 0;
@@ -364,10 +364,10 @@
       align-items: baseline;
       justify-content: space-between;
       gap: 8px;
-      margin-bottom: 0.3mm;
+      margin-bottom: 0.2mm;
     }
     .entry-title {
-      font-size: 9.1pt;
+      font-size: 9.0pt;
       font-weight: 700;
       color: var(--heading-color);
     }
@@ -385,7 +385,7 @@
       gap: 8px;
       font-size: 8pt;
       color: var(--light);
-      margin-bottom: 0.5mm;
+      margin-bottom: 0.3mm;
     }
     .entry-role {
       font-style: italic;
@@ -400,14 +400,14 @@
       padding-left: 0;
       display: flex;
       flex-direction: column;
-      gap: 0.6mm;
+      gap: 0.4mm;
     }
     .entry-bullets li {
       position: relative;
       padding-left: 12px;
-      font-size: 8.3pt;
+      font-size: 8.1pt;
       color: var(--muted);
-      line-height: 1.38;
+      line-height: 1.34;
     }
     .entry-bullets li::before {
       content: "•";
@@ -642,7 +642,7 @@
         box-shadow: none !important;
         border: none !important;
         border-radius: 0 !important;
-        padding: 8.5mm 14mm 8.5mm 14mm !important;
+        padding: 7.0mm 14mm 7.0mm 14mm !important;
         background: #ffffff !important;
         width: 210mm !important;
         height: 297mm !important;
@@ -673,157 +673,77 @@
       }
     }
   
-    /* Badge Chips on Page 3 */
-    .badge-chips-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2mm 1.8mm;
-      margin-top: 1mm;
-      margin-bottom: 2mm;
-    }
-    .badge-chip {
-      font-size: 7.2pt;
-      color: var(--heading-color);
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 4px;
-      padding: 0.7mm 2mm;
-      line-height: 1.25;
-      white-space: nowrap;
-    }
-    .badge-issuer-header {
-      font-size: 7.8pt;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-top: 1.2mm;
-      margin-bottom: 0.6mm;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .badge-issuer-header::before {
-      content: "•";
-      color: var(--accent);
-      font-weight: bold;
-    }
-
-    /* Tooling Chips on Page 3 */
-    .tools-grid {
+    /* Verified Digital Badges (Page 3) */
+    .badges-block {
       display: flex;
       flex-direction: column;
-      gap: 1.8mm;
-      margin-top: 1mm;
+      gap: 1.4mm;
+      margin-top: 0.6mm;
+      margin-bottom: 0.6mm;
+    }
+    .badge-issuer-row {
+      font-size: 8.0pt;
+      line-height: 1.42;
+      color: var(--muted);
+    }
+    .badge-issuer-title {
+      font-weight: 700;
+      color: var(--heading-color);
+    }
+    .badge-issuer-list {
+      color: var(--muted);
+    }
+
+    /* Technical & Methodological Tooling (Page 3) */
+    .tools-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4mm;
+      margin-top: 0.6mm;
+      margin-bottom: 0.6mm;
     }
     .tool-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8mm;
+      font-size: 8.0pt;
+      line-height: 1.42;
+      color: var(--muted);
     }
-    .tool-label {
-      font-size: 7.8pt;
+    .tool-title {
       font-weight: 700;
       color: var(--heading-color);
-      display: flex;
-      align-items: center;
-      gap: 5px;
     }
-    .tool-label::before {
-      content: "•";
+    .tool-list {
+      color: var(--muted);
+    }
+
+    /* Areas of Interest & Hobbies (Page 3) */
+    .interests-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4mm;
+      margin-top: 0.6mm;
+    }
+    .interest-item {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      font-size: 8.0pt;
+      line-height: 1.42;
+      color: var(--muted);
+    }
+    .interest-bullet {
       color: var(--accent);
       font-weight: bold;
+      font-size: 8.5pt;
+      flex-shrink: 0;
     }
-    .tool-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2mm 1.8mm;
-      padding-left: 10px;
-    }
-    .tool-chip {
-      font-size: 7.2pt;
-      color: var(--muted);
-      background: #f8fafc;
-      border: 1px solid #edf2f7;
-      border-radius: 4px;
-      padding: 0.6mm 2mm;
-      line-height: 1.25;
-    }
-
-  
-    /* Language Cards Grid on Page 3 */
-    .lang-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2mm;
-      margin-top: 1mm;
-    }
-    .lang-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 4px;
-      padding: 1.5mm 2.2mm;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8mm;
-    }
-    .lang-card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-    .lang-card-name {
-      font-size: 7.9pt;
-      font-weight: 700;
-      color: var(--heading-color);
-    }
-    .lang-card-level {
-      font-size: 6.8pt;
-      font-weight: 600;
-      color: var(--accent);
-    }
-    .lang-card-dots {
-      display: flex;
-      gap: 1.2mm;
-    }
-    .lang-card-desc {
-      font-size: 6.8pt;
-      line-height: 1.3;
-      color: var(--muted);
-    }
-
-    /* Interest Cards Grid on Page 3 */
-    .interests-cards-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.6mm 2.2mm;
-      margin-top: 1mm;
-    }
-    .interest-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 4px;
-      padding: 1.5mm 2.2mm;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6mm;
+    .interest-content {
+      flex: 1;
     }
     .interest-title {
-      font-size: 7.6pt;
       font-weight: 700;
       color: var(--heading-color);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .interest-title::before {
-      content: "•";
-      color: var(--accent);
-      font-weight: bold;
     }
     .interest-desc {
-      font-size: 7.0pt;
-      line-height: 1.32;
       color: var(--muted);
     }
 
@@ -1242,47 +1162,26 @@
           VERIFIED DIGITAL BADGES (27 CREDENTIALS)
         </div>
 
-        <div class="badge-issuer-header">Google — 15 Badges · Credly Transcript</div>
-        <div class="badge-chips-wrap">
-          <span class="badge-chip">Prompting Essentials</span>
-          <span class="badge-chip">Project Management Professional</span>
-          <span class="badge-chip">People Management Essentials</span>
-          <span class="badge-chip">GenAI for Execs: Formulate Use Case</span>
-          <span class="badge-chip">GenAI for Execs: Integration Strategy</span>
-          <span class="badge-chip">GenAI for Execs: Introduction</span>
-          <span class="badge-chip">AI for App Building</span>
-          <span class="badge-chip">AI for App Deployment</span>
-          <span class="badge-chip">AI for Brainstorming & Planning</span>
-          <span class="badge-chip">AI for Content Creation</span>
-          <span class="badge-chip">AI for Data Analysis</span>
-          <span class="badge-chip">AI for Research & Insights</span>
-          <span class="badge-chip">AI for Writing & Communicating</span>
-          <span class="badge-chip">AI Fundamentals</span>
-          <span class="badge-chip">AI Professional Certificate</span>
-        </div>
+        <div class="badges-block">
+          <div class="badge-issuer-row">
+            <span class="badge-issuer-title">Google (15 Badges &middot; Credly Transcript):</span>
+            <span class="badge-issuer-list">Prompting Essentials &middot; Project Management Professional &middot; People Management Essentials &middot; GenAI for Execs: Formulate Use Case &middot; GenAI for Execs: Integration Strategy &middot; GenAI for Execs: Introduction &middot; AI for App Building &middot; AI for App Deployment &middot; AI for Brainstorming &amp; Planning &middot; AI for Content Creation &middot; AI for Data Analysis &middot; AI for Research &amp; Insights &middot; AI for Writing &amp; Communicating &middot; AI Fundamentals &middot; AI Professional Certificate.</span>
+          </div>
 
-        <div class="badge-issuer-header">Google Cloud Skills Boost — 7 Badges</div>
-        <div class="badge-chips-wrap">
-          <span class="badge-chip">Gen AI: Foundational Concepts</span>
-          <span class="badge-chip">Attention Mechanism</span>
-          <span class="badge-chip">Gen AI: Beyond the Chatbot</span>
-          <span class="badge-chip">AI Boost Bites: Feedback Agent</span>
-          <span class="badge-chip">Gen AI: Navigate the Landscape</span>
-          <span class="badge-chip">Gen AI Apps: Transform Work</span>
-          <span class="badge-chip">Gen AI Agents: Transform Organization</span>
-        </div>
+          <div class="badge-issuer-row">
+            <span class="badge-issuer-title">Google Cloud Skills Boost (7 Badges):</span>
+            <span class="badge-issuer-list">Gen AI: Foundational Concepts &middot; Attention Mechanism &middot; Gen AI: Beyond the Chatbot &middot; AI Boost Bites: Feedback Agent &middot; Gen AI: Navigate the Landscape &middot; Gen AI Apps: Transform Work &middot; Gen AI Agents: Transform Organization.</span>
+          </div>
 
-        <div class="badge-issuer-header">IBM — 4 Badges · Credly Transcript</div>
-        <div class="badge-chips-wrap">
-          <span class="badge-chip">AI Fundamentals</span>
-          <span class="badge-chip">GenAI for Business Leaders Specialization</span>
-          <span class="badge-chip">Customer Engagement: Personality Dynamics</span>
-          <span class="badge-chip">Customer Engagement: Process Controls</span>
-        </div>
+          <div class="badge-issuer-row">
+            <span class="badge-issuer-title">IBM (4 Badges &middot; Credly Transcript):</span>
+            <span class="badge-issuer-list">AI Fundamentals &middot; GenAI for Business Leaders Specialization &middot; Customer Engagement: Personality Dynamics &middot; Customer Engagement: Process Controls.</span>
+          </div>
 
-        <div class="badge-issuer-header">HRCI — 1 Badge · Credly Transcript</div>
-        <div class="badge-chips-wrap">
-          <span class="badge-chip">Human Resource Associate Professional Certificate</span>
+          <div class="badge-issuer-row">
+            <span class="badge-issuer-title">HRCI (1 Badge &middot; Credly Transcript):</span>
+            <span class="badge-issuer-list">Human Resource Associate Professional Certificate.</span>
+          </div>
         </div>
       </section>
 
@@ -1292,38 +1191,18 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           TECHNICAL &amp; METHODOLOGICAL TOOLING
         </div>
-        <div class="tools-grid">
+        <div class="tools-block">
           <div class="tool-row">
-            <span class="tool-label">Office Systems &amp; Productivity Tools:</span>
-            <div class="tool-chips">
-              <span class="tool-chip">Microsoft Excel</span>
-              <span class="tool-chip">Microsoft Word</span>
-              <span class="tool-chip">PowerPoint</span>
-              <span class="tool-chip">Google Workspace</span>
-              <span class="tool-chip">Google Forms</span>
-              <span class="tool-chip">Notion</span>
-              <span class="tool-chip">Slack</span>
-            </div>
+            <span class="tool-title">Office Systems &amp; Productivity Tools:</span>
+            <span class="tool-list">Microsoft Excel &middot; Microsoft Word &middot; PowerPoint &middot; Google Workspace &middot; Google Forms &middot; Notion &middot; Slack.</span>
           </div>
           <div class="tool-row">
-            <span class="tool-label">Spreadsheet &amp; Reporting Basics:</span>
-            <div class="tool-chips">
-              <span class="tool-chip">Spreadsheet Organization</span>
-              <span class="tool-chip">Basic Formulas</span>
-              <span class="tool-chip">Structured Summary Tables</span>
-              <span class="tool-chip">Survey Data Formatting</span>
-              <span class="tool-chip">Task Tracking Sheets</span>
-            </div>
+            <span class="tool-title">Spreadsheet &amp; Reporting Basics:</span>
+            <span class="tool-list">Spreadsheet Organization &middot; Basic Formulas &middot; Structured Summary Tables &middot; Survey Data Formatting &middot; Task Tracking Sheets.</span>
           </div>
           <div class="tool-row">
-            <span class="tool-label">Academic Research &amp; Learning Tools:</span>
-            <div class="tool-chips">
-              <span class="tool-chip">Online Academic Research</span>
-              <span class="tool-chip">Document Drafting</span>
-              <span class="tool-chip">Responsible AI Drafting (Human-Reviewed)</span>
-              <span class="tool-chip">Google Prompting Essentials</span>
-              <span class="tool-chip">Continuous Self-Study</span>
-            </div>
+            <span class="tool-title">Academic Research &amp; Learning Tools:</span>
+            <span class="tool-list">Online Academic Research &middot; Document Drafting &middot; Responsible AI Drafting (Human-Reviewed) &middot; Google Prompting Essentials &middot; Continuous Self-Study.</span>
           </div>
         </div>
       </section>
@@ -1377,22 +1256,34 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
           AREAS OF INTEREST &amp; HOBBIES
         </div>
-        <div class="interests-cards-grid">
-          <div class="interest-card">
-            <span class="interest-title">Local AI Models &amp; Offline Systems</span>
-            <span class="interest-desc">Experimenting with lightweight open-weights LLMs (&lt;12B parameters) for secure, privacy-first offline drafting, summarization, and task automation.</span>
+        <div class="interests-block">
+          <div class="interest-item">
+            <span class="interest-bullet">&bull;</span>
+            <div class="interest-content">
+              <strong class="interest-title">Local AI Models &amp; Offline Systems:</strong>
+              <span class="interest-desc">Experimenting with lightweight open-weights LLMs (&lt;12B parameters) for secure, privacy-first offline drafting, summarization, and task automation.</span>
+            </div>
           </div>
-          <div class="interest-card">
-            <span class="interest-title">Open-Source Software &amp; Developer Tools</span>
-            <span class="interest-desc">Exploring and testing early-stage repositories, productivity utilities, and modern open-source collaboration platforms on GitHub.</span>
+          <div class="interest-item">
+            <span class="interest-bullet">&bull;</span>
+            <div class="interest-content">
+              <strong class="interest-title">Open-Source Software &amp; Developer Tools:</strong>
+              <span class="interest-desc">Exploring and testing early-stage repositories, productivity utilities, and modern open-source collaboration platforms on GitHub.</span>
+            </div>
           </div>
-          <div class="interest-card">
-            <span class="interest-title">Continuous Learning in People Tech</span>
-            <span class="interest-desc">Pursuing self-directed research into modern HR innovations, AI-driven workplace analytics, organizational psychology, and change management.</span>
+          <div class="interest-item">
+            <span class="interest-bullet">&bull;</span>
+            <div class="interest-content">
+              <strong class="interest-title">Continuous Learning in People Tech:</strong>
+              <span class="interest-desc">Pursuing self-directed research into modern HR innovations, AI-driven workplace analytics, organizational psychology, and change management.</span>
+            </div>
           </div>
-          <div class="interest-card">
-            <span class="interest-title">Technology Analysis &amp; System Teardowns</span>
-            <span class="interest-desc">Analyzing semiconductor supply chain dynamics, hardware ecosystem architectures, and enterprise SaaS productivity teardowns.</span>
+          <div class="interest-item">
+            <span class="interest-bullet">&bull;</span>
+            <div class="interest-content">
+              <strong class="interest-title">Technology Analysis &amp; System Teardowns:</strong>
+              <span class="interest-desc">Analyzing semiconductor supply chain dynamics, hardware ecosystem architectures, and enterprise SaaS productivity teardowns.</span>
+            </div>
           </div>
         </div>
       </section>
