@@ -88,8 +88,8 @@
       background: var(--bg);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
-      line-height: 1.40;
-      font-size: 8.8pt;
+      line-height: 1.34;
+      font-size: 10pt;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -155,13 +155,13 @@
       border: 1px solid var(--rule);
       border-radius: 12px;
       box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
-      padding: 8.5mm 13mm 7.5mm 13mm;
+      padding: 7mm 12mm 6mm 12mm;
       width: 100%;
       min-height: 297mm;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 2.2mm;
+      gap: 1.6mm;
     }
 
     /* Links */
@@ -181,18 +181,18 @@
     .header-block {
       display: flex;
       flex-direction: column;
-      gap: 1.6mm;
-      padding-bottom: 2.0mm;
+      gap: 1.2mm;
+      padding-bottom: 1.5mm;
       border-bottom: 1.5px solid var(--accent);
     }
     h1.candidate-name {
       font-size: 21pt;
       font-weight: 800;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.035em;
       text-transform: uppercase;
       color: var(--heading);
       line-height: 1.1;
-      margin-bottom: 0.8mm;
+      margin-bottom: 0.4mm;
     }
     .role-banner {
       display: inline-block;
@@ -200,10 +200,10 @@
       background: var(--banner-bg);
       border: 1px solid var(--banner-border);
       border-radius: 4px;
-      padding: 1.5mm 3.2mm;
-      font-size: 7.5pt;
+      padding: 1.2mm 2.8mm;
+      font-size: 8.8pt;
       font-weight: 800;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--banner-text);
       line-height: 1.3;
@@ -214,10 +214,10 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 1.8mm 4.5mm;
-      font-size: 7.6pt;
+      gap: 1.2mm 4.2mm;
+      font-size: 8.8pt;
       color: var(--muted);
-      line-height: 1.35;
+      line-height: 1.32;
     }
     .contact-item {
       display: inline-flex;
@@ -226,8 +226,8 @@
       white-space: nowrap;
     }
     .contact-item svg {
-      width: 11.5px;
-      height: 11.5px;
+      width: 12px;
+      height: 12px;
       color: var(--accent);
       flex-shrink: 0;
     }
@@ -239,64 +239,70 @@
       display: flex;
       flex-direction: column;
       gap: 1.0mm;
+      margin-top: 2.2mm;
     }
     .section-header {
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-size: 8.3pt;
+      gap: 6px;
+      font-size: 11pt;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.06em;
       color: var(--accent);
-      line-height: 1;
-      padding-bottom: 0.5mm;
+      line-height: 1.15;
+      padding-bottom: 0.6mm;
       border-bottom: 1px solid var(--rule);
+      margin-bottom: 0.8mm;
     }
     .section-header svg {
-      width: 12.5px;
-      height: 12.5px;
+      width: 13.5px;
+      height: 13.5px;
       color: var(--accent);
       flex-shrink: 0;
     }
 
     /* Professional Summary */
     .summary-text {
-      font-size: 7.8pt;
-      line-height: 1.38;
+      font-size: 9.5pt;
+      line-height: 1.36;
       color: var(--muted);
       text-align: justify;
+      margin-bottom: 1.6mm;
     }
 
     /* Skills Grid */
     .skills-matrix {
       display: flex;
       flex-direction: column;
-      gap: 1.8mm;
-      font-size: 7.6pt;
-      line-height: 1.34;
+      gap: 1.6mm;
+      font-size: 9.3pt;
+      line-height: 1.32;
       color: var(--muted);
+      margin-bottom: 1.6mm;
     }
     .skill-row {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.15mm;
+      gap: 0.2mm;
     }
     .skill-cat {
       font-weight: 700;
       color: var(--heading);
       margin-bottom: 0;
+      font-size: 9.5pt;
     }
     .skill-vals {
       color: var(--muted);
+      font-size: 9.2pt;
     }
 
     /* Experience / Projects Entries */
     .entries-list {
       display: flex;
       flex-direction: column;
-      gap: 1.4mm;
+      gap: 2.2mm;
     }
     .entry-card {
       break-inside: avoid;
@@ -315,20 +321,20 @@
       flex-wrap: wrap;
     }
     .entry-title {
-      font-size: 8.4pt;
+      font-size: 10.2pt;
       font-weight: 700;
       color: var(--heading);
     }
     .entry-badge {
-      font-size: 7.2pt;
+      font-size: 7.8pt;
       font-weight: 600;
       color: var(--accent);
       background: var(--accent-light);
-      padding: 0.3mm 1.6mm;
+      padding: 0.2mm 1.5mm;
       border-radius: 3px;
     }
     .entry-date {
-      font-size: 7.6pt;
+      font-size: 8.6pt;
       font-weight: 600;
       color: var(--light);
       white-space: nowrap;
@@ -339,7 +345,7 @@
       align-items: baseline;
       justify-content: space-between;
       gap: 8px;
-      font-size: 7.6pt;
+      font-size: 8.6pt;
       color: var(--light);
       margin-bottom: 0.4mm;
     }
@@ -354,32 +360,32 @@
     }
     .entry-bullets {
       list-style-type: disc;
-      margin-left: 13px;
+      margin-left: 14px;
       padding-left: 0;
     }
     .entry-bullets li {
-      font-size: 7.6pt;
+      font-size: 9.3pt;
       color: var(--muted);
-      line-height: 1.33;
-      margin-bottom: 0.2mm;
+      line-height: 1.30;
+      margin-bottom: 0.6mm;
     }
     .entry-bullets li::marker {
       color: var(--accent);
-      font-size: 7.5pt;
+      font-size: 9.0pt;
     }
 
     /* Education */
     .edu-list {
       display: flex;
       flex-direction: column;
-      gap: 0.8mm;
+      gap: 0.7mm;
     }
     .edu-row {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
       gap: 8px;
-      font-size: 7.8pt;
+      font-size: 9.5pt;
     }
     .edu-left {
       display: flex;
@@ -390,22 +396,24 @@
     .edu-inst {
       font-weight: 700;
       color: var(--heading);
+      font-size: 10.2pt;
     }
     .edu-deg {
       color: var(--accent);
       font-weight: 600;
+      font-size: 9.6pt;
     }
     .edu-right {
-      font-size: 7.5pt;
+      font-size: 8.6pt;
       color: var(--light);
       font-weight: 600;
       white-space: nowrap;
       margin-left: auto;
     }
     .edu-desc {
-      font-size: 7.3pt;
+      font-size: 9.0pt;
       color: var(--muted);
-      line-height: 1.30;
+      line-height: 1.25;
       margin-top: 0.1mm;
     }
 
@@ -413,9 +421,9 @@
     .cert-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.8mm 5mm;
-      font-size: 7.6pt;
-      line-height: 1.32;
+      gap: 0.6mm 4.5mm;
+      font-size: 9.2pt;
+      line-height: 1.28;
     }
     .cert-item {
       display: flex;
@@ -424,9 +432,10 @@
     .cert-name {
       font-weight: 700;
       color: var(--heading);
+      font-size: 9.5pt;
     }
     .cert-issuer {
-      font-size: 7.2pt;
+      font-size: 8.6pt;
       color: var(--light);
     }
 
@@ -434,9 +443,9 @@
     .meta-strip {
       display: flex;
       flex-direction: column;
-      gap: 1.2mm;
-      font-size: 7.6pt;
-      line-height: 1.34;
+      gap: 1.0mm;
+      font-size: 9.2pt;
+      line-height: 1.28;
       color: var(--muted);
     }
     .meta-row {
@@ -450,34 +459,37 @@
     .meta-label {
       font-weight: 700;
       color: var(--heading);
+      font-size: 9.5pt;
       min-width: 78px;
       flex-shrink: 0;
     }
     .meta-vals {
+      font-size: 9.2pt;
       color: var(--muted);
     }
     .interests-list {
       display: flex;
       flex-direction: column;
-      gap: 0.6mm;
+      gap: 0.3mm;
       flex: 1;
     }
     .interest-item {
       display: flex;
       align-items: baseline;
       gap: 5px;
-      line-height: 1.32;
+      line-height: 1.26;
+      font-size: 9.0pt;
     }
     .interest-bullet {
       color: var(--accent);
-      font-size: 7.5pt;
+      font-size: 8.5pt;
       flex-shrink: 0;
     }
 
     /* =========================================================
        PRINT & RESPONSIVE CSS
        ========================================================= */
-    @media (max-width: 768px) {
+    @media screen and (max-width: 768px) {
       body {
         padding: 12px 8px 30px;
       }
@@ -530,109 +542,158 @@
         box-shadow: none !important;
         border: none !important;
         border-radius: 0 !important;
-        padding: 6.5mm 12mm 5.5mm 12mm !important;
+        padding: 4.8mm 12mm 4.2mm 12mm !important;
         background: #ffffff !important;
         width: 210mm !important;
         height: 297mm !important;
         max-height: 297mm !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
-        gap: 1.6mm !important;
+        gap: 0 !important;
       }
       .header-block {
-        gap: 1.0mm !important;
-        padding-bottom: 1.2mm !important;
+        gap: 0.7mm !important;
+        padding-bottom: 0.8mm !important;
+        margin-bottom: 1.8mm !important;
       }
       h1.candidate-name {
-        font-size: 19.5pt !important;
-        margin-bottom: 0.6mm !important;
+        font-size: 20pt !important;
+        margin-bottom: 0.3mm !important;
       }
       .role-banner {
-        padding: 1.1mm 2.6mm !important;
-        font-size: 7.3pt !important;
+        padding: 0.8mm 2.4mm !important;
+        font-size: 8.4pt !important;
       }
       .contact-row {
-        gap: 1.2mm 4.0mm !important;
-        font-size: 7.4pt !important;
+        gap: 0.7mm 4.0mm !important;
+        font-size: 8.6pt !important;
       }
       .section-block {
-        gap: 0.6mm !important;
+        gap: 0 !important;
+        margin-top: 1.8mm !important;
       }
       .section-header {
-        font-size: 8.0pt !important;
-        padding-bottom: 0.3mm !important;
+        font-size: 10.6pt !important;
+        letter-spacing: 0.05em !important;
+        padding-bottom: 0.4mm !important;
+        margin-bottom: 0.7mm !important;
       }
       .summary-text {
-        font-size: 7.5pt !important;
-        line-height: 1.33 !important;
+        font-size: 9.3pt !important;
+        line-height: 1.25 !important;
+        margin-bottom: 1.6mm !important;
       }
       .skills-matrix {
-        gap: 1.8mm !important;
-        font-size: 7.3pt !important;
-        line-height: 1.28 !important;
+        gap: 0.9mm !important;
+        font-size: 8.9pt !important;
+        line-height: 1.22 !important;
+        margin-bottom: 1.6mm !important;
       }
       .skill-row {
         flex-direction: column !important;
         align-items: flex-start !important;
-        gap: 0.15mm !important;
+        gap: 0.12mm !important;
       }
       .skill-cat {
         min-width: auto !important;
         margin-bottom: 0 !important;
-        line-height: 1.22 !important;
+        font-size: 9.1pt !important;
+        line-height: 1.18 !important;
       }
       .skill-vals {
         margin-top: 0 !important;
-        line-height: 1.28 !important;
+        font-size: 8.9pt !important;
+        line-height: 1.22 !important;
       }
       .entries-list {
-        gap: 1.0mm !important;
+        gap: 1.2mm !important;
+      }
+      .entry-head {
+        margin-bottom: 0.12mm !important;
+      }
+      .entry-title {
+        font-size: 10.0pt !important;
+      }
+      .entry-badge {
+        font-size: 7.6pt !important;
+        padding: 0.2mm 1.4mm !important;
+      }
+      .entry-date {
+        font-size: 8.4pt !important;
       }
       .entry-subhead {
-        margin-bottom: 0.2mm !important;
+        margin-bottom: 0.25mm !important;
+        font-size: 8.4pt !important;
       }
       .entry-bullets {
-        margin-left: 11px !important;
+        margin-left: 13px !important;
       }
       .entry-bullets li {
-        font-size: 7.3pt !important;
-        line-height: 1.28 !important;
-        margin-bottom: 0.15mm !important;
+        font-size: 8.9pt !important;
+        line-height: 1.22 !important;
+        margin-bottom: 0.35mm !important;
       }
       .edu-list {
-        gap: 0.5mm !important;
+        gap: 0.8mm !important;
       }
       .edu-row {
-        font-size: 7.4pt !important;
+        font-size: 9.1pt !important;
+      }
+      .edu-inst {
+        font-size: 10.0pt !important;
+      }
+      .edu-deg {
+        font-size: 9.3pt !important;
+      }
+      .edu-right {
+        font-size: 8.4pt !important;
       }
       .edu-desc {
-        font-size: 7.0pt !important;
-        line-height: 1.22 !important;
+        font-size: 8.7pt !important;
+        line-height: 1.18 !important;
+        margin-top: 0.12mm !important;
       }
       .cert-grid {
-        gap: 0.5mm 3.8mm !important;
-        font-size: 7.2pt !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1.0mm 6.0mm !important;
+        font-size: 9.0pt !important;
+      }
+      .cert-name {
+        font-size: 9.3pt !important;
+      }
+      .cert-issuer {
+        font-size: 8.4pt !important;
       }
       .meta-strip {
-        gap: 1.2mm !important;
-        font-size: 7.3pt !important;
-        line-height: 1.28 !important;
+        gap: 0.7mm !important;
+        font-size: 8.9pt !important;
+        line-height: 1.20 !important;
       }
       .meta-row {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 0.15mm !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: baseline !important;
+        gap: 6px !important;
       }
       .meta-label {
-        min-width: auto !important;
+        min-width: 76px !important;
         margin-bottom: 0 !important;
-        line-height: 1.22 !important;
+        font-size: 9.1pt !important;
+        line-height: 1.18 !important;
+      }
+      .meta-vals {
+        font-size: 8.9pt !important;
       }
       .interests-list {
-        gap: 0.4mm !important;
+        gap: 0.2mm !important;
+      }
+      .interest-item {
+        font-size: 8.6pt !important;
+        line-height: 1.20 !important;
       }
       .interest-bullet {
-        font-size: 7.0pt !important;
+        font-size: 8.0pt !important;
       }
       a {
         color: #0b57d0 !important;
@@ -709,7 +770,7 @@
         PROFESSIONAL SUMMARY
       </div>
       <p class="summary-text" itemprop="description">
-        Motivated and detail-oriented MBA (HR) fresher at VIMTECH, Tumkur, with a solid commercial foundation from a Bachelor of Commerce (B.Com) degree. Possesses comprehensive foundational knowledge in human resource management principles, employee onboarding workflows, organizational behavior, and workplace compliance, backed by 20+ professional certifications including Microsoft HR Manager, HRCI Human Resource Associate, SHRM organizational change, and Google career credentials. Demonstrates strong interpersonal communication, structured problem solving, team collaboration, and practical proficiency in Microsoft Excel and Google Workspace. Eager to secure an entry-level HR internship to contribute reliable organizational support, learn from experienced practitioners, and develop hands-on expertise in live HR operations.
+        Detail-oriented MBA (HR) candidate at VIMTECH, Tumkur (B.Com graduate) with 20+ professional certifications including Microsoft HR Manager, HRCI Human Resource Associate, SHRM organizational change, and Google career credentials. Grounded in recruitment coordination, candidate screening, new hire onboarding workflows, employee relations, workplace compliance, and data-driven Excel reporting. Eager to provide operational support and structured problem solving in an entry-level HR internship.
       </p>
     </section>
 
@@ -722,15 +783,15 @@
       <div class="skills-matrix">
         <div class="skill-row">
           <span class="skill-cat">General &amp; Interpersonal:</span>
-          <span class="skill-vals">Clear Verbal &amp; Written Communication, Active Listening &amp; Professional Etiquette, Teamwork &amp; Cross-Functional Collaboration, Time Management &amp; Punctuality, Task Prioritization &amp; Multitasking, Organizational Follow-Through, Attention to Detail, Structured Problem Solving, Adaptability &amp; Quick Learning, High Accountability &amp; Work Ethic.</span>
+          <span class="skill-vals">Verbal &amp; Written Communication, Active Listening &amp; Etiquette, Teamwork &amp; Cross-Functional Collaboration, Time Management, Task Prioritization, Attention to Detail, Structured Problem Solving, Adaptability, Accountability &amp; Work Ethic.</span>
         </div>
         <div class="skill-row">
           <span class="skill-cat">Office &amp; Digital Tools:</span>
-          <span class="skill-vals">Microsoft Excel (Spreadsheet Tracking, Formulas, Basic Dashboards &amp; Data-Driven Metrics), Microsoft Word, PowerPoint, Google Workspace (Google Sheets, Docs, Forms), Document Management &amp; Record Keeping, Internet Research, Notion, Responsible Generative AI &amp; Prompt Engineering (Google Certified), Workflow Automation Concepts.</span>
+          <span class="skill-vals">Microsoft Excel (Spreadsheet Tracking, Formulas, Dashboards, Data-Driven Metrics &amp; Reporting), Google Workspace (Sheets, Docs, Forms), Notion, Documentation &amp; Record Keeping, Artificial Intelligence, Generative AI &amp; Prompt Engineering (Google Certified), Process Automation.</span>
         </div>
         <div class="skill-row">
           <span class="skill-cat">Academic HR Knowledge:</span>
-          <span class="skill-vals">Academic Foundations of Recruiting &amp; Hiring Workflows, Candidate Screening &amp; Shortlisting Concepts, Job Description Drafting Principles, Applicant Documentation &amp; Coordination, New Hire Onboarding Checklists, Training &amp; Learning Development, Employee Relations, Engagement &amp; Retention Dynamics, Workplace Compliance Awareness, Compensation &amp; Benefits Overview, Performance &amp; Constructive Feedback Systems, Overview of HRIS &amp; People Systems, Basic Workforce Planning Concepts.</span>
+          <span class="skill-vals">Recruiting &amp; Hiring, Talent Acquisition, Candidate Screening &amp; Shortlisting, Job Description Drafting, Applicant Coordination, New Hire Onboarding Checklists, Training &amp; Learning and Development, Employee Relations, Engagement &amp; Retention, Workplace Compliance, Compensation &amp; Benefits, Performance Management &amp; Constructive Feedback, HR Operations, HRIS (Human Resource Information System) &amp; People Processes, Workforce Planning &amp; People Analytics.</span>
         </div>
       </div>
     </section>
@@ -757,8 +818,8 @@
             <span class="entry-context">Self-Initiated MBA Practical Toolkit</span>
           </div>
           <ul class="entry-bullets">
-            <li>Researched and compiled standard recruiting documentation templates for entry-level hiring support, structuring candidate screening rubrics, applicant evaluation scorecards, and telephone interview protocols across 10+ evaluation criteria.</li>
-            <li>Standardized an end-to-end 4-stage new hire onboarding checklist and developed automated Excel tracker spreadsheets to monitor 100% documentation completion and basic people metrics.</li>
+            <li>Researched recruiting templates across 10+ evaluation criteria, structuring candidate screening rubrics, scorecards, and telephone interview protocols.</li>
+            <li>Standardized a 4-stage new hire onboarding checklist with automated Excel tracker spreadsheets to monitor 100% documentation completion and people metrics.</li>
           </ul>
         </div>
 
@@ -776,7 +837,7 @@
             <span class="entry-context">Shark Tank Competition Showcase</span>
           </div>
           <ul class="entry-bullets">
-            <li>Collaborated in a 12-member multidisciplinary student team to design an interactive business promotion prototype for a Shark Tank showcase, securing 1st place among participating cohorts.</li>
+            <li>Collaborated in a 12-member student team to design an interactive business promotion prototype for a Shark Tank showcase, securing 1st place among cohorts.</li>
             <li>Coordinated sprint milestones and wireframe designs across 5 user flows, delivering the functional prototype under strict competition deadlines.</li>
           </ul>
         </div>
@@ -795,8 +856,8 @@
             <span class="entry-context">MBA Sem 1 &amp; 2 Research Initiatives</span>
           </div>
           <ul class="entry-bullets">
-            <li>Administered primary consumer research surveys to 100+ respondents for Union Bank of India, evaluating retail service quality and turnaround times using structured spreadsheets.</li>
-            <li>Authored a comprehensive 58-page strategic study analyzing India's semiconductor supply chain dynamics, fab infrastructure, and national PLI policy incentives for faculty evaluation.</li>
+            <li>Administered primary consumer research surveys to 100+ respondents for Union Bank of India, evaluating retail service quality and turnaround times via spreadsheets.</li>
+            <li>Authored a comprehensive 58-page strategic study analyzing India's semiconductor supply chain dynamics, fab infrastructure, and national PLI policy incentives.</li>
           </ul>
         </div>
 
@@ -837,7 +898,7 @@
             </div>
             <span class="edu-right">2025 – Present · Tumkur, Karnataka</span>
           </div>
-          <p class="edu-desc">Core Focus: Strategic HRM, Talent Acquisition, People Analytics, Organizational Behavior, Compensation Management, and Workforce Planning.</p>
+          <p class="edu-desc">Focus: Strategic HRM, Talent Acquisition, People Analytics, Compensation, and Workforce Planning.</p>
         </div>
 
         <div class="edu-card">
@@ -848,7 +909,7 @@
             </div>
             <span class="edu-right">2022 – 2025 · Tumkur, Karnataka</span>
           </div>
-          <p class="edu-desc">Specialization in Accounting &amp; Finance; built a 3-year commercial foundation in financial management, corporate law, and business operations.</p>
+          <p class="edu-desc">Focus: Accounting &amp; Finance; commercial foundation in financial management, corporate law, and business operations.</p>
         </div>
       </div>
     </section>
@@ -890,22 +951,9 @@
           <span class="meta-label">Languages:</span>
           <span class="meta-vals"><b>English</b> (Fluent) &nbsp;&middot;&nbsp; <b>Hindi</b> (Working Proficiency) &nbsp;&middot;&nbsp; <b>Kannada</b> (Native)</span>
         </div>
-        <div class="meta-row meta-row-interests">
+        <div class="meta-row">
           <span class="meta-label">Interests:</span>
-          <div class="interests-list">
-            <div class="interest-item">
-              <span class="interest-bullet">&bull;</span>
-              <span><b>Local AI Models:</b> Testing open-weights LLMs (&lt;12B) for task workflows</span>
-            </div>
-            <div class="interest-item">
-              <span class="interest-bullet">&bull;</span>
-              <span><b>Open-Source Software:</b> Testing early-stage tools on GitHub</span>
-            </div>
-            <div class="interest-item">
-              <span class="interest-bullet">&bull;</span>
-              <span><b>Continuous Learning:</b> Tech analysis, systems teardowns &amp; self-directed study</span>
-            </div>
-          </div>
+          <span class="meta-vals"><b>Local AI Models</b> (&lt;12B offline) &nbsp;&middot;&nbsp; <b>Open-Source Tools</b> (GitHub) &nbsp;&middot;&nbsp; <b>Continuous Learning</b> (HR tech research)</span>
         </div>
       </div>
     </section>
