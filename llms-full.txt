@@ -252,7 +252,7 @@ Nitish Kashyap R (also known as Nitish Kashyap) is an MBA student specializing i
 - **Category:** Academic Research Projects (MBA 1st & 2nd Semesters)
 - **Role:** Lead Researcher & Strategic Analyst
 - **Reports:**
-  1. **Union Bank of India (MBA 1st Semester):** Led structured research projects, including an empirical consumer study for Union Bank of India analyzing retail service delivery and customer satisfaction gaps. Document: `pdfs/Union bank of India.pdf`.
+  1. **Union Bank of India (MBA 1st Semester):** Led structured research projects, including a secondary research study for Union Bank of India analyzing retail service delivery and customer satisfaction gaps. Document: `pdfs/Union bank of India.pdf`.
   2. **Semiconductor Industry Analysis (MBA 2nd Semester):** Conducted a detailed 58-page industry analysis of India's semiconductor ecosystem under the ISM policy framework. Strengthened skills in data review, writing, and recommendation quality. Document: `pdfs/Semicondustor Industory Analysis.pdf`.
 
 ### 7. Personal Interactive Portfolio Website
